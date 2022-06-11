@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="cache-control" content="no-cache" />
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/index.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <script src="assets/js/navbarHandler.js"></script>
+    <script src="assets/js/index/indexFunctions.js"></script>
+  </head>
+  <body>
+    <div id="main-navbar">
+      <div class="flex-row flex-v-center gap-30 no-drag">
+        <div class="flex-row flex-v-center">
+          <h1 class="main-text text-color-white m-r-5">All Books</h1>
+          <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="white" stroke-linecap="round" />
+            <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="white" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="vertical-divider-05"></div>
+        <div class="flex-row flex-v-center gap-30">
+          <svg id="add-books-button" class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="19" y1="10" x2="1" y2="10" stroke="white" stroke-width="2" stroke-linecap="round" />
+            <line x1="10" y1="19" x2="10" y2="1" stroke="white" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <svg id="edit-books-button" class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+            <g clip-path="url(#clip0_15_16)">
+            <path d="M12.3511 3.35919L1.3468 14.3643C1.29143 14.4198 1.25146 14.4899 1.23242 14.5653L0.0127046 19.461C-0.0237807 19.6083 0.0195258 19.765 0.127078 19.8726C0.208456 19.954 0.31934 19.999 0.432761 19.999C0.467502 19.999 0.503035 19.9947 0.537617 19.986L5.43331 18.7661C5.50961 18.7471 5.57893 18.7073 5.63429 18.6519L16.6395 7.64764L12.3511 3.35919Z" />
+            <path d="M19.3658 1.8587L18.1409 0.633746C17.3222 -0.184953 15.8953 -0.184159 15.0775 0.633746L13.577 2.13424L17.8653 6.42254L19.3658 4.92204C19.7748 4.51325 20 3.96914 20 3.39045C20 2.81176 19.7748 2.26765 19.3658 1.8587Z" />
+            </g>
+            <defs>
+            <clipPath id="clip0_15_16">
+            <rect width="20" height="20"/>
+            </clipPath>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      <div class="flex-row flex-v-center gap-15 no-drag">
+        <svg id="minimize-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 15 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+        <svg id="close-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <line x1="15.1422" y1="2.06066" x2="2.06067" y2="15.1421" stroke-width="1.5" stroke-linecap="round" />
+          <line x1="14.7886" y1="15.1422" x2="1.70711" y2="2.06067" stroke-width="1.5" stroke-linecap="round" />
+        </svg>
+      </div>
+    </div>
+    <div id="hero-section-book" class="flex-all-centered">
+      <div id="hero-section-content" class="p-absolute flex-row flex-h-center">
+        <div class="loading-animation"></div>
+        <!-- <div id="hero-section-image-cover"><img src="src/images/book-cover-test.jpg"></div>
+        <div id="hero-section-book-infos" class="flex-column">
+          <h1 class="main-text text-color-white text-b">The Toynbee Convector</h1>
+          <h2 class="main-text text-color-white">Ray Bradbury</h2>
+          <h3 class="main-text text-color-white op-5">Fantasy - IT</h3>
+          <button id="keep-reading-button" class="primary-button">Keep reading</button>
+        </div> -->
+      </div>
+      <div id="hero-section-image-background"></div>
+    </div>
+    <div id="section-book">
+      <div class="flex-row flex-space-between">
+        <div class="flex-row flex-v-center">
+          <h1 class="main-text m-r-5">Sort by: <span class="text-b m-l-5">Last Read</span></h1>
+          <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
+            <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="flex-row flex-v-center gap-15">
+          <svg width="21" height="19" viewBox="0 0 21 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="1" y1="1" x2="19.4444" y2="1" stroke="#ADADAD" stroke-width="2" stroke-linecap="round" />
+            <line x1="1" y1="6.66666" x2="19.4444" y2="6.66666" stroke="#ADADAD" stroke-width="2" stroke-linecap="round" />
+            <line x1="1" y1="12.3333" x2="19.4444" y2="12.3333" stroke="#ADADAD" stroke-width="2" stroke-linecap="round" />
+            <line x1="1" y1="18" x2="19.4444" y2="18" stroke="#ADADAD" stroke-width="2" stroke-linecap="round" />
+          </svg>
+          <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect width="8.44444" height="8.44444" rx="2.11111" fill="#717171" />
+            <rect y="10.5555" width="8.44444" height="8.44444" rx="2.11111" fill="#717171" />
+            <rect x="10.5557" y="10.5555" width="8.44444" height="8.44444" rx="2.11111" fill="#717171" />
+            <rect x="10.5557" width="8.44444" height="8.44444" rx="2.11111" fill="#717171" />
+          </svg>
+        </div>
+      </div>
+      <div id="section-book-preview">
+        <!-- <div class="book-box not-empty">
+          <div class="book-box-image overflow-hidden w-100 h-100"><img src="assets/images/book-cover-test.jpg"></div>
+          <div class="book-delete-icon cursor-pointer">
+            <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
+              <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
+            </svg>
+          </div>
+        </div>
+        <div class="book-box">
+        </div>
+        <div class="book-box">
+          <a id="see-all-books" href="" class="main-text text-b text-decoration-none">All Books -></a>
+        </div> -->
+      </div>
+    </div>
+  </body>
+</html>

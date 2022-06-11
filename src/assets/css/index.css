@@ -1,0 +1,194 @@
+#main-navbar {
+  position: absolute;
+  padding: 3vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 50;
+  width: 100%;
+  -webkit-user-select: none;
+   user-select: none;
+  -webkit-app-region: drag;
+}
+
+#close-app-icon,#minimize-app-icon {
+  stroke: white;
+  transition: stroke .2s;
+}
+#close-app-icon:hover {
+  stroke: var(--primary-red-color) !important;
+}
+#minimize-app-icon:hover {
+  stroke: rgba(255,255,255,0.7) !important;
+}
+#hero-section-content {
+  z-index: 10;
+  width: 450px;
+}
+#hero-section-content.loaded {
+  animation: loaded-hero-section 1s;
+}
+@keyframes loaded-hero-section {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+#hero-section-book {
+  height: 400px;
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+#hero-section-image-cover {
+  width: 140px;
+  height: 213px;
+  overflow: hidden;
+  user-select: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+#hero-section-image-cover img {
+  height: 100%;
+}
+#hero-section-book h1,#hero-section-book h2,#hero-section-book h3 {
+  margin-bottom: 5px;
+}
+#hero-section-book h1 {
+  font-size: 24px !important; 
+}
+#hero-section-book h2 {
+  font-size: 16px !important; 
+}
+#hero-section-book h3 {
+  font-size: 14px !important; 
+}
+#hero-section-image-background {
+  height: 110%;
+  width: 110%;
+  background-color: rgb(20, 20, 20);
+  background-size: cover;
+  background-position: 50% 50%;
+  filter: blur(10px);
+  margin: -2%;
+  position: absolute;
+  transition: all .3s;
+}
+#keep-reading-button  {
+  width: 100%;
+  margin-top: auto;
+}
+#hero-section-book-infos {
+  margin-left: 20px;
+  flex: 1;
+}
+#hero-section-book-infos h1 {
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+}
+
+#section-book {
+  padding: 25px 50px;
+}
+
+#section-book .book-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+#section-book .book-box:not(.not-empty):not(:last-of-type) {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+#section-book .book-box.not-empty {
+  border: 1px solid rgba(0, 0, 0, 0.08)
+}
+#section-book .book-box img {
+  width: 100%;
+  height: 100%;
+}
+#section-book .book-delete-icon {
+  position: absolute;
+  width: 25px;
+  height: 25px;
+  right: -10px;
+  top: -10px;
+  background-color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+}
+#section-book .book-delete-icon svg { 
+  stroke: var(--primary-red-color);
+  transition: stroke .3s;
+}
+#section-book-preview .book-delete-icon:hover svg {
+  stroke: white;
+}
+#section-book-preview .book-delete-icon:hover {
+  background-color: var(--primary-red-color);
+}
+#section-book-preview .book-box .book-box-image img {
+  transition: all .2s;
+}
+#section-book-preview .book-box.currently-editing:not(:last-of-type) {
+  animation: shake .4s;
+}
+#section-book-preview .book-box.currently-editing .book-box-image img {
+  filter: blur(4px) brightness(80%);
+}
+#section-book-preview .book-box:not(.currently-editing) .book-delete-icon {
+  display: none;
+  opacity: 0;
+}
+#section-book-preview .book-box.currently-editing .book-delete-icon {
+  transition: all .2s;
+  /* display: flex; */
+  opacity: 1 !important;
+}
+#edit-books-button {
+  fill: white;
+}
+#edit-books-button.currently-editing {
+  fill: var(--primary-red-color)
+}
+
+@keyframes shake {
+  0% { transform: translate(1px, 1px) rotate(0deg); }
+  10% { transform: translate(-1px, -1px) rotate(-1deg); }
+  20% { transform: translate(-3px, 0px) rotate(1deg); }
+  30% { transform: translate(1px, 1px) rotate(0deg); }
+  40% { transform: translate(1px, -1px) rotate(1deg); }
+  50% { transform: translate(-1px, 1px) rotate(-1deg); }
+  60% { transform: translate(-1px, 1px) rotate(0deg); }
+  70% { transform: translate(1px, 1px) rotate(-1deg); }
+  80% { transform: translate(-1px, -1px) rotate(1deg); }
+  90% { transform: translate(1px, 1px) rotate(0deg); }
+  100% { transform: translate(1px, -2px) rotate(-1deg); }
+}
+
+#section-book-preview {
+  margin-top: 25px;
+  display: grid;
+  grid-template-columns: repeat(7, 140px);
+  grid-template-rows: 214px;
+  justify-content: space-between;
+}
+#see-all-books {
+  transition: all 0.5s;
+  padding: 2vh 3vh;
+  border-radius: 10px;
+}
+#see-all-books:hover  {
+  background-color: black;
+  color: white;
+}
