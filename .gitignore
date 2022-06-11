@@ -90,3 +90,4 @@ out/
 
 # Custom excluded directories
 src/epubs/*
+!src/epubs/readme.md
