@@ -87,3 +87,6 @@ typings/
 
 # Electron-Forge
 out/
+
+# Custom excluded directories
+src/epubs/*
