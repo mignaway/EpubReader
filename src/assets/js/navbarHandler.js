@@ -15,6 +15,6 @@ $(window).on('load', function () {
         $('#edit-books-button').toggleClass('currently-editing')
     })
     $('#add-books-button').on('click', function (){
-        ipcRenderer.send('addBooksDialog')
+        ipcRenderer.send('openBookChooserDialog')
     })
 });

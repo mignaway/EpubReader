@@ -40,7 +40,7 @@ const createWindow = () => {
   ipcMain.on('minimizeApp', () => {
     mainWindow.minimize()
   })
-  ipcMain.on('addBooksDialog', () => {
+  ipcMain.on('openBookChooserDialog', () => {
     dialog.showOpenDialog({ 
       properties: ['openFile'],
       filters: [
@@ -48,7 +48,7 @@ const createWindow = () => {
       ]
     }).then(result => {
       if (!result.canceled) {
-        mainWindow.webContents.send('addBookConfirmed', result.filePaths)
+        mainWindow.webContents.send('bookChosenSuccess', result.filePaths[0])
       }
     }).catch(err => {
       console.log(err)
