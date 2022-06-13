@@ -162,14 +162,18 @@ async function deleteEpubBook(folderBookCode){
         await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json)) 
         // Remove recursively book's to remove folder
         await fs.rmSync(__dirname + '/epubs/' + folderBookCode, { recursive: true });
-        // Reload secitons
+        // If list is empty then disable edit button
+        if (json.length == 0) $('#edit-books-button').toggleClass('currently-editing')
+        // Reload sections
         loadAll(json)
     })
 }
 
 // Read books.json file
 async function getBooksFromJson(){
-    let raw = fs.readFileSync(__dirname + '/assets/json/books.json');
+    var path = __dirname + '/assets/json/books.json';
+    if (!fs.existsSync(path)) fs.writeFileSync(path,'[]');
+    let raw = fs.readFileSync(path);
     return JSON.parse(raw)
 }
 
