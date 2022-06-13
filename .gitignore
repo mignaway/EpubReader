@@ -89,7 +89,6 @@ typings/
 out/
 
 # Custom excluded directories
-src/epubs/*
-!src/epubs/readme.md
+src/epubs/
 
 src/assets/json/books.json

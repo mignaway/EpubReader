@@ -172,9 +172,20 @@ async function deleteEpubBook(folderBookCode){
 // Read books.json file
 async function getBooksFromJson(){
     var path = __dirname + '/assets/json/books.json';
-    if (!fs.existsSync(path)) fs.writeFileSync(path,'[]');
-    let raw = fs.readFileSync(path);
-    return JSON.parse(raw)
+    // check if books.json exists
+    if (!fs.existsSync(path)) {
+        // create json/books.json
+        await fse.outputFile(path, '[]');
+        // reset epubs folder
+        if (fs.existsSync(__dirname + '/epubs')) await fse.emptyDirSync(__dirname + '/epubs');
+        await fs.mkdirSync(__dirname + '/epubs');
+    }
+    // check if epubs folder exists
+    if (!fs.existsSync(__dirname + '/epubs')){
+        await fs.mkdirSync(__dirname + '/epubs');
+    }
+
+    return JSON.parse(fs.readFileSync(path))
 }
 
 // Get dominant (vibrant) color from image
