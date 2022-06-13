@@ -67,11 +67,18 @@
     <div id="section-book">
       <div class="flex-row flex-space-between">
         <div class="flex-row flex-v-center">
-          <h1 class="main-text m-r-5">Sort by: <span class="text-b m-l-5">Last Read</span></h1>
+          <!-- <span class="text-b m-l-5">Last Read</span> -->
+          <div class="flex-row flex-v-center">
+            <h1 class="main-text m-r-5">Sort by: </h1>
+            <select id="section-book-filter-selection" class="main-text text-b">
+              <option value="last_read">Last Read</option>
+            </select>
+          </div>
+          <!--             
           <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
             <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
-          </svg>
+          </svg> -->
         </div>
         <div class="flex-row flex-v-center gap-15">
           <svg id="section-book-show-information" width="21" height="19" viewBox="0 0 21 19" xmlns="http://www.w3.org/2000/svg">

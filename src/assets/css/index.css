@@ -226,3 +226,11 @@
 #section-book-show-information.active,#section-book-hide-information.active {
   opacity: 1;
 }
+
+#section-book-filter-selection {
+  border: none;
+  cursor: pointer;
+}
+#section-book-filter-selection:focus {
+  outline: none;
+}
