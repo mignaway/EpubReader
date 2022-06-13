@@ -25,17 +25,7 @@
   z-index: 10;
   width: 450px;
 }
-#hero-section-content.loaded {
-  animation: loaded-hero-section 1s;
-}
-@keyframes loaded-hero-section {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
+
 #hero-section-book {
   height: 400px;
   width: 100%;
@@ -92,6 +82,19 @@
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
 }
+
+#hero-section-loading-animation {
+  background-color: rgba(0, 0, 0, .7);
+  position: absolute;
+  z-index: 50;
+  transition: opacity .3s;
+}
+#hero-section-loading-animation.loaded {
+  display: none;
+}
+
+/* ------------------------------------- */
+
 
 #section-book {
   padding: 25px 50px;

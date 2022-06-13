@@ -15,12 +15,14 @@ $(window).on('load', async function(){
  */
 
 async function loadAll(books_json){
-    await loadHeroSection(books_json)
-    await loadBooksSection(books_json)
+    $('#hero-section-loading-animation').removeClass('loaded');
+    await loadHeroSection(books_json,"last_read")
+    await loadBooksSection(books_json,"last_read")
 }
 
-async function loadHeroSection(books_json) {
+async function loadHeroSection(books_json, sortby) {
     if (books_json.length > 0) {
+        books_json = orderBookModality(books_json,sortby);
         const [title, author, bookYear, language, folderBookCode, coverPath] = [books_json[0].title, 
                                                                                 books_json[0].author ? books_json[0].author : 'Undefined Author', 
                                                                                 books_json[0].bookYear ? books_json[0].bookYear : 'Undefined', 
@@ -41,20 +43,19 @@ async function loadHeroSection(books_json) {
         `)
         $('#hero-section-image-background').css('background-image', 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(epubs/' + folderBookCode + '/' + coverPath);
     } else {
-        $('#hero-section-content').html('<h2 class="main-text text-color-white">No preview available.</h2>')
+        $('#hero-section-content').html('<h2 class="main-text text-color-white text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>')
         $('#hero-section-image-background').css({ 'background-image': 'none', 'background-color': 'rgb(20, 20, 20)' });
     }
-    $('#hero-section-content').addClass('loaded')
+    $('#hero-section-loading-animation').addClass('loaded')
 }
 
-function loadBooksSection(books_json) {
+function loadBooksSection(books_json, sortby) {
     // Reset book preview section
     $('#section-book-preview').html('') 
+    // var orderedBooks = books_json.slice(0, 6)
 
-    // TODO:
-    // Need to be sorted by "lastOpened"
+    var orderedBooks = orderBookModality(books_json, sortby);
 
-    var orderedBooks = books_json.slice(0, 6) 
     for(var i = 0; i <= 5;i++) {
         if (i < orderedBooks.length) {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
@@ -107,7 +108,6 @@ async function addEpubBook(epubPath) {
         const jsonData = await getBooksFromJson();
 
         const data = epub.metadata;
-        console.log(data);
         const author = data.creator ? data.creator : null;
         const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author.replaceAll(" ", "-").toLowerCase();
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
@@ -122,7 +122,7 @@ async function addEpubBook(epubPath) {
                 "lang": data.languages ? data.language.split('-')[0].toUpperCase() : null,
                 "folderBookCode": folderBookCode,
                 "coverPath": coverPath,
-                "lastOpened": ""
+                "lastTimeOpened": new Date()
             }
             jsonData.push(newBook)
             await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData))
@@ -185,6 +185,18 @@ function getVibrantColorFromImage(imgPath) {
     } else {
         console.log("File doesn't exists")
     }
+}
+
+function orderBookModality(books_json, sortby){
+    var orderedBooks = null;
+    if (sortby == 'last_read') {
+        orderedBooks = books_json.sort((x, y) => {
+            return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
+        })
+    }
+    
+    console.log(orderedBooks);
+    return orderedBooks.slice(0, 6);
 }
 
 // Because javascript has some problem iterating arrays this function will help us to do so
