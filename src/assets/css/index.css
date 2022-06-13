@@ -107,7 +107,8 @@
   background-color: rgba(0, 0, 0, 0.05);
 }
 #section-book .book-box.not-empty {
-  border: 1px solid rgba(0, 0, 0, 0.08)
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  cursor: pointer;
 }
 #section-book .book-box img {
   width: 100%;
@@ -191,4 +192,34 @@
 #see-all-books:hover  {
   background-color: black;
   color: white;
+}
+.book-box-informations {
+  position: absolute;
+  padding: 2vh;
+  background-color: rgba(0, 0, 0, .9);
+  gap: 1vh;
+  transition: opacity .3s;
+  opacity: 0;
+}
+.book-box-informations h1 {
+  font-size: 17px;
+}
+.book-box-informations h2 {
+  font-size: 15px;
+}
+.book-box-informations h3 {
+  font-size: 13px;
+}
+#section-book-show-information,#section-book-hide-information {
+  cursor: pointer;
+  opacity: .4;
+}
+#section-book-show-information {
+  stroke: #717171;
+}
+#section-book-hide-information {
+  fill: #717171;
+}
+#section-book-show-information.active,#section-book-hide-information.active {
+  opacity: 1;
 }

@@ -58,9 +58,18 @@ function loadBooksSection(books_json) {
     for(var i = 0; i <= 5;i++) {
         if (i < orderedBooks.length) {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+            const author = orderedBooks[i].author ? orderedBooks[i].author : 'Undefined Author';
+            const language = orderedBooks[i].lang ? orderedBooks[i].lang : 'Undefined Language';
             $('#section-book-preview').append(`
             <div class="book-box ${editingClass} not-empty" data-folderbookcode="${orderedBooks[i].folderBookCode}">
-                <div class="book-box-image overflow-hidden w-100 h-100"><img src="epubs/${orderedBooks[i].folderBookCode}/${orderedBooks[i].coverPath}"></div>
+                <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
+                    <h1 class="main-text text-color-white text-b">${orderedBooks[i].title}</h1>
+                    <h2 class="main-text text-color-white">${author}</h2>
+                    <h3 class="main-text text-color-white op-5">${language}</h3>
+                </div>
+                <div class="book-box-image overflow-hidden w-100 h-100">
+                    <img src="epubs/${orderedBooks[i].folderBookCode}/${orderedBooks[i].coverPath}">
+                </div>
                 <div class="book-delete-icon cursor-pointer" onclick="deleteEpubBook($(this).parent().data('folderbookcode'))">
                     <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
                     <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
@@ -98,6 +107,7 @@ async function addEpubBook(epubPath) {
         const jsonData = await getBooksFromJson();
 
         const data = epub.metadata;
+        console.log(data);
         const author = data.creator ? data.creator : null;
         const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author.replaceAll(" ", "-").toLowerCase();
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;

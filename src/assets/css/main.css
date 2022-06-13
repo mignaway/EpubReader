@@ -7,6 +7,7 @@ body {
 
 * {
     box-sizing: border-box;
+    user-select: none;
 }
 
 img {
@@ -39,7 +40,7 @@ img {
     font-size: 1vh !important;
 }
 .text-small {
-    font-size: 1.2vh !important;
+    font-size: 12px !important;
 }
 .text-sb {
     font-weight: 600 !important;
