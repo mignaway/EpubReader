@@ -4,3 +4,22 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 
 ## Preview
 <img src="https://user-images.githubusercontent.com/40722616/173415028-c2f8e59a-fc31-48cd-a2fa-fb7b7c3803d4.gif" width="100%">
+
+## Testing
+To clone locally this project you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer.
+Then clone the project with these command line:<br><br>
+<i style="opacity: .5">(Windows)</i>
+```bash
+# Clone this repository
+git clone https://github.com/mignaway/EpubReader
+# Go into the repository
+cd EpubReader
+# Install dependencies
+npm install
+# Run the app
+npm start
+```
+
+## Useful documentations
+* [electronjs.org/docs](electronjs.org/docs) - Electron's documentation
+* [https://git-scm.com/docs](https://git-scm.com/docs) - Git's documentation
