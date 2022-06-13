@@ -209,8 +209,6 @@ function orderBookModality(books_json, sortby){
             return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
         })
     }
-    
-    console.log(orderedBooks);
     return orderedBooks.slice(0, 6);
 }
 
