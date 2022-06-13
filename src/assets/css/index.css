@@ -234,3 +234,31 @@
 #section-book-filter-selection:focus {
   outline: none;
 }
+
+#section-book-choose-sorting {
+  cursor: pointer;
+}
+
+#section-book-sortings-list {
+  padding: 0;
+  margin-top: 30px;
+  list-style: none;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  border-radius: 5px;
+  background-color: white;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);
+  overflow: hidden;
+}
+#section-book-sortings-list li {
+  padding: 10px 20px;
+  transition: all .3s;
+  cursor: pointer;
+}
+#section-book-sortings-list li:hover {
+  background-color: rgb(235, 235, 235) !important;
+}
+#section-book-sortings-list li:not(:last-of-type) {
+  border-bottom: 1px solid rgba(0,0,0,.1);
+}

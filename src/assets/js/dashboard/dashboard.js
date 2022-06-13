@@ -4,7 +4,7 @@ const EPub = require("epub2").EPub;
 $(window).on('load', async function(){
     // Load books form jsonfile
     let books_json = await getBooksFromJson();
-    await loadAll(books_json)
+    await loadAll(books_json, "last_read")
 });
 
 /**
@@ -14,10 +14,10 @@ $(window).on('load', async function(){
  * 
  */
 
-async function loadAll(books_json){
+var loadAll = async function (books_json,sortby){
     $('#hero-section-loading-animation').removeClass('loaded');
-    await loadHeroSection(books_json,"last_read")
-    await loadBooksSection(books_json,"last_read")
+    await loadHeroSection(books_json, sortby)
+    await loadBooksSection(books_json, sortby)
 }
 
 async function loadHeroSection(books_json, sortby) {
@@ -137,8 +137,9 @@ async function addEpubBook(epubPath) {
                 });
             });
 
+            var sortby = $('#section-book-current-sorting').data('sort');
             // Reload sections
-            await loadAll(jsonData)
+            await loadAll(jsonData, sortby)
         } else {
             // TODO:
             // Build better custom alert
@@ -165,12 +166,13 @@ async function deleteEpubBook(folderBookCode){
         // If list is empty then disable edit button
         if (json.length == 0) $('#edit-books-button').toggleClass('currently-editing')
         // Reload sections
-        loadAll(json)
+        var sortby = $('#section-book-current-sorting').data('sort');
+        loadAll(json, sortby)
     })
 }
 
 // Read books.json file
-async function getBooksFromJson(){
+var getBooksFromJson = async function(){
     var path = __dirname + '/assets/json/books.json';
     // check if books.json exists
     if (!fs.existsSync(path)) {
@@ -203,11 +205,14 @@ function getVibrantColorFromImage(imgPath) {
 }
 
 function orderBookModality(books_json, sortby){
+    console.log(books_json, sortby);
     var orderedBooks = null;
     if (sortby == 'last_read') {
         orderedBooks = books_json.sort((x, y) => {
             return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
         })
+    } else {
+        return books_json;
     }
     return orderedBooks.slice(0, 6);
 }
