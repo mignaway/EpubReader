@@ -1,7 +1,7 @@
 $(window).on('load', async function(){
     // Load books form jsonfile
     let books_json = await getBooksFromJson();
-    await loadAll(books_json, "last_read")
+    await loadAll(books_json)
 });
 
 /**
@@ -89,9 +89,8 @@ ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
 })
 
 async function deleteEpubBookHandler(folderBookCode) {
-    var sortby = $('#section-book-current-sorting').data('sort');
     var json = await deleteEpubBook(folderBookCode);
-    await loadAll(json, sortby);
+    await loadAll(json);
 }
 
 // Get dominant (vibrant) color from image
@@ -106,14 +105,6 @@ function getVibrantColorFromImage(imgPath) {
     } else {
         console.log("File doesn't exists")
     }
-}
-
-// Because javascript has some problem iterating arrays this function will help us to do so
-
-async function asyncForEach(array, callback) {
-  for (let index = 0; index < array.length; index++) {
-    await callback(array[index], index, array);
-  }
 }
 
 // --------------------------------------------------------------------------------------------------

@@ -107,3 +107,11 @@ var orderBookModality = async function(books_json, sortby) {
     }
     return orderedBooks.slice(0, 6);
 }
+
+// Because javascript has some problem iterating arrays this function will help us to do so
+
+async function asyncForEach(array, callback) {
+    for (let index = 0; index < array.length; index++) {
+        await callback(array[index], index, array);
+    }
+}
