@@ -87,7 +87,8 @@ function loadBooksSection(books_json, sortby) {
 // Event called after chose book in dialog
 
 ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
-    await addEpubBook(epubPath)
+    var response = await addEpubBook(epubPath)
+    if (response) await loadAll(jsonData)
 })
 
 /**
@@ -136,13 +137,11 @@ async function addEpubBook(epubPath) {
                     fse.outputFile(bookFolderPath + "/" + image.href, data, 'binary')
                 });
             });
-            // Reload sections
-            await loadAll(jsonData)
+            return jsonData;
         } else {
-            // TODO:
-            // Build better custom alert
-            displayAlert("Book already in library!","default");
+            displayAlert("Book already in library!","default");  
         }
+        return false;
     })
 }
 
