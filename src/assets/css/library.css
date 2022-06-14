@@ -92,6 +92,7 @@
 
 #books-section {
     padding: 30px 30px 0 30px;
+    position: relative;
 }
 #section-book-information-actions {
     justify-content: flex-end;
@@ -227,4 +228,14 @@
 
 .book-box-informations h3 {
     font-size: 13px;
+}
+
+.no-book-text {
+    position: absolute;
+    color: black;
+    margin: auto;
+    margin: auto;
+    left: 0;
+    right: 0;
+    top:45%
 }

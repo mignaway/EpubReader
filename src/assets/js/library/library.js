@@ -9,12 +9,12 @@ var loadBooks = async function (books_json, options){
     // reset book container before appending
     $('#book-section-grid').html('');
 
-
-    books_json.forEach((book)=>{
-        let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
-        const author = book.author ? book.author : 'Undefined Author';
-        const language = book.lang ? book.lang : 'Undefined Language';
-        $('#book-section-grid').append(`
+    if(books_json.length > 0){
+        books_json.forEach((book) => {
+            let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+            const author = book.author ? book.author : 'Undefined Author';
+            const language = book.lang ? book.lang : 'Undefined Language';
+            $('#book-section-grid').append(`
         <div class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
             <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                 <h1 class="main-text text-color-white text-b">${book.title}</h1>
@@ -31,7 +31,11 @@ var loadBooks = async function (books_json, options){
             </div>
         </div>
         `);
-    })
+        });
+    } else {
+        $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
+    }
+    
     
 }
 
