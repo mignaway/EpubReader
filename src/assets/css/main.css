@@ -1,4 +1,4 @@
-body {
+html,body {
     padding: 0;
     margin: 0;
     width: 100%;
@@ -17,6 +17,7 @@ img {
 :root {
     --primary-color: #1E69DB;
     --primary-color-rgb: 30, 105, 219;
+    --primary-color-rgb-hover: 23, 83, 173;
     --primary-red-color: #d9534f;
 }
 
@@ -36,6 +37,9 @@ img {
     font-size: 16px;
     margin: 0;
 }
+.text-giant {
+    font-size: 24px !important;
+}
 .text-ultra-small {
     font-size: 1vh !important;
 }
@@ -51,12 +55,20 @@ img {
 .text-color-white {
     color: white !important;
 }
+.text-color-black {
+    color: black !important;
+}
 .text-align-center {
     text-align: center;
 }
+.bg-white {
+    background-color: white !important;
+}
+.bg-black {
+    background-color: black !important;
+}
 .vertical-divider-05 {
     width: .5px;
-    background-color: white;
     opacity: .2;
     height: 20px;
 }
@@ -83,16 +95,19 @@ img {
 .flex-space-between {
     justify-content: space-between;
 }
+.flex-1 {
+    flex: 1;
+}
 .p-absolute {
     position: absolute;
 }
 .primary-button {
-    background: var(--primary-color);
+    background-color: var(--primary-color);
     padding: 2vh 3vh;
     border-radius: 10px;
     border: none;
     color: white;
-    transition: background-color .5s;
+    transition: background-color .3s;
     font-family: 'Inter', sans-serif;
     font-weight: 700;
     font-size: 16px;
@@ -100,7 +115,7 @@ img {
     cursor: pointer;
 }
 .primary-button:hover {
-    background: rgba(var(--primary-color-rgb),.7);
+    background-color: rgb(var(--primary-color-rgb-hover));
 }
 .primary-button:focus {
     outline: none;

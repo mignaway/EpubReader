@@ -1,0 +1,116 @@
+#main-navbar {
+    padding: 3vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    width: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-app-region: drag;
+
+    border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+}
+
+#close-app-icon,
+#minimize-app-icon {
+    stroke: black;
+    transition: stroke .2s;
+}
+
+#close-app-icon:hover {
+    stroke: var(--primary-red-color) !important;
+}
+
+#minimize-app-icon:hover {
+    stroke: rgba(0, 0, 0, 0.7) !important;
+}
+#edit-books-button {
+    fill: black;
+}
+
+#edit-books-button.currently-editing {
+    fill: var(--primary-red-color)
+}
+#add-books-button line{
+    stroke: black;
+}
+
+#sidebar-settings {
+    width: 300px;
+    padding: 30px;
+    border-right: .5px solid rgba(0, 0, 0, 0.1);
+}
+#back-to-dashboard {
+    opacity: .5;
+    text-decoration: none;
+    transition: opacity .3s;
+}
+#back-to-dashboard:hover {
+    opacity: 1;
+}
+
+#sorting-settings {
+    padding: 30px 0;
+    gap: 20px;
+}
+
+.sorting-settings-choose {
+    cursor: pointer;
+    padding: 10px 15px;
+    border-radius: 5px;
+    background-color: #F3F3F3;
+}
+
+.sorting-settings-list {
+    padding: 0;
+    margin-top: 40px;
+    list-style: none;
+    display: none;
+    position: absolute;
+    z-index: 10;
+    border-radius: 5px;
+    background-color: white;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);
+    overflow: hidden;
+}
+
+.sorting-settings-list li {
+    padding: 10px 20px;
+    transition: all .3s;
+    cursor: pointer;
+}
+
+.sorting-settings-list li:hover {
+    background-color: rgb(235, 235, 235) !important;
+}
+
+.sorting-settings-list li:not(:last-of-type) {
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+/* -------------------------------- */
+
+#books-section {
+    padding: 30px;
+}
+#section-book-information-actions {
+    justify-content: flex-end;
+}
+#section-book-show-information,
+#section-book-hide-information {
+    cursor: pointer;
+    opacity: .4;
+}
+
+#section-book-show-information {
+    stroke: #717171;
+}
+
+#section-book-hide-information {
+    fill: #717171;
+}
+
+#section-book-show-information.active,
+#section-book-hide-information.active {
+    opacity: 1;
+}

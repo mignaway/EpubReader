@@ -78,7 +78,7 @@ function loadBooksSection(books_json, sortby) {
             $('#section-book-preview').append('<div class="book-box"></div>')
         }
     }
-    $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="" class="main-text text-b text-decoration-none">All Books -></a></div>')
+    $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text text-b text-decoration-none">All Books -></a></div>')
 }
 
 // Event called after chose book in dialog
