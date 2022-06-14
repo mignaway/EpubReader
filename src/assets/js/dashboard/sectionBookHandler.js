@@ -13,13 +13,12 @@ $(window).on('load', async function () {
     $('#section-book-choose-sorting').on('click', function () {
         $('#section-book-sortings-list').toggle();
     });
-    $('#section-book-sortings-list > li').on('click', function(){
+    $('#section-book-sortings-list > li').on('click', async function(){
         var sort_value = $(this).attr("value");
         $('#section-book-current-sorting').data("sort",sort_value)
         $('#section-book-current-sorting').text($(this).text());
-        // console.log(sort_value);
-        // this doesn't work because it will return a promise.
-        // loadAll(getBooksFromJson(),sort_value);
+        var books = await getBooksFromJson()
+        loadAll(books,sort_value);
     })
     $('body').on('mouseup', function () {
         $('#section-book-sortings-list').hide();
