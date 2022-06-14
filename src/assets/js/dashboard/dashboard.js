@@ -143,7 +143,7 @@ async function addEpubBook(epubPath) {
         } else {
             // TODO:
             // Build better custom alert
-            alert("Book already in library!")
+            displayAlert("Book already in library!","default");
         }
     })
 }
@@ -176,6 +176,7 @@ var getBooksFromJson = async function(){
     var path = __dirname + '/assets/json/books.json';
     // check if books.json exists
     if (!fs.existsSync(path)) {
+        displayAlert("Initializing application...","default");
         // create json/books.json
         await fse.outputFile(path, '[]');
         // reset epubs folder
@@ -205,7 +206,7 @@ function getVibrantColorFromImage(imgPath) {
 }
 
 function orderBookModality(books_json, sortby){
-    console.log(books_json, sortby);
+    // console.log(books_json, sortby);
     var orderedBooks = null;
     if (sortby == 'last_read') {
         orderedBooks = books_json.sort((x, y) => {
@@ -223,4 +224,23 @@ async function asyncForEach(array, callback) {
   for (let index = 0; index < array.length; index++) {
     await callback(array[index], index, array);
   }
+}
+
+// --------------------------------------------------------------------------------------------------
+
+/**
+ * Displays alert with a message on dashboard page
+ * 
+ * @param {String} Messaage
+ * @param {String} Box_Color 
+ */
+var displayAlert = function(message,type){
+    $('#alert-text').text(message);
+    $('#alert-text').addClass('alert-' + type);
+    var container = $('#alert-container');
+    $('#alert-container').on("webkitAnimationEnd", function(){
+        $('#alert-container').removeClass("active");
+    });
+    $('#alert-container').addClass("active");
+    // $('#alert-container').removeClass("active");
 }
