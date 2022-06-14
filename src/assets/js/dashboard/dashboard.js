@@ -14,15 +14,17 @@ $(window).on('load', async function(){
  * 
  */
 
-var loadAll = async function (books_json,sortby){
+var loadAll = async function (books_json){
+    var sortby = $('#section-book-current-sorting').data('sort');
     $('#hero-section-loading-animation').removeClass('loaded');
-    await loadHeroSection(books_json, sortby)
-    await loadBooksSection(books_json, sortby)
+    const orderedBooks = await orderBookModality(books_json, sortby)
+    await loadHeroSection(orderedBooks, sortby)
+    await loadBooksSection(orderedBooks, sortby)
 }
 
 async function loadHeroSection(books_json, sortby) {
     if (books_json.length > 0) {
-        books_json = orderBookModality(books_json,sortby);
+        
         const [title, author, bookYear, language, folderBookCode, coverPath] = [books_json[0].title, 
                                                                                 books_json[0].author ? books_json[0].author : 'Undefined Author', 
                                                                                 books_json[0].bookYear ? books_json[0].bookYear : 'Undefined', 
@@ -52,24 +54,21 @@ async function loadHeroSection(books_json, sortby) {
 function loadBooksSection(books_json, sortby) {
     // Reset book preview section
     $('#section-book-preview').html('') 
-    // var orderedBooks = books_json.slice(0, 6)
-
-    var orderedBooks = orderBookModality(books_json, sortby);
 
     for(var i = 0; i <= 5;i++) {
-        if (i < orderedBooks.length) {
+        if (i < books_json.length) {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
-            const author = orderedBooks[i].author ? orderedBooks[i].author : 'Undefined Author';
-            const language = orderedBooks[i].lang ? orderedBooks[i].lang : 'Undefined Language';
+            const author = books_json[i].author ? books_json[i].author : 'Undefined Author';
+            const language = books_json[i].lang ? books_json[i].lang : 'Undefined Language';
             $('#section-book-preview').append(`
-            <div class="book-box ${editingClass} not-empty" data-folderbookcode="${orderedBooks[i].folderBookCode}">
+            <div class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
-                    <h1 class="main-text text-color-white text-b">${orderedBooks[i].title}</h1>
+                    <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
                     <h2 class="main-text text-color-white">${author}</h2>
                     <h3 class="main-text text-color-white op-5">${language}</h3>
                 </div>
                 <div class="book-box-image overflow-hidden w-100 h-100">
-                    <img src="epubs/${orderedBooks[i].folderBookCode}/${orderedBooks[i].coverPath}">
+                    <img src="epubs/${books_json[i].folderBookCode}/${books_json[i].coverPath}">
                 </div>
                 <div class="book-delete-icon cursor-pointer" onclick="deleteEpubBook($(this).parent().data('folderbookcode'))">
                     <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -109,7 +108,8 @@ async function addEpubBook(epubPath) {
 
         const data = epub.metadata;
         const author = data.creator ? data.creator : null;
-        const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author.replaceAll(" ", "-").toLowerCase();
+        const author_folderBookCode = author ? author.replaceAll(" ", "-").toLowerCase() : 'undefined';
+        const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
 
@@ -136,10 +136,8 @@ async function addEpubBook(epubPath) {
                     fse.outputFile(bookFolderPath + "/" + image.href, data, 'binary')
                 });
             });
-
-            var sortby = $('#section-book-current-sorting').data('sort');
             // Reload sections
-            await loadAll(jsonData, sortby)
+            await loadAll(jsonData)
         } else {
             // TODO:
             // Build better custom alert
@@ -205,7 +203,7 @@ function getVibrantColorFromImage(imgPath) {
     }
 }
 
-function orderBookModality(books_json, sortby){
+async function orderBookModality(books_json, sortby){
     // console.log(books_json, sortby);
     var orderedBooks = null;
     if (sortby == 'last_read') {
