@@ -177,3 +177,37 @@ img {
     transform: rotate(360deg);
   }
 }
+
+#alert-text {
+    padding: 10px 20px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
+    border-radius: 5px;
+    position: absolute;
+    margin: auto;
+    right: 0;
+    left: 0;
+    top: 0;
+    z-index: 100;
+    transform: translateY(-50px);
+    width: max-content;
+}
+#alert-text.active {
+  animation: alert-animation-slide 4s ease-in-out;
+}
+@keyframes alert-animation-slide {
+  0% {
+    transform: translateY(-50px);
+  }
+  10% {
+    transform: translateY(20px);
+  }
+  90% {
+    transform: translateY(20px);
+  }
+  100% {
+    transform: translateY(-50px);
+  }
+}
+#alert-text.alert-default {
+  background-color: #666666;
+}

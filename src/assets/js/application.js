@@ -115,3 +115,19 @@ async function asyncForEach(array, callback) {
         await callback(array[index], index, array);
     }
 }
+
+/**
+ * Displays alert with a message on dashboard page
+ * 
+ * @param {String} Messaage
+ * @param {String} Box_Color 
+ */
+var displayAlert = function (message, type) {
+    $('#alert-text').text(message);
+    $('#alert-text').addClass('alert-' + type);
+    var container = $('#alert-container');
+    $('#alert-text').on("webkitAnimationEnd", function () {
+        $('#alert-text').removeClass("active");
+    });
+    $('#alert-text').addClass("active");
+}

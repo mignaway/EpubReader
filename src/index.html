@@ -14,7 +14,7 @@
     <script src="assets/js/dashboard/sectionBookHandler.js"></script>
   </head>
   <body>
-    <div id="alert-container" class="flex-row flex-h-center"><h1 id="alert-text" class="main-text text-sb text-color-white alert-default"></h1></div>
+    <h1 id="alert-text" class="main-text text-sb text-color-white alert-default"></h1>
     <div id="main-navbar">
       <div class="flex-row flex-v-center gap-30 no-drag">
         <div class="flex-row flex-v-center">
@@ -56,13 +56,7 @@
     <div id="hero-section-book" class="flex-all-centered">
       <div id="hero-section-loading-animation" class="h-100 w-100 flex-all-centered"><div class="loading-animation"></div></div>
       <div id="hero-section-content" class="p-absolute flex-row flex-h-center">
-        <!-- <div id="hero-section-image-cover"><img src="src/images/book-cover-test.jpg"></div>
-        <div id="hero-section-book-infos" class="flex-column">
-          <h1 class="main-text text-color-white text-b">The Toynbee Convector</h1>
-          <h2 class="main-text text-color-white">Ray Bradbury</h2>
-          <h3 class="main-text text-color-white op-5">Fantasy - IT</h3>
-          <button id="keep-reading-button" class="primary-button">Keep reading</button>
-        </div> -->
+        <!-- dynamic content-->
       </div>
       <div id="hero-section-image-background"></div>
     </div>
@@ -83,7 +77,6 @@
               <ul id="section-book-sortings-list">
                 <li class="main-text text-b" value="last_read">Last Read</li>
                 <li class="main-text text-b" value="last_opened">Last Opened</li>
-                <!-- <li class="main-text text-b">Alphabetically</li> -->
               </ul>
             </div>
           </div>           
@@ -103,7 +96,9 @@
           </svg>
         </div>
       </div>
-      <div id="section-book-preview"></div>
+      <div id="section-book-preview">
+        <!-- dynamic content-->
+      </div>
     </div>
   </body>
 </html>

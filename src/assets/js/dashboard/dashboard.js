@@ -109,19 +109,3 @@ function getVibrantColorFromImage(imgPath) {
 
 // --------------------------------------------------------------------------------------------------
 
-/**
- * Displays alert with a message on dashboard page
- * 
- * @param {String} Messaage
- * @param {String} Box_Color 
- */
-var displayAlert = function(message,type){
-    $('#alert-text').text(message);
-    $('#alert-text').addClass('alert-' + type);
-    var container = $('#alert-container');
-    $('#alert-container').on("webkitAnimationEnd", function(){
-        $('#alert-container').removeClass("active");
-    });
-    $('#alert-container').addClass("active");
-    // $('#alert-container').removeClass("active");
-}

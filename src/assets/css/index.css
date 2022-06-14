@@ -262,35 +262,3 @@
 #section-book-sortings-list li:not(:last-of-type) {
   border-bottom: 1px solid rgba(0,0,0,.1);
 }
-#alert-container {
-  width: 100%;
-  position: absolute;
-  top: 0;
-  z-index: 100;
-  transform: translateY(-50px);
-}
-#alert-container.active {
-  animation: alert-animation-slide 4s ease-in-out;
-}
-@keyframes alert-animation-slide {
-  0% {
-    transform: translateY(-50px);
-  }
-  10% {
-    transform: translateY(20px);
-  }
-  90% {
-    transform: translateY(20px);
-  }
-  100% {
-    transform: translateY(-50px);
-  }
-}
-#alert-text {
-  padding: 10px 20px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
-  border-radius: 5px;
-}
-#alert-text.alert-default {
-  background-color: #666666;
-}
