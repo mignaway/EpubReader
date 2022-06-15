@@ -35,14 +35,17 @@ var loadBooks = async function (books_json, options){
     } else {
         $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
     }
-    
+    $('#section-book-loading-animation').addClass('loaded');
     
 }
 
 
 ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
     var response = await addEpubBook(epubPath);
-    if (response != false) await loadBooks(response)
+    if (response != false) {
+        $('#section-book-loading-animation').removeClass('loaded');
+        await loadBooks(response);
+    }
 })
 
 async function deleteEpubBookHandler(folderBookCode) {
