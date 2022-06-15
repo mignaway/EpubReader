@@ -117,6 +117,9 @@ img {
 .primary-button:hover {
     background-color: rgb(var(--primary-color-rgb-hover));
 }
+.primary-button.bg-black:hover {
+    background-color: rgb(25, 25, 25) !important;
+}
 .primary-button:focus {
     outline: none;
 }
