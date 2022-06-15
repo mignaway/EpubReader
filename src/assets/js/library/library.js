@@ -2,8 +2,10 @@ $(window).on('load', async function () {
     // Load books form jsonfile
     let books_json = await getBooksFromJson();
     let options = null;
-    await loadBooks(books_json, options)
+    await loadBooks(books_json, sortingSettings)
 });
+
+var sortingSettings = { "sortby": "last_read", "filter": "none" }
 
 var loadBooks = async function (books_json, options){
     // reset book container before appending

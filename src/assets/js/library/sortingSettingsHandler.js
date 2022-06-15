@@ -10,6 +10,7 @@ $(window).on('load', async function () {
         var current_text = $(this).parent().parent().find('.sorting-settings-current-text');
         current_text.data("sort", sort_value)
         current_text.text($(this).text());
+        sortingSettings[$(this).parent().data('settings')] = sort_value;
     })
     
     // display information preview 
@@ -23,5 +24,9 @@ $(window).on('load', async function () {
         $('#section-book-show-information').removeClass("active");
         $('#section-book-hide-information').addClass("active");
         $('.book-box-informations').css("opacity", "0");
+    });
+    $('#sorting-apply-btn').on('click', async function(){
+        var books_json = await getBooksFromJson();
+        loadBooks(books_json, sortingSettings)
     });
 });

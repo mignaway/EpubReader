@@ -83,9 +83,9 @@
                                     <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <ul class="sorting-settings-list">
+                            <ul class="sorting-settings-list" data-settings="sortby">
                                 <li class="main-text text-b" value="last_read">Last Read</li>
-                                <li class="main-text text-b" value="last_opened">Last Opened</li>
+                                <!-- <li class="main-text text-b" value="last_opened">Last Opened</li> -->
                             </ul>
                         </div>
                     </div>
@@ -100,14 +100,14 @@
                                     <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <ul class="sorting-settings-list">
+                            <ul class="sorting-settings-list" data-settings="filter">
                                 <li class="main-text text-b" value="none">None</li>
-                                <li class="main-text text-b" value="read">Read</li>
-                                <li class="main-text text-b" value="not_read">Not Read</li>
+                                <!-- <li class="main-text text-b" value="read">Read</li>
+                                <li class="main-text text-b" value="not_read">Not Read</li> -->
                             </ul>
                         </div>
                     </div>
-                    <button class="primary-button bg-black">Apply changes</button>
+                    <button id="sorting-apply-btn" class="primary-button bg-black">Apply changes</button>
                 </div>
             </div>
             <div id="books-section" class="flex-1">
