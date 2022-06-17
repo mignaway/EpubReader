@@ -37,21 +37,34 @@
 }
 #book-content-columns {
     max-width: 900px;
-    columns: 100vw auto;
+    columns: 100vw 2;
     column-width: 400px;
     column-gap: 100px;
-    /* grid-column: 1; */
+    column-rule: 1px solid rgba(0, 0, 0, 0.5);
     overflow-x: auto;
     height: 100%;
-    font-size: 16px;
-    column-rule: 1px solid rgba(0, 0, 0, 0.5);
 }
 #book-content-columns > * {
     font-family: IowanOldSt;
     line-height: 150%;
 }
+/* #book-content-columns > h1 {
+    -webkit-column-break-inside: avoid;
+}
+
+#book-content-columns > p {
+    margin: 0;
+    padding: 0;
+    text-align: justify;
+}
+#book-content-columns > p {
+    font-size: 16px;
+} */
 #book-content-columns img {
     max-width: 100% !important;
     max-height: 100% !important;
     /* break-inside: avoid !important; */
+}
+.chapter-content {
+    
 }
