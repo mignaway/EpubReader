@@ -1,0 +1,27 @@
+#main-navbar {
+    padding: 3vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 50;
+    width: 100%;
+    -webkit-user-select: none;
+    user-select: none;
+    -webkit-app-region: drag;
+
+    border-bottom: .5px solid rgba(0, 0, 0, 0.1);
+}
+
+#close-app-icon,
+#minimize-app-icon {
+    stroke: black;
+    transition: stroke .2s;
+}
+
+#close-app-icon:hover {
+    stroke: var(--primary-red-color) !important;
+}
+
+#minimize-app-icon:hover {
+    stroke: rgba(0, 0, 0, 0.7) !important;
+}

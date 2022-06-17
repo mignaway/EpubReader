@@ -17,7 +17,7 @@ var loadBooks = async function (books_json, options){
             const author = book.author ? book.author : 'Undefined Author';
             const language = book.lang ? book.lang : 'Undefined Language';
             $('#book-section-grid').append(`
-        <div class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
+        <a href="book.html?code=${book.folderBookCode}" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
             <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                 <h1 class="main-text text-color-white text-b">${book.title}</h1>
                 <h2 class="main-text text-color-white">${author}</h2>
@@ -31,7 +31,7 @@ var loadBooks = async function (books_json, options){
                 <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
                 </svg>
             </div>
-        </div>
+        </a>
         `);
         });
     } else {

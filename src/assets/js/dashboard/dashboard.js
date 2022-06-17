@@ -58,7 +58,7 @@ function loadBooksSection(books_json, sortby) {
             const author = books_json[i].author ? books_json[i].author : 'Undefined Author';
             const language = books_json[i].lang ? books_json[i].lang : 'Undefined Language';
             $('#section-book-preview').append(`
-            <div class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
+            <a href="book.html?code=${books_json[i].folderBookCode}" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                     <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
                     <h2 class="main-text text-color-white">${author}</h2>
@@ -72,7 +72,7 @@ function loadBooksSection(books_json, sortby) {
                     <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
                     </svg>
                 </div>
-            </div>
+            </a>
             `)
         } else {
             $('#section-book-preview').append('<div class="book-box"></div>')
