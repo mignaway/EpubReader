@@ -28,25 +28,27 @@ var loadBookHtml = async function() {
             });
             var i = 0;
             loadChapter(currentChapter);
-            // setInterval(() => {
-            //     loadChapter(epub, i, epubCodeSearch);
-            //     i++;
-            // }, 2000);
+            // await epub.flow.forEach((data) =>  {
+            //     epub.getChapter(data.id, function (error, text) {
+            //         $('#book-content-columns').append(text);
+            //     });
+            // });
         })
 }
 var loadChapter = async function (index){
     var chapter = epubBookContent.flow[index];
     await epubBookContent.getChapter(chapter.id, function (error, text) {
+        $('#book-content-columns').html(text);
         var iframe_content = $(`<iframe id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
         iframe_content.find('head').append('<link rel="stylesheet" type="text/css" href="epubs/' + epubCodeSearch + '/css.css">');
         iframe_content.find('body').append(text);
         iframe_content.find('html').css(
             {"overflow": "hidden",
-             "width": "892px",
-             "height": "780px",
+             "width": "900px",
+             "height": "900px",
              "column-fill": "auto",
-             "column-gap": "110px",
-             "column-width": "391px",
+            //  "column-gap": "110px",
+             "column-width": "400px",
              "column-rule": "1px solid rgba(0, 0, 0, 0.5)"
             });
         iframe_content.find('head').append($("<style type='text/css'>  img { max-width: 100%;}  </style>"));

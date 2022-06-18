@@ -38,11 +38,11 @@
     width: 100%;
 }
 #book-content-columns {
-    max-width: 900px;
-    /* columns: 100vw 2;
-    column-width: 400px;
-    column-gap: 100px;
-    */
+    width: 900px;
+    /* columns: 100vw 2; 
+    column-width: 200px;
+    column-gap: 100px;*/
+   
     overflow-x: auto;
     height: 85%;
     width: 85%;
@@ -53,6 +53,7 @@
     font-family: IowanOldSt;
     line-height: 150%;
 }
+
 #book-content-columns iframe body img {
     max-width: 100%;
 }
@@ -68,10 +69,9 @@
 }
 #book-content-columns > p {
     font-size: 16px;
-}
-#book-content-columns img {
+} 
+#book-content-columns image,#book-content-columns div,#book-content-columns img {
     max-width: 100% !important;
-    max-height: 100% !important;
 } */
 .chapter-content {
     
