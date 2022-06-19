@@ -38,11 +38,10 @@
     width: 100%;
 }
 #book-content-columns {
-    width: 900px;
     /* columns: 100vw 2; 
     column-width: 200px;
     column-gap: 100px;*/
-   
+    max-width: 1000px;
     overflow-x: auto;
     height: 85%;
     width: 85%;

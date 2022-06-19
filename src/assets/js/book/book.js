@@ -44,10 +44,10 @@ var loadChapter = async function (index){
         iframe_content.find('body').append(text);
         iframe_content.find('html').css(
             {"overflow": "hidden",
-             "width": "900px",
-             "height": "900px",
+             "width": iframe_content.width,
+             "height": iframe_content.height,
              "column-fill": "auto",
-            //  "column-gap": "110px",
+             "column-gap": "100px",
              "column-width": "400px",
              "column-rule": "1px solid rgba(0, 0, 0, 0.5)"
             });
