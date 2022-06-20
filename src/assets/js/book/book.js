@@ -39,14 +39,13 @@ var loadChapter = async function (index){
     var chapter = epubBookContent.flow[index];
     await epubBookContent.getChapter(chapter.id, function (error, text) {
         $('#book-content-columns').html(text);
-        var iframe_content = $(`<iframe id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
+        var iframe_content = $(`<iframe id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="column-count: 2;-moz-column-count: 2; -webkit-column-count: 2; border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
         iframe_content.find('head').append('<link rel="stylesheet" type="text/css" href="epubs/' + epubCodeSearch + '/css.css">');
         iframe_content.find('body').append(text);
-        console.log(`width: ${iframe_content.width}\nheight: ${iframe_content.height}`);
         iframe_content.find('html').css(
             {"overflow": "hidden",
-             "width": iframe_content.width,
-             "height": iframe_content.height,
+             "width": $('#book-content-columns').width(),
+             "height": $('#book-content-columns').height(),
              "column-fill": "auto",
              "column-gap": "100px",
              "column-width": "400px",
