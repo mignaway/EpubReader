@@ -7,12 +7,21 @@ $(window).on('load', function(){
         }
     })
     $('#next-chapter-btn').on('click', function () {
-        loadChapter(currentChapter + 1);
-        currentChapter++;
-    })
+        var containerWidth = $('#book-content-columns').width();
+        var iframeBodyWidth = $('#book-iframe').contents().find('html').outerWidth();
+        console.log(iframeBodyWidth)
+        if ((currentColumnWidthTranslate + containerWidth) < iframeBodyWidth) {
+            currentColumnWidthTranslate += containerWidth;
+            $('#book-iframe').contents().find('html').css('transform', 'translateX(-' + currentColumnWidthTranslate +'px)');
+        } else {
+            loadChapter(currentChapter + 1);
+            currentChapter++;
+        } 
+    });
 })
 var epubBookContent = null;
 var epubCodeSearch = "";
+var currentColumnWidthTranslate = 0;
 var currentChapter = 0;
 var chaptersLength;
 
@@ -39,7 +48,7 @@ var loadChapter = async function (index){
     var chapter = epubBookContent.flow[index];
     await epubBookContent.getChapter(chapter.id, function (error, text) {
         $('#book-content-columns').html(text);
-        var iframe_content = $(`<iframe id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="column-count: 2;-moz-column-count: 2; -webkit-column-count: 2; border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
+        var iframe_content = $(`<iframe id="book-iframe" data-id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
         iframe_content.find('head').append('<link rel="stylesheet" type="text/css" href="epubs/' + epubCodeSearch + '/css.css">');
         iframe_content.find('body').append(text);
         iframe_content.find('html').css(
