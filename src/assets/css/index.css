@@ -70,6 +70,8 @@
 #keep-reading-button  {
   width: 100%;
   margin-top: auto;
+  text-align: center;
+  text-decoration: none;
 }
 #hero-section-book-infos {
   margin-left: 20px;

@@ -4,6 +4,8 @@ $(window).on('load', async function(){
     await loadAll(books_json)
 });
 
+var sortingSettings = { "sortby": "last_read"}
+
 /**
  * Load/reload hero section and books list section
  * 
@@ -12,11 +14,11 @@ $(window).on('load', async function(){
  */
 
 var loadAll = async function (books_json){
-    var sortby = $('#section-book-current-sorting').data('sort');
+    sortingSettings['sortby'] = $('#section-book-current-sorting').data('sort');
     $('#hero-section-loading-animation').removeClass('loaded');
-    const orderedBooks = await orderBookModality(books_json, sortby)
-    await loadHeroSection(orderedBooks, sortby)
-    await loadBooksSection(orderedBooks, sortby)
+    const orderedBooks = await orderBookModality(books_json, sortingSettings)
+    await loadHeroSection(orderedBooks, sortingSettings['sortby'])
+    await loadBooksSection(orderedBooks, sortingSettings['sortby'])
 }
 
 async function loadHeroSection(books_json, sortby) {
@@ -37,7 +39,7 @@ async function loadHeroSection(books_json, sortby) {
               <h1 class="main-text text-color-white text-b">${title}</h1>
               <h2 class="main-text text-color-white">${author}</h2>
               <h3 class="main-text text-color-white op-5">${bookYear} Edition - ${language}</h3>
-              <button id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button" style="background-color: rgb(${dominantRGBValue})">Keep reading</button>
+              <a href="book.html?code=${folderBookCode}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button" style="background-color: rgb(${dominantRGBValue})">Keep reading</a>
             </div>
         `)
         $('#hero-section-image-background').css('background-image', 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(epubs/' + folderBookCode + '/' + coverPath);

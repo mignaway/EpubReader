@@ -95,7 +95,8 @@ var getBooksFromJson = async function () {
 }
 
 // Order a json object by modality
-var orderBookModality = async function(books_json, sortby) {
+var orderBookModality = async function(books_json, option) {
+    var sortby = option['sortby'];
     // console.log(books_json, sortby);
     var orderedBooks = null;
     if (sortby == 'last_read') {

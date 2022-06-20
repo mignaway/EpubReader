@@ -42,6 +42,7 @@ var loadChapter = async function (index){
         var iframe_content = $(`<iframe id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
         iframe_content.find('head').append('<link rel="stylesheet" type="text/css" href="epubs/' + epubCodeSearch + '/css.css">');
         iframe_content.find('body').append(text);
+        console.log(`width: ${iframe_content.width}\nheight: ${iframe_content.height}`);
         iframe_content.find('html').css(
             {"overflow": "hidden",
              "width": iframe_content.width,
