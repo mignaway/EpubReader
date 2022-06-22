@@ -72,6 +72,11 @@ img {
     opacity: .2;
     height: 20px;
 }
+.horizontal-divider-05 {
+    width: 100%;
+    opacity: .2;
+    height: .5px;
+}
 .flex-row {
     display: flex;
     flex-direction: row;
@@ -137,6 +142,18 @@ img {
 }
 .m-l-10 {
   margin-left: 10px;
+}
+.m-t-5 {
+  margin-top: 5px;
+}
+.m-t-10 {
+  margin-top: 10px;
+}
+.m-b-5 {
+  margin-bottom: 5px;
+}
+.m-b-10 {
+  margin-bottom: 10px;
 }
 .gap-30 {
     gap: 30px;

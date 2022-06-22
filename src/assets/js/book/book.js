@@ -30,6 +30,12 @@ var loadBookHtml = async function() {
     console.log(__dirname)
     await EPub.createAsync(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", 'epubs/' + epubCodeSearch, 'epubs/' + epubCodeSearch)
         .then(async function (epub) {
+            
+
+            var books_json = await getBooksFromJson()
+            var books_infos = await searchBookInJson(books_json, epubCodeSearch)
+            if (books_infos != false) await loadBookInfo(books_infos)
+
             chaptersLength = epub.flow.length;
             epubBookContent = epub;
             await epub.getFile("css", async function (error, data, mimeType) {
@@ -62,4 +68,12 @@ var loadChapter = async function (index){
             });
         iframe_content.find('head').append($("<style type='text/css'>  img { max-width: 100%;}  </style>"));
     });
+}
+
+async function loadBookInfo(book_infos){
+    $('#book-info-title').text(book_infos.title);
+    $('#book-info-author').text(book_infos.author ? book_infos.author : 'undefined');
+    $('#book-info-language').text(book_infos.lang ? book_infos.lang : 'undefined');
+    $('#book-info-year').text(book_infos.bookYear ? book_infos.bookYear : 'undefined');
+    $('#book-info-pages').text('undefined');
 }

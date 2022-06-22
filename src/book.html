@@ -12,6 +12,7 @@
     <script src="assets/js/application.js"></script>
     <script src="assets/js/navbarHandler.js"></script>
     <script src="assets/js/book/book.js"></script>
+    <script src="assets/js/book/bookNavbarHandler.js"></script>
 <body>
     <h1 id="alert-text" class="main-text text-sb text-color-white alert-default"></h1>
     <div class="flex-column h-100">
@@ -39,27 +40,62 @@
                         <path
                             d="M15.6489 0H4.35111C3.35544 0 2.50983 0.803036 2.50983 1.84129V18.547C2.51276 19.8648 4.12234 20.4831 5.03742 19.5581L9.34383 15.2529C9.68894 14.8928 10.3111 14.8928 10.6562 15.2529L14.9626 19.5581C15.8781 20.4835 17.4875 19.8642 17.4902 18.547V1.84129C17.4902 0.803036 16.6446 0 15.6489 0V0Z" />
                     </svg>
-                    <svg id="show-book-info" class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <g clip-path="url(#clip0_10_155)">
-                            <path
-                                d="M9.78321 0C11.0882 0 12.1436 1.05543 12.1436 2.3604C12.1436 3.66537 11.0882 4.7208 9.78321 4.7208C8.47824 4.7208 7.42281 3.66537 7.42281 2.3604C7.42281 1.05543 8.47824 0 9.78321 0ZM11.9309 6.20168H11.8695H8.07325H7.93416C7.1569 6.20168 6.53101 6.83166 6.53101 7.60482C6.53101 8.38208 7.16099 9.00797 7.93416 9.00797H8.07325V17.1896H6.53101V20H13.469V17.1896H11.935V6.20168H11.9309Z"
-                                fill="black" />
-                        </g>
-                        <defs>
-                            <clipPath id="clip0_10_155">
-                                <rect width="20" height="20" fill="white" />
-                            </clipPath>
-                        </defs>
-                    </svg>
-
+                    <div class="flex-column" style="position: relative;">
+                        <svg id="show-book-info" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20"
+                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_10_155)">
+                                <path
+                                    d="M9.78321 0C11.0882 0 12.1436 1.05543 12.1436 2.3604C12.1436 3.66537 11.0882 4.7208 9.78321 4.7208C8.47824 4.7208 7.42281 3.66537 7.42281 2.3604C7.42281 1.05543 8.47824 0 9.78321 0ZM11.9309 6.20168H11.8695H8.07325H7.93416C7.1569 6.20168 6.53101 6.83166 6.53101 7.60482C6.53101 8.38208 7.16099 9.00797 7.93416 9.00797H8.07325V17.1896H6.53101V20H13.469V17.1896H11.935V6.20168H11.9309Z"
+                                    fill="black" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_10_155">
+                                    <rect width="20" height="20" fill="white" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                        <div id="book-info" class="book-navbar-popup">
+                            <div class="flex-column" style="gap: 10px;">
+                                <div class="flex-row"><h1 class="main-text m-r-10">Title:</h1><span id="book-info-title" class="main-text text-sb"></span></div>
+                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
+                                <div class="flex-row"><h1 class="main-text m-r-10">Author:</h1><span id="book-info-author" class="main-text text-sb"></span></div>
+                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
+                                <div class="flex-row"><h1 class="main-text m-r-10">Language:</h1><span id="book-info-language" class="main-text text-sb"></span></div>
+                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
+                                <div class="flex-row"><h1 class="main-text m-r-10">Year Edition:</h1><span id="book-info-year" class="main-text text-sb"></span></div>
+                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
+                                <div class="flex-row"><h1 class="main-text m-r-10">Pages:</h1><span id="book-info-pages" class="main-text text-sb"></span></div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="flex-row flex-v-center gap-15 no-drag">
                 <div class="flex-row flex-v-center gap-30 no-drag" style="margin-right: 150px">
-                    <svg id="show-reading-settings" width="25" height="20" viewBox="0 0 31 20" fill="black" xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M2.15584 20H0.467532L5.35065 6.7013H7.01299L11.8961 20H10.2078L6.23377 8.80519H6.12987L2.15584 20ZM2.77922 14.8052H9.58442V16.2338H2.77922V14.8052ZM16.2338 20H13.039L20.2175 0.0519486H23.6948L30.8734 20H27.6786L22.039 3.67532H21.8831L16.2338 20ZM16.7695 12.1883H27.1331V14.7208H16.7695V12.1883Z" />
-                    </svg>
+                    <div class="flex-column" style="position: relative;">
+                        <svg id="show-reading-settings" class="book-navbar-popup-open cursor-pointer" width="25" height="20" viewBox="0 0 31 20" fill="black"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M2.15584 20H0.467532L5.35065 6.7013H7.01299L11.8961 20H10.2078L6.23377 8.80519H6.12987L2.15584 20ZM2.77922 14.8052H9.58442V16.2338H2.77922V14.8052ZM16.2338 20H13.039L20.2175 0.0519486H23.6948L30.8734 20H27.6786L22.039 3.67532H21.8831L16.2338 20ZM16.7695 12.1883H27.1331V14.7208H16.7695V12.1883Z" />
+                        </svg>
+                        <div id="reading-settings" class="book-navbar-popup">
+                            <div class="flex-column">
+                                <div class="flex-row flex-v-center">
+                                    <span class="main-text cursor-pointer" style="padding: 0 7vh;">A</span>
+                                    <div class="vertical-divider-05 bg-black" style="height: 40px;"></div>
+                                    <span class="main-text text-giant cursor-pointer" style="padding: 0 7vh;">A</span>
+                                </div>
+                                <div class="horizontal-divider-05 bg-black"></div>
+                                <div class="flex-row flex-v-center" style="margin-top: 20px;">
+                                    <h1 class="main-text m-r-10">Color Style:</h1>
+                                    <div class="flex-row flex-v-center flex-h-center">
+                                        <div id="page-color-style-default" class="cursor-pointer"></div>
+                                        <div id="page-color-style-brown" class="cursor-pointer"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>     
                 </div>
                 <svg id="minimize-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 15 1" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
@@ -86,6 +122,7 @@
                         </clipPath>
                     </defs>
                 </svg>
+                <!-- <div id="book-content-template" ></div> -->
                 <div id="book-content-columns" class="flex-row flex-h-center">
                     
                 </div>

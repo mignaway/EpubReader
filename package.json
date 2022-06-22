@@ -48,8 +48,9 @@
     "dominant-color": "^0.0.1",
     "electron-squirrel-startup": "^1.0.0",
     "epub2": "^2.0.7",
+    "epubjs": "^0.3.93",
     "jquery": "^3.6.0",
-    "node-vibrant": "^3.2.1-alpha.1"
+    "node-vibrant": "^3.1.6"
   },
   "devDependencies": {
     "@electron-forge/cli": "^6.0.0-beta.63",

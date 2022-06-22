@@ -109,6 +109,16 @@ var orderBookModality = async function(books_json, option) {
     return orderedBooks.slice(0, 6);
 }
 
+var searchBookInJson = async function(json, folderBookCode) {
+    var array = null;
+    $(json).each((index) => {
+        if (json[index].folderBookCode == folderBookCode) {
+            array = json[index];
+        }
+    })
+    return array;
+}
+
 // Because javascript has some problem iterating arrays this function will help us to do so
 
 async function asyncForEach(array, callback) {
