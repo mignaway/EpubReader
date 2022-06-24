@@ -2,7 +2,7 @@ $(window).on('load', function(){
     loadBookHtml();
     $('#previous-chapter-btn').on('click',function(){
         if (currentChapter > 0) {
-            loadChapter(currentChapter-1);
+            loadChapterById(currentChapter-1);
             currentChapter--;
         }
     })
@@ -14,7 +14,7 @@ $(window).on('load', function(){
             currentColumnWidthTranslate += containerWidth;
             $('#book-iframe').contents().find('html').css('transform', 'translateX(-' + currentColumnWidthTranslate +'px)');
         } else {
-            loadChapter(currentChapter + 1);
+            loadChapterById(currentChapter + 1);
             currentChapter++;
         } 
     });
@@ -35,6 +35,7 @@ var loadBookHtml = async function() {
             var books_json = await getBooksFromJson()
             var books_infos = await searchBookInJson(books_json, epubCodeSearch)
             if (books_infos != false) await loadBookInfo(books_infos)
+            await loadChaptersInfo(epub)
 
             chaptersLength = epub.flow.length;
             epubBookContent = epub;
@@ -42,7 +43,7 @@ var loadBookHtml = async function() {
                 await fse.outputFile(__dirname + "/epubs/" + epubCodeSearch + "/css.css", data, 'binary')
             });
             var i = 0;
-            loadChapter(currentChapter);
+            loadChapterById(currentChapter);
             // await epub.flow.forEach((data) =>  {
             //     epub.getChapter(data.id, function (error, text) {
             //         $('#book-content-columns').append(text);
@@ -50,11 +51,15 @@ var loadBookHtml = async function() {
             // });
         })
 }
-var loadChapter = async function (index){
+var loadChapterById = async function (index){
     var chapter = epubBookContent.flow[index];
-    await epubBookContent.getChapter(chapter.id, function (error, text) {
+    await loadChapter(chapter.id)
+}
+
+var loadChapter = async function (chapter_id) {
+    await epubBookContent.getChapter(chapter_id, function (error, text) {
         $('#book-content-columns').html(text);
-        var iframe_content = $(`<iframe id="book-iframe" data-id="${chapter.id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
+        var iframe_content = $(`<iframe id="book-iframe" data-id="${chapter_id}" scrolling="no" allowfullscreen="true" height="100%" width="100%" style="border: none; visibility: visible;" />`).appendTo($("#book-content-columns").html('')).contents()
         iframe_content.find('head').append('<link rel="stylesheet" type="text/css" href="epubs/' + epubCodeSearch + '/css.css">');
         iframe_content.find('body').append(text);
         iframe_content.find('html').css(
@@ -76,4 +81,11 @@ async function loadBookInfo(book_infos){
     $('#book-info-language').text(book_infos.lang ? book_infos.lang : 'undefined');
     $('#book-info-year').text(book_infos.bookYear ? book_infos.bookYear : 'undefined');
     $('#book-info-pages').text('undefined');
+}
+
+async function loadChaptersInfo(epub) {
+    epub.flow.forEach(chapter => {
+        var op = chapter.title ? "" : "op-5";
+        $('#book-chapters > ul').append(`<li class="main-text ${op}" onclick="loadChapter('${chapter.id}')">${chapter.title}</li>`)
+    });
 }

@@ -72,16 +72,11 @@
 #book-content-columns image,#book-content-columns div,#book-content-columns img {
     max-width: 100% !important;
 } */
-.chapter-content {
-    
-}
-
-
 
 .book-navbar-popup{
     padding: 3vh;
     margin-top: 30px;
-    /* display: none; */
+    display: none;
     position: absolute;
     z-index: 10;
     border-radius: 5px;
@@ -98,7 +93,46 @@
     left: 0;
     width: 350px;
 }
+#book-chapters {
+    left: 0;
+    width: 350px;
+    height: 500px;
+    overflow-y: auto;
+}
 
+/* width */
+::-webkit-scrollbar {
+    width: 5px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #999999;
+    border-radius: 5px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+#book-chapters ul {
+    padding: 0 30px;
+    margin: 0;
+    list-style: inside;
+}
+#book-chapters ul li {
+    padding: 2vh 0;
+    text-indent: -20px;
+    cursor: pointer;
+}
+#book-chapters ul li:hover {
+    text-decoration: underline;
+}
 #page-color-style-default,#page-color-style-brown {
     width: 40px;
     height: 40px;

@@ -12,4 +12,8 @@ $(window).on('load', function(){
         $('.book-navbar-popup').hide();
         $('#book-info').toggle();
     })
+    $('#show-book-chapters').on('click', function () {
+        $('.book-navbar-popup').hide();
+        $('#book-chapters').toggle();
+    })
 });
