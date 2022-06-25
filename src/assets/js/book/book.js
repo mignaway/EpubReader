@@ -86,6 +86,6 @@ async function loadBookInfo(book_infos){
 async function loadChaptersInfo(epub) {
     epub.flow.forEach(chapter => {
         var op = chapter.title ? "" : "op-5";
-        $('#book-chapters > ul').append(`<li class="main-text ${op}" onclick="loadChapter('${chapter.id}')">${chapter.title}</li>`)
+        $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="loadChapter('${chapter.id}')">${chapter.title}</h1>`)
     });
 }

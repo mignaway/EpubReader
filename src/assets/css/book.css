@@ -120,18 +120,21 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
-#book-chapters ul {
-    padding: 0 30px;
-    margin: 0;
-    list-style: inside;
+#book-chapters {
+    padding: 30px;
 }
-#book-chapters ul li {
-    padding: 2vh 0;
-    text-indent: -20px;
+#book-chapters h1 {
+    padding: 2vh;
     cursor: pointer;
+    border-radius: 5px;
+    transition: background-color .2s;
 }
-#book-chapters ul li:hover {
-    text-decoration: underline;
+#book-chapters h1::before {
+    content: '•';
+    margin-right: 5px;
+}
+#book-chapters h1:hover {
+    background-color: rgba(0, 0, 0, .1);
 }
 #page-color-style-default,#page-color-style-brown {
     width: 40px;
