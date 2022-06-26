@@ -43,6 +43,7 @@
 }
 #hero-section-image-cover img {
   height: 100%;
+  width: 100%;
 }
 #hero-section-book h1,#hero-section-book h2,#hero-section-book h3 {
   margin-bottom: 5px;

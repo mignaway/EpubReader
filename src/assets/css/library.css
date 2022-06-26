@@ -119,6 +119,7 @@
     padding: 30px 20px 0px 20px;
     display: grid;
     grid-template-columns: repeat(5, 1fr);
+    grid-template-rows: 214px;
     grid-column-gap: 30px;
     grid-row-gap: 20px;
 }
