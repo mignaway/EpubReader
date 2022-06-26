@@ -2,14 +2,13 @@ $(window).on('load', async function () {
     // Load books form jsonfile
     let books_json = await getBooksFromJson();
     let options = null;
-    await loadBooks(books_json, sortingSettings)
+    await loadBooks(books_json)
 });
 
 var sortingSettings = { "sortby": "last_read", "filter": "none" }
 
-var loadBooks = async function (books_json_not_sorted, options){
-
-    const books_json = await orderBookModality(books_json_not_sorted, options);
+var loadBooks = async function (books_json_not_sorted){
+    const books_json = await orderBookModality(books_json_not_sorted, sortingSettings);
 
     // reset book container before appending
     $('#book-section-grid').html('');
