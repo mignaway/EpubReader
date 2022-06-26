@@ -53,14 +53,15 @@ async function loadHeroSection(books_json, sortby) {
 function loadBooksSection(books_json, sortby) {
     // Reset book preview section
     $('#section-book-preview').html('') 
-
+    // 
+    // 
     for(var i = 0; i <= 5;i++) {
         if (i < books_json.length) {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
             const author = books_json[i].author ? books_json[i].author : 'Undefined Author';
             const language = books_json[i].lang ? books_json[i].lang : 'Undefined Language';
             $('#section-book-preview').append(`
-            <a href="book.html?code=${books_json[i].folderBookCode}" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
+            <div onclick="window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                     <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
                     <h2 class="main-text text-color-white">${author}</h2>
@@ -69,12 +70,12 @@ function loadBooksSection(books_json, sortby) {
                 <div class="book-box-image overflow-hidden w-100 h-100">
                     <img src="epubs/${books_json[i].folderBookCode}/${books_json[i].coverPath}">
                 </div>
-                <div class="book-delete-icon cursor-pointer" onclick="deleteEpubBookHandler($(this).parent().data('folderbookcode'))">
+                <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                     <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
                     <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
                     </svg>
                 </div>
-            </a>
+            </div>
             `)
         } else {
             $('#section-book-preview').append('<div class="book-box"></div>')
