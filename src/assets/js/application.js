@@ -38,14 +38,12 @@ var addEpubBook = async function(epubPath) {
             jsonData.push(newBook)
             await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData))
 
-            // Add book's images
+            // Add book's files folder and epub
             await fs.mkdirSync(bookFolderPath)
             await fs.copyFileSync(epubPath, bookFolderPath + "/epub.epub");
-            let imageList = epub.listImage()
-            await asyncForEach(imageList, async (image) => {
-                await epub.getImageAsync(image.id).then(function ([data, mimeType]) {
-                    fse.outputFile(bookFolderPath + "/" + image.href, data, 'binary')
-                });
+            // Adding only cover image
+            await epub.getImageAsync(epub.metadata.cover).then(async function ([data, mimeType]) {
+                await fse.outputFile(bookFolderPath + "/" + epub.manifest[epub.metadata.cover].href, data, 'binary')
             });
             return jsonData;
         } else {
