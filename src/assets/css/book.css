@@ -43,7 +43,7 @@
     column-gap: 100px;*/
     max-width: 1000px;
     overflow-x: auto;
-    height: 85%;
+    height: 90%;
     width: 85%;
     overflow-y: hidden;
     margin: 0 50px;
@@ -53,7 +53,7 @@
     line-height: 150%;
 }
 
-#book-content-columns iframe body img {
+iframe img {
     max-width: 100%;
 }
 

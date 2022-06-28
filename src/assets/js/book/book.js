@@ -35,7 +35,7 @@ var loadBook = async function() {
     var book_infos = await searchBookInJson(books_json,epubCodeSearch)
     await loadBookInfo(book_infos);
     book = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
-    book_rendition = book.renderTo("book-content-columns", { method: "default", width: "900", height: "500","resizeOnOrientationChange": true });
+    book_rendition = book.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
     book_rendition.display();
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
@@ -47,6 +47,11 @@ var loadBook = async function() {
             })
         }
     })
+    book_rendition.themes.default({
+        img: {
+            'max-width': '100%'
+        },
+    });
 }
 
 
