@@ -7,7 +7,9 @@
 
 # EpubReader
 
-EpubReader is a open-source project made with [ElectronJS](https://www.electronjs.org/). Like the name says it's an application for reading ***.epub*** files, there are already a thousand of epub reader but their UI/UX it's really bad. I started this project for letting people read epub books in a nice way with a well made application.
+EpubReader is a open-source project made with [ElectronJS](https://www.electronjs.org/). Like the name says it's an application for reading ***.epub*** files, there are already a thousand of epub reader but their UI/UX it's really bad. I started this project for letting people read epub books in a nice way with a well-made application.
+
+> **Warning** : This project is under development, you might experience an unwanted amount of bugs!
 
 ## Preview
 ***(Dashboard)***
