@@ -18,12 +18,13 @@ var addEpubBook = async function(epubPath) {
         const jsonData = await getBooksFromJson();
 
         const data = epub.metadata;
+        
         const author = data.creator ? data.creator : null;
         const author_folderBookCode = author ? author.replaceAll(" ", "-").toLowerCase() : 'undefined';
         const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
-
+        console.log(data)
         // Check if book already exists
         if (!fs.existsSync(bookFolderPath)){ 
             newBook = {
@@ -33,7 +34,8 @@ var addEpubBook = async function(epubPath) {
                 "lang": data.languages ? data.language.split('-')[0].toUpperCase() : null,
                 "folderBookCode": folderBookCode,
                 "coverPath": coverPath,
-                "lastTimeOpened": new Date()
+                "lastTimeOpened": new Date(),
+                "lastPageOpened": null
             }
             jsonData.push(newBook)
             await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData))
@@ -42,7 +44,7 @@ var addEpubBook = async function(epubPath) {
             await fs.mkdirSync(bookFolderPath)
             await fs.copyFileSync(epubPath, bookFolderPath + "/epub.epub");
             // Adding only cover image
-            await epub.getImageAsync(epub.metadata.cover).then(async function ([data, mimeType]) {
+            if (epub.metadata.cover) await epub.getImageAsync(epub.metadata.cover).then(async function ([data, mimeType]) {
                 await fse.outputFile(bookFolderPath + "/" + epub.manifest[epub.metadata.cover].href, data, 'binary')
             });
             return jsonData;
@@ -115,6 +117,15 @@ var searchBookInJson = async function(json, folderBookCode) {
         }
     })
     return array;
+}
+var changeValueInJsonBook = async function (json, folderBookCode, key, newValue) {
+    var array = null;
+    $(json).each((index) => {
+        if (json[index].folderBookCode == folderBookCode) {
+            json[index][key] = newValue;
+        }
+    })
+    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json))
 }
 
 // Because javascript has some problem iterating arrays this function will help us to do so

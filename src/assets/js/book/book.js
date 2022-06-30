@@ -36,7 +36,14 @@ var loadBook = async function() {
     await loadBookInfo(book_infos);
     book = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
     book_rendition = book.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
-    book_rendition.display();
+    var book_display; 
+    if (book_infos.lastPageOpened != null){
+        book_display = book_rendition.display(book_infos.lastPageOpened);
+        book_rendition.gotoCfi(book_infos.lastPageOpened)
+    } else {
+        book_display = book_rendition.display();
+    }
+   
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
     book_rendition.on("rendered", function (section) {
@@ -62,4 +69,13 @@ async function loadBookInfo(book_infos){
     $('#book-info-language').text(book_infos.lang ? book_infos.lang : 'undefined');
     $('#book-info-year').text(book_infos.bookYear ? book_infos.bookYear : 'undefined');
     $('#book-info-pages').text('undefined');
+}
+
+var saveBookPageBeforeClose = async function(){
+    if (book_rendition) {
+        let location = book_rendition.currentLocation();
+        let cfiString = location.start.cfi;
+        var books_json = await getBooksFromJson();
+        await changeValueInJsonBook(books_json, epubCodeSearch, "lastPageOpened", cfiString)
+    }
 }
