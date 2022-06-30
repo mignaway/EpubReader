@@ -28,7 +28,6 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 
 <img src="https://user-images.githubusercontent.com/40722616/173831311-2f67d669-7ea1-41b3-b93e-57321416504b.png" width="100%">
 -->
-___
 
 ## Testing
 To clone locally this project you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer.
