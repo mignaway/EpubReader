@@ -99,12 +99,20 @@ var orderBookModality = async function(books_json, option) {
     var sortby = option['sortby'];
     // console.log(books_json, sortby);
     var orderedBooks = null;
-    if (sortby == 'last_read') {
-        orderedBooks = books_json.sort((x, y) => {
-            return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
-        })
-    } else {
-        return books_json;
+    switch(sortby) {
+        case 'last_read':
+            orderedBooks = books_json.sort((x, y) => {
+                return new Date(x.lastTimeOpened) > new Date(y.lastTimeOpened) ? 1 : -1
+            });
+            break;
+        case 'alphabetically':
+            orderedBooks = books_json.sort((x, y) => {
+                if (x.title === y.title) return 0; // theoretically impossible
+                return x.title > y.title ? 1 : -1
+            });
+            break;
+        default:
+            return books_json;
     }
     return orderedBooks.slice(0, 6);
 }
