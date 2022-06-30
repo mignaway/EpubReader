@@ -5,7 +5,9 @@ const fse = require('fs-extra');
 
 $(window).on('load', function () {
     $('#close-app-icon').on('click', async function() {
-        await saveBookPageBeforeClose();   
+        if (typeof saveBookPageBeforeClose == 'function') {
+            await saveBookPageBeforeClose();
+        }
         ipcRenderer.send('closeApp');
     })
     $('#minimize-app-icon').on('click', function () {
