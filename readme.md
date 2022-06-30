@@ -12,6 +12,10 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 > **Warning** : This project is under development, you might experience an unwanted amount of bugs!
 
 ## Preview
+<img src="https://user-images.githubusercontent.com/40722616/176780491-6f7c7711-780f-4d96-bd2d-dc51fb7b5164.jpg" width="100%">
+
+
+<!--
 ***(Dashboard)***
 
 <img src="https://user-images.githubusercontent.com/40722616/173415028-c2f8e59a-fc31-48cd-a2fa-fb7b7c3803d4.gif" width="100%">
@@ -19,7 +23,7 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 ***(Library)***
 
 <img src="https://user-images.githubusercontent.com/40722616/173831311-2f67d669-7ea1-41b3-b93e-57321416504b.png" width="100%">
-
+-->
 ___
 
 ## Testing
