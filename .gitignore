@@ -92,3 +92,4 @@ out/
 src/epubs/
 
 src/assets/json/books.json
+package-lock.json
