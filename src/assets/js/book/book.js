@@ -37,14 +37,13 @@ var loadBook = async function() {
     await loadBookInfo(book_infos);
     book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
     book_rendition = book_epub.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
-    await loadBookStyleSettings();
     var book_display; 
     if (book_infos.lastPageOpened != null){
         book_display = book_rendition.display(book_infos.lastPageOpened);
     } else {
         book_display = book_rendition.display();
     }
-   
+    
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
     book_rendition.on("rendered", function (section) {
@@ -61,6 +60,7 @@ var loadBook = async function() {
             'color': 'inherit'
         }
     });
+    await loadBookStyleSettings();
 }
 
 async function loadBookInfo(book_infos){
@@ -89,7 +89,7 @@ async function loadBookStyleSettings(newValue = null){
             // if i use multiple themes (themes.register)
             // when it change text color it will not update cause it won't replace but append the css
             // -> color: #5B4636;color: black; | So it's necessary to apply css directly on default theme
-            book_rendition.themes.default({ body: {'color':'#5B4636'}})
+            book_rendition.themes.default({ body: { 'color': '#5B4636' } });
             backround_elements.addClass('page-color-style-brown-bg');
             icon_elements.addClass('page-color-style-brown-color');
             break;
