@@ -36,6 +36,7 @@ var loadBook = async function() {
     await loadBookInfo(book_infos);
     book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
     book_rendition = book_epub.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
+    await loadBookStyleSettings();
     var book_display; 
     if (book_infos.lastPageOpened != null){
         book_display = book_rendition.display(book_infos.lastPageOpened);
@@ -56,9 +57,13 @@ var loadBook = async function() {
         },
         a: {
             'pointer-events': 'none',
-            'color': 'black'
+            'color': 'inherit'
         }
     });
+    book_rendition.themes.register("brown",
+        {
+            "body": { "color": "#5B4636" }
+        });
 }
 
 
@@ -76,6 +81,27 @@ async function loadChaptersTitles(){
         $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="book_rendition.display('${section.href}')">${section.label}</h1>`)
     })
     chapters_rendered = true;
+}
+
+async function loadBookStyleSettings(newValue = null){
+    var user_settings = await getUserSettingsFromJson();
+    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
+    var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
+    if (newValue != null) user_settings.book.background_color_style = newValue
+    switch (user_settings.book.background_color_style){
+        case 'brown':
+            backround_elements.addClass('page-color-style-brown-bg');
+            icon_elements.addClass('page-color-style-brown-color')
+            book_rendition.themes.select('brown');
+            break;
+        default:
+            backround_elements.removeClass('page-color-style-brown-bg');
+            icon_elements.removeClass('page-color-style-brown-color')
+            book_rendition.themes.select('default');
+            break;
+    }
+    if (newValue != null) updateUserSettings(user_settings)
+
 }
 
 var saveBookPageBeforeClose = async function(){

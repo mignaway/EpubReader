@@ -20,7 +20,7 @@
     <div class="flex-column h-100">
         <div id="main-navbar">
             <div class="flex-row flex-v-center gap-30 no-drag">
-                <a href="library.html" class="main-text text-color-black text-sb cursor-pointer text-decoration-none" onclick="saveBookPageBeforeClose();">Library</a>
+                <a href="library.html" id="libraryNavBtn" class="main-text text-color-black text-sb cursor-pointer text-decoration-none" onclick="saveBookPageBeforeClose();">Library</a>
                 <div class="vertical-divider-05 bg-black"></div>
                 <div class="flex-row flex-v-center gap-30">
                     <div class="flex-column" style="position: relative;">
@@ -49,11 +49,11 @@
                     </svg>
                     <div class="flex-column" style="position: relative;">
                         <svg id="show-book-info" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20"
-                            fill="none" xmlns="http://www.w3.org/2000/svg">
+                            fill="black" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_10_155)">
                                 <path
                                     d="M9.78321 0C11.0882 0 12.1436 1.05543 12.1436 2.3604C12.1436 3.66537 11.0882 4.7208 9.78321 4.7208C8.47824 4.7208 7.42281 3.66537 7.42281 2.3604C7.42281 1.05543 8.47824 0 9.78321 0ZM11.9309 6.20168H11.8695H8.07325H7.93416C7.1569 6.20168 6.53101 6.83166 6.53101 7.60482C6.53101 8.38208 7.16099 9.00797 7.93416 9.00797H8.07325V17.1896H6.53101V20H13.469V17.1896H11.935V6.20168H11.9309Z"
-                                    fill="black" />
+                                    />
                             </g>
                             <defs>
                                 <clipPath id="clip0_10_155">
@@ -96,8 +96,8 @@
                                 <div class="flex-row flex-v-center" style="margin-top: 20px;">
                                     <h1 class="main-text m-r-10">Color Style:</h1>
                                     <div class="flex-row flex-v-center flex-h-center">
-                                        <div id="page-color-style-default" class="cursor-pointer"></div>
-                                        <div id="page-color-style-brown" class="cursor-pointer"></div>
+                                        <div id="page-color-style-default" class="cursor-pointer" onclick="loadBookStyleSettings('default');"></div>
+                                        <div id="page-color-style-brown" class="cursor-pointer" onclick="loadBookStyleSettings('brown');"></div>
                                     </div>
                                 </div>
                             </div>

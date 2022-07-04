@@ -94,6 +94,21 @@ var getBooksFromJson = async function () {
     return JSON.parse(fs.readFileSync(path))
 }
 
+var getUserSettingsFromJson = async function () {
+    var path = __dirname + '/assets/json/user_settings.json';
+    // // check if books.json exists
+    if (!fs.existsSync(path)) {
+    //     // create json/books.json
+        await fse.outputFile(path, '{"book": {"background_color_style": "default"}} ');
+    }
+
+    return JSON.parse(fs.readFileSync(path))
+}
+
+var updateUserSettings = async function (old_json) {
+    await fs.writeFileSync(__dirname + '/assets/json/user_settings.json', JSON.stringify(old_json))
+}
+
 // Order a json object by modality
 var orderBookModality = async function(books_json, option) {
     var sortby = option['sortby'];

@@ -144,3 +144,10 @@
     border: 1px solid #5B4636;
     background-color: #7c5f49;
 }
+.page-color-style-brown-bg {
+    background-color: #F8F1E2;
+}
+.page-color-style-brown-color {
+    color: #5B4636 !important;
+    fill: #5B4636;
+}
