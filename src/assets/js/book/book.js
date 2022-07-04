@@ -61,13 +61,7 @@ var loadBook = async function() {
             'color': 'inherit'
         }
     });
-    book_rendition.themes.register("brown",
-        {
-            "body": { "color": "#5B4636" }
-        });
 }
-
-
 
 async function loadBookInfo(book_infos){
     $('#book-info-title').text(book_infos.title);
@@ -89,16 +83,20 @@ async function loadBookStyleSettings(newValue = null){
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
     var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
     if (newValue != null) user_settings.book.background_color_style = newValue
+     
     switch (user_settings.book.background_color_style){
-        case 'brown':
+        case "brown":
+            // if i use multiple themes (themes.register)
+            // when it change text color it will not update cause it won't replace but append the css
+            // -> color: #5B4636;color: black; | So it's necessary to apply css directly on default theme
+            book_rendition.themes.default({ body: {'color':'#5B4636'}})
             backround_elements.addClass('page-color-style-brown-bg');
-            icon_elements.addClass('page-color-style-brown-color')
-            book_rendition.themes.select('brown');
+            icon_elements.addClass('page-color-style-brown-color');
             break;
         default:
+            book_rendition.themes.default({ body: { 'color': 'black' } })
             backround_elements.removeClass('page-color-style-brown-bg');
-            icon_elements.removeClass('page-color-style-brown-color')
-            book_rendition.themes.select('default');
+            icon_elements.removeClass('page-color-style-brown-color');
             break;
     }
     if (newValue != null) updateUserSettings(user_settings)
