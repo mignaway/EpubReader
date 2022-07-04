@@ -54,6 +54,10 @@ var loadBook = async function() {
         img: {
             'max-width': '100%'
         },
+        a: {
+            'pointer-events': 'none',
+            'color': 'black'
+        }
     });
 }
 
