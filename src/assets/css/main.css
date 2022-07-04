@@ -164,6 +164,9 @@ img {
 .cursor-pointer {
     cursor: pointer;
 }
+.cursor-default {
+  cursor: default !important;
+}
 .no-drag {
     -webkit-app-region: no-drag;
 }
