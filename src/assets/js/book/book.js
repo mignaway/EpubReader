@@ -34,8 +34,8 @@ var loadBook = async function() {
     var books_json = await getBooksFromJson();
     var book_infos = await searchBookInJson(books_json,epubCodeSearch)
     await loadBookInfo(book_infos);
-    book = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
-    book_rendition = book.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
+    book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
+    book_rendition = book_epub.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
     var book_display; 
     if (book_infos.lastPageOpened != null){
         book_display = book_rendition.display(book_infos.lastPageOpened);
@@ -47,10 +47,7 @@ var loadBook = async function() {
     document.addEventListener("keyup", keyListener, false);
     book_rendition.on("rendered", function (section) {
         if (!chapters_rendered) {
-            book.navigation.forEach((section) => {
-                var op = section.label ? "" : "op-5";
-                $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="book_rendition.display('${section.href}')">${section.label}</h1>`)
-            })
+            loadChaptersTitles()
         }
     })
     book_rendition.themes.default({
@@ -68,6 +65,13 @@ async function loadBookInfo(book_infos){
     $('#book-info-language').text(book_infos.lang ? book_infos.lang : 'undefined');
     $('#book-info-year').text(book_infos.bookYear ? book_infos.bookYear : 'undefined');
     $('#book-info-pages').text('undefined');
+}
+async function loadChaptersTitles(){
+    book_epub.navigation.forEach((section) => {
+        var op = section.label ? "" : "op-5";
+        $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="book_rendition.display('${section.href}')">${section.label}</h1>`)
+    })
+    chapters_rendered = true;
 }
 
 var saveBookPageBeforeClose = async function(){
