@@ -92,3 +92,4 @@ out/
 src/epubs/
 
 src/assets/json/books.json
+src/assets/json/user_settings.json
