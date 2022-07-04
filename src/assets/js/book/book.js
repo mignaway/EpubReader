@@ -39,7 +39,6 @@ var loadBook = async function() {
     var book_display; 
     if (book_infos.lastPageOpened != null){
         book_display = book_rendition.display(book_infos.lastPageOpened);
-        book_rendition.gotoCfi(book_infos.lastPageOpened)
     } else {
         book_display = book_rendition.display();
     }
