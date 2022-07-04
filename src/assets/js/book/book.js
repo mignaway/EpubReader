@@ -71,7 +71,7 @@ async function loadBookInfo(book_infos){
     $('#book-info-pages').text('undefined');
 }
 async function loadChaptersTitles(){
-    book_epub.navigation.forEach((section) => {
+    await book_epub.navigation.forEach((section) => {
         var op = section.label ? "" : "op-5";
         $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="book_rendition.display('${section.href}')">${section.label}</h1>`)
     })
