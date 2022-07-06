@@ -14,7 +14,9 @@ var epubCodeSearch = "";
 var book_epub = null;
 var book_rendition = null;
 var chapters_rendered = false;
-var current_font_size = 16;
+var current_font_size = 100;
+var MAX_FONT_SIZE = 120;
+var MIN_FONT_SIZE = 80;
 
 var keyListener = function (e) {
 
