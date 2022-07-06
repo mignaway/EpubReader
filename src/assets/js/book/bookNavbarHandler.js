@@ -21,22 +21,9 @@ $(window).on('load', function(){
         checkFontSizeOpacity();
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
     })
-    $('#settings-decrease-font-size').on('click', function () {
-        
+    $('#settings-decrease-font-size').on('click', function () {   
         if (current_style_settings.book.font_size_percent > MIN_FONT_SIZE) current_style_settings.book.font_size_percent -= 2
-        checkFontSizeOpacity(current_style_settings.book.font_size_percent);
+        checkFontSizeOpacity();
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
     })
-    function checkFontSizeOpacity(){
-        console.log(current_style_settings.book.font_size_percent)
-        $('#settings-decrease-font-size').removeClass('op-5');
-        $('#settings-increase-font-size').removeClass('op-5');
-        if (current_style_settings.book.font_size_percent == MAX_FONT_SIZE){
-            $('#settings-increase-font-size').addClass('op-5');
-            
-        } else if (current_style_settings.book.font_size_percent == MIN_FONT_SIZE) {
-            $('#settings-decrease-font-size').addClass('op-5');    
-        }
-        
-    }
 });

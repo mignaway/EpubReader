@@ -79,12 +79,14 @@ async function loadChaptersTitles(){
     })
     chapters_rendered = true;
 }
-
-async function loadBookStyleSettings(newValue = null){
+async function loadBookStyleSettings(newStyleColor = null){
     if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
     var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
-    if (newValue != null) current_style_settings.book.background_color_style = newValue
+    // fontSize here doesn't load, it needs to be fixed
+    // book_rendition.themes.fontSize(current_style_settings.book.font_size_percent);
+    checkFontSizeOpacity();
+    if (newStyleColor != null) current_style_settings.book.background_color_style = newStyleColor
      
     switch (current_style_settings.book.background_color_style){
         case "brown":
@@ -102,6 +104,17 @@ async function loadBookStyleSettings(newValue = null){
             break;
     }
 }
+var checkFontSizeOpacity = function () {
+    $('#settings-decrease-font-size').removeClass('op-5');
+    $('#settings-increase-font-size').removeClass('op-5');
+    if (current_style_settings.book.font_size_percent == MAX_FONT_SIZE) {
+        $('#settings-increase-font-size').addClass('op-5');
+
+    } else if (current_style_settings.book.font_size_percent == MIN_FONT_SIZE) {
+        $('#settings-decrease-font-size').addClass('op-5');
+    }
+
+}
 var saveBeforeClose = async function() {
     saveBookPageBeforeClose();
     saveSettingsBeforeClose();
@@ -116,7 +129,7 @@ var saveBookPageBeforeClose = async function(){
 }
 var saveSettingsBeforeClose = async function(){
     var settings = await getUserSettingsFromJson();
-    settings.book.background_color_style = current_style_settings.book.background_color_style
-    settings.book.font_size_percent = current_style_settings.book.font_size_percent;
+    settings.book.background_color_style = current_style_settings.book.background_color_style;
+    // settings.book.font_size_percent = current_style_settings.book.font_size_percent; 
     updateUserSettings(settings)
 }
