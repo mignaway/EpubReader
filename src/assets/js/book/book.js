@@ -84,7 +84,7 @@ async function loadBookStyleSettings(newStyleColor = null){
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
     var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
     // fontSize here doesn't load, it needs to be fixed
-    // book_rendition.themes.fontSize(current_style_settings.book.font_size_percent);
+    // book_rendition.themes.fontSize("140%");
     checkFontSizeOpacity();
     if (newStyleColor != null) current_style_settings.book.background_color_style = newStyleColor
      
@@ -117,7 +117,7 @@ var checkFontSizeOpacity = function () {
 }
 var saveBeforeClose = async function() {
     saveBookPageBeforeClose();
-    saveSettingsBeforeClose();
+    updateUserSettings(current_style_settings)
 }
 var saveBookPageBeforeClose = async function(){
     if (book_rendition) {
@@ -126,10 +126,4 @@ var saveBookPageBeforeClose = async function(){
         var books_json = await getBooksFromJson();
         await changeValueInJsonBook(books_json, epubCodeSearch, "lastPageOpened", cfiString)
     }
-}
-var saveSettingsBeforeClose = async function(){
-    var settings = await getUserSettingsFromJson();
-    settings.book.background_color_style = current_style_settings.book.background_color_style;
-    // settings.book.font_size_percent = current_style_settings.book.font_size_percent; 
-    updateUserSettings(settings)
 }
