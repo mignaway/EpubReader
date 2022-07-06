@@ -99,7 +99,7 @@ var getUserSettingsFromJson = async function () {
     // // check if books.json exists
     if (!fs.existsSync(path)) {
     //     // create json/books.json
-        await fse.outputFile(path, '{"book": {"background_color_style": "default"}} ');
+        await fse.outputFile(path, '{"book": {"background_color_style": "default","font_size_percent": 100}} ');
     }
 
     return JSON.parse(fs.readFileSync(path))

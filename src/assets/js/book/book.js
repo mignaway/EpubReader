@@ -14,7 +14,7 @@ var epubCodeSearch = "";
 var book_epub = null;
 var book_rendition = null;
 var chapters_rendered = false;
-var current_font_size = 100;
+var current_style_settings = null;
 var MAX_FONT_SIZE = 120;
 var MIN_FONT_SIZE = 80;
 
@@ -81,12 +81,12 @@ async function loadChaptersTitles(){
 }
 
 async function loadBookStyleSettings(newValue = null){
-    var user_settings = await getUserSettingsFromJson();
+    if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
     var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
-    if (newValue != null) user_settings.book.background_color_style = newValue
+    if (newValue != null) current_style_settings.book.background_color_style = newValue
      
-    switch (user_settings.book.background_color_style){
+    switch (current_style_settings.book.background_color_style){
         case "brown":
             // if i use multiple themes (themes.register)
             // when it change text color it will not update cause it won't replace but append the css
@@ -101,10 +101,11 @@ async function loadBookStyleSettings(newValue = null){
             icon_elements.removeClass('page-color-style-brown-color');
             break;
     }
-    if (newValue != null) updateUserSettings(user_settings)
-
 }
-
+var saveBeforeClose = async function() {
+    saveBookPageBeforeClose();
+    saveSettingsBeforeClose();
+}
 var saveBookPageBeforeClose = async function(){
     if (book_rendition) {
         let location = book_rendition.currentLocation();
@@ -112,4 +113,10 @@ var saveBookPageBeforeClose = async function(){
         var books_json = await getBooksFromJson();
         await changeValueInJsonBook(books_json, epubCodeSearch, "lastPageOpened", cfiString)
     }
+}
+var saveSettingsBeforeClose = async function(){
+    var settings = await getUserSettingsFromJson();
+    settings.book.background_color_style = current_style_settings.book.background_color_style
+    settings.book.font_size_percent = current_style_settings.book.font_size_percent;
+    updateUserSettings(settings)
 }
