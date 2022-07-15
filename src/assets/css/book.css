@@ -41,7 +41,7 @@
     /* columns: 100vw 2; 
     column-width: 200px;
     column-gap: 100px;*/
-    max-width: 1000px;
+    /* max-width: 1000px; */
     overflow-x: auto;
     height: 90%;
     width: 85%;

@@ -13,6 +13,11 @@ $(window).on('load', function () {
     $('#minimize-app-icon').on('click', function () {
         ipcRenderer.send('minimizeApp');
     })
+    $('#resize-maximize-app-icon, #resize-minimize-app-icon').on('click', function(){
+        $('#resize-maximize-app-icon').toggle();
+        $('#resize-minimize-app-icon').toggle();
+        ipcRenderer.send('resizeApp'); 
+    })
     $('#edit-books-button').on('click', function () {
         $('.book-box.not-empty').toggleClass('currently-editing')
         $('#edit-books-button').toggleClass('currently-editing')
