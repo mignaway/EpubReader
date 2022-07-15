@@ -37,7 +37,7 @@ var loadBook = async function() {
     var books_json = await getBooksFromJson();
     var book_infos = await searchBookInJson(books_json,epubCodeSearch)
     await loadBookInfo(book_infos);
-    book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub" })
+    book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
     book_rendition = book_epub.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
     var book_display; 
     if (book_infos.lastPageOpened != null){
@@ -52,6 +52,10 @@ var loadBook = async function() {
         if (!chapters_rendered) {
             loadChaptersTitles()
         }
+        var iframe = $('iframe').contents();
+        iframe.find('body').on('click', function (event) {
+            $('.book-navbar-popup').hide();
+        });
     })
     book_rendition.themes.default({
         img: {
