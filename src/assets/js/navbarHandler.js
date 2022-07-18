@@ -25,4 +25,26 @@ $(window).on('load', function () {
     $('#add-books-button').on('click', function (){
         ipcRenderer.send('openBookChooserDialog')
     })
+    $('#settings-menu-open').on('click', function(){
+        $('#settings-menu').toggle();
+    })
+    $("body").on('click', function (e) {
+        // iframe click doesn't work, need to be added/fixed
+        if (!$(e.target).is('#settings-menu-open') && // Check clicking popup icon
+            !$(e.target).parents('#settings-menu-open').length &&
+            $(e.target).closest($('#settings-menu')).length == 0) { // Check clicking inside of popup
+            $('#settings-menu').hide();
+        }
+    });
+    ipcRenderer.on('getAppVersion', async function(event, appVersion){
+        console.log(appVersion)
+        $('#app-info-version').text("v" + appVersion);
+    })
+    $('#menu-open-app-information').on('click', function(){
+        $('#application-information').css("display","flex");
+        $('#settings-menu').hide();
+    })
+    $('#menu-close-app-information').on('click', function () {
+        $('#application-information').css("display", "none");
+    })
 });

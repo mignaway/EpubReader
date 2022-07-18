@@ -234,3 +234,38 @@ img {
 #alert-text.alert-default {
   background-color: #666666;
 }
+
+#settings-menu {
+  padding: 3vh;
+  margin-top: 40px;
+  display: none;
+  position: absolute;
+  z-index: 10;
+  border-radius: 5px;
+  background-color: #121212;
+  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);
+  overflow: hidden;
+  display: none;
+  width: 250px;
+}
+.settings-menu-action {
+  transition: opacity .3s;
+  cursor: pointer;
+}
+.settings-menu-action {
+  opacity: .8;
+}
+.settings-menu-action:hover {
+  opacity: 1;
+}
+#application-information {
+  background-color: rgba(0,0,0,0.8);
+  position: absolute;
+  z-index: 100;
+  display: none;
+}
+#application-information-box {
+  background-color: #121212;
+  border-radius: 15px;
+  padding: 30px;
+}

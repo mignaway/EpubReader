@@ -1,4 +1,4 @@
-const { app, BrowserWindow, globalShortcut, ipcMain, dialog } = require('electron');
+const { app, BrowserWindow, globalShortcut, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -30,6 +30,7 @@ const createWindow = () => {
   // mainWindow.on('ready-to-show', ()=> setTimeout(() => mainWindow.show(), 50))
   mainWindow.webContents.on('did-finish-load', () => {
     setTimeout(() => mainWindow.show(), 50); // HACK
+    mainWindow.webContents.send('getAppVersion', app.getVersion())
   });
   globalShortcut.register('f5', function () {
     mainWindow.reload()
