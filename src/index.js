@@ -15,6 +15,7 @@ const createWindow = () => {
     resizable: false,
     show: false,
     frame: false,
+    icon: path.join(__dirname,"icon.ico"),
     // hasShadow: true,
     // transparent: true,
     webPreferences: {
