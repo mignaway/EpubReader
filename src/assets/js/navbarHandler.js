@@ -37,7 +37,6 @@ $(window).on('load', function () {
         }
     });
     ipcRenderer.on('getAppVersion', async function(event, appVersion){
-        console.log(appVersion)
         $('#app-info-version').text("v" + appVersion);
     })
     $('#menu-open-app-information').on('click', function(){

@@ -24,7 +24,7 @@ var addEpubBook = async function(epubPath) {
         const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
-        console.log(data)
+        // console.log(data)
         // Check if book already exists
         if (!fs.existsSync(bookFolderPath)){ 
             newBook = {
