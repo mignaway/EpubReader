@@ -36,6 +36,7 @@ var loadBook = async function() {
     epubCodeSearch = window.location.search.substring(1).split("=")[1];
     var books_json = await getBooksFromJson();
     var book_infos = await searchBookInJson(books_json,epubCodeSearch)
+    await changeValueInJsonBook(books_json, epubCodeSearch, "lastTimeOpened", new Date());
     await loadBookInfo(book_infos);
     book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
     book_rendition = book_epub.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});

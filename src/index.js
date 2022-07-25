@@ -49,6 +49,12 @@ const createWindow = () => {
     }
     mainWindow.unmaximize();
   })
+  ipcMain.on('unmaximizeApp', () => {
+    if (mainWindow.isMaximized()) {
+      mainWindow.unmaximize();
+      return null;
+    } 
+  })
   ipcMain.on('openBookChooserDialog', () => {
     dialog.showOpenDialog({ 
       properties: ['openFile'],

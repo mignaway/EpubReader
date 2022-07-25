@@ -117,7 +117,7 @@ var orderBookModality = async function(books_json, option) {
     switch(sortby) {
         case 'last_read':
             orderedBooks = books_json.sort((x, y) => {
-                return new Date(x.lastTimeOpened) > new Date(y.lastTimeOpened) ? 1 : -1
+                return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
             });
             break;
         case 'alphabetically':

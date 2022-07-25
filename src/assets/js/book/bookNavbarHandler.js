@@ -19,7 +19,9 @@ $(window).on('load', function(){
         $('.book-navbar-popup:not(#book-chapters)').hide();
         $('#book-chapters').toggle();
     })
-    
+    $('#libraryNavBtn').on('click', function(){
+        ipcRenderer.send('unmaximizeApp');
+    })
     $('#settings-increase-font-size').on('click', function(){
         if (current_style_settings.book.font_size_percent < MAX_FONT_SIZE) current_style_settings.book.font_size_percent += 2
         checkFontSizeOpacity();
