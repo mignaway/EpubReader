@@ -49,7 +49,7 @@ var loadBook = async function() {
     
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
-    book_rendition.on("rendered", function (section) {
+    book_rendition.on("rendered", async function (section) {
         if (!chapters_rendered) {
             loadChaptersTitles()
         }
@@ -57,6 +57,7 @@ var loadBook = async function() {
         iframe.find('body').on('click', function (event) {
             $('.book-navbar-popup').hide();
         });
+        if (current_style_settings != null) { await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")}
     })
     book_rendition.themes.default({
         img: {
