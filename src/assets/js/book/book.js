@@ -39,7 +39,7 @@ var loadBook = async function() {
     await changeValueInJsonBook(books_json, epubCodeSearch, "lastTimeOpened", new Date());
     await loadBookInfo(book_infos);
     book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
-    book_rendition = book_epub.renderTo("book-content-columns", { method: "default", width: "100%", height: "100%"});
+    book_rendition = book_epub.renderTo("book-content-columns", { manager: "default", width: "100%", height: "100%"});
     var book_display; 
     if (book_infos.lastPageOpened != null){
         book_display = book_rendition.display(book_infos.lastPageOpened);
@@ -50,14 +50,15 @@ var loadBook = async function() {
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
     book_rendition.on("rendered", async function (section) {
+        // LOAD CHAPTER LIST IN NAVBAR
         if (!chapters_rendered) {
-            loadChaptersTitles()
+            loadChaptersList()
         }
+        // ADD IFRAME CLICK EVENT TO CLOSE ALL NAVBAR POPUP
         var iframe = $('iframe').contents();
         iframe.find('body').on('click', function (event) {
             $('.book-navbar-popup').hide();
         });
-        if (current_style_settings != null) { await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")}
     })
     book_rendition.themes.default({
         img: {
@@ -78,7 +79,7 @@ async function loadBookInfo(book_infos){
     $('#book-info-year').text(book_infos.bookYear ? book_infos.bookYear : 'undefined');
     $('#book-info-pages').text('undefined');
 }
-async function loadChaptersTitles(){
+async function loadChaptersList(){
     $('#book-chapters').html(recursiveChapterHtml(book_epub.navigation, 1))
     chapters_rendered = true;
 }
@@ -97,14 +98,25 @@ function recursiveChapterHtml(array,level) {
     return finalHtml;
 }
 async function loadBookStyleSettings(newStyleColor = null){
+    // LOAD SETTINGS
     if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
+
+    // GROUP ELEMENTS TO CHANGE ON INITIAL STYLE LOAD
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
     var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
-    // fontSize here doesn't load, it needs to be fixed
-    // book_rendition.themes.fontSize("140%");
-    checkFontSizeOpacity();
-    if (newStyleColor != null) current_style_settings.book.background_color_style = newStyleColor
-     
+
+    // CHECK IF FONT SIZE IS MAX/MIN AND CHANGE OPACITY STYLE
+    checkNavbarFontSizeOpacity();
+
+    // (NOT INITIAL LOAD) IF STYLE IS MANUALLY CHANGED THEN DO IT
+    // (INITIAL LOAD) STYLE IS NOT CHANGED THEN LOAD INITIAL FONT SIZE
+    if (newStyleColor != null) {
+        current_style_settings.book.background_color_style = newStyleColor
+    } else {
+        await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")
+    }
+    
+    // COLOR STYLE SETTING CHANGE 
     switch (current_style_settings.book.background_color_style){
         case "brown":
             // if i use multiple themes (themes.register)
@@ -121,7 +133,7 @@ async function loadBookStyleSettings(newStyleColor = null){
             break;
     }
 }
-var checkFontSizeOpacity = function () {
+var checkNavbarFontSizeOpacity = function () {
     $('#settings-decrease-font-size').removeClass('op-5');
     $('#settings-increase-font-size').removeClass('op-5');
     if (current_style_settings.book.font_size_percent == MAX_FONT_SIZE) {

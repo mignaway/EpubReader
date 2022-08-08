@@ -24,12 +24,12 @@ $(window).on('load', function(){
     })
     $('#settings-increase-font-size').on('click', function(){
         if (current_style_settings.book.font_size_percent < MAX_FONT_SIZE) current_style_settings.book.font_size_percent += 2
-        checkFontSizeOpacity();
+        checkNavbarFontSizeOpacity();
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
     })
     $('#settings-decrease-font-size').on('click', function () {   
         if (current_style_settings.book.font_size_percent > MIN_FONT_SIZE) current_style_settings.book.font_size_percent -= 2
-        checkFontSizeOpacity();
+        checkNavbarFontSizeOpacity();
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
     })
 });
