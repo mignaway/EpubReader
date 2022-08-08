@@ -31,12 +31,14 @@
 #minimize-app-icon:hover {
     stroke: rgba(0, 0, 0, 0.7) !important;
 }
+
 #book-container {
     padding: 40px 0;
     overflow: hidden;
     height: 100%;
     width: 100%;
 }
+
 #book-content-columns {
     /* columns: 100vw 2; 
     column-width: 200px;
@@ -65,7 +67,7 @@
     max-width: 100% !important;
 } */
 
-.book-navbar-popup{
+.book-navbar-popup {
     padding: 3vh;
     margin-top: 30px;
     display: none;
@@ -81,10 +83,12 @@
 #reading-settings {
     right: 0;
 }
+
 #book-info {
     left: 0;
     width: 350px;
 }
+
 #book-chapters {
     left: 0;
     width: 350px;
@@ -112,23 +116,29 @@
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
 #book-chapters {
     padding: 25px 15px;
 }
+
 #book-chapters h1 {
     padding: 2vh;
     cursor: pointer;
     border-radius: 5px;
     transition: background-color .2s;
 }
+
 #book-chapters h1::before {
     content: '•';
     margin-right: 5px;
 }
+
 #book-chapters h1:hover {
     background-color: rgba(0, 0, 0, .1);
 }
-#page-color-style-default,#page-color-style-brown {
+
+#page-color-style-default,
+#page-color-style-brown {
     width: 40px;
     height: 40px;
     border-radius: 40px;
@@ -136,17 +146,27 @@
 }
 
 #page-color-style-default {
-    border: 1px solid black;
+    border: 1px solid rgba(0, 0, 0, .2);
     background-color: white;
 }
 
+#page-color-style-default.selected {
+    border: 1px solid rgba(0, 0, 0, 1) !important;
+}
+
 #page-color-style-brown {
-    border: 1px solid #5B4636;
+    border: 1px solid rgba(91, 70, 54, .2);
     background-color: #7c5f49;
 }
+
+#page-color-style-brown.selected {
+    border: 1px solid rgba(0, 0, 0, 1) !important;
+}
+
 .page-color-style-brown-bg {
     background-color: #F8F1E2;
 }
+
 .page-color-style-brown-color {
     color: #5B4636 !important;
     fill: #5B4636;

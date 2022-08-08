@@ -135,11 +135,15 @@ async function loadBookStyleSettings(newStyleColor = null){
             book_rendition.themes.default({ body: { 'color': '#5B4636' } });
             backround_elements.addClass('page-color-style-brown-bg');
             icon_elements.addClass('page-color-style-brown-color');
+            $('#page-color-style-brown').addClass('selected');
+            $('#page-color-style-default').removeClass('selected');
             break;
         default:
             book_rendition.themes.default({ body: { 'color': 'black' } })
             backround_elements.removeClass('page-color-style-brown-bg');
             icon_elements.removeClass('page-color-style-brown-color');
+            $('#page-color-style-default').addClass('selected');
+            $('#page-color-style-brown').removeClass('selected');
             break;
     }
 }
