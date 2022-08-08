@@ -5,7 +5,7 @@ const EPub = require("epub2").EPub;
  * Disclaimer:
  * Sometimes epubs doesn't have all the book's information.
  * 
- * Book's code formatting [folderBookCode]: title-separated-by-dash-author-name
+ * Book's code formatting [folderBookCode]: title-separated-by-dash-plus-author-name
  * Book's directory folder path is epubs/ + folderBookCode
  * 
  * @param {String} epubPath 
@@ -24,7 +24,7 @@ var addEpubBook = async function(epubPath) {
         const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
-        // console.log(data)
+
         // Check if book already exists
         if (!fs.existsSync(bookFolderPath)){ 
             newBook = {
@@ -55,6 +55,9 @@ var addEpubBook = async function(epubPath) {
     })
     return response;
 }
+
+
+// Delete epub book by book code and update local file
 
 var deleteEpubBook = async function(folderBookCode) {
     var json = await getBooksFromJson()
@@ -105,7 +108,7 @@ var getUserSettingsFromJson = async function () {
     return JSON.parse(fs.readFileSync(path))
 }
 
-var updateUserSettings = async function (old_json) {
+var localSaveUserSettings = async function (old_json) {
     await fs.writeFileSync(__dirname + '/assets/json/user_settings.json', JSON.stringify(old_json))
 }
 

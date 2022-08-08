@@ -33,28 +33,37 @@ var keyListener = function (e) {
 };
 
 var loadBook = async function() {
+    // Get book code by url param
     epubCodeSearch = window.location.search.substring(1).split("=")[1];
+
     var books_json = await getBooksFromJson();
     var book_infos = await searchBookInJson(books_json,epubCodeSearch)
+
+    // Update last time opened book
     await changeValueInJsonBook(books_json, epubCodeSearch, "lastTimeOpened", new Date());
+    // Load book info navbar popup
     await loadBookInfo(book_infos);
+
+    // Epub settings
     book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
     book_rendition = book_epub.renderTo("book-content-columns", { manager: "default", width: "100%", height: "100%"});
-    var book_display; 
+
     if (book_infos.lastPageOpened != null){
-        book_display = book_rendition.display(book_infos.lastPageOpened);
+        book_rendition.display(book_infos.lastPageOpened);
     } else {
-        book_display = book_rendition.display();
+        book_rendition.display();
     }
     
+    // Add book reading shortcut 
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
+
     book_rendition.on("rendered", async function (section) {
-        // LOAD CHAPTER LIST IN NAVBAR
+        // Load chapter list in navbar
         if (!chapters_rendered) {
             loadChaptersList()
         }
-        // ADD IFRAME CLICK EVENT TO CLOSE ALL NAVBAR POPUP
+        // Add iframe click event to close all navbar popup
         var iframe = $('iframe').contents();
         iframe.find('body').on('click', function (event) {
             $('.book-navbar-popup').hide();
@@ -69,6 +78,7 @@ var loadBook = async function() {
             'color': 'inherit'
         }
     });
+    // Load book style (color or font size)
     await loadBookStyleSettings();
 }
 
@@ -98,25 +108,25 @@ function recursiveChapterHtml(array,level) {
     return finalHtml;
 }
 async function loadBookStyleSettings(newStyleColor = null){
-    // LOAD SETTINGS
+    // Load settings
     if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
 
-    // GROUP ELEMENTS TO CHANGE ON INITIAL STYLE LOAD
+    // Group elements to change on initial style load
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
     var icon_elements = $('#show-book-chapters, #show-book-saved-pages, #show-book-info, #show-reading-settings, #libraryNavBtn')
 
-    // CHECK IF FONT SIZE IS MAX/MIN AND CHANGE OPACITY STYLE
+    // Check if font size is max/min and change opacity style
     checkNavbarFontSizeOpacity();
 
-    // (NOT INITIAL LOAD) IF STYLE IS MANUALLY CHANGED THEN DO IT
-    // (INITIAL LOAD) STYLE IS NOT CHANGED THEN LOAD INITIAL FONT SIZE
+    // (NOT INITIAL LOAD) If style is manually changed then do it
+    // (INITIAL LOAD) Style is not changed then load initial font size
     if (newStyleColor != null) {
         current_style_settings.book.background_color_style = newStyleColor
     } else {
         await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")
     }
     
-    // COLOR STYLE SETTING CHANGE 
+    // Color style setting change 
     switch (current_style_settings.book.background_color_style){
         case "brown":
             // if i use multiple themes (themes.register)
@@ -146,7 +156,7 @@ var checkNavbarFontSizeOpacity = function () {
 }
 var saveBeforeClose = async function() {
     saveBookPageBeforeClose();
-    updateUserSettings(current_style_settings)
+    localSaveUserSettings(current_style_settings)
 }
 var saveBookPageBeforeClose = async function(){
     if (book_rendition) {
