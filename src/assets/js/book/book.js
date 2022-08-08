@@ -79,11 +79,28 @@ async function loadBookInfo(book_infos){
     $('#book-info-pages').text('undefined');
 }
 async function loadChaptersTitles(){
-    await book_epub.navigation.forEach((section) => {
-        var op = section.label ? "" : "op-5";
-        $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="book_rendition.display('${section.href}')">${section.label}</h1>`)
-    })
+    // console.log(book_epub.navigation)
+    // await book_epub.navigation.forEach((section) => {
+    //     var op = section.label ? "" : "op-5";
+    //     $('#book-chapters').append(`<h1 class="main-text ${op}" onclick="book_rendition.display('${section.href}')">${section.label}</h1>`)
+    // })
+    $('#book-chapters').html(recursiveChapterHtml(book_epub.navigation, 1))
     chapters_rendered = true;
+}
+function recursiveChapterHtml(array,level) {
+    console.log(level)
+    var finalHtml = '<div class="p-l-10">';
+    array.forEach((item) => {
+        var op = item.label ? "" : "op-5";
+        var bold = level == 1 ? 'text-sb' : '';
+        finalHtml += `<h1 class="main-text ${op} ${bold}" onclick="book_rendition.display('${item.href}')">${item.label}</h1>`;
+        if (item.subitems.length > 0) {
+            finalHtml += recursiveChapterHtml(item.subitems, level+1);
+        }
+    })
+
+    finalHtml += '</div>';
+    return finalHtml;
 }
 async function loadBookStyleSettings(newStyleColor = null){
     if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
