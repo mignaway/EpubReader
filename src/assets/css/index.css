@@ -209,6 +209,11 @@
 }
 .book-box-informations h1 {
   font-size: 17px;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 5;
+  -webkit-box-orient: vertical;
 }
 .book-box-informations h2 {
   font-size: 15px;
