@@ -27,7 +27,7 @@ var addEpubBook = async function(epubPath) {
 
         // Check if book already exists
         if (!fs.existsSync(bookFolderPath)){ 
-            newBook = {
+            var newBook = {
                 "title": data.title,
                 "author": author,
                 "bookYear": data.date ? data.date.split('-')[0] : null,
@@ -38,7 +38,7 @@ var addEpubBook = async function(epubPath) {
                 "lastPageOpened": null
             }
             jsonData.push(newBook)
-            await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData))
+            await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData, null, 4))
 
             // Add book's files folder and epub
             await fs.mkdirSync(bookFolderPath)
@@ -69,7 +69,7 @@ var deleteEpubBook = async function(folderBookCode) {
         }
     })
     // Rewrite/update json
-    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json))
+    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json,null,4))
     // Remove recursively book's to remove folder
     await fs.rmSync(__dirname + '/epubs/' + folderBookCode, { recursive: true });
     // If list is empty then disable edit button
@@ -109,7 +109,7 @@ var getUserSettingsFromJson = async function () {
 }
 
 var localSaveUserSettings = async function (old_json) {
-    await fs.writeFileSync(__dirname + '/assets/json/user_settings.json', JSON.stringify(old_json))
+    await fs.writeFileSync(__dirname + '/assets/json/user_settings.json', JSON.stringify(old_json, null, 4))
 }
 
 // Order a json object by modality
@@ -151,7 +151,7 @@ var changeValueInJsonBook = async function (json, folderBookCode, key, newValue)
             json[index][key] = newValue;
         }
     })
-    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json))
+    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json, null, 4))
 }
 
 // Because javascript has some problem iterating arrays this function will help us to do so
