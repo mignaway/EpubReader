@@ -19,6 +19,10 @@ $(window).on('load', function(){
         $('.book-navbar-popup:not(#book-chapters)').hide();
         $('#book-chapters').toggle();
     })
+    $('#show-book-saved').on('click', function () {
+        $('.book-navbar-popup:not(#book-saved)').hide();
+        $('#book-saved').toggle();
+    })
     $('#libraryNavBtn').on('click', function(){
         ipcRenderer.send('unmaximizeApp');
     })

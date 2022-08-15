@@ -43,10 +43,37 @@
                             
                         </div>
                     </div>
-                    <svg id="show-book-saved-pages" class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg" style="opacity: .2">
-                        <path
-                            d="M15.6489 0H4.35111C3.35544 0 2.50983 0.803036 2.50983 1.84129V18.547C2.51276 19.8648 4.12234 20.4831 5.03742 19.5581L9.34383 15.2529C9.68894 14.8928 10.3111 14.8928 10.6562 15.2529L14.9626 19.5581C15.8781 20.4835 17.4875 19.8642 17.4902 18.547V1.84129C17.4902 0.803036 16.6446 0 15.6489 0V0Z" />
-                    </svg>
+                    <div class="flex-column" style="position: relative;">
+                        <svg id="show-book-saved" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M15.6489 0H4.35111C3.35544 0 2.50983 0.803036 2.50983 1.84129V18.547C2.51276 19.8648 4.12234 20.4831 5.03742 19.5581L9.34383 15.2529C9.68894 14.8928 10.3111 14.8928 10.6562 15.2529L14.9626 19.5581C15.8781 20.4835 17.4875 19.8642 17.4902 18.547V1.84129C17.4902 0.803036 16.6446 0 15.6489 0V0Z" />
+                        </svg>
+                        <div id="book-saved" class="book-navbar-popup flex-column">
+                            <div id="book-saved-btn" onclick="handleSavePage()" class="cursor-pointer flex-all-centered">
+                                <svg class="m-r-10" width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M1.84129 0.75H13.1391C13.7319 0.75 14.2304 1.2285 14.2304 1.84129L14.2304 18.5454C14.2304 18.5456 14.2304 18.5457 14.2304 18.5458C14.2288 19.1579 13.4557 19.5054 12.986 19.0306L12.9831 19.0277L8.6814 14.7272C8.04218 14.0681 6.93821 14.0681 6.29899 14.7272L1.99733 19.0277L1.9944 19.0306C1.5249 19.5052 0.751938 19.1582 0.75 18.546V1.84129C0.75 1.2285 1.24849 0.75 1.84129 0.75Z"
+                                        stroke="white" stroke-width="1.5" />
+                                </svg>
+                                <h1 class="main-text text-sb">Save this page</h1>
+                            </div>
+                            <div id="book-saved-pages" class="flex-column gap-15">
+                                <!-- <div class="book-saved-box cursor-pointer flex-row flex-v-center">
+                                    <div class="saved-information flex-column">
+                                        <h1 class="main-text text-sb m-b-5">Ragni e mosche</h1>
+                                        <h2 class="main-text text-small op-5"><span class="text-sb">11 Aug 2022</span> at <span class="text-sb">21:56</span></h2>
+                                    </div>
+                                    <svg width="22" height="23" viewBox="0 0 22 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M18.4719 2.57066C18.1331 2.21673 17.6563 1.99994 17.139 1.99994H5.84116C4.8455 1.99994 3.99988 2.80297 3.99988 3.84123V17.5538L18.4719 2.57066ZM3.99988 19.6361V20.5469C4.00281 21.8647 5.6124 22.4831 6.52747 21.558L10.8339 17.2528C11.179 16.8928 11.8012 16.8928 12.1463 17.2528L16.4527 21.558C17.3681 22.4834 18.9775 21.8641 18.9803 20.5469V4.12663L3.99988 19.6361Z"
+                                            />
+                                        <rect x="-0.00186306" y="-0.71746" width="2.44728" height="27.9745" rx="1.22364"
+                                            transform="matrix(0.698458 0.715651 -0.694731 0.719269 19.4901 0.79992)" stroke="white" />
+                                    </svg>
+                                </div> -->
+                            </div>
+                        </div>
+                    </div>
                     <div class="flex-column" style="position: relative;">
                         <svg id="show-book-info" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20"
                             fill="black" xmlns="http://www.w3.org/2000/svg">
@@ -154,6 +181,11 @@
                         </clipPath>
                     </defs>
                 </svg>
+            </div>
+            <div class="w-100 flex-row flex-h-center">
+                <div id="currentPages" class="w-100 flex-row flex-h-center">
+                    <h1 class="main-text"><span id="current_page_value" class="text-sb"></span> of <span id="total_page_value"></span></h1>
+                </div>
             </div>
         </div>
 </body>

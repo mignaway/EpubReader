@@ -20,8 +20,8 @@ var addEpubBook = async function(epubPath) {
         const data = epub.metadata;
         
         const author = data.creator ? data.creator : null;
-        const author_folderBookCode = author ? author.replaceAll(" ", "-").toLowerCase() : 'undefined';
-        const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").toLowerCase() + "-" + author_folderBookCode;
+        const author_folderBookCode = author ? author.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() : 'undefined';
+        const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
 
@@ -35,7 +35,8 @@ var addEpubBook = async function(epubPath) {
                 "folderBookCode": folderBookCode,
                 "coverPath": coverPath,
                 "lastTimeOpened": new Date(),
-                "lastPageOpened": null
+                "lastPageOpened": null,
+                "savedPages": []
             }
             jsonData.push(newBook)
             await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData, null, 4))
