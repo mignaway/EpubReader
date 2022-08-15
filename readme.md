@@ -31,8 +31,8 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 
 ## Recent Important Update
 
-- Fixed __`font size`__ not loading on start and chapter change
-- Added/Fixed __`sub-chapter`__ not showing 
+- Added __`save page`__ feature
+- Added __`current page`__ feature
 - Added the possiblity to __`maximize`__ the book window
 
 ## Testing
