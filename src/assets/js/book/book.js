@@ -2,14 +2,12 @@ $(window).on('load', function(){
     loadBook();
     $('#previous-chapter-btn').on('click',async function(){
         book_rendition.prev();
-        console.log(book_saved_pages)
         var current_cfi = book_rendition.currentLocation().start.cfi;
         updateSavePagesButton(book_saved_pages, current_cfi)
         updatePageNumber(current_cfi);
     })
     $('#next-chapter-btn').on('click', async function () {
         book_rendition.next();
-        console.log(book_saved_pages)
         var current_cfi = book_rendition.currentLocation().start.cfi;
         updateSavePagesButton(book_saved_pages, current_cfi)
         updatePageNumber(current_cfi);
@@ -94,11 +92,8 @@ var loadBook = async function() {
         iframe.find('body').on('click', function (event) {
             $('.book-navbar-popup').hide();
         });
-        // console.log(book_epub.navigation)
-        // console.log(section)
         var chapterName = await getCurrentChapterLabelByHref(book_epub.navigation.toc, section.href);
         if (chapterName != null) current_chapter_name = chapterName;
-        // console.log(chapterName)
     })
     book_rendition.themes.default({
         img: {
@@ -116,7 +111,6 @@ var loadBook = async function() {
 async function updatePageNumber(cfi) {
     var total_pages = book_epub.locations.total;
     var progress = Math.floor(book_epub.locations.percentageFromCfi(cfi) * total_pages);
-    // console.log(total_pages,progress)
     $('#current_page_value').text(progress);
     $('#total_page_value').text(total_pages)
 }
@@ -178,7 +172,7 @@ async function handleSavePage() {
 }
 async function handleSavedClick(cfi) {
     book_rendition.display(cfi);
-    updateSavePagesButton()
+    updateSavePagesButton(book_saved_pages, cfi)
 }
 async function addSavedPage() {
     var books_json = await getBooksFromJson();
@@ -297,7 +291,7 @@ var saveBookPageBeforeClose = async function(){
 var getCurrentChapterLabelByHref = async function(array,chapterHref){
     sburro = null;
     for(var i=0; i < array.length; i++){
-        // console.log(array[i].href)
+
         if (array[i].href.includes(chapterHref)){
             sburro = array[i].label;
             break;
