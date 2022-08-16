@@ -6,7 +6,6 @@ $(window).on('load', function(){
         var current_cfi = book_rendition.currentLocation().start.cfi;
         updateSavePagesButton(book_saved_pages, current_cfi)
         updatePageNumber(current_cfi);
-        e.preventDefault();
     })
     $('#next-chapter-btn').on('click', async function () {
         book_rendition.next();
@@ -14,7 +13,6 @@ $(window).on('load', function(){
         var current_cfi = book_rendition.currentLocation().start.cfi;
         updateSavePagesButton(book_saved_pages, current_cfi)
         updatePageNumber(current_cfi);
-        e.preventDefault();
     });
 })
 var epubCodeSearch = "";
