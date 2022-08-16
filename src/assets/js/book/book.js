@@ -116,7 +116,7 @@ var loadBook = async function() {
 async function updatePageNumber(cfi) {
     var total_pages = book_epub.locations.total;
     var progress = Math.floor(book_epub.locations.percentageFromCfi(cfi) * total_pages);
-    console.log(total_pages,progress)
+    // console.log(total_pages,progress)
     $('#current_page_value').text(progress);
     $('#total_page_value').text(total_pages)
 }
