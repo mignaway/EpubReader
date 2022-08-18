@@ -89,7 +89,7 @@ var loadBook = async function() {
         updateSavePagesButton(book_saved_pages, book_rendition.currentLocation().start.cfi);
         // Add iframe click event to close all navbar popup
         var iframe = $('iframe').contents();
-        iframe.find('body').on('click', function (event) {
+        iframe.find('body').on('click', function () {
             $('.book-navbar-popup').hide();
         });
         var chapterName = await getCurrentChapterLabelByHref(book_epub.navigation.toc, section.href);

@@ -17,11 +17,11 @@ var loadAll = async function (books_json){
     sortingSettings['sortby'] = $('#section-book-current-sorting').data('sort');
     $('#hero-section-loading-animation').removeClass('loaded');
     const orderedBooks = await orderBookModality(books_json, sortingSettings)
-    await loadHeroSection(orderedBooks, sortingSettings['sortby'])
-    await loadBooksSection(orderedBooks, sortingSettings['sortby'])
+    await loadHeroSection(orderedBooks)
+    await loadBooksSection(orderedBooks)
 }
 
-async function loadHeroSection(books_json, sortby) {
+async function loadHeroSection(books_json) {
     if (books_json.length > 0) {
         
         const [title, author, bookYear, language, folderBookCode, coverPath, bookOpened] = [books_json[0].title, 
@@ -31,10 +31,10 @@ async function loadHeroSection(books_json, sortby) {
                                                                                 books_json[0].folderBookCode, 
                                                                                 books_json[0].coverPath,
                                                                                 books_json[0].lastPageOpened != null]
-
+        
         const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + folderBookCode + '/' + coverPath)
         var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
-        await $('#hero-section-content')
+        $('#hero-section-content')
             .html(`
             <div id="hero-section-image-cover"><img src="${'epubs/' + folderBookCode + '/' + coverPath}"></div>
             <div id="hero-section-book-infos" class="flex-column">
@@ -52,7 +52,7 @@ async function loadHeroSection(books_json, sortby) {
     $('#hero-section-loading-animation').addClass('loaded')
 }
 
-async function loadBooksSection(books_json, sortby) {
+async function loadBooksSection(books_json) {
     // Reset book preview section
     $('#section-book-preview').html('') 
 
@@ -102,8 +102,3 @@ async function deleteEpubBookHandler(folderBookCode) {
     var json = await deleteEpubBook(folderBookCode);
     await loadAll(json);
 }
-
-
-
-// --------------------------------------------------------------------------------------------------
-

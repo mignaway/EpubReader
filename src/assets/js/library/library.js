@@ -1,7 +1,6 @@
 $(window).on('load', async function () {
     // Load books form jsonfile
     let books_json = await getBooksFromJson();
-    let options = null;
     await loadBooks(books_json)
 });
 

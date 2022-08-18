@@ -146,7 +146,6 @@ var searchBookInJson = async function(json, folderBookCode) {
     return array;
 }
 var changeValueInJsonBook = async function (json, folderBookCode, key, newValue) {
-    var array = null;
     $(json).each((index) => {
         if (json[index].folderBookCode == folderBookCode) {
             json[index][key] = newValue;
@@ -172,7 +171,7 @@ async function asyncForEach(array, callback) {
 var displayAlert = function (message, type) {
     $('#alert-text').text(message);
     $('#alert-text').addClass('alert-' + type);
-    var container = $('#alert-container');
+    
     $('#alert-text').on("webkitAnimationEnd", function () {
         $('#alert-text').removeClass("active");
     });
@@ -182,7 +181,7 @@ var displayAlert = function (message, type) {
 // Get dominant (vibrant) color from image
 
 var getVibrantColorFromImage = function (imgPath) {
-    var finalVibrantColor;
+    // var finalVibrantColor;
     if (fs.existsSync(imgPath)) {
         return Vibrant.from(imgPath).getPalette()
             .then(value => {
