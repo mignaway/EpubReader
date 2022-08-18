@@ -178,3 +178,17 @@ var displayAlert = function (message, type) {
     });
     $('#alert-text').addClass("active");
 }
+
+// Get dominant (vibrant) color from image
+
+var getVibrantColorFromImage = function (imgPath) {
+    var finalVibrantColor;
+    if (fs.existsSync(imgPath)) {
+        return Vibrant.from(imgPath).getPalette()
+            .then(value => {
+                return value.Vibrant.getRgb()
+            })
+    } else {
+        console.log("File doesn't exists")
+    }
+}

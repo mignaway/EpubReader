@@ -52,18 +52,20 @@ async function loadHeroSection(books_json, sortby) {
     $('#hero-section-loading-animation').addClass('loaded')
 }
 
-function loadBooksSection(books_json, sortby) {
+async function loadBooksSection(books_json, sortby) {
     // Reset book preview section
     $('#section-book-preview').html('') 
-    // 
-    // 
+
+    const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
     for(var i = 0; i <= 5;i++) {
         if (i < books_json.length) {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
             const author = books_json[i].author ?? 'Undefined Author';
             const language = books_json[i].lang ?? 'Undefined Language';
+            const already_read = books_json[i].lastPageOpened ? 'none' : 'flex';
+
             $('#section-book-preview').append(`
-            <div onclick="window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
+            <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                     <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
                     <h2 class="main-text text-color-white">${author}</h2>
@@ -71,6 +73,9 @@ function loadBooksSection(books_json, sortby) {
                 </div>
                 <div class="book-box-image overflow-hidden w-100 h-100">
                     <img src="epubs/${books_json[i].folderBookCode}/${books_json[i].coverPath}">
+                </div>
+                <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
+                    <h1 class="main-text text-color-white text-b">NEW</h1>
                 </div>
                 <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                     <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -98,19 +103,7 @@ async function deleteEpubBookHandler(folderBookCode) {
     await loadAll(json);
 }
 
-// Get dominant (vibrant) color from image
 
-function getVibrantColorFromImage(imgPath) {
-    var finalVibrantColor;
-    if (fs.existsSync(imgPath)) {
-        return Vibrant.from(imgPath).getPalette()
-            .then(value => {
-                return value.Vibrant.getRgb()
-            })
-    } else {
-        console.log("File doesn't exists")
-    }
-}
 
 // --------------------------------------------------------------------------------------------------
 

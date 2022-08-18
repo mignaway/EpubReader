@@ -12,14 +12,17 @@ var loadBooks = async function (books_json_not_sorted){
 
     // reset book container before appending
     $('#book-section-grid').html('');
-
+    
+    const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
     if(books_json.length > 0){
         books_json.forEach((book) => {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
             const author = book.author ?? 'Undefined Author';
             const language = book.lang ?? 'Undefined Language';
+            const already_read = book.lastPageOpened ? 'none' : 'flex';
+
             $('#book-section-grid').append(`
-            <div onclick="window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
+            <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                     <h1 class="main-text text-color-white text-b">${book.title}</h1>
                     <h2 class="main-text text-color-white">${author}</h2>
@@ -27,6 +30,9 @@ var loadBooks = async function (books_json_not_sorted){
                 </div>
                 <div class="book-box-image overflow-hidden w-100 h-100">
                     <img src="epubs/${book.folderBookCode}/${book.coverPath}">
+                </div>
+                <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
+                    <h1 class="main-text text-color-white text-b">NEW</h1>
                 </div>
                 <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                     <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
