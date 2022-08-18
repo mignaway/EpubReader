@@ -25,9 +25,9 @@ async function loadHeroSection(books_json, sortby) {
     if (books_json.length > 0) {
         
         const [title, author, bookYear, language, folderBookCode, coverPath, bookOpened] = [books_json[0].title, 
-                                                                                books_json[0].author ? books_json[0].author : 'Undefined Author', 
-                                                                                books_json[0].bookYear ? books_json[0].bookYear : 'Undefined', 
-                                                                                books_json[0].lang ? books_json[0].lang : 'Undefined Language', 
+                                                                                books_json[0].author ?? 'Undefined Author', 
+                                                                                books_json[0].bookYear ?? 'Undefined', 
+                                                                                books_json[0].lang ?? 'Undefined Language', 
                                                                                 books_json[0].folderBookCode, 
                                                                                 books_json[0].coverPath,
                                                                                 books_json[0].lastPageOpened != null]
@@ -60,8 +60,8 @@ function loadBooksSection(books_json, sortby) {
     for(var i = 0; i <= 5;i++) {
         if (i < books_json.length) {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
-            const author = books_json[i].author ? books_json[i].author : 'Undefined Author';
-            const language = books_json[i].lang ? books_json[i].lang : 'Undefined Language';
+            const author = books_json[i].author ?? 'Undefined Author';
+            const language = books_json[i].lang ?? 'Undefined Language';
             $('#section-book-preview').append(`
             <div onclick="window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">

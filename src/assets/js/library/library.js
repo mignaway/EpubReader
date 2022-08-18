@@ -16,8 +16,8 @@ var loadBooks = async function (books_json_not_sorted){
     if(books_json.length > 0){
         books_json.forEach((book) => {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
-            const author = book.author ? book.author : 'Undefined Author';
-            const language = book.lang ? book.lang : 'Undefined Language';
+            const author = book.author ?? 'Undefined Author';
+            const language = book.lang ?? 'Undefined Language';
             $('#book-section-grid').append(`
             <div onclick="window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">

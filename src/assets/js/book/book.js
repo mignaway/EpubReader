@@ -74,7 +74,7 @@ var loadBook = async function() {
         } else {
             return book_epub.locations.generate(1024); // Generates CFI for every X characters (Characters per/page)
         }
-    }).then(function (location) { // This promise will take a little while to return (About 20 seconds or so for Moby Dick)
+    }).then(function (location) {
         localStorage.setItem(book_epub.key() + '-locations', book_epub.locations.save());
     });
 
@@ -112,14 +112,15 @@ async function updatePageNumber(cfi) {
     var total_pages = book_epub.locations.total;
     var progress = Math.floor(book_epub.locations.percentageFromCfi(cfi) * total_pages);
     $('#current_page_value').text(progress);
-    $('#total_page_value').text(total_pages)
+    $('#total_page_value').text(total_pages);
+    $('#book-info-pages').text(total_pages);
 }
 
 async function loadBookInfo(info){
     $('#book-info-title').text(info.title);
-    $('#book-info-author').text(info.author ? info.author : 'undefined');
-    $('#book-info-language').text(info.lang ? info.lang : 'undefined');
-    $('#book-info-year').text(info.bookYear ? info.bookYear : 'undefined');
+    $('#book-info-author').text(info.author ?? 'undefined');
+    $('#book-info-language').text(info.lang ?? 'undefined');
+    $('#book-info-year').text(info.bookYear ?? 'undefined');
     $('#book-info-pages').text('undefined');
 }
 async function loadChaptersList(){

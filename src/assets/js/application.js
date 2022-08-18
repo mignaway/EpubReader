@@ -19,8 +19,8 @@ var addEpubBook = async function(epubPath) {
 
         const data = epub.metadata;
         
-        const author = data.creator ? data.creator : null;
-        const author_folderBookCode = author ? author.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() : 'undefined';
+        const author = data.creator ?? null;
+        const author_folderBookCode = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
         const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
@@ -30,8 +30,8 @@ var addEpubBook = async function(epubPath) {
             var newBook = {
                 "title": data.title,
                 "author": author,
-                "bookYear": data.date ? data.date.split('-')[0] : null,
-                "lang": data.languages ? data.language.split('-')[0].toUpperCase() : null,
+                "bookYear": data.date?.split('-')[0] ?? null,
+                "lang": data.languages?.split('-')[0].toUpperCase() ?? null,
                 "folderBookCode": folderBookCode,
                 "coverPath": coverPath,
                 "lastTimeOpened": new Date(),
