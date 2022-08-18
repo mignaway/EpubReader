@@ -12,8 +12,8 @@ var loadBooks = async function (books_json_not_sorted){
     // reset book container before appending
     $('#book-section-grid').html('');
     
-    const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
     if(books_json.length > 0){
+        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
         books_json.forEach((book) => {
             let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
             const author = book.author ?? 'Undefined Author';

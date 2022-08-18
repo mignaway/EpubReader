@@ -55,40 +55,41 @@ async function loadHeroSection(books_json) {
 async function loadBooksSection(books_json) {
     // Reset book preview section
     $('#section-book-preview').html('') 
+    if (books_json.length > 0) {
+        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
+        for(var i = 0; i <= 5;i++) {
+            if (i < books_json.length) {
+                let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+                const author = books_json[i].author ?? 'Undefined Author';
+                const language = books_json[i].lang ?? 'Undefined Language';
+                const already_read = books_json[i].lastPageOpened ? 'none' : 'flex';
 
-    const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
-    for(var i = 0; i <= 5;i++) {
-        if (i < books_json.length) {
-            let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
-            const author = books_json[i].author ?? 'Undefined Author';
-            const language = books_json[i].lang ?? 'Undefined Language';
-            const already_read = books_json[i].lastPageOpened ? 'none' : 'flex';
-
-            $('#section-book-preview').append(`
-            <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
-                <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
-                    <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
-                    <h2 class="main-text text-color-white">${author}</h2>
-                    <h3 class="main-text text-color-white op-5">${language}</h3>
+                $('#section-book-preview').append(`
+                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
+                    <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
+                        <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
+                        <h2 class="main-text text-color-white">${author}</h2>
+                        <h3 class="main-text text-color-white op-5">${language}</h3>
+                    </div>
+                    <div class="book-box-image overflow-hidden w-100 h-100">
+                        <img src="epubs/${books_json[i].folderBookCode}/${books_json[i].coverPath}">
+                    </div>
+                    <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
+                        <h1 class="main-text text-color-white text-b">NEW</h1>
+                    </div>
+                    <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
+                        <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
+                        <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
+                        </svg>
+                    </div>
                 </div>
-                <div class="book-box-image overflow-hidden w-100 h-100">
-                    <img src="epubs/${books_json[i].folderBookCode}/${books_json[i].coverPath}">
-                </div>
-                <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                    <h1 class="main-text text-color-white text-b">NEW</h1>
-                </div>
-                <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
-                    <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
-                    <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
-                    </svg>
-                </div>
-            </div>
-            `)
-        } else {
-            $('#section-book-preview').append('<div class="book-box"></div>')
+                `)
+            } else {
+                $('#section-book-preview').append('<div class="book-box"></div>')
+            }
         }
+        $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text text-b text-decoration-none">All Books -></a></div>')
     }
-    $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text text-b text-decoration-none">All Books -></a></div>')
 }
 
 // Event called after chose book in dialog
