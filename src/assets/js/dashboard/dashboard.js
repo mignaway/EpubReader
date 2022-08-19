@@ -66,7 +66,7 @@ async function loadBooksSection(books_json) {
 
                 $('#section-book-preview').append(`
                 <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
-                    <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
+                    <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
                         <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
                         <h2 class="main-text text-color-white">${author}</h2>
                         <h3 class="main-text text-color-white op-5">${language}</h3>
