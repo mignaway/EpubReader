@@ -1,26 +1,33 @@
 $(window).on('load', async function () {
     // Load books form jsonfile
-    let books_json = await getBooksFromJson();
+    books_json = await getBooksFromJson();
     await loadBooks(books_json)
 });
 
-var sortingSettings = { "sortby": "last_read", "filter": "none" }
+var sortingSettings = { "sortby": "last_read"}
+var books_json = [];
 
 var loadBooks = async function (books_json_not_sorted){
-    const books_json = await orderBookModality(books_json_not_sorted, sortingSettings);
-
+    var ordered_books = await orderBookModality(books_json_not_sorted, sortingSettings);
+    $('#library-book-loading').css('opacity', '1');
     // reset book container before appending
-    $('#book-section-grid').html('');
-    
-    if(books_json.length > 0){
-        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
-        books_json.forEach((book) => {
-            let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
-            const author = book.author ?? 'Undefined Author';
-            const language = book.lang ?? 'Undefined Language';
-            const already_read = book.lastPageOpened ? 'none' : 'flex';
+    if(ordered_books.length > 0) {
+        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + ordered_books[0].folderBookCode + '/' + ordered_books[0].coverPath)
+        await loadBooksAction(ordered_books, dominantRGBValue);
+    } else {
+        $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
+    }
+}
 
-            $('#book-section-grid').append(`
+async function loadBooksAction(ordered_books, dominantRGBValue) {
+    $('#book-section-grid').html('');
+    ordered_books.forEach((book) => {
+        let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+        const author = book.author ?? 'Undefined Author';
+        const language = book.lang ?? 'Undefined Language';
+        const already_read = book.lastPageOpened ? 'none' : 'flex';
+
+        $('#book-section-grid').append(`
             <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column">
                     <h1 class="main-text text-color-white text-b">${book.title}</h1>
@@ -40,14 +47,24 @@ var loadBooks = async function (books_json_not_sorted){
                 </div>
             </div>
             `);
-        });
-    } else {
-        $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
-    }
-    $('#section-book-loading-animation').addClass('loaded');
-    
+    });
+    $('#library-book-loading').css('opacity', '0');
 }
 
+var searchTimeout = null;
+async function handleSearchBarChange(newText) {
+    if (newText.trim().length > 0) {
+        $('#library-book-loading').css('opacity','1');
+        var filtered_books = books_json.filter(text => text.title.toLowerCase().includes(newText.toLowerCase()))
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(async function () {
+            await loadBooksAction(filtered_books)
+        }, 300);
+        
+    } else {
+        await loadBooks(books_json)
+    }
+}
 
 ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
     var response = await addEpubBook(epubPath);

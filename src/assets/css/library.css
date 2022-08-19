@@ -1,3 +1,6 @@
+body {
+    overflow: hidden;
+}
 #main-navbar {
     padding: 3vh;
     display: flex;
@@ -57,7 +60,7 @@
 
 .sorting-settings-choose {
     cursor: pointer;
-    padding: 10px 15px;
+    padding: 10px 20px;
     border-radius: 5px;
     background-color: #F3F3F3;
 }
@@ -93,9 +96,11 @@
 #books-section {
     padding: 30px 30px 0 30px;
     position: relative;
+    flex: 1;
+    overflow: hidden;
 }
 #section-book-information-actions {
-    justify-content: flex-end;
+    justify-content: space-between;
 }
 #section-book-show-information,
 #section-book-hide-information {
@@ -115,13 +120,33 @@
 #section-book-hide-information.active {
     opacity: 1;
 }
+#book-section-grid::-webkit-scrollbar {
+    width: 7px;
+    border-radius: 10px;
+}
+
+#book-section-grid::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+#book-section-grid::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+#book-section-grid::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
 #book-section-grid {
-    padding: 30px 20px 0px 20px;
+    margin: 30px 20px 0px 20px;
     display: grid;
     grid-template-columns: repeat(5, 140px);
     grid-template-rows: 214px;
     grid-column-gap: 30px;
     grid-row-gap: 20px;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 #book-section-grid .book-box {
@@ -280,4 +305,54 @@
     font-size: 9px !important;
     letter-spacing: 1px;
     text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
+}
+#search-bar-container {
+    background-color: #F3F3F3;
+    padding: 2vh 2.6vh;
+    border-radius: 10px;
+    margin: 0;
+    margin-top: 30px;
+}
+#search-bar {
+    gap: 2vh;
+}
+#search-bar svg {
+    min-width: 16px;
+    min-height: 16px;
+}
+#search-bar-input {
+    color: black;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 16px;
+    border: none;
+    background-color: transparent;
+    width: 100%;
+}
+#search-bar-input:focus {
+    outline: none;
+}
+#library-book-loading {
+    width: 20px;
+    height: 20px; 
+}
+#library-book-loading:after {
+    content: " ";
+    display: block;
+    width: 15px;
+    height: 15px;
+    margin: 8px;
+    border-radius: 50%;
+    border: 2px solid #f3f3f3;
+    border-top: 2px solid rgba(0, 0, 0, .7);
+    animation: library-loading-logo 1s linear infinite;
+}
+@keyframes library-loading-logo {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }
