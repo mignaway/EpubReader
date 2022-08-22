@@ -138,15 +138,23 @@ body {
 #book-section-grid::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
+
 #book-section-grid {
-    margin: 30px 20px 0px 20px;
-    display: grid;
+    overflow-y: hidden;
+    padding: 10px 20px 30px 20px;
+    margin: 25px 0 100px 0;
+    /* display: grid;
     grid-template-columns: repeat(5, 140px);
     grid-template-rows: 214px;
     grid-column-gap: 30px;
-    grid-row-gap: 20px;
-    /* overflow-y: auto;
-    overflow-x: hidden; */
+    grid-row-gap: 20px; */
+    display: flex;
+    flex-wrap: wrap;
+    /* justify-content: space-between; */
+    overflow-y: auto;
+    row-gap: 40px;
+    column-gap: 40px;
+    /* overflow-x: hidden; */
 }
 
 #book-section-grid .book-box {
@@ -154,6 +162,8 @@ body {
     align-items: center;
     justify-content: center;
     position: relative;
+    width: 140px;
+    height: 214px;
 }
 
 #book-section-grid .book-box:not(.not-empty):not(:last-of-type) {

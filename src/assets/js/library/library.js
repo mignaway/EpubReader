@@ -6,13 +6,17 @@ $(window).on('load', async function () {
 
 var sortingSettings = { "sortby": "last_read"}
 var books_json = [];
+var dominantRGBValue = null;
 
 var loadBooks = async function (books_json_not_sorted){
     var ordered_books = await orderBookModality(books_json_not_sorted, sortingSettings);
+    books_json = ordered_books;
+    // style to change
     $('#library-book-loading').css('opacity', '1');
     // reset book container before appending
     if(ordered_books.length > 0) {
-        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + ordered_books[0].folderBookCode + '/' + ordered_books[0].coverPath)
+        dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + ordered_books[0].folderBookCode + '/' + ordered_books[0].coverPath)
+        console.log(dominantRGBValue)
         await loadBooksAction(ordered_books, dominantRGBValue);
     } else {
         $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
@@ -26,8 +30,8 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
         const author = book.author ?? 'Undefined Author';
         const language = book.lang ?? 'Undefined Language';
         const already_read = book.lastPageOpened ? 'none' : 'flex';
-
-        $('#book-section-grid').append(`
+        // for(var i=0;i<15; i++) { // TEMP FOR CHECKING SCROLL ON LIBRARY
+            $('#book-section-grid').append(`
             <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
                 <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
                     <h1 class="main-text text-color-white text-b">${book.title}</h1>
@@ -47,6 +51,8 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                 </div>
             </div>
             `);
+        // }
+        
     });
     $('#library-book-loading').css('opacity', '0');
 }
@@ -58,7 +64,7 @@ async function handleSearchBarChange(newText) {
         var filtered_books = books_json.filter(text => text.title.toLowerCase().includes(newText.toLowerCase()))
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(async function () {
-            await loadBooksAction(filtered_books)
+            await loadBooksAction(filtered_books, dominantRGBValue)
         }, 300);
         
     } else {
