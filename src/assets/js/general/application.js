@@ -154,14 +154,6 @@ var changeValueInJsonBook = async function (json, folderBookCode, key, newValue)
     await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json, null, 4))
 }
 
-// Because javascript has some problem iterating arrays this function will help us to do so
-
-async function asyncForEach(array, callback) {
-    for (let index = 0; index < array.length; index++) {
-        await callback(array[index], index, array);
-    }
-}
-
 /**
  * Displays alert with a message on dashboard page
  * 

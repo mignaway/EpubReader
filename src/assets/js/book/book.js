@@ -290,24 +290,24 @@ var saveBookPageBeforeClose = async function(){
 }
 
 var getCurrentChapterLabelByHref = async function(array,chapterHref){
-    sburro = null;
+    chapter_title = null;
     for(var i=0; i < array.length; i++){
 
         if (array[i].href.includes(chapterHref)){
-            sburro = array[i].label;
+            chapter_title = array[i].label;
             break;
         } else if (array[i].subitems.length > 0) {
-            var temp_sburro = await getCurrentChapterLabelByHref(array[i].subitems, chapterHref)
-            if (temp_sburro != null) {
-                sburro = temp_sburro;
+            var temp_chapter_title = await getCurrentChapterLabelByHref(array[i].subitems, chapterHref)
+            if (temp_chapter_title != null) {
+                chapter_title = temp_chapter_title;
                 break;
             } else {
                 // IF CHAPTER DONT FOUND CHOOSE THE PREVIOUS ARRAY LABEL
                 if (current_chapter_name == null) {
-                    sburro = array[i].label;
+                    chapter_title = array[i].label;
                 }
             }
         }
     }
-    return sburro;
+    return chapter_title;
 }
