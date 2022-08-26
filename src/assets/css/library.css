@@ -1,6 +1,9 @@
 body {
     overflow: hidden;
 }
+:focus {
+    outline: none;
+}
 #main-navbar {
     padding: 3vh;
     display: flex;

@@ -41,3 +41,8 @@ $(window).on('load', function(){
 function handleTypeFaceSelection() {
     $('#typeface-option').toggle()
 }
+function handleChangeFont(fontText,fontValue){
+    $('#typeface-section-text').text(fontText);
+    book_rendition.themes.font(fontValue);
+    current_style_settings.book.typeface = fontValue; 
+}

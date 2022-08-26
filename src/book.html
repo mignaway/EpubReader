@@ -115,7 +115,7 @@
                         </svg>
                         <div id="reading-settings" class="book-navbar-popup">
                             <div class="flex-column">
-                                <div class="flex-row flex-v-center">
+                                <div class="flex-row flex-v-center" style="justify-content: space-around;">
                                     <span id="settings-decrease-font-size" class="main-text cursor-pointer" style="padding: 0 7vh;">A</span>
                                     <div class="vertical-divider-05 bg-black" style="height: 40px;"></div>
                                     <span id="settings-increase-font-size" class="main-text text-giant cursor-pointer" style="padding: 0 7vh;">A</span>
@@ -133,11 +133,11 @@
                                             </svg>
                                         </div>
                                         <div id="typeface-option" class="w-100">
-                                            <h1 class="main-text" onclick="$('#typeface-section-text').text(this.innerHTML);book_rendition.themes.font(this.dataset.value)" data-value="">Default</h1>
+                                            <h1 class="main-text" onclick="handleChangeFont(this.innerHTML,this.dataset.value)" data-value="">Default</h1>
                                             <div class="horizontal-divider-05 text-color-black"></div>
-                                            <h1 class="main-text" onclick="$('#typeface-section-text').text(this.innerHTML);book_rendition.themes.font(this.dataset.value)" data-value="Arial">Arial</h1>
+                                            <h1 class="main-text" onclick="handleChangeFont(this.innerHTML,this.dataset.value)" data-value="Arial">Arial</h1>
                                             <div class="horizontal-divider-05 text-color-black"></div>
-                                            <h1 class="main-text" onclick="$('#typeface-section-text').text(this.innerHTML);book_rendition.themes.font(this.dataset.value)" data-value="Inter">Inter</h1>
+                                            <h1 class="main-text" onclick="handleChangeFont(this.innerHTML,this.dataset.value)" data-value="Inter">Inter</h1>
                                         </div>
                                     </div> 
                                 </div>

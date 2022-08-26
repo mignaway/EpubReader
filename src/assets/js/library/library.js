@@ -10,18 +10,11 @@ var dominantRGBValue = null;
 
 var loadBooks = async function (books_json_not_sorted){
     var final_book = null;
-    var ordered_books = await orderBookModality(books_json_not_sorted, sortingSettings);
-    books_json = ordered_books;
+    var ordered_books = books_json = await orderBookModality(books_json_not_sorted, sortingSettings);
 
     var isSearchingSomething = $('#search-bar-input').val().trim().length > 0;
-    console.log(isSearchingSomething)
-    if (isSearchingSomething) {
-        console.log("searching..")
-        var title_filter = $('#search-bar-input').val()
-        final_book = await filterBooksByTitle(ordered_books, title_filter)
-    } else {
-        final_book = ordered_books
-    }
+
+    final_book = isSearchingSomething ? await filterBooksByTitle(ordered_books, $('#search-bar-input').val()) : ordered_books
     // style to change
     $('#library-book-loading').css('opacity', '1');
     
@@ -42,27 +35,27 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
             const author = book.author ?? 'Undefined Author';
             const language = book.lang ?? 'Undefined Language';
             const already_read = book.lastPageOpened ? 'none' : 'flex';
-            // for(var i=0;i<15; i++) { // TEMP FOR CHECKING SCROLL ON LIBRARY
-                $('#book-section-grid').append(`
-                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
-                    <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                        <h1 class="main-text text-color-white text-b">${book.title}</h1>
-                        <h2 class="main-text text-color-white">${author}</h2>
-                        <h3 class="main-text text-color-white op-5">${language}</h3>
-                    </div>
-                    <div class="book-box-image overflow-hidden w-100 h-100">
-                        <img src="epubs/${book.folderBookCode}/${book.coverPath}">
-                    </div>
-                    <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                        <h1 class="main-text text-color-white text-b">NEW</h1>
-                    </div>
-                    <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
-                        <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
-                        <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
-                        </svg>
-                    </div>
+
+            $('#book-section-grid').append(`
+            <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
+                <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
+                    <h1 class="main-text text-color-white text-b">${book.title}</h1>
+                    <h2 class="main-text text-color-white">${author}</h2>
+                    <h3 class="main-text text-color-white op-5">${language}</h3>
                 </div>
-                `);     
+                <div class="book-box-image overflow-hidden w-100 h-100">
+                    <img src="epubs/${book.folderBookCode}/${book.coverPath}">
+                </div>
+                <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
+                    <h1 class="main-text text-color-white text-b">NEW</h1>
+                </div>
+                <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
+                    <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">    
+                        <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
+                    </svg>
+                </div>
+            </div>
+            `);     
         });
     } else {
         $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No books found.<br>You may try remove the search</h2>');

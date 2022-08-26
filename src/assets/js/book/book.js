@@ -231,7 +231,7 @@ async function loadBookStyleSettings(newStyleColor = null){
     if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
 
     // Group elements to change on initial style load
-    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup')
+    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1')
     var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn')
     var text_elements = $('#currentPages h1')
 
@@ -245,7 +245,10 @@ async function loadBookStyleSettings(newStyleColor = null){
     } else {
         await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")
     }
-    
+    // LOAD FONT
+    book_rendition.themes.font(current_style_settings.book.typeface)
+    if (current_style_settings.book.typeface.length > 0) $('#typeface-section-text').text(current_style_settings.book.typeface)
+
     // Color style setting change 
     switch (current_style_settings.book.background_color_style){
         case "brown":
