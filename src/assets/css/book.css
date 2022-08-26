@@ -1,9 +1,3 @@
-@font-face {
-    font-family: IowanOldSt;
-    src: url("../fonts/default-reading-typeface.ttf");
-    font-weight: 600;
-}
-
 #main-navbar {
     padding: 3vh;
     display: flex;
@@ -75,9 +69,11 @@
     z-index: 10;
     border-radius: 5px;
     background-color: white;
-    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);
-    overflow: hidden;
+    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);  
     display: none;
+}
+.book-navbar-popup:not(#reading-settings) {
+    overflow: hidden;
 }
 
 #reading-settings {
@@ -228,4 +224,35 @@
     width: 140px;
     background-color: rgba(0,0,0,.1);
     border-radius: 10px;
+}
+#typeface-section {
+    background-color: #F2F2F2;
+    padding: 1vh;
+    border-radius: 5px;
+    border: .5px solid rgba(0, 0, 0, .1);
+    cursor: pointer;
+}
+#typeface-settings {
+    position: relative;
+}
+#typeface-section:focus {
+    outline: none;
+}
+
+#typeface-option {
+    position: absolute;
+    display: none;
+    margin-top: 5px;
+    background-color: #F2F2F2;
+    border-radius: 5px;
+    padding: 1vh;
+    border: .5px solid rgba(0,0,0,.1)
+}
+#typeface-option h1 {
+    padding: 1vh;
+    cursor: pointer;
+    border-radius: 5px;
+}
+#typeface-option h1:hover {
+    background-color: #dddddd;
 }

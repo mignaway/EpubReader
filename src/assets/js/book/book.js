@@ -96,6 +96,9 @@ var loadBook = async function() {
         if (chapterName != null) current_chapter_name = chapterName;
     })
     book_rendition.themes.default({
+        f: {
+
+        },
         img: {
             'max-width': '100%'
         },
@@ -104,6 +107,7 @@ var loadBook = async function() {
             'color': 'inherit'
         }
     });
+    console.log(book_rendition.themes);
     // Load book style (color or font size)
     await loadBookStyleSettings();
 }

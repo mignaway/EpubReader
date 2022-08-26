@@ -37,3 +37,7 @@ $(window).on('load', function(){
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
     })
 });
+
+function handleTypeFaceSelection() {
+    $('#typeface-option').toggle()
+}

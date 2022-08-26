@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;600;700;900&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
     <script src="assets/js/general/application.js"></script>
@@ -120,6 +121,26 @@
                                     <span id="settings-increase-font-size" class="main-text text-giant cursor-pointer" style="padding: 0 7vh;">A</span>
                                 </div>
                                 <div class="horizontal-divider-05 bg-black"></div>
+                                <div class="flex-row flex-v-center" style="margin-top: 20px;">
+                                    <h1 class="main-text m-r-10">Typeface:</h1>
+                                    <div id="typeface-settings" class="w-100" onclick="handleTypeFaceSelection()">
+                                        <div id="typeface-section" class="flex-row flex-v-center">
+                                            <h1 id="typeface-section-text" class="flex-1 main-text text-sb">Default</h1>
+                                            <svg width="12" height="8" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M7.18198 0.318107C7.08821 0.224372 6.96106 0.171714 6.82848 0.171714C6.69589 0.171714 6.56874 0.224372 6.47498 0.318107L3.99998 2.79311L1.52498 0.318107C1.43068 0.227028 1.30438 0.176631 1.17328 0.17777C1.04218 0.178909 0.916772 0.231493 0.824068 0.324197C0.731364 0.416901 0.67878 0.542308 0.677641 0.673406C0.676502 0.804505 0.726899 0.930805 0.817978 1.02511L3.64648 3.85361C3.74024 3.94734 3.86739 4 3.99998 4C4.13256 4 4.25971 3.94734 4.35348 3.85361L7.18198 1.02511C7.27571 0.931343 7.32837 0.804189 7.32837 0.671607C7.32837 0.539025 7.27571 0.411871 7.18198 0.318107V0.318107Z"
+                                                    fill="black" fill-opacity="0.5" />
+                                            </svg>
+                                        </div>
+                                        <div id="typeface-option" class="w-100">
+                                            <h1 class="main-text" onclick="$('#typeface-section-text').text(this.innerHTML);book_rendition.themes.font(this.dataset.value)" data-value="">Default</h1>
+                                            <div class="horizontal-divider-05 text-color-black"></div>
+                                            <h1 class="main-text" onclick="$('#typeface-section-text').text(this.innerHTML);book_rendition.themes.font(this.dataset.value)" data-value="Arial">Arial</h1>
+                                            <div class="horizontal-divider-05 text-color-black"></div>
+                                            <h1 class="main-text" onclick="$('#typeface-section-text').text(this.innerHTML);book_rendition.themes.font(this.dataset.value)" data-value="Inter">Inter</h1>
+                                        </div>
+                                    </div> 
+                                </div>
                                 <div class="flex-row flex-v-center" style="margin-top: 20px;">
                                     <h1 class="main-text m-r-10">Color Style:</h1>
                                     <div class="flex-row flex-v-center flex-h-center">
