@@ -237,6 +237,10 @@ img {
 #alert-text.alert-default {
   background-color: #666666;
 }
+#alert-text.alert-success {
+  color: white;
+  background-color: #38a164;
+}
 
 #settings-menu {
   padding: 3vh;

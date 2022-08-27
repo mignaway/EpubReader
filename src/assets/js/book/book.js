@@ -57,6 +57,7 @@ var loadBook = async function() {
     book_rendition = book_epub.renderTo("book-content-columns", { manager: "default", width: "100%", height: "100%"});
     book_saved_pages = book_infos.savedPages;
 
+
     if (book_infos.lastPageOpened != null){
         book_rendition.display(book_infos.lastPageOpened);
     } else {
@@ -83,15 +84,18 @@ var loadBook = async function() {
         if (!chapters_rendered) {
             loadChaptersList()
         }
-        // Update pages
-        updatePageNumber(book_rendition.currentLocation().start.cfi)
-        // Update save button
-        updateSavePagesButton(book_saved_pages, book_rendition.currentLocation().start.cfi);
         // Add iframe click event to close all navbar popup
         var iframe = $('iframe').contents();
         iframe.find('body').on('click', function () {
             $('.book-navbar-popup').hide();
         });
+
+        const start_cfi = book_rendition.currentLocation().start.cfi;
+        // Update pages
+        updatePageNumber(start_cfi)
+        // Update save button
+        updateSavePagesButton(book_saved_pages, start_cfi);
+        
         var chapterName = await getCurrentChapterLabelByHref(book_epub.navigation.toc, section.href);
         if (chapterName != null) current_chapter_name = chapterName;
     })
@@ -99,15 +103,14 @@ var loadBook = async function() {
         f: {
 
         },
-        img: {
-            'max-width': '100%'
-        },
+        // img: {
+        //     'max-width': '100%'
+        // },
         a: {
             'pointer-events': 'none',
             'color': 'inherit'
         }
     });
-    console.log(book_rendition.themes);
     // Load book style (color or font size)
     await loadBookStyleSettings();
 }
@@ -230,11 +233,6 @@ async function loadBookStyleSettings(newStyleColor = null){
     // Load settings
     if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
 
-    // Group elements to change on initial style load
-    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1')
-    var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn')
-    var text_elements = $('#currentPages h1')
-
     // Check if font size is max/min and change opacity style
     checkNavbarFontSizeOpacity();
 
@@ -248,6 +246,11 @@ async function loadBookStyleSettings(newStyleColor = null){
     // LOAD FONT
     book_rendition.themes.font(current_style_settings.book.typeface)
     if (current_style_settings.book.typeface.length > 0) $('#typeface-section-text').text(current_style_settings.book.typeface)
+
+    // Group elements to change on initial style load
+    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1')
+    var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn')
+    var text_elements = $('#currentPages h1')
 
     // Color style setting change 
     switch (current_style_settings.book.background_color_style){
@@ -298,7 +301,7 @@ var saveBookPageBeforeClose = async function(){
 
 var getCurrentChapterLabelByHref = async function(array,chapterHref){
     chapter_title = null;
-    for(books in array){
+    for(const books of array){
         if (books.href.includes(chapterHref)){
             chapter_title = books.label;
             break;

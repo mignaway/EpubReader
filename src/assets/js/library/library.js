@@ -9,9 +9,9 @@ var books_json = [];
 var dominantRGBValue = null;
 
 var loadBooks = async function (books_json_not_sorted){
+
     var final_book = null;
     var ordered_books = books_json = await orderBookModality(books_json_not_sorted, sortingSettings);
-
     var isSearchingSomething = $('#search-bar-input').val().trim().length > 0;
 
     final_book = isSearchingSomething ? await filterBooksByTitle(ordered_books, $('#search-bar-input').val()) : ordered_books
@@ -65,7 +65,8 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
 
 var searchTimeout = null;
 async function handleSearchBarChange(newText) {
-    if (newText.trim().length > 0) {
+    newText = newText.trim()
+    if (newText.length > 0) {
         $('#library-book-loading').css('opacity','1');
         var filtered_books = await filterBooksByTitle(books_json, newText)
         // console.log(filtered_books)
@@ -84,7 +85,7 @@ async function filterBooksByTitle(json,title){
 
 ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
     var response = await addEpubBook(epubPath);
-    if (response != false) {
+    if (response) {
         $('#section-book-loading-animation').removeClass('loaded');
         await loadBooks(response);
     }

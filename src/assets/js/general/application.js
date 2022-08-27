@@ -16,22 +16,20 @@ var addEpubBook = async function(epubPath) {
     var response = await EPub.createAsync(epubPath,null,null)
     .then(async function(epub) {
         const jsonData = await getBooksFromJson();
-
-        const data = epub.metadata;
         
-        const author = data.creator ?? null;
+        const author = epub.metadata.creator ?? null;
         const author_folderBookCode = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
-        const folderBookCode = data.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
+        const folderBookCode = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
         const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
         const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
 
         // Check if book already exists
         if (!fs.existsSync(bookFolderPath)){ 
             var newBook = {
-                "title": data.title,
+                "title": epub.metadata.title,
                 "author": author,
-                "bookYear": data.date?.split('-')[0] ?? null,
-                "lang": data.languages?.split('-')[0].toUpperCase() ?? null,
+                "bookYear": epub.metadata.date?.split('-')[0] ?? null,
+                "lang": epub.metadata.languages?.split('-')[0].toUpperCase() ?? null,
                 "folderBookCode": folderBookCode,
                 "coverPath": coverPath,
                 "lastTimeOpened": new Date(),
@@ -39,7 +37,7 @@ var addEpubBook = async function(epubPath) {
                 "savedPages": []
             }
             jsonData.push(newBook)
-            await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(jsonData, null, 4))
+            await fse.writeJsonSync(__dirname + '/assets/json/books.json', jsonData,{spaces: 4})
 
             // Add book's files folder and epub
             await fs.mkdirSync(bookFolderPath)
@@ -70,7 +68,7 @@ var deleteEpubBook = async function(folderBookCode) {
         }
     })
     // Rewrite/update json
-    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json,null,4))
+    await fse.writeJsonSync(__dirname + '/assets/json/books.json', json,{spaces: 4})
     // Remove recursively book's to remove folder
     await fs.rmSync(__dirname + '/epubs/' + folderBookCode, { recursive: true });
     // If list is empty then disable edit button
@@ -84,15 +82,13 @@ var getBooksFromJson = async function () {
     // check if books.json exists
     if (!fs.existsSync(path)) {
         displayAlert("Initializing application...", "default");
+
         // create json/books.json
         await fse.outputFile(path, '[]');
-        // reset epubs folder
-        if (fs.existsSync(__dirname + '/epubs')) await fse.emptyDirSync(__dirname + '/epubs');
-        await fs.mkdirSync(__dirname + '/epubs');
-    }
-    // check if epubs folder exists
-    if (!fs.existsSync(__dirname + '/epubs')) {
-        await fs.mkdirSync(__dirname + '/epubs');
+        // reset epubs folder and create if doesn't exists
+        await fse.emptyDirSync(__dirname + '/epubs');
+
+        displayAlert("Initialization completed!", "success");
     }
 
     return JSON.parse(fs.readFileSync(path))
@@ -100,17 +96,16 @@ var getBooksFromJson = async function () {
 
 var getUserSettingsFromJson = async function () {
     var path = __dirname + '/assets/json/user_settings.json';
-    // // check if books.json exists
+    // check if books.json exists
     if (!fs.existsSync(path)) {
-    //     // create json/books.json
-        await fse.outputFile(path, '{"book": {"background_color_style": "default","font_size_percent": 100, "typeface": ""}} ');
+        // create books.json
+        await fse.outputJsonSync(path, {"book": {"background_color_style": "default","font_size_percent": 100, "typeface": ""}}, {spaces: 4});
     }
-
     return JSON.parse(fs.readFileSync(path))
 }
 
 var localSaveUserSettings = async function (old_json) {
-    await fs.writeFileSync(__dirname + '/assets/json/user_settings.json', JSON.stringify(old_json, null, 4))
+    await fse.writeJsonSync(__dirname + '/assets/json/user_settings.json', old_json, {spaces: 4})
 }
 
 // Order a json object by modality
@@ -151,7 +146,7 @@ var changeValueInJsonBook = async function (json, folderBookCode, key, newValue)
             json[index][key] = newValue;
         }
     })
-    await fs.writeFileSync(__dirname + '/assets/json/books.json', JSON.stringify(json, null, 4))
+    await fse.writeJsonSync(__dirname + '/assets/json/books.json', json, {spaces: 4})
 }
 
 /**
@@ -172,13 +167,11 @@ var displayAlert = function (message, type) {
 
 // Get dominant (vibrant) color from image
 
-var getVibrantColorFromImage = function (imgPath) {
+var getVibrantColorFromImage = async function (imgPath) {
     // var finalVibrantColor;
     if (fs.existsSync(imgPath)) {
-        return Vibrant.from(imgPath).getPalette()
-            .then(value => {
-                return value.Vibrant.getRgb()
-            })
+        var value = await Vibrant.from(imgPath).getPalette()
+        return value.Vibrant.getRgb()
     } else {
         console.log("File doesn't exists")
     }
