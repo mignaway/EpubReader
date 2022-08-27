@@ -298,20 +298,19 @@ var saveBookPageBeforeClose = async function(){
 
 var getCurrentChapterLabelByHref = async function(array,chapterHref){
     chapter_title = null;
-    for(var i=0; i < array.length; i++){
-
-        if (array[i].href.includes(chapterHref)){
-            chapter_title = array[i].label;
+    for(books in array){
+        if (books.href.includes(chapterHref)){
+            chapter_title = books.label;
             break;
-        } else if (array[i].subitems.length > 0) {
-            var temp_chapter_title = await getCurrentChapterLabelByHref(array[i].subitems, chapterHref)
+        } else if (books.subitems.length > 0) {
+            var temp_chapter_title = await getCurrentChapterLabelByHref(books.subitems, chapterHref)
             if (temp_chapter_title != null) {
                 chapter_title = temp_chapter_title;
                 break;
             } else {
                 // IF CHAPTER DONT FOUND CHOOSE THE PREVIOUS ARRAY LABEL
                 if (current_chapter_name == null) {
-                    chapter_title = array[i].label;
+                    chapter_title = books.label;
                 }
             }
         }
