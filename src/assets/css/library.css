@@ -352,27 +352,3 @@ body {
 #search-bar-input:focus {
     outline: none;
 }
-#library-book-loading {
-    width: 20px;
-    height: 20px; 
-}
-#library-book-loading:after {
-    content: " ";
-    display: block;
-    width: 15px;
-    height: 15px;
-    margin: 8px;
-    border-radius: 50%;
-    border: 2px solid #f3f3f3;
-    border-top: 2px solid rgba(0, 0, 0, .7);
-    animation: library-loading-logo 1s linear infinite;
-}
-@keyframes library-loading-logo {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(360deg);
-    }
-}

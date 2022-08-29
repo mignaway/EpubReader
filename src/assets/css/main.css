@@ -204,6 +204,33 @@ img {
   }
 }
 
+#book-loading-logo {
+  width: 20px;
+  height: 20px;
+}
+
+#book-loading-logo:after {
+  content: " ";
+  display: block;
+  width: 15px;
+  height: 15px;
+  margin-left: 8px;
+  border-radius: 50%;
+  border: 2px solid #f3f3f3;
+  border-top: 2px solid rgba(0, 0, 0, .7);
+  animation: book-loading-logo-animation 1s linear infinite;
+}
+
+@keyframes book-loading-logo-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
 #alert-text {
     padding: 10px 20px;
     box-shadow: 0 2px 5px rgba(0, 0, 0, .1);
