@@ -155,9 +155,16 @@ body {
     flex-wrap: wrap;
     /* justify-content: space-between; */
     overflow-y: auto;
+    /* overflow-x: hidden; */
+}
+#book-section-grid.row-style {
+    flex-direction: row;
     row-gap: 40px;
     column-gap: 40px;
-    /* overflow-x: hidden; */
+}
+#book-section-grid.column-style {
+    /* flex-direction: column; */
+    gap: 25px;
 }
 
 #book-section-grid .book-box {

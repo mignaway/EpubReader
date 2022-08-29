@@ -4,7 +4,7 @@ $(window).on('load', async function(){
     await loadAll(books_json)
 });
 
-var sortingSettings = { "sortby": "last_read"}
+var sortingSettings = { sortby: "last_read"}
 
 /**
  * Load/reload hero section and books list section
@@ -14,11 +14,11 @@ var sortingSettings = { "sortby": "last_read"}
  */
 
 var loadAll = async function (books_json){
-    sortingSettings['sortby'] = $('#section-book-current-sorting').data('sort');
+    sortingSettings.sortby = $('#section-book-current-sorting').data('sort');
     $('#hero-section-loading-animation').removeClass('loaded');
     const orderedBooks = await orderBookModality(books_json, sortingSettings)
     await loadHeroSection(orderedBooks)
-    await loadBooksSection(orderedBooks)
+    await loadBooksSection(orderedBooks.slice(0, 6))
 }
 
 async function loadHeroSection(books_json) {

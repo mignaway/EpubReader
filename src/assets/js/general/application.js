@@ -110,25 +110,23 @@ var localSaveUserSettings = async function (old_json) {
 
 // Order a json object by modality
 var orderBookModality = async function(books_json, option) {
-    var sortby = option['sortby'];
-    // console.log(books_json, sortby);
     var orderedBooks = null;
-    switch(sortby) {
+    switch(option.sortby) {
         case 'last_read':
             orderedBooks = books_json.sort((x, y) => {
                 return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
             });
             break;
         case 'alphabetically':
-            orderedBooks = books_json.sort((x, y) => {
-                if (x.title === y.title) return 0; // theoretically impossible
-                return x.title > y.title ? 1 : -1
-            });
+            // If not already separated by letter then do it
+            var books_json_separated = books_json.constructor == Object ? books_json : await separateBooksByLetter(books_json)
+            // Order alphabetically ascendent
+            orderedBooks = Object.keys(books_json_separated).sort().reduce((r, k) => (r[k] = books_json_separated[k], r), {});
             break;
         default:
             return books_json;
     }
-    return orderedBooks.slice(0, 6);
+    return orderedBooks;
 }
 
 var searchBookInJson = async function(json, folderBookCode) {
@@ -147,6 +145,19 @@ var changeValueInJsonBook = async function (json, folderBookCode, key, newValue)
         }
     })
     await fse.writeJsonSync(__dirname + '/assets/json/books.json', json, {spaces: 4})
+}
+
+var separateBooksByLetter = async function (books_json) {
+    temp_ordered = {}
+    for (const book of books_json) {
+        var firstLetter = book.title.charAt(0).toUpperCase();
+        if (!temp_ordered[firstLetter]) {
+            temp_ordered[firstLetter] = [book]
+        } else {
+            temp_ordered[firstLetter].push(book);
+        }
+    }
+    return temp_ordered
 }
 
 /**
