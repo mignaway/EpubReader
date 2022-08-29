@@ -103,3 +103,23 @@ async function deleteEpubBookHandler(folderBookCode) {
     var json = await deleteEpubBook(folderBookCode);
     await loadAll(json);
 }
+
+// Order a json object by modality
+async function orderBookModality(books_json, option) {
+    var orderedBooks = null;
+    switch (option.sortby) {
+        case 'last_read':
+            orderedBooks = books_json.sort((x, y) => {
+                return new Date(x.lastTimeOpened) < new Date(y.lastTimeOpened) ? 1 : -1
+            });
+            break;
+        case 'alphabetically':
+            orderedBooks = books_json.sort((x, y) => {
+                if (x.title === y.title) return 0; // theoretically impossible
+                return x.title > y.title ? 1 : -1
+            });
+        default:
+            return books_json;
+    }
+    return orderedBooks;
+}
