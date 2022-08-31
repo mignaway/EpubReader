@@ -21,7 +21,11 @@ $(window).on('load', function(){
     })
     $('#show-book-saved').on('click', function () {
         $('.book-navbar-popup:not(#book-saved)').hide();
-        $('#book-saved').toggle();
+        if($('#book-saved').is(':visible')){
+            $('#book-saved').hide()
+        } else {
+            $('#book-saved').css('display','flex')
+        }
     })
     $('#libraryNavBtn').on('click', function(){
         ipcRenderer.send('unmaximizeApp');

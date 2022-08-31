@@ -95,6 +95,8 @@
 #book-saved {
     left: 0;
     width: 350px;
+    max-height: 400px;
+    padding: 0 !important;
 }
 
 
@@ -174,7 +176,10 @@
     fill: #5B4636;
 }
 #book-saved-pages {
-    padding: 20px 0 0 0;
+    padding: 2vh;
+    margin: 1vh;
+    flex: 1;
+    overflow-y: auto;
 }
 .saved-information {
     transition: padding .3s;
@@ -196,6 +201,7 @@
     padding: 15px 25px;
     border-radius: 10px;
     transition: all .3s;
+    margin: 3vh 3vh 0 3vh;
 }
 #book-saved-btn.saving {
     background-color: black;
