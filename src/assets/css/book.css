@@ -90,7 +90,7 @@
     left: 0;
     width: 350px;
     height: 500px;
-    overflow-y: auto;
+    overflow-y: auto !important;
 }
 #book-saved {
     left: 0;

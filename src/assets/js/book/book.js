@@ -100,12 +100,6 @@ var loadBook = async function() {
         if (chapterName != null) current_chapter_name = chapterName;
     })
     book_rendition.themes.default({
-        f: {
-
-        },
-        // img: {
-        //     'max-width': '100%'
-        // },
         a: {
             'pointer-events': 'none',
             'color': 'inherit'
