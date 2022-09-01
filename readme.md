@@ -30,10 +30,14 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 -->
 
 ## Recent Important Update
+### v1.0.1
 
-- Added __`save page`__ feature
-- Added __`current page`__ feature
-- Added the possiblity to __`maximize`__ the book window
+- Removed __`clicking book action`__ while editing
+- Added __`new book`__ cover display
+- Fixed __`library scroll`__
+- Added __`font changing`__
+- Added __`alphabetically separated`__ sorting
+- General improvement and bug fixed
 
 ## Testing
 To clone locally this project you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer.

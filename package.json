@@ -32,7 +32,8 @@
       "**/*",
       "!dist/",
       "!src/epubs/",
-      "!src/assets/json/"
+      "!src/assets/json/",
+      "!readme.md"
     ],
     "asar": false
   },
