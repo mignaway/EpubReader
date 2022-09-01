@@ -144,6 +144,9 @@
 #section-book-preview .book-delete-icon:hover {
   background-color: var(--primary-red-color);
 }
+#section-book-preview .book-box .book-box-image {
+  z-index: 4;
+}
 #section-book-preview .book-box .book-box-image img {
   transition: all .2s;
 }
@@ -206,6 +209,7 @@
   gap: 1vh;
   transition: opacity .3s;
   opacity: 0;
+  z-index: 5;
 }
 .book-box-informations h1 {
   font-size: 17px;
@@ -282,7 +286,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 5;
+  z-index: 10;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 #section-book .new-book-box h1 {

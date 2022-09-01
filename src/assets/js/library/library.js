@@ -35,7 +35,11 @@ var loadBooks = async function (books_json_not_sorted){
         await loadBooksAction(final_book, dominantRGBValue);
     } else {
         $('#book-loading-logo').css('opacity', '0');
-        $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>')
+        if (isSearchingSomething) {
+            $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No books found.<br>You may try remove the search</h2>');    
+        } else {
+            $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
+        }
     }
 }
 
@@ -50,7 +54,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                 const author = book.author ?? 'Undefined Author';
                 const language = book.lang ?? 'Undefined Language';
                 const already_read = book.lastPageOpened ? 'none' : 'flex';
-    
+
                 $('#book-section-grid').append(`
                 <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
                     <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
@@ -65,12 +69,12 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                         <h1 class="main-text text-color-white text-b">NEW</h1>
                     </div>
                     <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
-                        <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">    
+                        <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
                             <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
                         </svg>
                     </div>
                 </div>
-                `);     
+                `);
             });
         } else {
             $('#book-section-grid').addClass('column-style')
@@ -103,7 +107,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                             <h1 class="main-text text-color-white text-b">NEW</h1>
                         </div>
                         <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
-                            <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">    
+                            <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
                                 <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
                             </svg>
                         </div>
@@ -130,7 +134,7 @@ async function handleSearchBarChange(newText) {
         searchTimeout = setTimeout(async function () {
             await loadBooksAction(filtered_books, dominantRGBValue)
         }, 300);
-        
+
     } else {
         await loadBooks(books_json)
     }
@@ -139,7 +143,7 @@ async function handleSearchBarChange(newText) {
 async function filterBooksByTitle(json,title){
     if (json.constructor == Object) {
         var temp_json = {}
-        // CASE IS DICT 
+        // CASE IS DICT
         Object.entries(json).forEach(([key, value]) => {
             var books_filtered = value.filter(book => book.title.toLowerCase().includes(title.toLowerCase()))
             if(books_filtered.length > 0) temp_json[key] = books_filtered

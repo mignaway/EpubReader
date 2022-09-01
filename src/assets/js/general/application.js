@@ -158,7 +158,7 @@ var displayAlert = function (message, type) {
 // Get dominant (vibrant) color from image
 
 var getVibrantColorFromImage = async function (imgPath) {
-    // var finalVibrantColor;
+
     if (fs.existsSync(imgPath)) {
         var value = await Vibrant.from(imgPath).getPalette()
         return value.Vibrant.getRgb()

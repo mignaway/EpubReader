@@ -14,8 +14,6 @@ $(window).on('load', function () {
         ipcRenderer.send('minimizeApp');
     })
     $('#resize-maximize-app-icon, #resize-minimize-app-icon').on('click', function(){
-        $('#resize-maximize-app-icon').toggle();
-        $('#resize-minimize-app-icon').toggle();
         ipcRenderer.send('resizeApp'); 
     })
     $('#edit-books-button').on('click', function () {
@@ -38,6 +36,17 @@ $(window).on('load', function () {
     });
     ipcRenderer.on('getAppVersion', async function(event, appVersion){
         $('#app-info-version').text("v" + appVersion);
+    })
+    ipcRenderer.on('updateMaximizeIcon', async function(event, isMaximized){
+        console.log("called")
+        if(isMaximized){
+            $('#resize-minimize-app-icon').show();
+            $('#resize-maximize-app-icon').hide();
+        } else {
+            $('#resize-maximize-app-icon').show();
+            $('#resize-minimize-app-icon').hide();
+        }
+        
     })
     $('#menu-open-app-information').on('click', function(){
         $('#application-information').css("display","flex");

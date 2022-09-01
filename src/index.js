@@ -69,6 +69,9 @@ const createWindow = () => {
       console.log(err)
     })
   })
+  mainWindow.on('resize', function() {
+    mainWindow.webContents.send('updateMaximizeIcon', mainWindow.isMaximized());
+  })
   // Open the DevTools.
   // mainWindow.webContents.openDevTools();
 };
