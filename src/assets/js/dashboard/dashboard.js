@@ -89,9 +89,9 @@ async function loadBooksSection(books_json) {
                 $('#section-book-preview').append('<div class="book-box"></div>')
             }
         }
-        $('#book-loading-logo').css('opacity', '0');
         $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text text-b text-decoration-none">All Books -></a></div>')
     }
+    $('#book-loading-logo').css('opacity', '0');
 }
 
 // Event called after chose book in dialog

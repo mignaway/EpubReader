@@ -33,7 +33,8 @@
       "!dist/",
       "!src/epubs/",
       "!src/assets/json/"
-    ]
+    ],
+    "asar": false
   },
   "keywords": [],
   "author": {
