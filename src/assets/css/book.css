@@ -98,7 +98,17 @@
     max-height: 400px;
     padding: 0 !important;
 }
+#dictionary-popup {
+    left: 0;
+    min-width: 350px;
+    padding: 20px 30px !important;
+    max-height: 80vh;
+    overflow-y: auto !important;
+}
 
+.dictionary-definition-box ol li::marker {
+    font-weight: 600;
+}
 
 /* width */
 ::-webkit-scrollbar {

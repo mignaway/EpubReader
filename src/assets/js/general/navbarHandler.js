@@ -38,7 +38,6 @@ $(window).on('load', function () {
         $('#app-info-version').text("v" + appVersion);
     })
     ipcRenderer.on('updateMaximizeIcon', async function(event, isMaximized){
-        console.log("called")
         if(isMaximized){
             $('#resize-minimize-app-icon').show();
             $('#resize-maximize-app-icon').hide();

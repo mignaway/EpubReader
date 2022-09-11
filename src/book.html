@@ -15,6 +15,7 @@
     <script src="assets/js/general/navbarHandler.js"></script>
     <script src="assets/js/book/book.js"></script>
     <script src="assets/js/book/bookNavbarHandler.js"></script>
+    <script src="assets/js/general/dictionary_api.js"></script>
 </head>
 <body>
     <h1 id="alert-text" class="main-text text-sb text-color-white alert-default"></h1>
@@ -104,6 +105,27 @@
                         </div>
                     </div>
                 </div>
+                <div class="vertical-divider-05 bg-black"></div>
+                <div class="flex-column" style="position: relative;">
+                    <svg id="show-dictionary-popup" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 400 400"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <g clip-path="url(#clip0_348_104)">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M395.36 372.693L302.133 279.467C330.144 245.642 344.051 202.327 340.966 158.518C337.881 114.709 318.04 73.7717 285.565 44.2065C253.089 14.6413 210.474 -1.27971 166.569 -0.250524C122.663 0.778666 80.8412 18.679 49.7868 49.7334C18.7324 80.7878 0.832011 122.61 -0.19718 166.516C-1.22637 210.421 14.6947 253.036 44.2599 285.511C73.8251 317.987 114.763 337.827 158.572 340.913C202.381 343.998 245.695 330.091 279.52 302.08L372.747 395.307C374.229 396.795 375.991 397.977 377.932 398.783C379.872 399.589 381.952 400.004 384.053 400.004C386.154 400.004 388.235 399.589 390.175 398.783C392.115 397.977 393.877 396.795 395.36 395.307C398.336 392.296 400.004 388.233 400.004 384C400.004 379.767 398.336 375.704 395.36 372.693V372.693ZM188 218.667H102.667C98.4232 218.667 94.3536 216.981 91.353 213.98C88.3524 210.98 86.6667 206.91 86.6667 202.667C86.6667 198.423 88.3524 194.354 91.353 191.353C94.3536 188.352 98.4232 186.667 102.667 186.667H188C192.243 186.667 196.313 188.352 199.314 191.353C202.314 194.354 204 198.423 204 202.667C204 206.91 202.314 210.98 199.314 213.98C196.313 216.981 192.243 218.667 188 218.667V218.667ZM230.667 154.667H102.667C98.4232 154.667 94.3536 152.981 91.353 149.98C88.3524 146.98 86.6667 142.91 86.6667 138.667C86.6667 134.423 88.3524 130.354 91.353 127.353C94.3536 124.352 98.4232 122.667 102.667 122.667H230.667C234.91 122.667 238.98 124.352 241.98 127.353C244.981 130.354 246.667 134.423 246.667 138.667C246.667 142.91 244.981 146.98 241.98 149.98C238.98 152.981 234.91 154.667 230.667 154.667Z"
+                                />
+                        </g>
+                        <defs>
+                            <clipPath id="clip0_348_104">
+                                <rect width="400" height="400" fill="white" />
+                            </clipPath>
+                        </defs>
+                    </svg>
+                    <div id="dictionary-popup" class="book-navbar-popup flex-column">
+                        
+                    </div>
+                </div>
+                
+
             </div>
             <div class="flex-row flex-v-center gap-15 no-drag">
                 <div class="flex-row flex-v-center gap-30 no-drag" style="margin-right: 150px">

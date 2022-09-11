@@ -148,7 +148,6 @@ async function filterBooksByTitle(json,title){
             var books_filtered = value.filter(book => book.title.toLowerCase().includes(title.toLowerCase()))
             if(books_filtered.length > 0) temp_json[key] = books_filtered
         })
-        console.log(temp_json)
         return temp_json
     } else {
         // CASE IS ARRAY

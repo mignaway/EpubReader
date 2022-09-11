@@ -19,6 +19,12 @@ $(window).on('load', function(){
         $('.book-navbar-popup:not(#book-chapters)').hide();
         $('#book-chapters').toggle();
     })
+    $('#show-dictionary-popup').on('click', function () {
+        $('.book-navbar-popup:not(#dictionary-popup)').hide();
+        $('#dictionary-popup').toggle();
+        // load selection
+        loadDictionary()
+    })
     $('#show-book-saved').on('click', function () {
         $('.book-navbar-popup:not(#book-saved)').hide();
         if($('#book-saved').is(':visible')){

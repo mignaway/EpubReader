@@ -63,8 +63,8 @@ var loadBook = async function() {
     } else {
         book_rendition.display();
     }
-    
-    // Add book reading shortcut 
+
+    // Add book reading shortcut
     book_rendition.on("keyup", keyListener);
     document.addEventListener("keyup", keyListener, false);
 
@@ -89,13 +89,14 @@ var loadBook = async function() {
         iframe.find('body').on('click', function () {
             $('.book-navbar-popup').hide();
         });
+        // const wordDictionary = await dictionaryGetWork(text)
 
         const start_cfi = book_rendition.currentLocation().start.cfi;
         // Update pages
         updatePageNumber(start_cfi)
         // Update save button
         updateSavePagesButton(book_saved_pages, start_cfi);
-        
+
         var chapterName = await getCurrentChapterLabelByHref(book_epub.navigation.toc, section.href);
         if (chapterName != null) current_chapter_name = chapterName;
     })
@@ -126,6 +127,56 @@ async function loadBookInfo(info){
 }
 async function loadChaptersList(){
     $('#book-chapters').html(recursiveChapterHtml(book_epub.navigation, 1))
+}
+var loadDictionary = async function(){
+    // get highlighted text from iframe
+    const selection_text = $('iframe')[0].contentWindow.getSelection().toString().trim();
+    // if text is highlighted
+    if (selection_text.length > 0) {
+        var finalHtml = '';
+        const multiple_definitions = await dictionaryGetWord(selection_text)
+        // if got any results match
+        if (multiple_definitions.length > 0) {
+            for (const definition of multiple_definitions){
+                for (const meaning of definition.meanings) {
+                    // Upper text word, audio & phonetic
+                    finalHtml += `<div class="dictionary-definition-box flex-column">
+                                        <h1 class="main-text text-sb" style="font-size: 20px; padding-top: 10px;">${multiple_definitions[0].word}</h1>
+                                        <div class="flex-row flex-v-center" style="gap: 5px; padding: 10px 0;">
+                                        ${definition?.phonetic ? "<h2 class='main-text'>" + definition?.phonetic + "</h2>" : ""}
+                                        <h2 class="main-text">${meaning.partOfSpeech}</h2>
+                                  </div>`
+                    // Upper text synonyms
+                    if(meaning.synonyms.length > 0){
+                        var synonymText = '<h2 class="main-text m-b-10" style="font-size: 14px; opacity: .8;">Synonyms: '
+                        for (const [i, synonym] of meaning.synonyms.entries()){
+                            synonymText += '<i>' + synonym + '</i>'
+                            if (i < meaning.synonyms.length - 1) { synonymText += ', ' }
+                        }
+                        synonymText += '</h2>'
+                        finalHtml += synonymText
+                    }    
+                    // Closing Upper Text
+                    finalHtml += '<div class="horizontal-divider-05 bg-black"></div>'
+                    // Definitions list
+                    finalHtml += '<ol style="padding: 0;list-style-position: inside;">'
+                    for (const meaning_definition of meaning.definitions) {
+                        finalHtml += `<li class="main-text m-t-10">${meaning_definition.definition}</li>`
+                    }
+                    finalHtml += '</ol>'
+                    // Closing dictionary-definition-box
+                    finalHtml += `</div>`
+                }
+            }
+        } else {
+            // No match text
+            finalHtml += `<div class="dictionary-definition-box flex-column"><h1 class="main-text text-sb" style="font-size: 20px; padding-top: 10px;">${multiple_definitions.title}</h1><div class="horizontal-divider-05 m-t-10 m-b-10 bg-black"></div><h2 class="main-text">${multiple_definitions.message}<br><br>Rembember to search for <u>only one word at a time</u></h2></div>`;
+        }
+        $('#dictionary-popup').html(finalHtml);
+    } else {
+        // No selection text
+        $('#dictionary-popup').html('<h1 class="main-text text-sb" style="text-align: center; font-size: 14px;">Highlight some text to know his definition!</h1>')
+    }
 }
 function recursiveChapterHtml(array,level) {
     var finalHtml = '<div class="p-l-10">';
@@ -188,7 +239,7 @@ async function addSavedPage() {
         date: {
             day: d.getDate() + " " + months[d.getMonth()] + " " + d.getFullYear(),
             time: d.getHours() + ":" + d.getMinutes()
-        }       
+        }
     }
     book_data.savedPages.unshift(data)
     changeValueInJsonBook(books_json, epubCodeSearch, "savedPages", book_data.savedPages)
@@ -205,7 +256,7 @@ async function deleteSavedPage(cfi){
             return false;
         }
     })
-    
+
     changeValueInJsonBook(books_json, epubCodeSearch, "savedPages", data.savedPages)
     loadSavedPages(data.savedPages)
     book_saved_pages = data.savedPages;
@@ -243,10 +294,10 @@ async function loadBookStyleSettings(newStyleColor = null){
 
     // Group elements to change on initial style load
     var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1')
-    var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn')
+    var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup')
     var text_elements = $('#currentPages h1')
 
-    // Color style setting change 
+    // Color style setting change
     switch (current_style_settings.book.background_color_style){
         case "brown":
             // if i use multiple themes (themes.register)
