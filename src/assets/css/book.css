@@ -98,12 +98,30 @@
     max-height: 400px;
     padding: 0 !important;
 }
+#show-dictionary-popup {
+    transition: all .3s;
+}
 #dictionary-popup {
     left: 0;
     min-width: 350px;
     padding: 20px 30px !important;
     max-height: 80vh;
     overflow-y: auto !important;
+}
+.dictionary-audio-button {
+    width: 30px;
+    height: 30px;
+    border-radius: 30px;
+    background-color: white;
+    box-shadow: 0 0 10px -4px rgb(0 ,0 ,0,.7);
+    margin-left: 10px;
+}
+.dictionary-audio-button svg {
+    fill: rgba(0, 0, 0, .5);
+    transition: all .3s;
+}
+.dictionary-audio-button:hover svg {
+    fill: rgba(0, 0, 0, 1)
 }
 
 .dictionary-definition-box ol li::marker {

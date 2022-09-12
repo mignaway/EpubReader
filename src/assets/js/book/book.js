@@ -89,9 +89,12 @@ var loadBook = async function() {
         iframe.find('body').on('click', function () {
             $('.book-navbar-popup').hide();
         });
-        // const wordDictionary = await dictionaryGetWork(text)
+        // Add selection color to match the icon
+        iframe.find('head').append("<style>::selection { background-color: #E3B230;}</style>");
 
-        const start_cfi = book_rendition.currentLocation().start.cfi;
+        const wordDictionary = await dictionaryGetWork(text)
+
+        const start_cfi = book_rendition.currentLocation().start?.cfi;
         // Update pages
         updatePageNumber(start_cfi)
         // Update save button
@@ -106,6 +109,7 @@ var loadBook = async function() {
             'color': 'inherit'
         }
     });
+    book_rendition.themes.override("body", "purple");
     // Load book style (color or font size)
     await loadBookStyleSettings();
 }
@@ -135,17 +139,53 @@ var loadDictionary = async function(){
     if (selection_text.length > 0) {
         var finalHtml = '';
         const multiple_definitions = await dictionaryGetWord(selection_text)
+        console.log(multiple_definitions)
         // if got any results match
         if (multiple_definitions.length > 0) {
             for (const definition of multiple_definitions){
                 for (const meaning of definition.meanings) {
+                    
+                    var audioObject = await getAudioFromPhonetics(definition.phonetics);
+
+                    console.log(audioObject)
+                    var audioButtonHtml = audioObject?.hasOwnProperty('audio') ? `
+                    <div class="flex-all-centered dictionary-audio-button cursor-pointer" onclick="$(this).children('audio').get(0).play()">
+                            <audio hidden class="dictionary-audio-input">
+                                <source src="${audioObject.audio}" type="audio/mp3">
+                            </audio>
+                            <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                xmlns:svgjs="http://svgjs.com/svgjs" width="15" height="15" x="0" y="0" viewBox="0 0 512 512" 
+                                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                            <g>
+                                <path xmlns="http://www.w3.org/2000/svg" d="m36.17 325.18h18.44a59.94 59.94 0 0 1 41.13 16.11c27.94 
+                                26.48 55.26 52.93 80.57 79.31 15.19 15.79 39.15 18.35 58.54 5.78 20.34-13.24 36.12-34.53 40.22-59.08 
+                                3.84-23.4 7.45-55.57 7.49-99.61s-3.64-76.2-7.47-99.61c-4.13-24.67-20-46.06-40.54-59.28-19.25-12.37-42.91-10.07-58.13
+                                5.36-25 25.4-51.94 50.86-79.5 76.36a59.91 59.91 0 0 1 -40.56 15.62h-20.06c-19.22 0-35.57 14.63-36 32.67s-.4 35.8-.07
+                                53.69c.36 18.05 16.7 32.68 35.94 32.68z"></path>
+                                <path xmlns="http://www.w3.org/2000/svg" d="m409.25 261.1a272 272 0 0 0 -8.56-68.9 228.86 228.86 0 0 0 
+                                -19.15-49.45c-14-26.38-28.47-39.92-30.07-41.37a25.56 25.56 0 0 0 -34.56 37.67c2.13 2 41.22 40.58 41.22 
+                                122.05a220.4 220.4 0 0 1 -6.77 55.39 176.71 176.71 0 0 1 -14.61 38.07c-9.57 18.07-19.18 27.44-19.75 28.06a25.56 
+                                25.56 0 0 0 34.4 37.81c1.6-1.44 16.08-14.88 30.14-41.18a226.73 226.73 0 0 0 19.18-49.32 271.72 271.72 0 0 0 8.53-68.83z"></path>
+                                <path xmlns="http://www.w3.org/2000/svg" d="m500.12 165.48a315.72 315.72 0 0 0 
+                                -26.45-68.32c-19.19-36.07-38.54-54.24-40.67-56.16a25.56 25.56 0 0 0 -34.56 37.67c.57.54 
+                                15.59 15 30.44 43.15a265.35 265.35 0 0 1 21.92 57.08 327.46 327.46 0 0 1 10.08 82.3 326 326 0 0 1 
+                                -10.08 82.17 262.7 262.7 0 0 1 -21.9 56.85c-14.79 27.85-29.74 42.17-30.37 42.77a25.56 25.56 0 0 0 
+                                34.35 37.86c2.15-1.94 21.54-20 40.77-55.9a313.81 313.81 0 0 0 26.47-68.12 377.06 377.06 0 0 0 
+                                11.88-95.63 378.17 378.17 0 0 0 -11.88-95.72z"></path>
+                            </g></svg>
+                    </div> ` : '';
+                    
+
                     // Upper text word, audio & phonetic
                     finalHtml += `<div class="dictionary-definition-box flex-column">
-                                        <h1 class="main-text text-sb" style="font-size: 20px; padding-top: 10px;">${multiple_definitions[0].word}</h1>
+                                        <div class="flex-row flex-v-center" style="padding-top: 10px;"><h1 class="main-text text-sb" style="font-size: 20px;">${definition.word}</h1>
+                                        ${audioButtonHtml}
+                                        </div>
                                         <div class="flex-row flex-v-center" style="gap: 5px; padding: 10px 0;">
-                                        ${definition?.phonetic ? "<h2 class='main-text'>" + definition?.phonetic + "</h2>" : ""}
+                                        ${definition.phonetic ? "<h2 class='main-text'>" + definition.phonetic + "</h2>" : ""}
                                         <h2 class="main-text">${meaning.partOfSpeech}</h2>
                                   </div>`
+
                     // Upper text synonyms
                     if(meaning.synonyms.length > 0){
                         var synonymText = '<h2 class="main-text m-b-10" style="font-size: 14px; opacity: .8;">Synonyms: '
@@ -177,6 +217,10 @@ var loadDictionary = async function(){
         // No selection text
         $('#dictionary-popup').html('<h1 class="main-text text-sb" style="text-align: center; font-size: 14px;">Highlight some text to know his definition!</h1>')
     }
+}
+function getAudioFromPhonetics(phonetics){
+    return phonetics.find(item => { return item.audio != '' }) ?? null
+
 }
 function recursiveChapterHtml(array,level) {
     var finalHtml = '<div class="p-l-10">';
