@@ -204,12 +204,12 @@ img {
   }
 }
 
-#book-loading-logo {
+.circle-loading-logo {
   width: 20px;
   height: 20px;
 }
 
-#book-loading-logo:after {
+.circle-loading-logo:after {
   content: " ";
   display: block;
   width: 15px;
@@ -218,10 +218,10 @@ img {
   border-radius: 50%;
   border: 2px solid #f3f3f3;
   border-top: 2px solid rgba(0, 0, 0, .7);
-  animation: book-loading-logo-animation 1s linear infinite;
+  animation: circle-loading-logo-animation 1s linear infinite;
 }
 
-@keyframes book-loading-logo-animation {
+@keyframes circle-loading-logo-animation {
   0% {
     transform: rotate(0deg);
   }

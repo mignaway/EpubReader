@@ -25,7 +25,7 @@ var loadBooks = async function (books_json_not_sorted){
     final_book = isSearchingSomething ? await filterBooksByTitle(ordered_books, $('#search-bar-input').val()) : ordered_books
 
     // start loading animation
-    $('#book-loading-logo').css('opacity', '1');
+    $('.circle-loading-logo').css('opacity', '1');
 
     if (final_book.length > 0) {
         dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + final_book[0].folderBookCode + '/' + final_book[0].coverPath)
@@ -34,7 +34,7 @@ var loadBooks = async function (books_json_not_sorted){
         dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + final_book[Object.keys(final_book)[0]][0].folderBookCode + '/' + final_book[Object.keys(final_book)[0]][0].coverPath)
         await loadBooksAction(final_book, dominantRGBValue);
     } else {
-        $('#book-loading-logo').css('opacity', '0');
+        $('.circle-loading-logo').css('opacity', '0');
         if (isSearchingSomething) {
             $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No books found.<br>You may try remove the search</h2>');    
         } else {
@@ -121,14 +121,14 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
     } else {
         $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No books found.<br>You may try remove the search</h2>');
     }
-    $('#book-loading-logo').css('opacity', '0');
+    $('.circle-loading-logo').css('opacity', '0');
 }
 
 var searchTimeout = null;
 async function handleSearchBarChange(newText) {
     newText = newText.trim()
     if (newText.length > 0) {
-        $('#book-loading-logo').css('opacity','1');
+        $('.circle-loading-logo').css('opacity','1');
         var filtered_books = await filterBooksByTitle(books_json, newText)
 
         searchTimeout = setTimeout(async function () {

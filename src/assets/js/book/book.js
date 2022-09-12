@@ -92,8 +92,6 @@ var loadBook = async function() {
         // Add selection color to match the icon
         iframe.find('head').append("<style>::selection { background-color: #E3B230;}</style>");
 
-        const wordDictionary = await dictionaryGetWork(text)
-
         const start_cfi = book_rendition.currentLocation().start?.cfi;
         // Update pages
         updatePageNumber(start_cfi)
@@ -138,8 +136,8 @@ var loadDictionary = async function(){
     // if text is highlighted
     if (selection_text.length > 0) {
         var finalHtml = '';
+        $('#dictionary-popup').html('<div class="circle-loading-logo" style="margin: 0 auto"></div>')
         const multiple_definitions = await dictionaryGetWord(selection_text)
-        console.log(multiple_definitions)
         // if got any results match
         if (multiple_definitions.length > 0) {
             for (const definition of multiple_definitions){
@@ -147,7 +145,6 @@ var loadDictionary = async function(){
                     
                     var audioObject = await getAudioFromPhonetics(definition.phonetics);
 
-                    console.log(audioObject)
                     var audioButtonHtml = audioObject?.hasOwnProperty('audio') ? `
                     <div class="flex-all-centered dictionary-audio-button cursor-pointer" onclick="$(this).children('audio').get(0).play()">
                             <audio hidden class="dictionary-audio-input">

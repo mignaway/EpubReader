@@ -56,7 +56,7 @@ async function loadBooksSection(books_json) {
     // Reset book preview section
     $('#section-book-preview').html('') 
     if (books_json.length > 0) {
-        $('#book-loading-logo').css('opacity', '1');
+        $('.circle-loading-logo').css('opacity', '1');
         const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
         for(var i = 0; i <= 5;i++) {
             if (i < books_json.length) {
@@ -91,7 +91,7 @@ async function loadBooksSection(books_json) {
         }
         $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text text-b text-decoration-none">All Books -></a></div>')
     }
-    $('#book-loading-logo').css('opacity', '0');
+    $('.circle-loading-logo').css('opacity', '0');
 }
 
 // Event called after chose book in dialog
