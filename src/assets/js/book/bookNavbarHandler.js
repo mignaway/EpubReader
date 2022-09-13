@@ -3,8 +3,10 @@ $(window).on('load', function(){
         // iframe click doesn't work, need to be added/fixed
         if (!$(e.target).hasClass('book-navbar-popup-open') && // Check clicking popup icon
             !$(e.target).parents('.book-navbar-popup-open').length &&  // Check clicking something inside popup icon
-            $(e.target).closest($('.book-navbar-popup')).length == 0){ // Check clicking inside of popup
+            $(e.target).closest($('.book-navbar-popup')).length == 0 && // Check clicking inside of popup
+            $(e.target).closest($('#book-action-menu')).length == 0) {  // Check clicking inside the action menu
             $('.book-navbar-popup').hide();
+            $('#book-action-menu').hide();
         }
     });
     $('#show-reading-settings').on('click', function(){
@@ -19,7 +21,7 @@ $(window).on('load', function(){
         $('.book-navbar-popup:not(#book-chapters)').hide();
         $('#book-chapters').toggle();
     })
-    $('#show-dictionary-popup').on('click', function () {
+    $('#show-dictionary-popup, #action-menu-show-dictionary').on('click', function () {
         $('.book-navbar-popup:not(#dictionary-popup)').hide();
         $('#dictionary-popup').toggle();
         // load selection

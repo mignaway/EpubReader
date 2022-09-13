@@ -88,9 +88,17 @@ var loadBook = async function() {
         var iframe = $('iframe').contents();
         iframe.find('body').on('click', function () {
             $('.book-navbar-popup').hide();
+            $('#book-action-menu').hide();
         });
         // Add selection color to match the icon
         iframe.find('head').append("<style>::selection { background-color: #E3B230;}</style>");
+        iframe.on('contextmenu', function (e) {
+            const somethingSelected = $('iframe')[0].contentWindow.getSelection().toString().trim().length > 0
+            if(somethingSelected) {
+                // console.log(iframe.offsetParent())
+                spawnActionMenu(e)
+            }
+        });
 
         const start_cfi = book_rendition.currentLocation().start?.cfi;
         // Update pages
@@ -218,6 +226,14 @@ var loadDictionary = async function(){
 function getAudioFromPhonetics(phonetics){
     return phonetics.find(item => { return item.audio != '' }) ?? null
 
+}
+function spawnActionMenu(e) {
+    var hasOverflowedX = e.pageX + ($(window).width() - $('#book-content-columns-wrapper').width()) + $('#book-action-menu').width() > $(window).width();
+    var x = hasOverflowedX ? e.pageX - $('#book-action-menu').width() + 'px' : e.pageX + 'px';
+    var y = e.pageY + 20 + 'px';
+    // console.log(x)
+
+    $('#book-action-menu').css({ 'display': 'block','margin-left': x ,'margin-top': y});
 }
 function recursiveChapterHtml(array,level) {
     var finalHtml = '<div class="p-l-10">';

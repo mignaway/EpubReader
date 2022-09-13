@@ -31,6 +31,12 @@
     overflow: hidden;
     height: 100%;
     width: 100%;
+    position: relative;
+}
+#book-content-columns-wrapper {
+    height: 90%;
+    width: 85%;
+    position: relative;
 }
 
 #book-content-columns {
@@ -38,11 +44,11 @@
     column-width: 200px;
     column-gap: 100px;*/
     /* max-width: 1000px; */
+    width: 100%;
+    height: 100%;
     overflow-x: auto;
-    height: 90%;
-    width: 85%;
     overflow-y: hidden;
-    margin: 0 50px;
+    /* margin: 0 50px; */
 }
 
 /* #book-content-columns > h1 {
@@ -126,6 +132,27 @@
 
 .dictionary-definition-box ol li::marker {
     font-weight: 600;
+}
+
+#book-action-menu {
+    background-color: white;
+    border-radius: 5px;
+    list-style: none;
+    padding: 10px;
+    display: inline-block;
+    box-shadow: 0 0 12px -1px rgba(0,0,0,.25);
+    z-index: 5;
+    position: absolute;
+    display: none;
+}
+#book-action-menu li {
+    border-radius: 5px;
+    padding: 10px;
+    cursor: pointer;
+    white-space: nowrap;
+}
+#book-action-menu li:hover {
+    background-color: rgba(0, 0, 0, .05);
 }
 
 /* width */
