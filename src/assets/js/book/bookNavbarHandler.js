@@ -12,18 +12,26 @@ $(window).on('load', function(){
     $('#show-reading-settings').on('click', function(){
         $('.book-navbar-popup:not(#reading-settings)').hide();
         $('#reading-settings').toggle();
+        $('#book-action-menu').hide();
     })
     $('#show-book-info').on('click', function () {
         $('.book-navbar-popup:not(#book-info)').hide();
         $('#book-info').toggle();
+        $('#book-action-menu').hide();
     })
     $('#show-book-chapters').on('click', function () {
         $('.book-navbar-popup:not(#book-chapters)').hide();
         $('#book-chapters').toggle();
+        $('#book-action-menu').hide();
     })
-    $('#show-dictionary-popup, #action-menu-show-dictionary').on('click', function () {
+    $('#show-dictionary-popup, #action-menu-show-dictionary').on('click', function (e) {
         $('.book-navbar-popup:not(#dictionary-popup)').hide();
-        $('#dictionary-popup').toggle();
+        if (e.target.id == "action-menu-show-dictionary") {
+            $('#dictionary-popup').show();
+        } else {
+            $('#dictionary-popup').toggle();
+        }
+        $('#book-action-menu').hide();
         // load selection
         loadDictionary()
     })
