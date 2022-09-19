@@ -228,10 +228,10 @@ function getAudioFromPhonetics(phonetics){
 
 }
 function spawnActionMenu(e) {
-    var hasOverflowedX = e.pageX + ($(window).width() - $('#book-content-columns-wrapper').width()) + $('#book-action-menu').width() > $(window).width();
-    var x = hasOverflowedX ? e.pageX - $('#book-action-menu').width() + 'px' : e.pageX + 'px';
+    var horizontalPadding = $(window).width() - $('#book-content-columns-wrapper').width()
+    var hasOverflowedX = (e.pageX % $('#book-content-columns-wrapper').width() + horizontalPadding + $('#book-action-menu').width()) > $(window).width();
+    var x = hasOverflowedX ? (e.pageX % $('#book-content-columns-wrapper').width()) - $('#book-action-menu').width() + 'px' : e.pageX % $('#book-content-columns-wrapper').width() + 'px';
     var y = e.pageY + 20 + 'px';
-    // console.log(x)
 
     $('#book-action-menu').css({ 'display': 'block','margin-left': x ,'margin-top': y});
 }
@@ -350,7 +350,7 @@ async function loadBookStyleSettings(newStyleColor = null){
     if (current_style_settings.book.typeface.length > 0) $('#typeface-section-text').text(current_style_settings.book.typeface)
 
     // Group elements to change on initial style load
-    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1')
+    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1, #book-action-menu, .dictionary-audio-button')
     var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup')
     var text_elements = $('#currentPages h1')
 

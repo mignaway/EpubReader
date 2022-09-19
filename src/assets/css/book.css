@@ -118,7 +118,7 @@
     width: 30px;
     height: 30px;
     border-radius: 30px;
-    background-color: white;
+    background-color: rgba(255, 255, 255, .2);
     box-shadow: 0 0 10px -4px rgb(0 ,0 ,0,.7);
     margin-left: 10px;
 }
