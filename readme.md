@@ -7,6 +7,8 @@
 
 # EpubReader 
 <a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.1/Setup.v1.0.1.exe"><img src="https://user-images.githubusercontent.com/40722616/187921781-d02952a2-f3e2-4c2f-9b67-718994b0f49a.svg"></a>
+<!-- <a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.2/Epub-Reader.Setup.1.0.2.exe"><img src="https://user-images.githubusercontent.com/40722616/191017791-1bd4c16f-19a1-4ab3-94db-478192b0836c.svg"></a> -->
+
 
 EpubReader is a open-source project made with [ElectronJS](https://www.electronjs.org/). Like the name says it's an application for reading ***.epub*** files, there are already a thousand of epub reader but their UI/UX it's really bad. I started this project for letting people read epub books in a nice way with a well-made application.
 
@@ -15,7 +17,8 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 ## Preview
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176780491-6f7c7711-780f-4d96-bd2d-dc51fb7b5164.jpg" width="100%"> -->
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176781677-4b024470-9a6b-4e93-81c2-ea6a6898b3c1.jpg" width="100%"> -->
-<img src="https://user-images.githubusercontent.com/40722616/176783527-e3f37430-cf1c-45b9-b0d9-85a37a0d8b8a.jpg" width="100%">
+<img src="https://user-images.githubusercontent.com/40722616/191061901-c6437634-5a80-434e-bf90-e4cc14c97682.png" width="100%">
+
 
 
 
@@ -30,14 +33,11 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 -->
 
 ## Recent Important Update
-### v1.0.1
+### v1.0.2 (Temporary unavailable due some bugs)
 
-- Removed __`clicking book action`__ while editing
-- Added __`new book`__ cover display
-- Fixed __`library scroll`__
-- Added __`font changing`__
-- Added __`alphabetically separated`__ sorting
-- General improvement and bug fixed
+- New __`website`__
+- __`Dictionary`__ feature (also with audio pronounce) - (Only in english)
+- Right click book __`Action menu`__ 
 
 ## Testing
 To clone locally this project you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer.
