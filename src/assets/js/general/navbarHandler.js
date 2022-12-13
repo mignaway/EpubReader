@@ -1,27 +1,22 @@
-const $ = require('jquery');
-const { ipcMain, ipcRenderer, shell, dialog } = require('electron');
-const fs = require('fs');
-const fse = require('fs-extra');
-
-$(window).on('load', function () {
+$(window).on('load', async function () {
     $('#close-app-icon').on('click', async function() {
         if (typeof saveBeforeClose == 'function') {
             await saveBeforeClose();
         }
-        ipcRenderer.send('closeApp');
+        window.appConfig.send('closeApp');
     })
     $('#minimize-app-icon').on('click', function () {
-        ipcRenderer.send('minimizeApp');
+        window.appConfig.send('minimizeApp');
     })
     $('#resize-maximize-app-icon, #resize-minimize-app-icon').on('click', function(){
-        ipcRenderer.send('resizeApp'); 
+        window.appConfig.send('resizeApp'); 
     })
     $('#edit-books-button').on('click', function () {
         $('.book-box.not-empty').toggleClass('currently-editing')
         $('#edit-books-button').toggleClass('currently-editing')
     })
     $('#add-books-button').on('click', function (){
-        ipcRenderer.send('openBookChooserDialog')
+        window.appConfig.send('openBookChooserDialog')
     })
     $('#settings-menu-open').on('click', function(){
         $('#settings-menu').toggle();
@@ -34,10 +29,7 @@ $(window).on('load', function () {
             $('#settings-menu').hide();
         }
     });
-    ipcRenderer.on('getAppVersion', async function(event, appVersion){
-        $('#app-info-version').text("v" + appVersion);
-    })
-    ipcRenderer.on('updateMaximizeIcon', async function(event, isMaximized){
+    window.appConfig.on('updateMaximizeIcon', async function(_, isMaximized){
         if(isMaximized){
             $('#resize-minimize-app-icon').show();
             $('#resize-maximize-app-icon').hide();
@@ -54,4 +46,7 @@ $(window).on('load', function () {
     $('#menu-close-app-information').on('click', function () {
         $('#application-information').css("display", "none");
     })
+
+    // preload 
+    $('#app-info-version').text("v" + await window.appConfig.appVersion());
 });

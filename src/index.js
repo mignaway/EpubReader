@@ -21,16 +21,20 @@ const createWindow = () => {
     webPreferences: {
       webviewTag: true,
       nodeIntegration: true,
-      contextIsolation: false,
+      contextIsolation: true,
+      enableRemoteModule: false,
+      preload: path.join(__dirname, './preload.js'),
     },
   });
   // and load the index.html of the app.
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
+  ipcMain.handle('appVersion', () => app.getVersion())
+  ipcMain.handle('storePath', () => app.getPath('appData'))
+
   // mainWindow.on('ready-to-show', ()=> setTimeout(() => mainWindow.show(), 50))
-  mainWindow.webContents.on('did-finish-load', () => {
+  mainWindow.webContents.on('did-finish-load', async () => {
     setTimeout(() => mainWindow.show(), 50); // HACK
-    mainWindow.webContents.send('getAppVersion', app.getVersion())
   });
   globalShortcut.register('f5', function () {
     mainWindow.reload()

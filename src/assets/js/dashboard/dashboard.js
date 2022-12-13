@@ -1,19 +1,13 @@
 $(window).on('load', async function(){
     // Load books form jsonfile
-    let books_json = await getBooksFromJson();
+    let books_json = await window.bookConfig.getBooks();
     await loadAll(books_json)
 });
 
 var sortingSettings = { sortby: "last_read"}
 
-/**
- * Load/reload hero section and books list section
- * 
- * @param {JSON Object} books_json 
- * 
- */
-
 var loadAll = async function (books_json){
+    // console.log(books_json)
     sortingSettings.sortby = $('#section-book-current-sorting').data('sort');
     $('#hero-section-loading-animation').removeClass('loaded');
     const orderedBooks = await orderBookModality(books_json, sortingSettings)
@@ -32,11 +26,12 @@ async function loadHeroSection(books_json) {
                                                                                 books_json[0].coverPath,
                                                                                 books_json[0].lastPageOpened != null]
         
-        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + folderBookCode + '/' + coverPath)
+        const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(folderBookCode,coverPath)
+        const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
         var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
         $('#hero-section-content')
             .html(`
-            <div id="hero-section-image-cover"><img src="${'epubs/' + folderBookCode + '/' + coverPath}"></div>
+            <div id="hero-section-image-cover"><img src="${bookCover}"></div>
             <div id="hero-section-book-infos" class="flex-column">
               <h1 class="main-text text-color-white text-b">${title}</h1>
               <h2 class="main-text text-color-white">${author}</h2>
@@ -57,13 +52,14 @@ async function loadBooksSection(books_json) {
     $('#section-book-preview').html('') 
     if (books_json.length > 0) {
         $('.circle-loading-logo').css('opacity', '1');
-        const dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + books_json[0].folderBookCode + '/' + books_json[0].coverPath)
+        const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(books_json[0].folderBookCode,books_json[0].coverPath)
         for(var i = 0; i <= 5;i++) {
             if (i < books_json.length) {
                 let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
                 const author = books_json[i].author ?? 'Undefined Author';
                 const language = books_json[i].lang ?? 'Undefined Language';
                 const already_read = books_json[i].lastPageOpened ? 'none' : 'flex';
+                const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(books_json[i].folderBookCode, books_json[i].coverPath)
 
                 $('#section-book-preview').append(`
                 <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
@@ -73,7 +69,7 @@ async function loadBooksSection(books_json) {
                         <h3 class="main-text text-color-white op-5">${language}</h3>
                     </div>
                     <div class="book-box-image overflow-hidden w-100 h-100">
-                        <img src="epubs/${books_json[i].folderBookCode}/${books_json[i].coverPath}">
+                        <img src="${bookCover}">
                     </div>
                     <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
                         <h1 class="main-text text-color-white text-b">NEW</h1>
@@ -96,18 +92,19 @@ async function loadBooksSection(books_json) {
 
 // Event called after chose book in dialog
 
-ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
-    var response = await addEpubBook(epubPath);
+window.appConfig.on('bookChosenSuccess', async function (event, epubPath) {
+    var response = await window.bookConfig.addEpubBook(epubPath);
     if (response != false) await loadAll(response)
 })
 
 async function deleteEpubBookHandler(folderBookCode) {
-    var json = await deleteEpubBook(folderBookCode);
+    var json = await window.bookConfig.deleteEpubBook(folderBookCode);
     await loadAll(json);
 }
 
 // Order a json object by modality
 async function orderBookModality(books_json, option) {
+
     var orderedBooks = null;
     switch (option.sortby) {
         case 'last_read':

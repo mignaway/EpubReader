@@ -42,18 +42,18 @@ var loadBook = async function() {
     // Get book code by url param
     epubCodeSearch = window.location.search.substring(1).split("=")[1];
 
-    var books_json = await getBooksFromJson();
-    var book_infos = await searchBookInJson(books_json,epubCodeSearch)
+    var books_json = await window.bookConfig.getBooks();
+    var book_infos = await window.bookConfig.searchBook(books_json,epubCodeSearch)
 
     // Update last time opened book
-    await changeValueInJsonBook(books_json, epubCodeSearch, "lastTimeOpened", new Date());
+    await window.bookConfig.changeBookValue(books_json, epubCodeSearch, "lastTimeOpened", new Date());
     // Load book info navbar popup
     await loadBookInfo(book_infos);
     // Load saved pages if any
     await loadSavedPages(book_infos.savedPages);
 
     // Epub settings
-    book_epub = ePub(__dirname + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
+    book_epub = ePub(window.appConfig.dirname() + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
     book_rendition = book_epub.renderTo("book-content-columns", { manager: "default", width: "100%", height: "100%"});
     book_saved_pages = book_infos.savedPages;
 
@@ -285,10 +285,10 @@ async function handleSavedClick(cfi) {
     updateSavePagesButton(book_saved_pages, cfi)
 }
 async function addSavedPage() {
-    var books_json = await getBooksFromJson();
+    var books_json = await window.bookConfig.getBooks();
     const d = new Date();
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-    var book_data = await searchBookInJson(books_json, epubCodeSearch);
+    var book_data = await window.bookConfig.searchBook(books_json, epubCodeSearch);
     var cfi = book_rendition.currentLocation().start.cfi
     var data = {
         chapterName: current_chapter_name,
@@ -299,14 +299,14 @@ async function addSavedPage() {
         }
     }
     book_data.savedPages.unshift(data)
-    changeValueInJsonBook(books_json, epubCodeSearch, "savedPages", book_data.savedPages)
+    await window.bookConfig.changeBookValue(books_json, epubCodeSearch, "savedPages", book_data.savedPages)
     loadSavedPages(book_data.savedPages)
     book_saved_pages = book_data.savedPages;
     updateSavePagesButton(book_data.savedPages,cfi);
 }
 async function deleteSavedPage(cfi){
-    var books_json = await getBooksFromJson();
-    var data = await searchBookInJson(await getBooksFromJson(), epubCodeSearch);
+    var books_json = await window.bookConfig.getBooks();
+    var data = await window.bookConfig.searchBook(books_json, epubCodeSearch);
     $(data.savedPages).each((index) => {
         if (data.savedPages[index].cfi == cfi) {
             data.savedPages.splice(index, 1);
@@ -314,7 +314,7 @@ async function deleteSavedPage(cfi){
         }
     })
 
-    changeValueInJsonBook(books_json, epubCodeSearch, "savedPages", data.savedPages)
+    await window.bookConfig.changeBookValue(books_json, epubCodeSearch, "savedPages", data.savedPages)
     loadSavedPages(data.savedPages)
     book_saved_pages = data.savedPages;
     updateSavePagesButton(data.savedPages, cfi);
@@ -333,7 +333,7 @@ function updateSavePagesButton(savedPages,cfi){
 }
 async function loadBookStyleSettings(newStyleColor = null){
     // Load settings
-    if (current_style_settings == null) current_style_settings = await getUserSettingsFromJson();
+    if (current_style_settings == null) current_style_settings = await window.bookConfig.getUserSettings();
 
     // Check if font size is max/min and change opacity style
     checkNavbarFontSizeOpacity();
@@ -390,14 +390,14 @@ var checkNavbarFontSizeOpacity = function () {
 }
 var saveBeforeClose = async function() {
     saveBookPageBeforeClose();
-    localSaveUserSettings(current_style_settings)
+    window.bookConfig.saveUserSettings(current_style_settings)
 }
 var saveBookPageBeforeClose = async function(){
     if (book_rendition) {
         let location = book_rendition.currentLocation();
         let cfiString = location.start.cfi;
-        var books_json = await getBooksFromJson();
-        await changeValueInJsonBook(books_json, epubCodeSearch, "lastPageOpened", cfiString)
+        var books_json = await window.bookConfig.getBooks();
+        await window.bookConfig.changeBookValue(books_json, epubCodeSearch, "lastPageOpened", cfiString)
     }
 }
 

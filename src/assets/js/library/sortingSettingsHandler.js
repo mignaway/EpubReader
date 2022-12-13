@@ -26,7 +26,7 @@ $(window).on('load', async function () {
         $('.book-box-informations').css("opacity", "0");
     });
     $('#sorting-apply-btn').on('click', async function(){
-        var books_json = await getBooksFromJson();
-        loadBooks(books_json, sortingSettings)
+        var books_json = await window.bookConfig.getBooks();
+        await loadBooks(books_json, sortingSettings)
     });
 });

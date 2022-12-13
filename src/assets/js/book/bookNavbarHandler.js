@@ -44,7 +44,7 @@ $(window).on('load', function(){
         }
     })
     $('#libraryNavBtn').on('click', function(){
-        ipcRenderer.send('unmaximizeApp');
+        window.appConfig.send('unmaximizeApp');
     })
     $('#settings-increase-font-size').on('click', function(){
         if (current_style_settings.book.font_size_percent < MAX_FONT_SIZE) current_style_settings.book.font_size_percent += 2

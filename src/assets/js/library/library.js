@@ -1,6 +1,6 @@
 $(window).on('load', async function () {
     // Load books form jsonfile
-    books_json = await getBooksFromJson();
+    books_json = await window.bookConfig.getBooks();
     await loadBooks(books_json)
 });
 
@@ -22,16 +22,16 @@ var loadBooks = async function (books_json_not_sorted){
 
     // if searching something then filter by search
     // if array given it return array, same for dict
-    final_book = isSearchingSomething ? await filterBooksByTitle(ordered_books, $('#search-bar-input').val()) : ordered_books
+    final_book = isSearchingSomething ? await filterBooksByTitleAndAuthor(ordered_books, $('#search-bar-input').val()) : ordered_books
 
     // start loading animation
     $('.circle-loading-logo').css('opacity', '1');
 
     if (final_book.length > 0) {
-        dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + final_book[0].folderBookCode + '/' + final_book[0].coverPath)
+        dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(final_book[0].folderBookCode, final_book[0].coverPath)
         await loadBooksAction(final_book, dominantRGBValue);
     } else if (Object.keys(final_book).length) {
-        dominantRGBValue = await getVibrantColorFromImage(__dirname + '/epubs/' + final_book[Object.keys(final_book)[0]][0].folderBookCode + '/' + final_book[Object.keys(final_book)[0]][0].coverPath)
+        dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(final_book[Object.keys(final_book)[0]][0].folderBookCode, final_book[Object.keys(final_book)[0]][0].coverPath)
         await loadBooksAction(final_book, dominantRGBValue);
     } else {
         $('.circle-loading-logo').css('opacity', '0');
@@ -49,11 +49,12 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
         if(sortingSettings.sortby == "last_read"){
             $('#book-section-grid').addClass('row-style')
             $('#book-section-grid').removeClass('column-style')
-            ordered_books.forEach((book) => {
+            for(const book of ordered_books) {
                 let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
                 const author = book.author ?? 'Undefined Author';
                 const language = book.lang ?? 'Undefined Language';
                 const already_read = book.lastPageOpened ? 'none' : 'flex';
+                const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(book.folderBookCode, book.coverPath)
 
                 $('#book-section-grid').append(`
                 <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
@@ -63,7 +64,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                         <h3 class="main-text text-color-white op-5">${language}</h3>
                     </div>
                     <div class="book-box-image overflow-hidden w-100 h-100">
-                        <img src="epubs/${book.folderBookCode}/${book.coverPath}">
+                        <img src="${bookCover}">
                     </div>
                     <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
                         <h1 class="main-text text-color-white text-b">NEW</h1>
@@ -75,7 +76,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                     </div>
                 </div>
                 `);
-            });
+            }
         } else {
             $('#book-section-grid').addClass('column-style')
             $('#book-section-grid').removeClass('row-style')
@@ -92,6 +93,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                     const author = book.author ?? 'Undefined Author';
                     const language = book.lang ?? 'Undefined Language';
                     const already_read = book.lastPageOpened ? 'none' : 'flex';
+                    const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(book.folderBookCode, book.coverPath)
 
                     book_final_html += `
                     <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
@@ -101,7 +103,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                             <h3 class="main-text text-color-white op-5">${language}</h3>
                         </div>
                         <div class="book-box-image overflow-hidden w-100 h-100">
-                            <img src="epubs/${book.folderBookCode}/${book.coverPath}">
+                            <img src="${bookCover}">
                         </div>
                         <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
                             <h1 class="main-text text-color-white text-b">NEW</h1>
@@ -129,7 +131,7 @@ async function handleSearchBarChange(newText) {
     newText = newText.trim()
     if (newText.length > 0) {
         $('.circle-loading-logo').css('opacity','1');
-        var filtered_books = await filterBooksByTitle(books_json, newText)
+        var filtered_books = await filterBooksByTitleAndAuthor(books_json, newText)
 
         searchTimeout = setTimeout(async function () {
             await loadBooksAction(filtered_books, dominantRGBValue)
@@ -140,23 +142,27 @@ async function handleSearchBarChange(newText) {
     }
 }
 
-async function filterBooksByTitle(json,title){
+async function filterBooksByTitleAndAuthor(json,searchText){
+    /* filterBooksByTitleAndAuthor handle two json types:
+        - dict -> if filtered with alphabetically method 
+        - array -> if filtered with default method
+    */
+    // check if dict
     if (json.constructor == Object) {
         var temp_json = {}
-        // CASE IS DICT
         Object.entries(json).forEach(([key, value]) => {
-            var books_filtered = value.filter(book => book.title.toLowerCase().includes(title.toLowerCase()))
+            var books_filtered = value.filter(book => book.title.toLowerCase().includes(searchText.toLowerCase()) || book.author.toLowerCase().includes(searchText.toLowerCase()))
             if(books_filtered.length > 0) temp_json[key] = books_filtered
         })
         return temp_json
     } else {
-        // CASE IS ARRAY
-        return json.filter(book => book.title.toLowerCase().includes(title.toLowerCase()))
+        // is array
+        return json.filter(book => book.title.toLowerCase().includes(searchText.toLowerCase()) || book.author.toLowerCase().includes(searchText.toLowerCase()))
     }
 }
 
-ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
-    var response = await addEpubBook(epubPath);
+window.appConfig.on('bookChosenSuccess', async function (_, epubPath) {
+    var response = await window.bookConfig.addEpubBook(epubPath);
     if (response) {
         $('#section-book-loading-animation').removeClass('loaded');
         await loadBooks(response);
@@ -164,8 +170,21 @@ ipcRenderer.on('bookChosenSuccess', async function (event, epubPath) {
 })
 
 async function deleteEpubBookHandler(folderBookCode) {
-    var json = await deleteEpubBook(folderBookCode);
+    var json = await window.bookConfig.deleteEpubBook(folderBookCode);
     await loadBooks(json);
+}
+
+async function separateBooksByLetter(books_json) {
+    temp_ordered = {}
+    for (const book of books_json) {
+        var firstLetter = book.title.charAt(0).toUpperCase();
+        if (!temp_ordered[firstLetter]) {
+            temp_ordered[firstLetter] = [book]
+        } else {
+            temp_ordered[firstLetter].push(book);
+        }
+    }
+    return temp_ordered
 }
 
 // Order a json object by modality

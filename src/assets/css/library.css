@@ -351,6 +351,7 @@ body {
     border: none;
     background-color: transparent;
     width: 100%;
+    flex: 1;
 }
 #search-bar-input:focus {
     outline: none;
