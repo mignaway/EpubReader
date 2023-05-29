@@ -321,3 +321,13 @@
 #typeface-option h1:hover {
     filter: brightness(.9)
 }
+
+#lang-select {
+    border: none;
+    outline: none;
+    scroll-behavior: smooth;;
+}
+#language-selection {
+    justify-content: end;
+    gap: 5px;
+}

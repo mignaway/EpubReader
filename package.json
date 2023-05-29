@@ -1,8 +1,8 @@
 {
-  "name": "Epub-Reader",
-  "productName": "Epub-Reader",
+  "name": "epub-reader",
+  "productName": "epub-reader",
   "version": "1.0.2",
-  "description": "Epub / Book Reader Application built with ElectronJS",
+  "description": "Epub Reader Application built with ElectronJS",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",

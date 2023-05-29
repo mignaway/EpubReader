@@ -30,7 +30,7 @@ const createWindow = () => {
   mainWindow.loadFile(path.join(__dirname, 'index.html'));
 
   ipcMain.handle('appVersion', () => app.getVersion())
-  ipcMain.handle('storePath', () => app.getPath('appData'))
+  ipcMain.handle('storePath', () => path.join(app.getPath('userData'),'localStorage'))
 
   // mainWindow.on('ready-to-show', ()=> setTimeout(() => mainWindow.show(), 50))
   mainWindow.webContents.on('did-finish-load', async () => {

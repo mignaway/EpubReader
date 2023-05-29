@@ -6,21 +6,27 @@ const Epub = require("epub2").EPub;
 const path = require('path');
 
 
+const getStorePath = async () => await ipcRenderer.invoke('storePath')
+
 const addEpubBook = async function (epubPath) {
     var response = await Epub.createAsync(epubPath, null, null)
         .then(async function (epub) {
             const jsonData = await getBooks();
-
+            let storePath = await getStorePath()
+			
+			const title = epub.metadata.title ?? 'Couldn\'t retrieve title'
             const author = epub.metadata.creator ?? null;
             const author_folderBookCode = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
             const folderBookCode = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
-            const bookFolderPath = __dirname + '/epubs/' + folderBookCode;
+            const bookFolderPath = storePath + '/epubs/' + folderBookCode;
             const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
+			
+			console.log(epub.metadata.cover)
 
             // Check if book already exists
             if (!fs.existsSync(bookFolderPath)) {
                 var newBook = {
-                    "title": epub.metadata.title,
+                    "title": title,
                     "author": author,
                     "bookYear": epub.metadata.date?.split('-')[0] ?? null,
                     "lang": epub.metadata.languages?.split('-')[0].toUpperCase() ?? null,
@@ -31,7 +37,7 @@ const addEpubBook = async function (epubPath) {
                     "savedPages": []
                 }
                 jsonData.push(newBook)
-                fse.writeJsonSync(__dirname + '/assets/json/books.json', jsonData, { spaces: 4 })
+                fse.writeJsonSync(storePath + '/assets/json/books.json', jsonData, { spaces: 4 })
 
                 // Add book's files folder and epub
                 fs.mkdirSync(bookFolderPath, { recursive: true })
@@ -39,7 +45,7 @@ const addEpubBook = async function (epubPath) {
                 // Adding only cover image
                 if (epub.metadata.cover) await epub.getImageAsync(epub.metadata.cover).then(async function ([data, _]) {
                     await fse.outputFile(bookFolderPath + "/" + epub.manifest[epub.metadata.cover].href, data, 'binary')
-                });
+				}).catch((e) => { console.log("Error while trying to retrieve cover from book!") });
                 return jsonData;
             } else {
                 displayAlert("Book already in library!", "default");
@@ -50,13 +56,14 @@ const addEpubBook = async function (epubPath) {
 }
 
 const deleteEpubBook = async function (folderBookCode) {
-    var json = await getBooks()
+    let json = await getBooks()
+    let storePath = await getStorePath()
     // Remove element from json data by folderBookCode key comparison
     let filtered_json = json.filter((book) => { return book.folderBookCode !== folderBookCode })
     // Rewrite/update json
-    await fse.writeJsonSync(__dirname + '/assets/json/books.json', filtered_json, { spaces: 4 })
+    await fse.writeJsonSync(storePath + '/assets/json/books.json', filtered_json, { spaces: 4 })
     // Remove recursively book's to remove folder
-    await fs.rmSync(__dirname + '/epubs/' + folderBookCode, { recursive: true, force: true });
+    await fs.rmSync(storePath + '/epubs/' + folderBookCode, { recursive: true, force: true });
     // If list is empty then disable edit button
     if (filtered_json.length == 0) document.getElementById('edit-books-button').classList.toggle('currently-editing')
 
@@ -64,7 +71,8 @@ const deleteEpubBook = async function (folderBookCode) {
 }
 
 const getBooks = async function () {
-    var bookJsonPath = __dirname + '/assets/json/books.json'
+    let storePath = await getStorePath()
+    var bookJsonPath = storePath + '/assets/json/books.json'
     // check if books.json exists
     if (!fs.existsSync(bookJsonPath)) {
         displayAlert("Initializing application...", "default");
@@ -72,7 +80,7 @@ const getBooks = async function () {
         // create json/books.json
         await fse.outputFile(bookJsonPath, '[]');
         // reset epubs folder and create if doesn't exists
-        await fse.emptyDirSync(__dirname + '/epubs');
+        await fse.emptyDirSync(storePath + '/epubs');
 
         displayAlert("Initialization completed!", "success");
     }
@@ -80,7 +88,8 @@ const getBooks = async function () {
 }
 
 const getUserSettings = async function () {
-    var jsonPath = __dirname + '/assets/json/user_settings.json';
+    let storePath = await getStorePath()
+    var jsonPath = storePath + '/assets/json/user_settings.json';
     // check if books.json exists
     if (!fs.existsSync(jsonPath)) {
         // create books.json
@@ -90,7 +99,8 @@ const getUserSettings = async function () {
 }
 
 const saveUserSettings = async function (json) {
-    if(json) await fse.writeJsonSync(__dirname + '/assets/json/user_settings.json', json, {spaces: 4})
+    let storePath = await getStorePath()
+    if(json) await fse.writeJsonSync(storePath + '/assets/json/user_settings.json', json, {spaces: 4})
 }
 
 const searchBook = async function (json, folderBookCode) {
@@ -111,13 +121,15 @@ const changeBookValue = async function (json, folderBookCode, key, newValue) {
             break;
         }
     }
-    await fse.writeJsonSync(__dirname + '/assets/json/books.json', json, { spaces: 4 })
+    let storePath = await getStorePath()
+    await fse.writeJsonSync(storePath + '/assets/json/books.json', json, { spaces: 4 })
 }
 
 const getVibrantColorFromImage = async function (folderBookCode, coverPath) {
     const imgPath = await ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
-    if (fs.existsSync(path.join(__dirname, imgPath))) {
-        var value = await Vibrant.from(path.join(__dirname, imgPath)).getPalette()
+    let storePath = await getStorePath()
+    if (fs.existsSync(path.join(storePath, imgPath))) {
+        var value = await Vibrant.from(path.join(storePath, imgPath)).getPalette()
         return value.Vibrant.getRgb()
     } else {
         console.log("Image path not found, the vibrant color may not be retrieved.")
@@ -125,8 +137,9 @@ const getVibrantColorFromImage = async function (folderBookCode, coverPath) {
 }
 
 const ensureBookCoverExistsAndReturn = async function (folderBookCode, coverPath) {
-    const imgPath = `epubs/${folderBookCode}/${coverPath}`
-    const coverPathExists = fs.existsSync(path.join(__dirname, imgPath))
+    let storePath = await getStorePath()
+    const imgPath = path.join(storePath, `/epubs/${folderBookCode}/${coverPath}`) 
+    const coverPathExists = fs.existsSync(imgPath)
     return coverPathExists ? imgPath : 'assets/images/undefined-cover.jpg'
 }
 
@@ -155,8 +168,7 @@ contextBridge.exposeInMainWorld('bookConfig', {
 });
 contextBridge.exposeInMainWorld('appConfig', {
     appVersion: () => ipcRenderer.invoke('appVersion'),
-    storePath: () => ipcRenderer.invoke('storePath'),
-    dirname: () => __dirname,
+    dirname: async () => await getStorePath(),
     on(eventName, callback) {
         ipcRenderer.on(eventName, callback)
     },

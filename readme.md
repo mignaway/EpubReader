@@ -34,6 +34,16 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 -->
 
 ## Recent Important Update
+
+### v1.0.3
+
+- Epub folder moved to the user's roaming folder
+- Asar
+- General fixes
+- A lot of refactoring
+
+
+
 ### v1.0.2
 
 - New __`website`__
