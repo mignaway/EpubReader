@@ -1,7 +1,7 @@
 {
   "name": "epub-reader",
   "productName": "epub-reader",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Epub Reader Application built with ElectronJS",
   "main": "src/index.js",
   "scripts": {
