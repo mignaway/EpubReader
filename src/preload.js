@@ -19,7 +19,7 @@ const addEpubBook = async function (epubPath) {
             const author_folderBookCode = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
             const folderBookCode = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
             const bookFolderPath = storePath + '/epubs/' + folderBookCode;
-            const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover].href : '../../assets/images/undefined-cover.jpg';
+            const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover]?.href : '../../assets/images/undefined-cover.jpg';
 			
 			console.log(epub.metadata.cover)
 
