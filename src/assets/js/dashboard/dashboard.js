@@ -1,8 +1,11 @@
 $(window).on('load', async function(){
+	activeDropFeature()	
     // Load books form jsonfile
     let books_json = await window.bookConfig.getBooks();
     await loadAll(books_json)
 });
+
+
 
 var sortingSettings = { sortby: "last_read"}
 
@@ -94,10 +97,13 @@ async function loadBooksSection(books_json) {
 // Event called after chose book in dialog
 
 window.appConfig.on('bookChosenSuccess', async function (event, epubPath) {
-    var response = await window.bookConfig.addEpubBook(epubPath);
-    if (response != false) await loadAll(response)
+	await addEpubBookHandler(epubPath)
 })
 
+async function addEpubBookHandler(epubPath){
+    var response = await window.bookConfig.addEpubBook(epubPath);
+    if (response != false) await loadAll(response)
+}
 async function deleteEpubBookHandler(folderBookCode) {
     var json = await window.bookConfig.deleteEpubBook(folderBookCode);
     await loadAll(json);
@@ -123,3 +129,5 @@ async function orderBookModality(books_json, option) {
     }
     return orderedBooks;
 }
+
+

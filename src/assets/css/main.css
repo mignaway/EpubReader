@@ -83,7 +83,7 @@ img {
 }
 .flex-column {
     display: flex;
-    flex-direction: column;
+    flex-direction: column !important;
 }
 .flex-all-centered {
     display: flex;
@@ -302,4 +302,18 @@ img {
   background-color: #121212;
   border-radius: 15px;
   padding: 30px;
+}
+#droparea {
+	user-select: none;
+  position: absolute;
+  z-index: 101;
+  display: none;
+  overflow: hidden;
+  background-color: rgba(0,0,0,0.8);
+}
+#droparea.active{
+	display: flex;
+}
+#droparea span {
+	font-size: 24px !important;
 }

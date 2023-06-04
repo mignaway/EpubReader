@@ -6,6 +6,9 @@ const Epub = require("epub2").EPub;
 const path = require('path');
 
 
+const allowedExtensions = ['epub']
+
+
 const getStorePath = async () => await ipcRenderer.invoke('storePath')
 
 const addEpubBook = async function (epubPath) {
@@ -152,6 +155,10 @@ const displayAlert = function (message,type) {
     elem.classList.add('active')
 }
 
+const isAllowedExtension = function(ext){
+	return allowedExtensions.includes(ext) 
+}
+
 
 
 contextBridge.exposeInMainWorld('bookConfig', {
@@ -163,11 +170,13 @@ contextBridge.exposeInMainWorld('bookConfig', {
     searchBook: async (json, folderBookCode) => await searchBook(json, folderBookCode),
     changeBookValue: async (json, folderBookCode, key, newValue) => await changeBookValue(json, folderBookCode, key, newValue),
     getVibrantColorFromImage: async (folderBookCode,imagePath) => await getVibrantColorFromImage(folderBookCode,imagePath),
-    ensureBookCoverExistsAndReturn: async (folderBookCode, coverPath) => await ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
+    ensureBookCoverExistsAndReturn: async (folderBookCode, coverPath) => await ensureBookCoverExistsAndReturn(folderBookCode, coverPath),
+	isAllowedExtension: (ext) => isAllowedExtension(ext)
 });
 contextBridge.exposeInMainWorld('appConfig', {
     appVersion: () => ipcRenderer.invoke('appVersion'),
     dirname: async () => await getStorePath(),
+	displayAlert: (content,type) => displayAlert(content,type),
     on(eventName, callback) {
         ipcRenderer.on(eventName, callback)
     },

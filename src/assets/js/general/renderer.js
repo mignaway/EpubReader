@@ -1,0 +1,32 @@
+function activeDropFeature(){
+	document.addEventListener("dragover", e => {
+		e.stopPropagation()
+		e.preventDefault()
+	})
+	document.addEventListener("dragenter", e => {
+		e.stopPropagation()
+		e.preventDefault()
+		$('#droparea').addClass('active')
+	})
+	document.getElementById('droparea').addEventListener("dragleave", e => {
+		e.stopPropagation()
+		e.preventDefault()
+		$('#droparea').removeClass('active')
+	})
+	document.getElementById('droparea').addEventListener("drop", e => {
+		e.stopPropagation()
+		e.preventDefault()
+		$('#droparea').removeClass('active')
+		console.log(e)
+		for (const f of e.dataTransfer.files){
+			var fileExt = f.path.split('.').pop();
+			if(window.bookConfig.isAllowedExtension(fileExt)) {
+				addEpubBookHandler(f.path)
+			} else {
+				window.appConfig.displayAlert("File type not supported", 'warning')
+			}
+		}
+	})
+}
+
+
