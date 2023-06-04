@@ -38,6 +38,7 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 ### v1.0.3 (In Progress)
 
 - Epub folder moved to the user's roaming folder
+- Now you can directly drop the file in the application
 - Asar
 - General fixes
 - A lot of refactoring
