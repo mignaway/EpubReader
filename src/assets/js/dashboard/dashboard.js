@@ -28,6 +28,7 @@ async function loadHeroSection(books_json) {
         
         const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(folderBookCode,coverPath)
         const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
+
         var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
         $('#hero-section-content')
             .html(`
@@ -39,7 +40,7 @@ async function loadHeroSection(books_json) {
               <a href="book.html?code=${folderBookCode}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button" style="background-color: rgb(${dominantRGBValue})">${keepReadingText}</a>
             </div>
         `)
-        $('#hero-section-image-background').css('background-image', 'linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(epubs/' + folderBookCode + '/' + coverPath);
+        $('#hero-section-image-background').css('background-image', `linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(${bookCover}`);
     } else {
         $('#hero-section-content').html('<h2 class="main-text text-color-white text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>')
         $('#hero-section-image-background').css({ 'background-image': 'none', 'background-color': 'rgb(20, 20, 20)' });

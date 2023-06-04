@@ -127,9 +127,8 @@ const changeBookValue = async function (json, folderBookCode, key, newValue) {
 
 const getVibrantColorFromImage = async function (folderBookCode, coverPath) {
     const imgPath = await ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
-    let storePath = await getStorePath()
-    if (fs.existsSync(path.join(storePath, imgPath))) {
-        var value = await Vibrant.from(path.join(storePath, imgPath)).getPalette()
+    if (fs.existsSync(imgPath)) {
+        var value = await Vibrant.from(imgPath).getPalette()
         return value.Vibrant.getRgb()
     } else {
         console.log("Image path not found, the vibrant color may not be retrieved.")
@@ -138,7 +137,7 @@ const getVibrantColorFromImage = async function (folderBookCode, coverPath) {
 
 const ensureBookCoverExistsAndReturn = async function (folderBookCode, coverPath) {
     let storePath = await getStorePath()
-    const imgPath = path.join(storePath, `/epubs/${folderBookCode}/${coverPath}`) 
+    const imgPath = path.posix.join(storePath, `/epubs/${folderBookCode}/${coverPath}`) 
     const coverPathExists = fs.existsSync(imgPath)
     return coverPathExists ? imgPath : 'assets/images/undefined-cover.jpg'
 }
