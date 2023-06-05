@@ -10,6 +10,10 @@ html,body {
     user-select: none;
 }
 
+*, *::after, *::before {
+	-webkit-user-drag: none;
+}
+
 img {
     user-select: none;
 }

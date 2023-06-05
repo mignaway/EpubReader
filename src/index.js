@@ -32,6 +32,11 @@ const createWindow = () => {
   ipcMain.handle('appVersion', () => app.getVersion())
   ipcMain.handle('storePath', () => path.resolve(path.join(app.getPath('userData'),'localStorage')).split(path.sep).join("/"))
 
+  mainWindow.webContents.setWindowOpenHandler((details) => {
+    shell.openExternal(details.url);
+    return { action: 'deny' }
+  })
+
   // mainWindow.on('ready-to-show', ()=> setTimeout(() => mainWindow.show(), 50))
   mainWindow.webContents.on('did-finish-load', async () => {
     setTimeout(() => mainWindow.show(), 50); // HACK
