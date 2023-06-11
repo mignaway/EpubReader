@@ -47,11 +47,13 @@ $(window).on('load', function(){
         window.appConfig.send('unmaximizeApp');
     })
     $('#settings-increase-font-size').on('click', function(){
+		$(this).addClass('settings-font-click-animation')
         if (current_style_settings.book.font_size_percent < MAX_FONT_SIZE) current_style_settings.book.font_size_percent += 2
         checkNavbarFontSizeOpacity();
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
     })
     $('#settings-decrease-font-size').on('click', function () {   
+		$(this).addClass('settings-font-click-animation')
         if (current_style_settings.book.font_size_percent > MIN_FONT_SIZE) current_style_settings.book.font_size_percent -= 2
         checkNavbarFontSizeOpacity();
         book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");

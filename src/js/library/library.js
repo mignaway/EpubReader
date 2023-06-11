@@ -29,10 +29,10 @@ var loadBooks = async function (books_json_not_sorted){
     $('.circle-loading-logo').css('opacity', '1');
 
     if (final_book.length > 0) {
-        dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(final_book[0].folderBookCode, final_book[0].coverPath)
+        dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(final_book[0].bookFolderName, final_book[0].coverPath)
         await loadBooksAction(final_book, dominantRGBValue);
     } else if (Object.keys(final_book).length) {
-        dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(final_book[Object.keys(final_book)[0]][0].folderBookCode, final_book[Object.keys(final_book)[0]][0].coverPath)
+        dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(final_book[Object.keys(final_book)[0]][0].bookFolderName, final_book[Object.keys(final_book)[0]][0].coverPath)
         await loadBooksAction(final_book, dominantRGBValue);
     } else {
         $('.circle-loading-logo').css('opacity', '0');
@@ -52,15 +52,16 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
             $('#book-section-grid').removeClass('column-style')
             for(const book of ordered_books) {
                 let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+                const title = book.title ?? 'Undefined Title';
                 const author = book.author ?? 'Undefined Author';
                 const language = book.lang ?? 'Undefined Language';
                 const already_read = book.lastPageOpened ? 'none' : 'flex';
-                const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(book.folderBookCode, book.coverPath)
+                const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(book.bookFolderName, book.coverPath)
 
                 $('#book-section-grid').append(`
-                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
+                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.bookFolderName}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.bookFolderName}">
                     <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                        <h1 class="main-text text-color-white text-b">${book.title}</h1>
+                        <h1 class="main-text text-color-white text-b">${title}</h1>
                         <h2 class="main-text text-color-white">${author}</h2>
                         <h3 class="main-text text-color-white op-5">${language}</h3>
                     </div>
@@ -91,15 +92,16 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                 for (const book of ordered_books[separator_letter]){
 
                     let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+					const title = book.title ?? 'Undefined Title';
                     const author = book.author ?? 'Undefined Author';
                     const language = book.lang ?? 'Undefined Language';
                     const already_read = book.lastPageOpened ? 'none' : 'flex';
-                    const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(book.folderBookCode, book.coverPath)
+                    const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(book.bookFolderName, book.coverPath)
 
                     book_final_html += `
-                    <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.folderBookCode}">
+                    <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.bookFolderName}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${book.bookFolderName}">
                         <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                            <h1 class="main-text text-color-white text-b">${book.title}</h1>
+                            <h1 class="main-text text-color-white text-b">${title}</h1>
                             <h2 class="main-text text-color-white">${author}</h2>
                             <h3 class="main-text text-color-white op-5">${language}</h3>
                         </div>
@@ -174,8 +176,8 @@ async function addEpubBookHandler(epubPath){
     var response = await window.bookConfig.addEpubBook(epubPath);
     if (response != false) await loadBooks(response)
 }
-async function deleteEpubBookHandler(folderBookCode) {
-    var json = await window.bookConfig.deleteEpubBook(folderBookCode);
+async function deleteEpubBookHandler(bookFolderName) {
+    var json = await window.bookConfig.deleteEpubBook(bookFolderName);
     await loadBooks(json);
 }
 

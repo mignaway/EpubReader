@@ -131,7 +131,7 @@ async function updatePageNumber(cfi) {
 }
 
 async function loadBookInfo(info){
-    $('#book-info-title').text(info.title);
+    $('#book-info-title').text(info.title ?? 'undefined');
     $('#book-info-author').text(info.author ?? 'undefined');
     $('#book-info-language').text(info.lang ?? 'undefined');
     $('#book-info-year').text(info.bookYear ?? 'undefined');

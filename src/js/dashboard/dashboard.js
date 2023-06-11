@@ -21,16 +21,16 @@ var loadAll = async function (books_json){
 async function loadHeroSection(books_json) {
     if (books_json.length > 0) {
         
-        const [title, author, bookYear, language, folderBookCode, coverPath, bookOpened] = [books_json[0].title, 
+        const [title, author, bookYear, language, bookFolderName, coverPath, bookOpened] = [books_json[0].title ?? 'Undefined Title', 
                                                                                 books_json[0].author ?? 'Undefined Author', 
                                                                                 books_json[0].bookYear ?? 'Undefined', 
                                                                                 books_json[0].lang ?? 'Undefined Language', 
-                                                                                books_json[0].folderBookCode, 
+                                                                                books_json[0].bookFolderName, 
                                                                                 books_json[0].coverPath,
                                                                                 books_json[0].lastPageOpened != null]
         
-        const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(folderBookCode,coverPath)
-        const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
+        const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(bookFolderName,coverPath)
+        const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(bookFolderName, coverPath)
 
         var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
         $('#hero-section-content')
@@ -40,7 +40,7 @@ async function loadHeroSection(books_json) {
               <h1 class="main-text text-color-white text-b">${title}</h1>
               <h2 class="main-text text-color-white">${author}</h2>
               <h3 class="main-text text-color-white op-5">${bookYear} Edition - ${language}</h3>
-              <a href="book.html?code=${folderBookCode}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button" style="background-color: rgb(${dominantRGBValue})">${keepReadingText}</a>
+              <a href="book.html?code=${bookFolderName}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button" style="background-color: rgb(${dominantRGBValue})">${keepReadingText}</a>
             </div>
         `)
         $('#hero-section-image-background').css('background-image', `linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(${bookCover}`);
@@ -56,19 +56,20 @@ async function loadBooksSection(books_json) {
     $('#section-book-preview').html('') 
     if (books_json.length > 0) {
         $('.circle-loading-logo').css('opacity', '1');
-        const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(books_json[0].folderBookCode,books_json[0].coverPath)
+        const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(books_json[0].bookFolderName,books_json[0].coverPath)
         for(var i = 0; i <= 5;i++) {
             if (i < books_json.length) {
                 let editingClass = $('#edit-books-button').hasClass('currently-editing') ? 'currently-editing' : ''
+                const title = books_json[i].title ?? 'Undefined Title';
                 const author = books_json[i].author ?? 'Undefined Author';
                 const language = books_json[i].lang ?? 'Undefined Language';
                 const already_read = books_json[i].lastPageOpened ? 'none' : 'flex';
-                const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(books_json[i].folderBookCode, books_json[i].coverPath)
+                const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(books_json[i].bookFolderName, books_json[i].coverPath)
 
                 $('#section-book-preview').append(`
-                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].folderBookCode}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].folderBookCode}">
+                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].bookFolderName}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].bookFolderName}">
                     <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                        <h1 class="main-text text-color-white text-b">${books_json[i].title}</h1>
+                        <h1 class="main-text text-color-white text-b">${title}</h1>
                         <h2 class="main-text text-color-white">${author}</h2>
                         <h3 class="main-text text-color-white op-5">${language}</h3>
                     </div>
@@ -104,8 +105,8 @@ async function addEpubBookHandler(epubPath){
     var response = await window.bookConfig.addEpubBook(epubPath);
     if (response != false) await loadAll(response)
 }
-async function deleteEpubBookHandler(folderBookCode) {
-    var json = await window.bookConfig.deleteEpubBook(folderBookCode);
+async function deleteEpubBookHandler(bookFolderName) {
+    var json = await window.bookConfig.deleteEpubBook(bookFolderName);
     await loadAll(json);
 }
 

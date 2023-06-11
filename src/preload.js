@@ -1,54 +1,66 @@
-const { app, contextBridge, ipcMain, ipcRenderer, shell, dialog } = require('electron');
+const { contextBridge, ipcRenderer } = require('electron');
 const fs = require('fs');
 const fse = require('fs-extra');
 const Vibrant = require('node-vibrant')
 const Epub = require("epub2").EPub;
 const path = require('path');
 
-
 const allowedExtensions = ['epub']
 
-
+// Get store path, default is ...\AppData\Roaming\epub-reader\localStorage
 const getStorePath = async () => await ipcRenderer.invoke('storePath')
 
+
+// Add and save epub book locally and extract metadata 
+// If everythings gone fine it returns the updated books in json
 const addEpubBook = async function (epubPath) {
     var response = await Epub.createAsync(epubPath, null, null)
         .then(async function (epub) {
+
+			// Getting jsonData to update it 
             const jsonData = await getBooks();
+
             let storePath = await getStorePath()
 			
-			const title = epub.metadata.title ?? 'Couldn\'t retrieve title'
+			const title = epub.metadata.title ?? 'undefined'; 
             const author = epub.metadata.creator ?? null;
-            const author_folderBookCode = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
-            const folderBookCode = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + author_folderBookCode;
-            const bookFolderPath = storePath + '/epubs/' + folderBookCode;
-            const coverPath = epub.metadata.cover ? epub.manifest[epub.metadata.cover]?.href : '../../assets/images/undefined-cover.jpg';
-			
-			console.log(epub.metadata.cover)
 
+			// Folder name is title + author in snake case
+            const bookFolderAuthorName = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
+            const bookFolderName = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + bookFolderAuthorName;
+
+            const bookFolderPath = storePath + '/epubs/' + bookFolderName;
+			console.log(epub.manifest)
+			console.log(epub.metadata)
+            const coverPath = epub.manifest['cover']?.href ?? null;
+			
             // Check if book already exists
             if (!fs.existsSync(bookFolderPath)) {
                 var newBook = {
                     "title": title,
                     "author": author,
                     "bookYear": epub.metadata.date?.split('-')[0] ?? null,
-                    "lang": epub.metadata.languages?.split('-')[0].toUpperCase() ?? null,
-                    "folderBookCode": folderBookCode,
+                    "lang": epub.metadata.language?.split('-')[0].toUpperCase() ?? null,
+                    "bookFolderName": bookFolderName,
                     "coverPath": coverPath,
                     "lastTimeOpened": new Date(),
                     "lastPageOpened": null,
                     "savedPages": []
                 }
+				// update the virtual book json data
                 jsonData.push(newBook)
+				// update the local book json
                 fse.writeJsonSync(storePath + '/assets/json/books.json', jsonData, { spaces: 4 })
 
-                // Add book's files folder and epub
+                // Create folder and move there the epub file
                 fs.mkdirSync(bookFolderPath, { recursive: true })
                 fs.copyFileSync(epubPath, bookFolderPath + "/epub.epub");
-                // Adding only cover image
-                if (epub.metadata.cover) await epub.getImageAsync(epub.metadata.cover).then(async function ([data, _]) {
-                    await fse.outputFile(bookFolderPath + "/" + epub.manifest[epub.metadata.cover].href, data, 'binary')
-				}).catch((e) => { console.log("Error while trying to retrieve cover from book!") });
+
+
+                // Saving locally the cover image
+                if (epub.metadata.cover) await epub.getImageAsync('cover').then(async function ([data, _]) {
+                    await fse.outputFile(path.join(bookFolderPath,epub.manifest['cover'].href), data, 'binary')
+				}).catch((e) => { console.log("Error while trying to retrieve cover from book!", e) });
                 return jsonData;
             } else {
                 displayAlert("Book already in library!", "default");
@@ -58,15 +70,15 @@ const addEpubBook = async function (epubPath) {
     return response;
 }
 
-const deleteEpubBook = async function (folderBookCode) {
+const deleteEpubBook = async function (bookFolderName) {
     let json = await getBooks()
     let storePath = await getStorePath()
-    // Remove element from json data by folderBookCode key comparison
-    let filtered_json = json.filter((book) => { return book.folderBookCode !== folderBookCode })
+    // Remove element from json data by bookFolderName key comparison
+    let filtered_json = json.filter((book) => { return book.bookFolderName !== bookFolderName })
     // Rewrite/update json
     await fse.writeJsonSync(storePath + '/assets/json/books.json', filtered_json, { spaces: 4 })
     // Remove recursively book's to remove folder
-    await fs.rmSync(storePath + '/epubs/' + folderBookCode, { recursive: true, force: true });
+    await fs.rmSync(storePath + '/epubs/' + bookFolderName, { recursive: true, force: true });
     // If list is empty then disable edit button
     if (filtered_json.length == 0) document.getElementById('edit-books-button').classList.toggle('currently-editing')
 
@@ -106,10 +118,10 @@ const saveUserSettings = async function (json) {
     if(json) await fse.writeJsonSync(storePath + '/assets/json/user_settings.json', json, {spaces: 4})
 }
 
-const searchBook = async function (json, folderBookCode) {
+const searchBook = async function (json, bookFolderName) {
     var array = null;
     for (let i = 0; i < json.length; i++) {
-        if(json[i].folderBookCode == folderBookCode){
+        if(json[i].bookFolderName == bookFolderName){
             array = json[i]
             break;
         }
@@ -117,9 +129,9 @@ const searchBook = async function (json, folderBookCode) {
     return array;
 }
 
-const changeBookValue = async function (json, folderBookCode, key, newValue) {
+const changeBookValue = async function (json, bookFolderName, key, newValue) {
     for (let i = 0; i < json.length; i++) {
-        if (json[i].folderBookCode == folderBookCode) {
+        if (json[i].bookFolderName == bookFolderName) {
             json[i][key] = newValue
             break;
         }
@@ -128,21 +140,26 @@ const changeBookValue = async function (json, folderBookCode, key, newValue) {
     await fse.writeJsonSync(storePath + '/assets/json/books.json', json, { spaces: 4 })
 }
 
-const getVibrantColorFromImage = async function (folderBookCode, coverPath) {
-    const imgPath = await ensureBookCoverExistsAndReturn(folderBookCode, coverPath)
+const getVibrantColorFromImage = async function (bookFolderName, coverPath) {
+    const imgPath = await ensureBookCoverExistsAndReturn(bookFolderName, coverPath)
     if (fs.existsSync(imgPath)) {
         var value = await Vibrant.from(imgPath).getPalette()
         return value.Vibrant.getRgb()
     } else {
         console.log("Image path not found, the vibrant color may not be retrieved.")
+		return null
     }
 }
 
-const ensureBookCoverExistsAndReturn = async function (folderBookCode, coverPath) {
+const ensureBookCoverExistsAndReturn = async function (bookFolderName, coverPath) {
+	let defaultCoverPath = '../assets/images/undefined-cover.jpg'
+	if (coverPath === null) {
+		return defaultCoverPath ;
+	}
     let storePath = await getStorePath()
-    const imgPath = path.posix.join(storePath, `/epubs/${folderBookCode}/${coverPath}`) 
+    const imgPath = path.posix.join(storePath, `/epubs/${bookFolderName}/${coverPath}`) 
     const coverPathExists = fs.existsSync(imgPath)
-    return coverPathExists ? imgPath : 'assets/images/undefined-cover.jpg'
+    return coverPathExists ? imgPath : defaultCoverPath 
 }
 
 const displayAlert = function (message,type) {
@@ -163,14 +180,14 @@ const isAllowedExtension = function(ext){
 
 contextBridge.exposeInMainWorld('bookConfig', {
     addEpubBook: async (epubPath) => await addEpubBook(epubPath),
-    deleteEpubBook: async (folderBookCode) => await deleteEpubBook(folderBookCode),
+    deleteEpubBook: async (bookFolderName) => await deleteEpubBook(bookFolderName),
     getBooks: async () => getBooks(),
     getUserSettings: async () => await getUserSettings(),
     saveUserSettings: async (json) => await saveUserSettings(json),
-    searchBook: async (json, folderBookCode) => await searchBook(json, folderBookCode),
-    changeBookValue: async (json, folderBookCode, key, newValue) => await changeBookValue(json, folderBookCode, key, newValue),
-    getVibrantColorFromImage: async (folderBookCode,imagePath) => await getVibrantColorFromImage(folderBookCode,imagePath),
-    ensureBookCoverExistsAndReturn: async (folderBookCode, coverPath) => await ensureBookCoverExistsAndReturn(folderBookCode, coverPath),
+    searchBook: async (json, bookFolderName) => await searchBook(json, bookFolderName),
+    changeBookValue: async (json, bookFolderName, key, newValue) => await changeBookValue(json, bookFolderName, key, newValue),
+    getVibrantColorFromImage: async (bookFolderName,imagePath) => await getVibrantColorFromImage(bookFolderName,imagePath),
+    ensureBookCoverExistsAndReturn: async (bookFolderName, coverPath) => await ensureBookCoverExistsAndReturn(bookFolderName, coverPath),
 	isAllowedExtension: (ext) => isAllowedExtension(ext)
 });
 contextBridge.exposeInMainWorld('appConfig', {

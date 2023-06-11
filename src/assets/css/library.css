@@ -315,7 +315,7 @@ body {
     height: 25px;
     left: -10px;
     top: -10px;
-    background-color: #8D7DEF;
+    background-color: var(--primary-color);
     border-radius: 5px;
     display: flex;
     align-items: center;

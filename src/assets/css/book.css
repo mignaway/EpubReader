@@ -331,3 +331,27 @@
     justify-content: end;
     gap: 5px;
 }
+#settings-decrease-font-size,#settings-increase-font-size{
+	text-align: center;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border-radius: 5px;
+}
+
+.settings-font-click-animation:not(.op-5):active {
+	animation: .1s settings-font-click-animation 1;
+}
+
+@keyframes settings-font-click-animation {
+	0% {
+		background-color: rgba(0,0,0,0)	
+	}
+	50% {
+		background-color: rgba(0,0,0,.1)	
+	}
+	100% {
+		background-color: rgba(0,0,0,0)	
+	}
+}
