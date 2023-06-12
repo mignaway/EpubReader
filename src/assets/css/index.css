@@ -286,7 +286,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: 10;
+  z-index: 9;
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
 }
 #section-book .new-book-box h1 {

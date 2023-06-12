@@ -296,17 +296,6 @@ img {
 .settings-menu-action:hover {
   opacity: 1;
 }
-#application-information {
-  background-color: rgba(0,0,0,0.8);
-  position: absolute;
-  z-index: 100;
-  display: none;
-}
-#application-information-box {
-  background-color: #121212;
-  border-radius: 15px;
-  padding: 30px;
-}
 #droparea {
 	user-select: none;
   position: absolute;

@@ -181,7 +181,7 @@ var loadDictionary = async function (){
 
 async function getHtmlEnglishDictionary(selection_text){
     let finalHtml = ''
-    const multiple_definitions = await dictionaryGetWord(selection_text)
+    const multiple_definitions = await getDictionaryWordDefinitions(selection_text)
     // if got any results match
     if (multiple_definitions.length > 0) {
         for (const definition of multiple_definitions) {
