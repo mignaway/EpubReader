@@ -28,10 +28,8 @@ const addEpubBook = async function (epubPath) {
 			// Folder name is title + author in snake case
             const bookFolderAuthorName = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
             const bookFolderName = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + bookFolderAuthorName;
-
             const bookFolderPath = storePath + '/epubs/' + bookFolderName;
-			console.log(epub.manifest)
-			console.log(epub.metadata)
+
             const coverPath = epub.manifest['cover']?.href ?? null;
 			
             // Check if book already exists
@@ -167,6 +165,7 @@ const displayAlert = function (message,type) {
     elem.innerHTML = message
     elem.classList.add(`alert-${type}`)
     elem.addEventListener("webkitAnimationEnd", function () {
+        elem.classList.remove("active")
         elem.classList.remove(`alert-${type}`)
     });
     elem.classList.add('active')
@@ -176,6 +175,13 @@ const isAllowedExtension = function(ext){
 	return allowedExtensions.includes(ext) 
 }
 
+ipcRenderer.on("updateAvailable", (info) => {
+	let elem = document.querySelector('')	
+})
+ipcRenderer.on("updateNotAvailable", (info) => {
+	let elem = document.querySelector('')	
+	console.log('info')
+})
 
 
 contextBridge.exposeInMainWorld('bookConfig', {

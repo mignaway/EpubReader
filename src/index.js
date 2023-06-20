@@ -1,11 +1,29 @@
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
+const { autoUpdater } = require("electron-updater")
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
   // eslint-disable-line global-require
   app.quit();
 }
+
+
+autoUpdater.setFeedURL({
+  provider: "github",
+  owner: "mignaway",
+  repo: "EpubReader",
+});
+
+// NOT TO USE IN PRODUCTION
+Object.defineProperty(app, 'isPackaged', {
+  get() {
+    return true;
+  }
+});
+
+autoUpdater.autoDownload = false;
+autoUpdater.autoInstallOnAppQuit = true;
 
 const createWindow = () => {
   // Create the browser window.
@@ -81,8 +99,8 @@ const createWindow = () => {
   mainWindow.on('resize', function() {
     mainWindow.webContents.send('updateMaximizeIcon', mainWindow.isMaximized());
   })
-  // Open the DevTools.
-  // mainWindow.webContents.openDevTools();
+
+  autoUpdater.checkForUpdates()
 };
 
 // This method will be called when Electron has finished
@@ -109,3 +127,16 @@ app.on('activate', () => {
 
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.
+
+autoUpdater.on("update-available", (info)=>{
+	mainWindow.webContents.send('updateAvailable',info)	
+})
+autoUpdater.on("update-not-available", (info)=>{
+	mainWindow.webContents.send('updateNotAvailable',info)	
+})
+autoUpdater.on("update-downloaded", (info)=>{
+	mainWindow.webContents.send('updateDownloaded',info)	
+})
+autoUpdater.on("error", (info)=>{
+	mainWindow.webContents.send('updateError',info)	
+})

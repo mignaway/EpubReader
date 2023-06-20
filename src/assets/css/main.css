@@ -40,6 +40,7 @@ img {
     color: black;
     font-size: 16px;
     margin: 0;
+	line-height: 120%;
 }
 .text-giant {
     font-size: 24px !important;

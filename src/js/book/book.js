@@ -111,13 +111,14 @@ var loadBook = async function() {
         var chapterName = await getCurrentChapterLabelByHref(book_epub.navigation.toc, section.href);
         if (chapterName != null) current_chapter_name = chapterName;
     })
+    /* 
     book_rendition.themes.default({
         a: {
             'pointer-events': 'none',
             'color': 'inherit'
-        }
+		}
     });
-    book_rendition.themes.override("body", "purple");
+	*/
     // Load book style (color or font size)
     await loadBookStyleSettings();
 }

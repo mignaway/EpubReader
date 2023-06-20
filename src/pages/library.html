@@ -6,6 +6,7 @@
     <meta http-equiv="cache-control" content="no-cache" />
     <link rel="stylesheet" href="../assets/css/main.css">
     <link rel="stylesheet" href="../assets/css/library.css" />
+    <link rel="stylesheet" href="../assets/css/tailwindcss.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -16,72 +17,66 @@
     <script src="../js/library/sortingSettingsHandler.js"></script>
 </head>
 <body>
-    <h1 id="alert-text" class="main-text text-sb text-color-white alert-default"></h1>
-    <div id="application-information" class="flex-all-centered w-100 h-100">
-        <div id="application-information-box">
-            <svg id="menu-close-app-information" class="m-r-10 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="21"
-                height="14" viewBox="0 0 21 14" fill="white">
-                <path
-                    d="M19.5 7.9C19.9971 7.9 20.4 7.49706 20.4 7C20.4 6.50294 19.9971 6.1 19.5 6.1L19.5 7.9ZM0.363604 6.3636C0.012132 6.71507 0.012132 7.28492 0.363604 7.63639L6.09117 13.364C6.44264 13.7154 7.01249 13.7154 7.36396 13.364C7.71543 13.0125 7.71543 12.4426 7.36396 12.0912L2.27279 7L7.36396 1.90883C7.71543 1.55736 7.71543 0.98751 7.36396 0.636038C7.01249 0.284566 6.44264 0.284566 6.09117 0.636038L0.363604 6.3636ZM19.5 6.1L1 6.1L1 7.9L19.5 7.9L19.5 6.1Z"
-                    fill="white" />
-            </svg>
-            <div class="flex-column" style="margin-top: 25px; gap: 20px; width: 250px">
-                <div class="flex-row flex-v-center">
-                    <h1 class="main-text text-b m-r-10 text-color-white" style="display: inline;">App version:</h1>
-                    <h1 id="app-info-version" class="main-text text-color-white" style="display: inline;"></h1>
-                </div>
-                <div class="horizontal-divider-05 bg-white" style="opacity: .1"></div>
-                <div class="flex-row flex-v-center">
-                    <h1 class="main-text text-b m-r-10 text-color-white" style="display: inline;">Author:</h1>
-                    <h1 id="app-info-author" class="main-text text-color-white cursor-pointer"
-                        onclick="window.open('https://github.com/mignaway','_blank')"
-                        style="text-decoration: underline; display: inline;">mignaway</h1>
-                </div>
-                <div class="horizontal-divider-05 bg-white" style="opacity: .1"></div>
-                <div>
-                    <h1 class="main-text text-b m-r-5 text-color-white" style="display: inline;">Description:</h1>
-                    <h1 id="app-info-description" class="main-text text-color-white" style="display: inline;">Epub Reader
-                        Application built with ElectronJS</h1>
-                </div>
-                <div class="horizontal-divider-05 bg-white" style="opacity: .1"></div>
-                <div class="flex-row flex-v-center">
-                    <h1 class="main-text text-b m-r-10 text-color-white" style="display: inline;">Git Repository:</h1>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer"
-                        onclick="window.open('https://github.com/mignaway/EpubReader','_blank')" version="1.1"
-                        xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="20"
-                        height="20" x="0" y="0" viewBox="0 0 512.092 512.092" style="enable-background:new 0 0 512 512"
-                        xml:space="preserve" class="">
-                        <g>
-                            <g xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                    <path
-                                        d="M312.453,199.601c-6.066-6.102-12.792-11.511-20.053-16.128c-19.232-12.315-41.59-18.859-64.427-18.859    c-31.697-0.059-62.106,12.535-84.48,34.987L34.949,308.23c-22.336,22.379-34.89,52.7-34.91,84.318    c-0.042,65.98,53.41,119.501,119.39,119.543c31.648,0.11,62.029-12.424,84.395-34.816l89.6-89.6    c1.628-1.614,2.537-3.816,2.524-6.108c-0.027-4.713-3.87-8.511-8.583-8.484h-3.413c-18.72,0.066-37.273-3.529-54.613-10.581    c-3.195-1.315-6.867-0.573-9.301,1.877l-64.427,64.512c-20.006,20.006-52.442,20.006-72.448,0    c-20.006-20.006-20.006-52.442,0-72.448l108.971-108.885c19.99-19.965,52.373-19.965,72.363,0    c13.472,12.679,34.486,12.679,47.957,0c5.796-5.801,9.31-13.495,9.899-21.675C322.976,216.108,319.371,206.535,312.453,199.601z"
-                                        fill="#fff" data-original="#fff"></path>
-                                </g>
-                            </g>
-                            <g xmlns="http://www.w3.org/2000/svg">
-                                <g>
-                                    <path
-                                        d="M477.061,34.993c-46.657-46.657-122.303-46.657-168.96,0l-89.515,89.429c-2.458,2.47-3.167,6.185-1.792,9.387    c1.359,3.211,4.535,5.272,8.021,5.205h3.157c18.698-0.034,37.221,3.589,54.528,10.667c3.195,1.315,6.867,0.573,9.301-1.877    l64.256-64.171c20.006-20.006,52.442-20.006,72.448,0c20.006,20.006,20.006,52.442,0,72.448l-80.043,79.957l-0.683,0.768    l-27.989,27.819c-19.99,19.965-52.373,19.965-72.363,0c-13.472-12.679-34.486-12.679-47.957,0    c-5.833,5.845-9.35,13.606-9.899,21.845c-0.624,9.775,2.981,19.348,9.899,26.283c9.877,9.919,21.433,18.008,34.133,23.893    c1.792,0.853,3.584,1.536,5.376,2.304c1.792,0.768,3.669,1.365,5.461,2.048c1.792,0.683,3.669,1.28,5.461,1.792l5.035,1.365    c3.413,0.853,6.827,1.536,10.325,2.133c4.214,0.626,8.458,1.025,12.715,1.195h5.973h0.512l5.12-0.597    c1.877-0.085,3.84-0.512,6.059-0.512h2.901l5.888-0.853l2.731-0.512l4.949-1.024h0.939c20.961-5.265,40.101-16.118,55.381-31.403    l108.629-108.629C523.718,157.296,523.718,81.65,477.061,34.993z"
-                                        fill="#fff" data-original="#fff"></path>
-                                </g>
-                            </g>
-                        </g>
-                    </svg>
-    
-                </div>
+	<h1 id="alert-text" class="main-text font-semibold text-white alert-default"></h1>
+	<div id="application-information" class="hidden items-center justify-center w-full h-full bg-[rgba(0,0,0,.8)] absolute z-[100]">
+      <div id="application-information-box" class="bg-[#121212] rounded-[15px] p-8">
+          <svg id="menu-close-app-information" class="mr-3 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="white">
+            <path
+              d="M19.5 7.9C19.9971 7.9 20.4 7.49706 20.4 7C20.4 6.50294 19.9971 6.1 19.5 6.1L19.5 7.9ZM0.363604 6.3636C0.012132 6.71507 0.012132 7.28492 0.363604 7.63639L6.09117 13.364C6.44264 13.7154 7.01249 13.7154 7.36396 13.364C7.71543 13.0125 7.71543 12.4426 7.36396 12.0912L2.27279 7L7.36396 1.90883C7.71543 1.55736 7.71543 0.98751 7.36396 0.636038C7.01249 0.284566 6.44264 0.284566 6.09117 0.636038L0.363604 6.3636ZM19.5 6.1L1 6.1L1 7.9L19.5 7.9L19.5 6.1Z"
+              fill="white" />
+          </svg>
+          <div class="flex flex-col mt-6 gap-5 w-[250px]">
+            <div class="flex flex-row items-center">
+              <h1 class="main-text font-bold mr-3 text-white ">App version:</h1>
+              <h1 id="app-info-version" class="main-text text-white "></h1>
             </div>
-        </div>
+			<div class="h-[.5px] w-full bg-white opacity-10"></div>
+            <div class="flex items-center flex-wrap">
+              <h1 class="main-text font-bold mr-3 text-white ">Author:</h1>
+              <h1 id="app-info-author" class="main-text text-color-white cursor-pointer" onclick="window.open('https://github.com/mignaway','_blank')" style="text-decoration: underline; display: ;">mignaway</h1>
+            </div>
+			<div class="h-[.5px] w-full bg-white opacity-10"></div>
+            <div>
+              <h1 class="main-text font-bold mr-3 text-white inline">Description:</h1>
+			  <h1 id="app-info-description" class="main-text text-white inline">Epub Reader Application built with ElectronJS</h1>
+            </div>
+			<div class="h-[.5px] w-full bg-white opacity-10"></div>
+            <div class="flex-row flex-v-center">
+              <h1 class="main-text font-bold mr-3 text-white ">Git Repository:</h1>
+              <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer" onclick="window.open('https://github.com/mignaway/EpubReader','_blank')" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+                xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0" y="0" viewBox="0 0 512.092 512.092"
+                style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
+                <g>
+                  <g xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <path
+                        d="M312.453,199.601c-6.066-6.102-12.792-11.511-20.053-16.128c-19.232-12.315-41.59-18.859-64.427-18.859    c-31.697-0.059-62.106,12.535-84.48,34.987L34.949,308.23c-22.336,22.379-34.89,52.7-34.91,84.318    c-0.042,65.98,53.41,119.501,119.39,119.543c31.648,0.11,62.029-12.424,84.395-34.816l89.6-89.6    c1.628-1.614,2.537-3.816,2.524-6.108c-0.027-4.713-3.87-8.511-8.583-8.484h-3.413c-18.72,0.066-37.273-3.529-54.613-10.581    c-3.195-1.315-6.867-0.573-9.301,1.877l-64.427,64.512c-20.006,20.006-52.442,20.006-72.448,0    c-20.006-20.006-20.006-52.442,0-72.448l108.971-108.885c19.99-19.965,52.373-19.965,72.363,0    c13.472,12.679,34.486,12.679,47.957,0c5.796-5.801,9.31-13.495,9.899-21.675C322.976,216.108,319.371,206.535,312.453,199.601z"
+                        fill="#fff" data-original="#fff"></path>
+                    </g>
+                  </g>
+                  <g xmlns="http://www.w3.org/2000/svg">
+                    <g>
+                      <path
+                        d="M477.061,34.993c-46.657-46.657-122.303-46.657-168.96,0l-89.515,89.429c-2.458,2.47-3.167,6.185-1.792,9.387    c1.359,3.211,4.535,5.272,8.021,5.205h3.157c18.698-0.034,37.221,3.589,54.528,10.667c3.195,1.315,6.867,0.573,9.301-1.877    l64.256-64.171c20.006-20.006,52.442-20.006,72.448,0c20.006,20.006,20.006,52.442,0,72.448l-80.043,79.957l-0.683,0.768    l-27.989,27.819c-19.99,19.965-52.373,19.965-72.363,0c-13.472-12.679-34.486-12.679-47.957,0    c-5.833,5.845-9.35,13.606-9.899,21.845c-0.624,9.775,2.981,19.348,9.899,26.283c9.877,9.919,21.433,18.008,34.133,23.893    c1.792,0.853,3.584,1.536,5.376,2.304c1.792,0.768,3.669,1.365,5.461,2.048c1.792,0.683,3.669,1.28,5.461,1.792l5.035,1.365    c3.413,0.853,6.827,1.536,10.325,2.133c4.214,0.626,8.458,1.025,12.715,1.195h5.973h0.512l5.12-0.597    c1.877-0.085,3.84-0.512,6.059-0.512h2.901l5.888-0.853l2.731-0.512l4.949-1.024h0.939c20.961-5.265,40.101-16.118,55.381-31.403    l108.629-108.629C523.718,157.296,523.718,81.65,477.061,34.993z"
+                        fill="#fff" data-original="#fff"></path>
+                    </g>
+                  </g>
+                </g>
+              </svg>
+              
+            </div>
+          </div>
+      </div>
     </div>
-	<div id="droparea" class="w-100 h-100 gap-30 flex-column flex-all-centered">
+	<div id="droparea" class="w-full h-full gap-8 flex flex-col items-center justify-center">
 		<svg width="100" height="101" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M72.9167 21.3335H88.3625L72.9167 5.8877V21.3335ZM33.3333 64.0419C33.3146 62.8835 32.0792 62.9689 31.25 63.0002V65.0835C32.0792 65.1127 33.3146 65.2002 33.3333 64.0419Z" fill="white" fill-opacity="0.75"/>
 			<path d="M29.1666 4.66675C28.6141 4.66675 28.0841 4.88624 27.6934 5.27694C27.3027 5.66764 27.0833 6.19755 27.0833 6.75008V48.4167H66.6666C70.1124 48.4167 72.9166 51.2209 72.9166 54.6667V79.6667C72.9166 83.1126 70.1124 85.9167 66.6666 85.9167H27.0833V94.2501C27.0833 94.8026 27.3027 95.3325 27.6934 95.7232C28.0841 96.1139 28.6141 96.3334 29.1666 96.3334H87.4999C88.0525 96.3334 88.5824 96.1139 88.9731 95.7232C89.3638 95.3325 89.5832 94.8026 89.5832 94.2501V25.5001H70.8333C70.2807 25.5001 69.7508 25.2806 69.3601 24.8899C68.9694 24.4992 68.7499 23.9693 68.7499 23.4167V4.66675H29.1666Z" fill="white" fill-opacity="0.75"/>
 			<path d="M58.3333 64.0417C58.3146 62.8854 57.0792 62.9688 56.25 63V65.0834C57.0792 65.1125 58.3146 65.2 58.3333 64.0417ZM58.3333 70.2917C58.3146 69.1354 57.0792 69.2188 56.25 69.25V71.3334C57.0792 71.3625 58.3146 71.45 58.3333 70.2917Z" fill="white" fill-opacity="0.75"/>
 			<path d="M12.5 52.5835C11.9474 52.5835 11.4175 52.803 11.0268 53.1937C10.6361 53.5844 10.4166 54.1143 10.4166 54.6668V79.6668C10.4166 80.2194 10.6361 80.7493 11.0268 81.14C11.4175 81.5307 11.9474 81.7502 12.5 81.7502H66.6666C67.2192 81.7502 67.7491 81.5307 68.1398 81.14C68.5305 80.7493 68.75 80.2194 68.75 79.6668V54.6668C68.75 54.1143 68.5305 53.5844 68.1398 53.1937C67.7491 52.803 67.2192 52.5835 66.6666 52.5835H12.5ZM52.0833 60.9168C52.0833 60.3643 52.3028 59.8344 52.6935 59.4437C53.0842 59.053 53.6141 58.8335 54.1666 58.8335H57.2916C60.1645 58.8335 62.5 61.1689 62.5 64.0418C62.5 65.2147 62.1104 66.296 61.4562 67.1668C62.1104 68.0377 62.5 69.121 62.5 70.2918C62.5 73.1647 60.1645 75.5002 57.2916 75.5002H54.1666C53.6141 75.5002 53.0842 75.2807 52.6935 74.89C52.3028 74.4993 52.0833 73.9694 52.0833 73.4168V60.9168ZM39.5833 60.9168C39.5958 58.1939 43.7375 58.1897 43.75 60.9168V70.2918C43.75 70.5681 43.8597 70.833 44.0551 71.0284C44.2504 71.2237 44.5154 71.3335 44.7916 71.3335C45.0679 71.3335 45.3328 71.2237 45.5282 71.0284C45.7235 70.833 45.8333 70.5681 45.8333 70.2918V60.9168C45.8333 60.3643 46.0528 59.8344 46.4435 59.4437C46.8342 59.053 47.3641 58.8335 47.9166 58.8335C48.4692 58.8335 48.9991 59.053 49.3898 59.4437C49.7805 59.8344 50 60.3643 50 60.9168V70.2918C49.8208 77.1564 39.7625 77.1606 39.5833 70.2918V60.9168ZM27.0833 60.9168C27.0833 60.3643 27.3028 59.8344 27.6935 59.4437C28.0842 59.053 28.6141 58.8335 29.1666 58.8335H32.2916C39.1583 59.0147 39.1583 69.071 32.2916 69.2502H31.25V73.4168C31.2395 76.1377 27.0937 76.1439 27.0833 73.4168V60.9168ZM22.9166 58.8335C25.6416 58.8481 25.6416 62.9877 22.9166 63.0002H20.8333V65.0835H22.9166C25.6395 65.0939 25.6416 69.2397 22.9166 69.2502H20.8333V71.3335H22.9166C23.4692 71.3335 23.9991 71.553 24.3898 71.9437C24.7805 72.3344 25 72.8643 25 73.4168C25 73.9694 24.7805 74.4993 24.3898 74.89C23.9991 75.2807 23.4692 75.5002 22.9166 75.5002H18.75C18.1974 75.5002 17.6675 75.2807 17.2768 74.89C16.8861 74.4993 16.6666 73.9694 16.6666 73.4168V60.9168C16.6666 60.3643 16.8861 59.8344 17.2768 59.4437C17.6675 59.053 18.1974 58.8335 18.75 58.8335H22.9166Z" fill="white" fill-opacity="0.75"/>
 		</svg>
-		<span class="main-text text-color-white">Drop file here</span>	
-	</div>
+		<span class="main-text text-white">Drop file here</span>	
+	</div>	
     <div class="flex-column h-100">
         <div id="main-navbar">
             <div class="flex-row flex-v-center gap-30 no-drag">
