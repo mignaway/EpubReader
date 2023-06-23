@@ -35,21 +35,13 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 
 ## Recent Important Update
 
-### v1.0.3 (In Progress)
+### v1.0.3 
 
 - Epub folder moved to the user's roaming folder
 - Now you can directly drop the file in the application
 - Asar
 - General fixes
 - A lot of refactoring
-
-
-
-### v1.0.2
-
-- New __`website`__
-- __`Dictionary`__ feature (also with audio pronounce) - (Only in english)
-- Right click book __`Action menu`__ 
 
 ## Testing
 To clone locally this project you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer.

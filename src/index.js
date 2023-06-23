@@ -8,13 +8,6 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-
-autoUpdater.setFeedURL({
-  provider: "github",
-  owner: "mignaway",
-  repo: "EpubReader",
-});
-
 // NOT TO USE IN PRODUCTION
 Object.defineProperty(app, 'isPackaged', {
   get() {
@@ -125,18 +118,3 @@ app.on('activate', () => {
   }
 });
 
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
-
-autoUpdater.on("update-available", (info)=>{
-	mainWindow.webContents.send('updateAvailable',info)	
-})
-autoUpdater.on("update-not-available", (info)=>{
-	mainWindow.webContents.send('updateNotAvailable',info)	
-})
-autoUpdater.on("update-downloaded", (info)=>{
-	mainWindow.webContents.send('updateDownloaded',info)	
-})
-autoUpdater.on("error", (info)=>{
-	mainWindow.webContents.send('updateError',info)	
-})
