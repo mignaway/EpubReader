@@ -1,6 +1,6 @@
 {
   "name": "epub-reader",
-  "productName": "epub-reader",
+  "productName": "EpubReader",
   "version": "1.0.3",
   "description": "Epub Reader Application built with ElectronJS",
   "main": "src/index.js",
@@ -28,6 +28,7 @@
       ],
       "icon": "src/icon.ico"
     },
+	"asar": true,
     "nsis": {
       "oneClick": false,
       "installerIcon": "src/icon.ico",
@@ -42,8 +43,7 @@
       "!src/epubs/",
       "!src/assets/json/",
       "!readme.md"
-    ],
-    "asar": false
+    ]
   },
   "keywords": [],
   "author": {
