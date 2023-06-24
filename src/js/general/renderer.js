@@ -19,7 +19,7 @@ function activeDropFeature(){
 		$('#droparea').removeClass('active')
 		console.log(e)
 		for (const f of e.dataTransfer.files){
-			var fileExt = f.path.split('.').pop();
+			const fileExt = f.path.split('.').pop();
 			if(window.bookConfig.isAllowedExtension(fileExt)) {
 				addEpubBookHandler(f.path)
 			} else {

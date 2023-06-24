@@ -8,16 +8,6 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-// NOT TO USE IN PRODUCTION
-Object.defineProperty(app, 'isPackaged', {
-  get() {
-    return true;
-  }
-});
-
-autoUpdater.autoDownload = false;
-autoUpdater.autoInstallOnAppQuit = true;
-
 const createWindow = () => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -38,7 +28,7 @@ const createWindow = () => {
     },
   });
   // and load the index.html of the app.
-  mainWindow.loadFile(path.join(__dirname, 'pages/index.html'));
+  mainWindow.loadFile(path.join(__dirname, 'pages', 'index.html'));
 
   ipcMain.handle('appVersion', () => app.getVersion())
   ipcMain.handle('storePath', () => path.resolve(path.join(app.getPath('userData'),'localStorage')).split(path.sep).join("/"))
@@ -52,7 +42,7 @@ const createWindow = () => {
   mainWindow.webContents.on('did-finish-load', async () => {
     setTimeout(() => mainWindow.show(), 50); // HACK
   });
-  globalShortcut.register('f5', function () {
+	globalShortcut.register('f5', ()=> {
     mainWindow.reload()
   })
 
@@ -89,7 +79,7 @@ const createWindow = () => {
       console.log(err)
     })
   })
-  mainWindow.on('resize', function() {
+	mainWindow.on('resize', () => {
     mainWindow.webContents.send('updateMaximizeIcon', mainWindow.isMaximized());
   })
 
