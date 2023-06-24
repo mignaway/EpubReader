@@ -1,6 +1,5 @@
 const { app, BrowserWindow, globalShortcut, ipcMain, dialog, shell } = require('electron');
 const path = require('path');
-const { autoUpdater } = require("electron-updater")
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
 if (require('electron-squirrel-startup')) {
@@ -83,7 +82,6 @@ const createWindow = () => {
     mainWindow.webContents.send('updateMaximizeIcon', mainWindow.isMaximized());
   })
 
-  autoUpdater.checkForUpdates()
 };
 
 // This method will be called when Electron has finished

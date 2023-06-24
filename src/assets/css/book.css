@@ -27,14 +27,19 @@
 }
 
 #book-container {
-    padding: 40px 0;
+    padding: 40px 40px 0 40px;
     overflow: hidden;
     height: 100%;
     width: 100%;
     position: relative;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	gap: 50px;
 }
 #book-content-columns-wrapper {
-    height: 90%;
+    height: 100%;
     width: 85%;
     position: relative;
 }

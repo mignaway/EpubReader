@@ -60,6 +60,21 @@ $(window).on('load', function(){
     })
 });
 
+function loadLayoutHandler(layout) {
+	$('.loadLayoutIcon').removeClass('active')
+	switch(layout){
+		case 'scrolled':
+			loadBook({manager: 'continuous', flow: 'scrolled', width: '65%'});
+			$('#loadLayoutScrolled').addClass('active')
+			break;
+		default:
+
+			$('#loadLayoutDefault').addClass('active')
+			loadBook()
+			break;
+	}
+}
+
 function handleTypeFaceSelection() {
     $('#typeface-option').toggle()
 }

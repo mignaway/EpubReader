@@ -1,17 +1,5 @@
 $(window).on('load', function(){
     loadBook();
-    $('#previous-chapter-btn').on('click',async function(){
-        book_rendition.prev();
-        var current_cfi = book_rendition.currentLocation().start.cfi;
-        updateSavePagesButton(book_saved_pages, current_cfi)
-        updatePageNumber(current_cfi);
-    })
-    $('#next-chapter-btn').on('click', async function () {
-        book_rendition.next();
-        var current_cfi = book_rendition.currentLocation().start.cfi;
-        updateSavePagesButton(book_saved_pages, current_cfi)
-        updatePageNumber(current_cfi);
-    });
 })
 
 const MAX_FONT_SIZE = 130;
@@ -40,7 +28,17 @@ var keyListener = function (e) {
 
 };
 
-var loadBook = async function() {
+var loadBook = async function(styleSettings = null) {
+
+	// reset content for allowing updating layout preferences
+	$('#book-content-columns').empty()
+
+	const bookStyle = {
+		manager: styleSettings?.manager ?? 'default',
+		flow: styleSettings?.flow ?? 'paginated',
+		width: styleSettings?.width ?? '100%',
+	}
+
     // Get book code by url param
     epubCodeSearch = window.location.search.substring(1).split("=")[1];
 
@@ -56,7 +54,7 @@ var loadBook = async function() {
 
     // Epub settings
     book_epub = ePub(await window.appConfig.dirname() + "/epubs/" + epubCodeSearch + "/epub.epub", { openAs: "epub"})
-    book_rendition = book_epub.renderTo("book-content-columns", { manager: "default", width: "100%", height: "100%"});
+	book_rendition = book_epub.renderTo("book-content-columns", { manager: bookStyle.manager, flow: bookStyle.flow, width: bookStyle.width, height: "100%"});
     book_saved_pages = book_infos.savedPages;
 
 
@@ -67,9 +65,29 @@ var loadBook = async function() {
     }
 
     // Add book reading shortcut
-    book_rendition.on("keyup", keyListener);
-    document.addEventListener("keyup", keyListener, false);
+	if (bookStyle.flow === 'paginated'){
+		$('#previous-chapter-btn, #next-chapter-btn').show()
+		$('#previous-chapter-btn').on('click',async function(){
+			book_rendition.prev();
+			var current_cfi = book_rendition.currentLocation().start.cfi;
+			updateSavePagesButton(book_saved_pages, current_cfi)
+			updatePageNumber(current_cfi);
+		})
+		$('#next-chapter-btn').on('click', async function () {
+			book_rendition.next();
+			var current_cfi = book_rendition.currentLocation().start.cfi;
+			updateSavePagesButton(book_saved_pages, current_cfi)
+			updatePageNumber(current_cfi);
+		});
+		book_rendition.on("keyup", keyListener);
+		document.addEventListener("keyup", keyListener, false);
+	} else {
+		$('#previous-chapter-btn, #next-chapter-btn').hide()
 
+
+	}
+
+	
     book_epub.ready.then(function () {
         const stored = localStorage.getItem(book_epub.key() + '-locations');
         if (stored) {
@@ -383,7 +401,7 @@ async function loadBookStyleSettings(newStyleColor = null){
     if (current_style_settings.book.typeface.length > 0) $('#typeface-section-text').text(current_style_settings.book.typeface)
 
     // Group elements to change on initial style load
-    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1, #book-action-menu, .dictionary-audio-button')
+    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1, #book-action-menu, .dictionary-audio-button, #currentPagesContainer')
     var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup')
     var text_elements = $('#currentPages h1')
 
@@ -410,6 +428,8 @@ async function loadBookStyleSettings(newStyleColor = null){
             break;
     }
 }
+
+
 var checkNavbarFontSizeOpacity = function () {
     $('#settings-decrease-font-size').removeClass('op-5');
     $('#settings-increase-font-size').removeClass('op-5');

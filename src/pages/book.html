@@ -171,6 +171,21 @@
                                         <div id="page-color-style-brown" class="cursor-pointer" onclick="loadBookStyleSettings('brown');"></div>
                                     </div>
                                 </div>
+								<div class="flex-row flex-v-center" style="margin-top: 20px;">
+                                    <h1 class="main-text" style="margin-right: 20px">Layout:</h1>
+                                    <div class="flex-row flex-v-center flex-h-center" style="gap: 15px;">
+											<svg id="loadLayoutDefault" class="loadLayoutIcon active group/layout h-[40px] cursor-pointer" viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="loadLayoutHandler('default')">
+												<rect class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]" x="13.4131" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0"/>
+												<rect class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]" x="0.5" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0" />
+												<path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]" d="M22.7035 10.8933C22.8011 10.7956 22.8011 10.6373 22.7035 10.5397L21.1125 8.94872C21.0149 8.85109 20.8566 8.85109 20.7589 8.94872C20.6613 9.04636 20.6613 9.20465 20.7589 9.30228L22.1731 10.7165L20.7589 12.1307C20.6613 12.2283 20.6613 12.3866 20.7589 12.4843C20.8566 12.5819 21.0149 12.5819 21.1125 12.4843L22.7035 10.8933ZM17.6253 10.9665H22.5267V10.4665H17.6253V10.9665Z" fill="black" fill-opacity="0.5"/>
+												<path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]" d="M4.7443 10.5397C4.64667 10.6373 4.64667 10.7956 4.7443 10.8933L6.3353 12.4843C6.43293 12.5819 6.59122 12.5819 6.68885 12.4843C6.78648 12.3866 6.78648 12.2283 6.68885 12.1307L5.27463 10.7165L6.68885 9.30228C6.78648 9.20465 6.78648 9.04636 6.68885 8.94872C6.59122 8.85109 6.43293 8.85109 6.3353 8.94872L4.7443 10.5397ZM4.92108 10.9665H9.82247V10.4665H4.92108V10.9665Z" fill="black" fill-opacity="0.5"/>
+											</svg>
+											<svg id="loadLayoutScrolled" class="loadLayoutIcon group/layout h-[40px] cursor-pointer" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="loadLayoutHandler('scrolled')">
+												<rect class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]" x="1.41309" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0" stroke="#AAAAAA"/>
+												<path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]" d="M7.73631 13.8159C7.83394 13.9136 7.99223 13.9136 8.08986 13.8159L9.68085 12.225C9.77848 12.1273 9.77848 11.969 9.68085 11.8714C9.58322 11.7738 9.42493 11.7738 9.3273 11.8714L7.91309 13.2856L6.49887 11.8714C6.40124 11.7738 6.24295 11.7738 6.14532 11.8714C6.04769 11.969 6.04769 12.1273 6.14532 12.225L7.73631 13.8159ZM7.66309 6.81958V13.6392H8.16309V6.81958H7.66309Z" fill="black" fill-opacity="0.5"/>
+											</svg>
+									</div>
+                                </div>
                             </div>
                         </div>
                     </div>     
@@ -195,8 +210,8 @@
                 </svg>
             </div>
         </div>
-        <div id="book-container" class="flex-column">
-            <div class="flex-row flex-all-centered h-100 w-100 gap-5">
+        <div id="book-container">
+			<!-- <div class="flex-row flex-all-centered h-100 w-100 gap-5">-->
                 <svg id="previous-chapter-btn" class="cursor-pointer" width="16" height="30" viewBox="0 0 16 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <g clip-path="url(#clip0_5_60)">
                         <path
@@ -235,13 +250,13 @@
                         </clipPath>
                     </defs>
                 </svg>
-            </div>
-            <div class="w-100 flex-row flex-h-center">
+			<!-- </div>-->
+        </div>
+		<div id="currentPagesContainer" class="w-100 flex-row flex-h-center py-8">
                 <div id="currentPages" class="w-100 flex-row flex-h-center">
                     <h1 class="main-text"><span id="current_page_value" class="text-sb"></span> of <span id="total_page_value"></span></h1>
                 </div>
             </div>
-        </div>
 </body>
 
 </html>

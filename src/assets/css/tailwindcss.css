@@ -570,6 +570,10 @@ video {
   height: .5px;
 }
 
+.h-\[40px\] {
+  height: 40px;
+}
+
 .h-full {
   height: 100%;
 }
@@ -653,8 +657,21 @@ video {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.stroke-\[\#AAAAAA\] {
+  stroke: #AAAAAA;
+}
+
 .p-8 {
   padding: 2rem;
+}
+
+.py-8 {
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+.pt-8 {
+  padding-top: 2rem;
 }
 
 .text-center {
@@ -684,4 +701,20 @@ video {
 
 .filter {
   filter: var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow);
+}
+
+.group\/layout.active .group-\[\.active\]\/layout\:fill-\[\#1E69DB\]\/20 {
+  fill: rgb(30 105 219 / 0.2);
+}
+
+.group\/layout.active .group-\[\.active\]\/layout\:fill-\[\#E3B230\]\/20 {
+  fill: rgb(227 178 48 / 0.2);
+}
+
+.group\/layout.active .group-\[\.active\]\/layout\:stroke-\[\#1E69DB\] {
+  stroke: #1E69DB;
+}
+
+.group\/layout.active .group-\[\.active\]\/layout\:stroke-\[\#E3B230\] {
+  stroke: #E3B230;
 }
