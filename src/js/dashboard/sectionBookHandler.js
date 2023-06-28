@@ -17,8 +17,8 @@ $(window).on('load', async function () {
         var sort_value = $(this).attr("value");
         $('#section-book-current-sorting').data("sort",sort_value)
         $('#section-book-current-sorting').text($(this).text());
-        var books = await getBooksFromJson()
-        loadAll(books,sort_value);
+        var books = await window.bookConfig.getBooks()
+        loadAll(books);
     })
     $('body').on('mouseup', function () {
         $('#section-book-sortings-list').hide();

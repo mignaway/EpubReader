@@ -116,7 +116,7 @@ async function deleteEpubBookHandler(bookFolderName) {
 
 // Order a json object by modality
 async function orderBookModality(books_json, option) {
-
+	console.log(orderBookModality)
     var orderedBooks = null;
     switch (option.sortby) {
         case 'last_read':
