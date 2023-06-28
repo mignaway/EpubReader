@@ -12,7 +12,7 @@ var sortingSettings = { sortby: "last_read"}
 var loadAll = async function (books_json){
     // console.log(books_json)
     sortingSettings.sortby = $('#section-book-current-sorting').data('sort');
-    $('#hero-section-loading-animation').removeClass('loaded');
+    $('#hero-section-loading-animation').removeClass('hidden');
     const orderedBooks = await orderBookModality(books_json, sortingSettings)
     await loadHeroSection(orderedBooks)
     await loadBooksSection(orderedBooks.slice(0, 6))
@@ -20,7 +20,8 @@ var loadAll = async function (books_json){
 
 async function loadHeroSection(books_json) {
     if (books_json.length > 0) {
-        
+
+		// Get data from json
         const [title, author, bookYear, language, bookFolderName, coverPath, bookOpened] = [books_json[0].title ?? 'Undefined Title', 
                                                                                 books_json[0].author ?? 'Undefined Author', 
                                                                                 books_json[0].bookYear ?? 'Undefined', 
@@ -28,33 +29,36 @@ async function loadHeroSection(books_json) {
                                                                                 books_json[0].bookFolderName, 
                                                                                 books_json[0].coverPath,
                                                                                 books_json[0].lastPageOpened != null]
-        
+        // Get vibrant color of image 
         const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(bookFolderName,coverPath)
+		// Check cover exists and return path 
         const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(bookFolderName, coverPath)
 
         var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
         $('#hero-section-content')
             .html(`
-            <div id="hero-section-image-cover"><img src="${bookCover}"></div>
-            <div id="hero-section-book-infos" class="flex-column">
-              <h1 class="main-text text-color-white text-b">${title}</h1>
-              <h2 class="main-text text-color-white">${author}</h2>
-              <h3 class="main-text text-color-white op-5">${bookYear} Edition - ${language}</h3>
-              <a href="book.html?code=${bookFolderName}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button" style="background-color: rgb(${dominantRGBValue})">${keepReadingText}</a>
+            <div id="hero-section-image-cover" class="flex justify-center items-center overflow-hidden select-none w-[140px] h-[213px]">
+				<img class="w-full h-full" src="${bookCover}"></div>
+            <div id="hero-section-book-infos" class="flex flex-col ml-5 flex-1">
+              <h1 class="main-text w-full line-clamp-3 overflow-hidden !text-[24px] mb-1 text-white font-bold">${title}</h1>
+              <h2 class="main-text !text-[16px] mb-1 text-white">${author}</h2>
+              <h3 class="main-text !text-[14px] mb-1 text-white opacity-50">${bookYear} Edition - ${language}</h3>
+              <a href="book.html?code=${bookFolderName}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button w-full mt-auto text-center decoration-none" style="background-color: rgb(${dominantRGBValue})">${keepReadingText}</a>
             </div>
         `)
         $('#hero-section-image-background').css('background-image', `linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(${bookCover}`);
     } else {
-        $('#hero-section-content').html('<h2 class="main-text text-color-white text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>')
+        $('#hero-section-content').html('<h2 class="main-text text-white text-center">No preview available.<br>Add books by clicking the "+" button</h2>')
         $('#hero-section-image-background').css({ 'background-image': 'none', 'background-color': 'rgb(20, 20, 20)' });
     }
-    $('#hero-section-loading-animation').addClass('loaded')
+    $('#hero-section-loading-animation').addClass('hidden')
 }
 
 async function loadBooksSection(books_json) {
     // Reset book preview section
     $('#section-book-preview').html('') 
     if (books_json.length > 0) {
+
         $('.circle-loading-logo').css('opacity', '1');
         const dominantRGBValue = await window.bookConfig.getVibrantColorFromImage(books_json[0].bookFolderName,books_json[0].coverPath)
         for(var i = 0; i <= 5;i++) {
@@ -67,17 +71,17 @@ async function loadBooksSection(books_json) {
                 const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(books_json[i].bookFolderName, books_json[i].coverPath)
 
                 $('#section-book-preview').append(`
-                <div onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].bookFolderName}'" class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].bookFolderName}">
-                    <div class="book-box-informations overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                        <h1 class="main-text text-color-white text-b">${title}</h1>
-                        <h2 class="main-text text-color-white">${author}</h2>
-                        <h3 class="main-text text-color-white op-5">${language}</h3>
+                <div class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].bookFolderName}" onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].bookFolderName}'">
+                    <div class="book-box-informations absolute p-5 bg-black/90 gap-2.5 transition opacity-0 z-[5] overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
+                        <h1 class="main-text text-[17px] w-full line-clamp-5 text-white font-bold">${title}</h1>
+                        <h2 class="main-text text-[15px] text-white">${author}</h2>
+                        <h3 class="main-text text-[13px] text-white opacity-50">${language}</h3>
                     </div>
-                    <div class="book-box-image overflow-hidden w-100 h-100">
-                        <img src="${bookCover}">
+                    <div class="book-box-image overflow-hidden w-full h-full">
+                        <img class="w-full h-full" src="${bookCover}">
                     </div>
                     <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                        <h1 class="main-text text-color-white text-b">NEW</h1>
+                        <h1 class="main-text text-white font-bold">NEW</h1>
                     </div>
                     <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                         <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -90,7 +94,7 @@ async function loadBooksSection(books_json) {
                 $('#section-book-preview').append('<div class="book-box"></div>')
             }
         }
-        $('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text text-b text-decoration-none">All Books -></a></div>')
+		$('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text font-bold transition py-5 px-[30px] rounded-[10px] hover:bg-black hover:text-white">All Books -></a></div>')
     }
     $('.circle-loading-logo').css('opacity', '0');
 }

@@ -17,7 +17,7 @@
   </head>
   <body>
     <h1 id="alert-text" class="main-text font-semibold text-white alert-default"></h1>
-	<div id="application-information" class="hidden items-center justify-center w-full h-full bg-[rgba(0,0,0,.8)] absolute z-[100]">
+	<div id="application-information" class="hidden flex items-center justify-center w-full h-full bg-[rgba(0,0,0,.8)] absolute z-[100]">
       <div id="application-information-box" class="bg-[#121212] rounded-[15px] p-8">
           <svg id="menu-close-app-information" class="mr-3 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="white">
             <path
@@ -76,18 +76,18 @@
 		</svg>
 		<span class="main-text text-white">Drop file here</span>	
 	</div>
-    <div id="main-navbar">
-      <div class="flex-row flex-v-center gap-30 no-drag">
-        <div class="flex-column" style="position: relative;">
-          <div id="settings-menu-open" class="flex-row flex-v-center cursor-pointer">
-            <h1 class="main-text text-color-white m-r-5">Settings</h1>
+    <div id="main-navbar" class="absolute p-7 flex justify-between items-center z-[50] w-full select-none">
+      <div class="flex flex-row items-center gap-7 no-drag">
+        <div class="flex flex-col relative">
+          <div id="settings-menu-open" class="flex flex-row items-center cursor-pointer">
+            <h1 class="main-text text-white mr-1">Settings</h1>
             <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
               <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="white" stroke-linecap="round" />
               <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="white" stroke-linecap="round" />
             </svg>
           </div>
-          <div id="settings-menu">
-              <div id="menu-open-app-information" class="flex-row flex-v-center settings-menu-action">
+          <div id="settings-menu" class="p-6 mt-10 hidden absolute z-[10] flex flex-col gap-7 rounded-md bg-[#121212] shadow-md overflow-hidden w-[250px]">
+              <div id="menu-open-app-information" class="flex flex-row items-center transition opacity-80 hover:opacity-100 cursor-pointer">
                 <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
                   xmlns:svgjs="http://svgjs.com/svgjs" width="25" height="25" x="0" y="0" viewBox="0 0 45.999 45.999"
                   style="enable-background:new 0 0 512 512" xml:space="preserve" class="">
@@ -101,17 +101,17 @@
                     </g>
                   </g>
                 </svg>
-                <h1 class="main-text text-color-white m-l-10">App information</h1>
+                <h1 class="main-text text-white ml-2">App information</h1>
               </div>
           </div>
         </div>
         <div class="vertical-divider-05 bg-white"></div>
-        <div class="flex-row flex-v-center gap-30">
+        <div class="flex flex-row items-center gap-7">
           <svg id="add-books-button" class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line x1="19" y1="10" x2="1" y2="10" stroke="white" stroke-width="2" stroke-linecap="round" />
             <line x1="10" y1="19" x2="10" y2="1" stroke="white" stroke-width="2" stroke-linecap="round" />
           </svg>
-          <svg id="edit-books-button" class="cursor-pointer" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+          <svg id="edit-books-button" class="fill-white [&.currently-editing]:fill-[var(--primary-red-color)] cursor-pointer" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
             <g clip-path="url(#clip0_15_16)">
             <path d="M12.3511 3.35919L1.3468 14.3643C1.29143 14.4198 1.25146 14.4899 1.23242 14.5653L0.0127046 19.461C-0.0237807 19.6083 0.0195258 19.765 0.127078 19.8726C0.208456 19.954 0.31934 19.999 0.432761 19.999C0.467502 19.999 0.503035 19.9947 0.537617 19.986L5.43331 18.7661C5.50961 18.7471 5.57893 18.7073 5.63429 18.6519L16.6395 7.64764L12.3511 3.35919Z" />
             <path d="M19.3658 1.8587L18.1409 0.633746C17.3222 -0.184953 15.8953 -0.184159 15.0775 0.633746L13.577 2.13424L17.8653 6.42254L19.3658 4.92204C19.7748 4.51325 20 3.96914 20 3.39045C20 2.81176 19.7748 2.26765 19.3658 1.8587Z" />
@@ -124,53 +124,53 @@
           </svg>
         </div>
       </div>
-      <div class="flex-row flex-v-center gap-15 no-drag">
-        <svg id="minimize-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 15 1" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <div class="flex flex-row items-center gap-4 no-drag">
+        <svg id="minimize-app-icon" class="stroke-white hover:stroke-white/70 cursor-pointer" width="20" height="20" viewBox="0 0 15 1" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="1.5" stroke-linecap="round" />
         </svg>
-        <svg id="close-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <svg id="close-app-icon" class="stroke-white hover:stroke-[var(--primary-red-color)] cursor-pointer" width="20" height="20" viewBox="0 0 17 17" fill="none" xmlns="http://www.w3.org/2000/svg">
           <line x1="15.1422" y1="2.06066" x2="2.06067" y2="15.1421" stroke-width="1.5" stroke-linecap="round" />
           <line x1="14.7886" y1="15.1422" x2="1.70711" y2="2.06067" stroke-width="1.5" stroke-linecap="round" />
         </svg>
       </div>
     </div>
-    <div id="hero-section-book" class="flex-all-centered">
-      <div id="hero-section-loading-animation" class="h-100 w-100 flex-all-centered"><div class="loading-animation"></div></div>
-      <div id="hero-section-content" class="p-absolute flex-row flex-h-center">
+    <div id="hero-section-book" class="h-[400px] z-10 w-full relative overflow-hidden flex justify-center items-center">
+      <div id="hero-section-loading-animation" class="h-full w-full flex justify-center items-center bg-[rgba(0,0,0,.7)] absolute z-[50] transition"><div class="loading-animation"></div></div>
+      <div id="hero-section-content" class="absolute z-10 w-[450px] flex flex-row justify-center">
         <!-- dynamic content-->
       </div>
-      <div id="hero-section-image-background"></div>
+      <div id="hero-section-image-background" class="h-[110%] w-[110%] m-[-2%] absolute transition blur-md bg-[#141414] bg-cover bg-center"></div>
     </div>
-    <div id="section-book">
-      <div class="flex-row flex-space-between">
-        <div class="flex-row flex-v-center">
-          <div class="flex-row flex-v-center">
-            <h1 class="main-text m-r-5">Sort by: </h1>
-            <div class="flex-column">
-              <div id="section-book-choose-sorting" class="flex-row flex-v-center">
-                <h1 id="section-book-current-sorting" class="main-text text-b m-r-5" data-sort="last_read">Last Read</h1>
+    <div id="section-book" class="py-6 px-10">
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-row items-center">
+          <div class="flex flex-row items-center">
+            <h1 class="main-text mr-1">Sort by: </h1>
+            <div class="flex flex-col">
+              <div id="section-book-choose-sorting" class="flex flex-row items-center cursor-pointer">
+                <h1 id="section-book-current-sorting" class="main-text font-bold mr-1" data-sort="last_read">Last Read</h1>
                 <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
                   <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
                 </svg>
               </div>
-              <ul id="section-book-sortings-list">
-                <li class="main-text text-b" value="last_read">Last Read</li>
-                <li class="main-text text-b" value="alphabetically">Alphabetically</li>
+              <ul id="section-book-sortings-list" class="p-0 mt-8 list-none hidden absolute z-10 rounded-md bg-white shadow-[0_0_6px_1px_rgba(0,0,0,.1)] overflow-hidden">
+                <li class="main-text font-bold py-2.5 px-5 transition hover:bg-[#ebebeb] cursor-pointer last-of-type:border-[1px_solid_rgba(0,0,0,0.1)]" value="last_read">Last Read</li>
+                <li class="main-text font-bold py-2.5 px-5 transition hover:bg-[#ebebeb] cursor-pointer last-of-type:border-[1px_solid_rgba(0,0,0,0.1)]" value="alphabetically">Alphabetically</li>
                 <!-- <li class="main-text text-b" value="last_opened">Last Opened</li> -->
               </ul>
             </div>
           </div>
           <div class="circle-loading-logo"></div>
         </div>
-        <div class="flex-row flex-v-center gap-15">
-          <svg id="section-book-show-information" width="21" height="19" viewBox="0 0 21 19" xmlns="http://www.w3.org/2000/svg">
+        <div class="flex flex-row items-center gap-3.5">
+          <svg id="section-book-show-information" class="stroke-[#717171] cursor-pointer opacity-40 [&.active]:opacity-100" width="21" height="19" viewBox="0 0 21 19" xmlns="http://www.w3.org/2000/svg">
             <line x1="1" y1="1" x2="19.4444" y2="1" stroke-width="2" stroke-linecap="round" />
             <line x1="1" y1="6.66666" x2="19.4444" y2="6.66666" stroke-width="2" stroke-linecap="round" />
             <line x1="1" y1="12.3333" x2="19.4444" y2="12.3333" stroke-width="2" stroke-linecap="round" />
             <line x1="1" y1="18" x2="19.4444" y2="18" stroke-width="2" stroke-linecap="round" />
           </svg>
-          <svg id="section-book-hide-information" width="19" height="19" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
+          <svg id="section-book-hide-information" class="fill-[#717171] cursor-pointer opacity-40 [&.active]:opacity-100" width="19" height="19" viewBox="0 0 19 19" xmlns="http://www.w3.org/2000/svg">
             <rect width="8.44444" height="8.44444" rx="2.11111"  />
             <rect y="10.5555" width="8.44444" height="8.44444" rx="2.11111" />
             <rect x="10.5557" y="10.5555" width="8.44444" height="8.44444" rx="2.11111" />

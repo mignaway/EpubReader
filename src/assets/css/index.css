@@ -1,108 +1,3 @@
-#main-navbar {
-  position: absolute;
-  padding: 3vh;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  z-index: 50;
-  width: 100%;
-  -webkit-user-select: none;
-   user-select: none;
-  -webkit-app-region: drag;
-}
-
-#close-app-icon,#minimize-app-icon {
-  stroke: white;
-  transition: stroke .2s;
-}
-#close-app-icon:hover {
-  stroke: var(--primary-red-color) !important;
-}
-#minimize-app-icon:hover {
-  stroke: rgba(255,255,255,0.7) !important;
-}
-#hero-section-content {
-  z-index: 10;
-  width: 450px;
-}
-
-#hero-section-book {
-  height: 400px;
-  width: 100%;
-  overflow: hidden;
-  position: relative;
-}
-#hero-section-image-cover {
-  width: 140px;
-  height: 213px;
-  overflow: hidden;
-  user-select: none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-#hero-section-image-cover img {
-  height: 100%;
-  width: 100%;
-}
-#hero-section-book h1,#hero-section-book h2,#hero-section-book h3 {
-  margin-bottom: 5px;
-}
-#hero-section-book h1 {
-  font-size: 24px !important; 
-}
-#hero-section-book h2 {
-  font-size: 16px !important; 
-}
-#hero-section-book h3 {
-  font-size: 14px !important; 
-}
-#hero-section-image-background {
-  height: 110%;
-  width: 110%;
-  background-color: rgb(20, 20, 20);
-  background-size: cover;
-  background-position: 50% 50%;
-  filter: blur(10px);
-  margin: -2%;
-  position: absolute;
-  transition: all .3s;
-}
-#keep-reading-button  {
-  width: 100%;
-  margin-top: auto;
-  text-align: center;
-  text-decoration: none;
-}
-#hero-section-book-infos {
-  margin-left: 20px;
-  flex: 1;
-}
-#hero-section-book-infos h1 {
-  width: 100%;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 3;
-  -webkit-box-orient: vertical;
-}
-
-#hero-section-loading-animation {
-  background-color: rgba(0, 0, 0, .7);
-  position: absolute;
-  z-index: 50;
-  transition: opacity .3s;
-}
-#hero-section-loading-animation.loaded {
-  display: none;
-}
-
-/* ------------------------------------- */
-
-
-#section-book {
-  padding: 25px 50px;
-}
-
 #section-book .book-box {
   display: flex;
   align-items: center;
@@ -115,10 +10,6 @@
 #section-book .book-box.not-empty {
   border: 1px solid rgba(0, 0, 0, 0.08);
   cursor: pointer;
-}
-#section-book .book-box img {
-  width: 100%;
-  height: 100%;
 }
 #section-book .book-delete-icon {
   position: absolute;
@@ -165,12 +56,6 @@
   /* display: flex; */
   opacity: 1 !important;
 }
-#edit-books-button {
-  fill: white;
-}
-#edit-books-button.currently-editing {
-  fill: var(--primary-red-color)
-}
 
 @keyframes shake {
   0% { transform: translate(1px, 1px) rotate(0deg); }
@@ -202,43 +87,6 @@
   background-color: black;
   color: white;
 }
-.book-box-informations {
-  position: absolute;
-  padding: 2vh;
-  background-color: rgba(0, 0, 0, .9);
-  gap: 1vh;
-  transition: opacity .3s;
-  opacity: 0;
-  z-index: 5;
-}
-.book-box-informations h1 {
-  font-size: 17px;
-  width: 100%;
-  overflow: hidden;
-  display: -webkit-box;
-  -webkit-line-clamp: 5;
-  -webkit-box-orient: vertical;
-}
-.book-box-informations h2 {
-  font-size: 15px;
-}
-.book-box-informations h3 {
-  font-size: 13px;
-}
-#section-book-show-information,#section-book-hide-information {
-  cursor: pointer;
-  opacity: .4;
-}
-#section-book-show-information {
-  stroke: #717171;
-}
-#section-book-hide-information {
-  fill: #717171;
-}
-#section-book-show-information.active,#section-book-hide-information.active {
-  opacity: 1;
-}
-
 #section-book-filter-selection {
   border: none;
   cursor: pointer;
@@ -247,30 +95,6 @@
   outline: none;
 }
 
-#section-book-choose-sorting {
-  cursor: pointer;
-}
-
-#section-book-sortings-list {
-  padding: 0;
-  margin-top: 30px;
-  list-style: none;
-  display: none;
-  position: absolute;
-  z-index: 10;
-  border-radius: 5px;
-  background-color: white;
-  box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);
-  overflow: hidden;
-}
-#section-book-sortings-list li {
-  padding: 10px 20px;
-  transition: all .3s;
-  cursor: pointer;
-}
-#section-book-sortings-list li:hover {
-  background-color: rgb(235, 235, 235) !important;
-}
 #section-book-sortings-list li:not(:last-of-type) {
   border-bottom: 1px solid rgba(0,0,0,.1);
 }

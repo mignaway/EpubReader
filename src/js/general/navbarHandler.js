@@ -19,14 +19,14 @@ $(window).on('load', async function () {
         window.appConfig.send('openBookChooserDialog')
     })
     $('#settings-menu-open').on('click', function(){
-        $('#settings-menu').toggle();
+        $('#settings-menu').toggleClass('hidden');
     })
     $("body").on('click', function (e) {
         // iframe click doesn't work, need to be added/fixed
         if (!$(e.target).is('#settings-menu-open') && // Check clicking popup icon
             !$(e.target).parents('#settings-menu-open').length &&
             $(e.target).closest($('#settings-menu')).length == 0) { // Check clicking inside of popup
-            $('#settings-menu').hide();
+            $('#settings-menu').addClass('hidden');
         }
     });
     window.appConfig.on('updateMaximizeIcon', async function(_, isMaximized){
@@ -40,11 +40,11 @@ $(window).on('load', async function () {
         
     })
     $('#menu-open-app-information').on('click', function(){
-        $('#application-information').css("display","flex");
-        $('#settings-menu').hide();
+        $('#application-information').removeClass('hidden');
+        $('#settings-menu').addClass('hidden');
     })
     $('#menu-close-app-information').on('click', function () {
-        $('#application-information').css("display", "none");
+        $('#application-information').addClass('hidden');
     })
 
     // preload 
