@@ -36,13 +36,13 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 
 ## Recent Important Update
 
-### v1.0.4 (Developing)
+### v1.0.4 (Current developing version)
 
 - Update feature
 - Added multiple book layouts (paginated, scrolling)
 - General fixes from previous version
 
-### v1.0.3 (Current)
+### v1.0.3 (Last version)
 
 - Epub folder moved to the user's roaming folder
 - Now you can directly drop the file in the application
