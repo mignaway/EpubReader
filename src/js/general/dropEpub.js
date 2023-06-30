@@ -17,7 +17,6 @@ function activeDropFeature(){
 		e.stopPropagation()
 		e.preventDefault()
 		$('#droparea').removeClass('active')
-		console.log(e)
 		for (const f of e.dataTransfer.files){
 			const fileExt = f.path.split('.').pop();
 			if(window.bookConfig.isAllowedExtension(fileExt)) {
