@@ -137,80 +137,61 @@
         </svg>
       </div>
     </div>
-        <div class="flex-row h-100 w-100">
-            <div id="sidebar-settings" class="flex-column h-100">
-                <a href="index.html" id="back-to-dashboard" class="flex-row flex-v-center cursor-pointer">
-                    <svg class="m-r-10" xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="none">
+        <div class="flex flex-row h-full w-full">
+            <div id="sidebar-settings" class="w-[300px] p-7 border-r-[0.5px] border-[rgba(0,0,0,0.1)] flex flex-col h-full">
+                <a href="index.html" id="back-to-dashboard" class="flex flex-row items-center opacity-50 hover:opacity-100 transition cursor-pointer">
+                    <svg class="mr-2.5" xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="none">
                         <path
                             d="M19.5 7.9C19.9971 7.9 20.4 7.49706 20.4 7C20.4 6.50294 19.9971 6.1 19.5 6.1L19.5 7.9ZM0.363604 6.3636C0.012132 6.71507 0.012132 7.28492 0.363604 7.63639L6.09117 13.364C6.44264 13.7154 7.01249 13.7154 7.36396 13.364C7.71543 13.0125 7.71543 12.4426 7.36396 12.0912L2.27279 7L7.36396 1.90883C7.71543 1.55736 7.71543 0.98751 7.36396 0.636038C7.01249 0.284566 6.44264 0.284566 6.09117 0.636038L0.363604 6.3636ZM19.5 6.1L1 6.1L1 7.9L19.5 7.9L19.5 6.1Z"
                             fill="black" />
                     </svg>
-                    <h1 class="main-text text-sb">Back to dashboard</h1>
+                    <h1 class="main-text font-semibold">Back to dashboard</h1>
                 </a>
-                <div id="search-bar-container">
-                    <div id="search-bar" class="flex-row flex-v-center">
-                        <svg width="17" height="17" viewBox="0 0 21 20" fill="black" fill-opacity="0.75" xmlns="http://www.w3.org/2000/svg">
+                <div id="search-bar-container" class="bg-[#F3F3F3] py-4 px-5 rounded-md m-0 mt-7">
+                    <div id="search-bar" class="flex flex-row gap-4 items-center">
+                        <svg class="min-w-[17px] min-h-[17px]" width="17" height="17" viewBox="0 0 21 20" fill="black" fill-opacity="0.75" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" clip-rule="evenodd"
                                 d="M14.6071 12.8987L20.0928 18.2787C20.2856 18.468 20.3939 18.7246 20.3938 18.9921C20.3937 19.2596 20.2853 19.5161 20.0923 19.7052C19.8994 19.8943 19.6377 20.0005 19.3649 20.0004C19.0922 20.0003 18.8306 19.894 18.6378 19.7047L13.1521 14.3247C11.5122 15.5704 9.45007 16.1566 7.38514 15.9641C5.32021 15.7716 3.40762 14.8148 2.03646 13.2884C0.665293 11.7619 -0.0614488 9.78056 0.00407483 7.74729C0.0695985 5.71402 0.922466 3.7816 2.38918 2.34315C3.85589 0.904695 5.82626 0.0682577 7.89947 0.00399633C9.97267 -0.0602651 11.993 0.652477 13.5494 1.99723C15.1058 3.34198 16.0814 5.21772 16.2777 7.24287C16.474 9.26802 15.8763 11.2905 14.6061 12.8987H14.6071ZM8.1579 13.9997C9.78046 13.9997 11.3366 13.3676 12.4839 12.2424C13.6312 11.1172 14.2758 9.59104 14.2758 7.99974C14.2758 6.40845 13.6312 4.88232 12.4839 3.7571C11.3366 2.63189 9.78046 1.99974 8.1579 1.99974C6.53534 1.99974 4.97924 2.63189 3.83192 3.7571C2.6846 4.88232 2.04004 6.40845 2.04004 7.99974C2.04004 9.59104 2.6846 11.1172 3.83192 12.2424C4.97924 13.3676 6.53534 13.9997 8.1579 13.9997V13.9997Z"
                              />
                         </svg>
-                        <div class="vertical-divider-05 bg-black" style="opacity: .1"></div>
-                        <input id="search-bar-input" type="text" onkeyup="handleSearchBarChange(this.value)" placeholder="Search books..." />
+                        <div class="w-[.5px] h-[20px] bg-black opacity-10"></div>
+                        <input id="search-bar-input" class="main-text bg-transparent text-base w-full flex-1" type="text" onkeyup="handleSearchBarChange(this.value)" placeholder="Search books..." />
                     </div>
                 </div>
-                <div id="sorting-settings" class="flex-column">
-                    <h1 class="main-text text-giant text-sb">Sorting</h1>
-                    <div class="sorting-sorting-selection flex-row flex-v-center">
-                        <h1 class="main-text m-r-10" style="white-space: nowrap;">Sort By:</h1>
-                        <div class="flex-column">
-                            <div class="sorting-settings-choose flex-row flex-v-center">
-                                <h1 id="sorting-settings-current-sortby" class="sorting-settings-current-text main-text text-b m-r-5" data-sort="last_read">Last Read</h1>
+                <div id="sorting-settings" class="flex flex-col py-7 gap-7">
+                    <h1 class="main-text text-2xl font-semibold">Sorting</h1>
+                    <div class="flex flex-row items-center">
+                        <h1 class="main-text mr-2.5 whitespace-nowrap">Sort By:</h1>
+                        <div class="flex flex-col">
+                            <div class="sorting-settings-choose cursor-pointer py-2.5 px-5 rounded-[5px] bg-[#F3F3F3] flex flex-row items-center">
+                                <h1 id="sorting-settings-current-sortby" class="sorting-settings-current-text main-text font-bold mr-1" data-sort="last_read">Last Read</h1>
                                 <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                                     <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
                                     <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
                                 </svg>
                             </div>
-                            <ul class="sorting-settings-list" data-settings="sortby">
-                                <li class="main-text text-b" value="last_read">Last Read</li>
-                                <li class="main-text text-b" value="alphabetically">Alphabetically</li>
-                                <!-- <li class="main-text text-b" value="last_opened">Last Opened</li> -->
+                            <ul class="sorting-settings-list p-0 mt-12 list-none hidden absolute z-10 rounded-[5px] bg-white shadow-[0_0_6px_1px_rgba(0,0,0,.1)] overflow-hidden" data-settings="sortby">
+                                <li class="main-text font-bold py-2.5 px-5 transition cursor-pointer hover:bg-[#EBEBEB]" value="last_read">Last Read</li>
+                                <li class="main-text font-bold py-2.5 px-5 transition cursor-pointer hover:bg-[#EBEBEB]" value="alphabetically">Alphabetically</li>
                             </ul>
                         </div>
                     </div>
-                    <!-- <div class="sorting-sorting-selection flex-row flex-v-center">
-                        <h1 class="main-text m-r-10">Filter:</h1>
-                        <div class="flex-column">
-                            <div class="sorting-settings-choose flex-row flex-v-center">
-                                <h1 id="sorting-settings-current-filter" class="sorting-settings-current-text main-text text-b m-r-5"
-                                    data-sort="none">None</h1>
-                                <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
-                                    <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
-                                </svg>
-                            </div>
-                            <ul class="sorting-settings-list" data-settings="filter">
-                                <li class="main-text text-b" value="none">None</li>
-                                <li class="main-text text-b" value="read">Read</li>
-                                <li class="main-text text-b" value="not_read">Not Read</li>
-                            </ul>
-                        </div>
-                    </div> -->
                     <button id="sorting-apply-btn" class="primary-button bg-black">Apply changes</button>
                 </div>
             </div>
-            <div id="books-section" class="flex-column">
+            <div id="books-section" class="flex flex-col pt-7 px-7 relative flex-1 overflow-hidden">
                 <!-- <div id="section-book-loading-animation" class="h-100 w-100 flex-all-centered"><div class="loading-animation"></div></div> -->
-                <div id="section-book-information-actions" class="flex-row w-100">
+                <div id="section-book-information-actions" class="flex flex-row w-full justify-between">
                     <div class="circle-loading-logo"></div>
-                    <div class="flex-row flex-v-center gap-15">
-                        <svg id="section-book-show-information" width="21" height="19" viewBox="0 0 21 19"
+                    <div class="flex flex-row items-center gap-3.5">
+                        <svg id="section-book-show-information" class="cursor-pointer opacity-40 stroke-[#717171] [&.active]:opacity-100" width="21" height="19" viewBox="0 0 21 19"
                             xmlns="http://www.w3.org/2000/svg">
                             <line x1="1" y1="1" x2="19.4444" y2="1" stroke-width="2" stroke-linecap="round" />
                             <line x1="1" y1="6.66666" x2="19.4444" y2="6.66666" stroke-width="2" stroke-linecap="round" />
                             <line x1="1" y1="12.3333" x2="19.4444" y2="12.3333" stroke-width="2" stroke-linecap="round" />
                             <line x1="1" y1="18" x2="19.4444" y2="18" stroke-width="2" stroke-linecap="round" />
                         </svg>
-                        <svg id="section-book-hide-information" width="19" height="19" viewBox="0 0 19 19"
+                        <svg id="section-book-hide-information" class="cursor-pointer opacity-40 fill-[#717171] [&.active]:opacity-100" width="19" height="19" viewBox="0 0 19 19"
                             xmlns="http://www.w3.org/2000/svg">
                             <rect width="8.44444" height="8.44444" rx="2.11111" />
                             <rect y="10.5555" width="8.44444" height="8.44444" rx="2.11111" />
@@ -219,7 +200,9 @@
                         </svg>
                     </div>
                 </div>
-                <div id="book-section-grid" class="flex-1"></div>
+                <div id="book-section-grid" class="overflow-hidden pt-2.5 pb-7 px-5 mt-6 mb-24 mx-0 flex flex-wrap overflow-y-auto flex-1">
+					<!-- dynamic content-->
+				</div>
             </div>
         </div>
     </div>

@@ -1,91 +1,11 @@
 body {
     overflow: hidden;
 }
-:focus {
-    outline: none;
-}
-
-#sidebar-settings {
-    width: 300px;
-    padding: 30px;
-    border-right: .5px solid rgba(0, 0, 0, 0.1);
-}
-#back-to-dashboard {
-    opacity: .5;
-    text-decoration: none;
-    transition: opacity .3s;
-}
-#back-to-dashboard:hover {
-    opacity: 1;
-}
-
-#sorting-settings {
-    padding: 30px 0;
-    gap: 20px;
-}
-
-.sorting-settings-choose {
-    cursor: pointer;
-    padding: 10px 20px;
-    border-radius: 5px;
-    background-color: #F3F3F3;
-}
-
-.sorting-settings-list {
-    padding: 0;
-    margin-top: 40px;
-    list-style: none;
-    display: none;
-    position: absolute;
-    z-index: 10;
-    border-radius: 5px;
-    background-color: white;
-    box-shadow: 0px 0px 5px 3px rgba(0, 0, 0, .1);
-    overflow: hidden;
-}
-
-.sorting-settings-list li {
-    padding: 10px 20px;
-    transition: all .3s;
-    cursor: pointer;
-}
-
-.sorting-settings-list li:hover {
-    background-color: rgb(235, 235, 235) !important;
-}
 
 .sorting-settings-list li:not(:last-of-type) {
     border-bottom: 1px solid rgba(0, 0, 0, .1);
 }
-/* -------------------------------- */
 
-#books-section {
-    padding: 30px 30px 0 30px;
-    position: relative;
-    flex: 1;
-    overflow: hidden;
-}
-#section-book-information-actions {
-    justify-content: space-between;
-}
-#section-book-show-information,
-#section-book-hide-information {
-    cursor: pointer;
-    opacity: .4;
-}
-
-#section-book-show-information {
-    stroke: #717171;
-}
-
-#section-book-hide-information {
-    fill: #717171;
-}
-
-#section-book-show-information.active,
-#section-book-hide-information.active {
-    opacity: 1;
-}
 #book-section-grid::-webkit-scrollbar {
     width: 7px;
     border-radius: 10px;
@@ -105,21 +25,6 @@ body {
     background: #555;
 }
 
-#book-section-grid {
-    overflow-y: hidden;
-    padding: 10px 20px 30px 20px;
-    margin: 25px 0 100px 0;
-    /* display: grid;
-    grid-template-columns: repeat(5, 140px);
-    grid-template-rows: 214px;
-    grid-column-gap: 30px;
-    grid-row-gap: 20px; */
-    display: flex;
-    flex-wrap: wrap;
-    /* justify-content: space-between; */
-    overflow-y: auto;
-    /* overflow-x: hidden; */
-}
 #book-section-grid.row-style {
     flex-direction: row;
     row-gap: 40px;
@@ -292,30 +197,4 @@ body {
     letter-spacing: 1px;
     text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
 }
-#search-bar-container {
-    background-color: #F3F3F3;
-    padding: 2vh 2.6vh;
-    border-radius: 10px;
-    margin: 0;
-    margin-top: 30px;
-}
-#search-bar {
-    gap: 2vh;
-}
-#search-bar svg {
-    min-width: 16px;
-    min-height: 16px;
-}
-#search-bar-input {
-    color: black;
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    font-size: 16px;
-    border: none;
-    background-color: transparent;
-    width: 100%;
-    flex: 1;
-}
-#search-bar-input:focus {
-    outline: none;
-}
+

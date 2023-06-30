@@ -1,9 +1,9 @@
 $(window).on('load', async function () {
     $('body').on('mouseup', function () {
-        $('.sorting-settings-list').hide();
+        $('.sorting-settings-list').addClass('hidden');
     });
     $('.sorting-settings-choose').on('click', function () {
-        $(this).parent().find('.sorting-settings-list').toggle();
+        $(this).parent().find('.sorting-settings-list').toggleClass('hidden');
     });
     $('.sorting-settings-list > li').on('click', async function () {
         var sort_value = $(this).attr("value");
