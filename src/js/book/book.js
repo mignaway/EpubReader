@@ -67,13 +67,13 @@ var loadBook = async function(styleSettings = null) {
     // Add book reading shortcut
 	if (bookStyle.flow === 'paginated'){
 		$('#previous-chapter-btn, #next-chapter-btn').show()
-		$('#previous-chapter-btn').on('click',async function(){
+		$('#previous-chapter-btn').off('click').on('click',async function(){
 			book_rendition.prev();
 			var current_cfi = book_rendition.currentLocation().start.cfi;
 			updateSavePagesButton(book_saved_pages, current_cfi)
 			updatePageNumber(current_cfi);
 		})
-		$('#next-chapter-btn').on('click', async function () {
+		$('#next-chapter-btn').off('click').on('click', async function () {
 			book_rendition.next();
 			var current_cfi = book_rendition.currentLocation().start.cfi;
 			updateSavePagesButton(book_saved_pages, current_cfi)
