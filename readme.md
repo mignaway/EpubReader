@@ -40,6 +40,7 @@ EpubReader is a open-source project made with [ElectronJS](https://www.electronj
 
 - Update feature
 - Added multiple book layouts (paginated, scrolling)
+- General fixes from previous version
 
 ### v1.0.3 (Current)
 
