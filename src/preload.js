@@ -38,7 +38,7 @@ const addEpubBook = async function (epubPath) {
             const bookFolderName = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + bookFolderAuthorName;
             const bookFolderPath = path.join(storePath, 'epubs', bookFolderName);
 
-            const coverPath = epub.manifest['cover']?.href ?? null;
+            const coverPath = epub.metadata.cover ? epub.metadata.cover + ".png" : null;
 
             // Check if the book already exists
             if (!fs.existsSync(bookFolderPath)) {
@@ -62,12 +62,15 @@ const addEpubBook = async function (epubPath) {
                 fs.mkdirSync(bookFolderPath, { recursive: true });
                 fs.copyFileSync(epubPath, path.join(bookFolderPath, "epub.epub"));
 
-                // Save the cover image locally
-                if (epub.metadata.cover) {
-                    await epub.getImageAsync('cover').then(async function ([data, _]) {
-                        await fse.outputFile(path.join(bookFolderPath, epub.manifest['cover'].href), data, 'binary');
+                // Save the cover image locally if exists
+                if (coverPath) {
+					// Do not pass coverPath here because it contains the .png extension while metadata.cover only the id
+                    await epub.getImageAsync(epub.metadata.cover).then(async function ([data, _]) {
+                        await fse.outputFile(path.join(bookFolderPath, coverPath), data, 'binary');
                     }).catch((e) => { console.log("Error while trying to retrieve cover from book!", e); });
-                }
+                } else {
+					console.log("Couldn't find cover image")
+				} 
                 return jsonData;
             } else {
                 displayAlert("Book already in library!", "default");
