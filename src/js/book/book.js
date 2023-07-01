@@ -456,7 +456,7 @@ var getCurrentChapterLabelByHref = async function(navigationToc,chapterHref){
     chapter_title = null;
     for(const books of navigationToc){
         if (books.href.includes(chapterHref)){
-            chapter_title = books.label;
+            chapter_title = `[${books.label}] Page ${$("#current_page_value").text()}`;
             break;
         } else if (books.subitems.length > 0) {
             var temp_chapter_title = await getCurrentChapterLabelByHref(books.subitems, chapterHref)
@@ -464,8 +464,7 @@ var getCurrentChapterLabelByHref = async function(navigationToc,chapterHref){
                 chapter_title = temp_chapter_title;
                 break;
             } else {
-				// If it can't determine chapter name then give it a 
-                chapter_title = '[Chapter name not found]';
+                chapter_title = `Page ${$("#current_page_value").text()}`;
             }
         }
     }
