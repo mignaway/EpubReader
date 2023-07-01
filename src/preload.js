@@ -162,13 +162,14 @@ const searchBook = async function (bookData, targetFolderName) {
  * @param {any} newPropertyValue - The new value.
  */
 const changeBookValue = async function (bookData, targetFolderName, propertyKey, newPropertyValue) {
-    const book = bookData.find(book => book.bookFolderName === targetFolderName);
-    if (book) {
-        book[propertyKey] = newPropertyValue;
-    }
-    let storePath = await getStorePath();
-    const jsonPath = path.join(storePath, 'assets', 'json', 'books.json');
-    await fse.writeJson(jsonPath, bookData, { spaces: 4 });
+	for (let i = 0; i < bookData.length; i++) {
+		if (bookData[i].bookFolderName == targetFolderName) {
+			bookData[i][propertyKey] = newPropertyValue
+			break;
+		}
+	}
+	let storePath = await getStorePath()
+	await fse.writeJsonSync(storePath + '/assets/json/books.json', bookData, { spaces: 4 })
 };
 
 /**
