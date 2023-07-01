@@ -110,6 +110,7 @@ var loadBook = async function(styleSettings = null) {
         // Add iframe click event to close all navbar popups
         var iframe = $('iframe').contents();
         iframe.find('body').on('click', function () {
+			console.log("hellp")
             $('.book-navbar-popup').hide();
             $('#book-action-menu').hide();
         });
@@ -132,9 +133,16 @@ var loadBook = async function(styleSettings = null) {
 		// Update global variable with current section href
         current_section_href = section.href;
     })
-
-    // Load book styles in navbar
-	await loadBookStyleSettings();
+    /* 
+    book_rendition.themes.default({
+        a: {
+            'pointer-events': 'none',
+            'color': 'inherit'
+		}
+    });
+	*/
+    // Load book style (color or font size)
+    await loadBookStyleSettings();
 }
 
 async function updatePageNumber(cfi) {
@@ -465,7 +473,7 @@ var getCurrentChapterLabelByHref = async function(navigationToc,chapterHref){
                 break;
             } else {
 				// If it can't determine chapter name then give it a 
-                chapter_title = '[Chapter name not found]';
+                chapter_title = '[Chapter name not found];
             }
         }
     }
