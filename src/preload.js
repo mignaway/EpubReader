@@ -168,7 +168,7 @@ const changeBookValue = async function (bookData, targetFolderName, propertyKey,
 		}
 	}
 	let storePath = await getStorePath()
-	await fse.writeJsonSync(storePath,'assets','json','books.json', bookData, { spaces: 4 })
+	await fse.writeJsonSync(path.join(storePath,'assets','json','books.json'), bookData, { spaces: 4 })
 };
 
 /**
