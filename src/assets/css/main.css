@@ -312,3 +312,22 @@ img {
 #droparea span {
 	font-size: 24px !important;
 }
+
+.book-box .new-book-box {
+    position: absolute;
+    width: 40px;
+    height: 25px;
+    left: -10px;
+    top: -10px;
+    background-color: var(--primary-color);
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9;
+}
+
+.book-box .new-book-box h1 {
+    font-size: 9px !important;
+    letter-spacing: 1px;
+}

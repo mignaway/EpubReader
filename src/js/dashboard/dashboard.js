@@ -43,7 +43,7 @@ async function loadHeroSection(books_json) {
               <h1 class="main-text w-full line-clamp-3 overflow-hidden !text-[24px] mb-1 text-white font-bold">${title}</h1>
               <h2 class="main-text !text-[16px] mb-1 text-white">${author}</h2>
               <h3 class="main-text !text-[14px] mb-1 text-white opacity-50">${bookYear} Edition - ${language}</h3>
-              <a href="book.html?code=${bookFolderName}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button w-full mt-auto text-center decoration-none" style="background-color: rgb(${dominantRGBValue})">${keepReadingText}</a>
+			  <a href="book.html?code=${bookFolderName}" id="keep-reading-button" onmouseover="this.style.backgroundColor='rgba(${dominantRGBValue},0.5)'" onmouseout="this.style.backgroundColor='rgb(${dominantRGBValue})'" class="primary-button w-full drop-shadow-[0_1px_3px_rgba(0,0,0,0.3)] mt-auto text-center decoration-none" style="background-color: rgb(${dominantRGBValue})"><span class="drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)]">${keepReadingText}</span></a>
             </div>
         `)
         $('#hero-section-image-background').css('background-image', `linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(${bookCover}`);
@@ -80,8 +80,8 @@ async function loadBooksSection(books_json) {
                     <div class="book-box-image overflow-hidden w-full h-full">
                         <img class="w-full h-full" src="${bookCover}">
                     </div>
-                    <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                        <h1 class="main-text text-white font-bold">NEW</h1>
+                    <div class="new-book-box drop-shadow-lg" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
+                        <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">NEW</h1>
                     </div>
                     <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                         <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">

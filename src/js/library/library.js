@@ -69,7 +69,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                         <img src="${bookCover}">
                     </div>
                     <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                        <h1 class="main-text text-color-white text-b">NEW</h1>
+                        <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">NEW</h1>
                     </div>
                     <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                         <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -84,9 +84,9 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
             $('#book-section-grid').removeClass('row-style')
             for(const separator_letter of Object.keys(ordered_books)){
                 book_final_html = ''
-                book_final_html += '<div class="flex-column flex-1" style="row-gap: 20px;">'
-                book_final_html += `<div class="flex-column" style="gap: 5px;"><h1 class="main-text text-sb">${separator_letter}</h1><div class="horizontal-divider-05 bg-black" style="opacity: .1"></div></div>`
-                book_final_html += '<div class="flex-row" style="row-gap: 40px;column-gap: 40px;">'
+                book_final_html += '<div class="flex flex-col flex-1 gap-5">'
+                book_final_html += `<div class="flex flex-col gap-1"><h1 class="main-text font-semibold">${separator_letter}</h1><div class="horizontal-divider-05 bg-black opacity-10"></div></div>`
+                book_final_html += '<div class="flex flex-row gap-10">'
 
 
                 for (const book of ordered_books[separator_letter]){
@@ -108,8 +108,8 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                         <div class="book-box-image overflow-hidden w-100 h-100">
                             <img src="${bookCover}">
                         </div>
-                        <div class="new-book-box" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                            <h1 class="main-text text-color-white text-b">NEW</h1>
+                        <div class="new-book-box drop-shadow-lg" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
+                            <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">NEW</h1>
                         </div>
                         <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                             <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">

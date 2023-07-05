@@ -99,22 +99,3 @@
   border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
-#section-book .new-book-box {
-  position: absolute;
-  width: 40px;
-  height: 25px;
-  left: -10px;
-  top: -10px;
-  background-color: var(--primary-color);
-  border-radius: 5px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.4);
-}
-#section-book .new-book-box h1 {
-  font-size: 9px !important;
-  letter-spacing: 1px;
-  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25);
-}
