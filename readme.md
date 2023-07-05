@@ -36,16 +36,18 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 ## Recent Important Update
 
-### v1.0.4 (Current developing version)
+### v1.0.4 (Last stable release)
 
-- Update feature
+- Update feature (posticipated to v1.0.5 due important fix in order distribute a soon as possible a more stable version)
 - Added multiple book layouts (paginated, scrolling)
+- Design fixes and improvements
+- Improved Save Page feature
 - Important fixes from previous version
     - Book covers are now shown and saved correctly
     - Epub drop fixed glitch
     - Fixed dashboard book sorting
 
-### v1.0.3 (Last version)
+### v1.0.3 (Previous version)
 
 - Epub folder moved to the user's roaming folder
 - Now you can directly drop the file in the application
