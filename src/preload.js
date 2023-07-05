@@ -140,7 +140,7 @@ const getUserSettings = async function () {
  */
 const saveUserSettings = async function (userSettings) {
 	let storePath = await getStorePath()
-    if(userSettings) await fse.writeJsonSync(path.join(storePath,'/assets/','json','user_settings.json'), userSettings, {spaces: 4})
+    if(userSettings) await fse.writeJsonSync(path.join(storePath,'assets','json','user_settings.json'), userSettings, {spaces: 4})
 };
 
 /**
@@ -168,7 +168,7 @@ const changeBookValue = async function (bookData, targetFolderName, propertyKey,
 		}
 	}
 	let storePath = await getStorePath()
-	await fse.writeJsonSync(storePath + '/assets/json/books.json', bookData, { spaces: 4 })
+	await fse.writeJsonSync(storePath,'assets','json','books.json', bookData, { spaces: 4 })
 };
 
 /**
