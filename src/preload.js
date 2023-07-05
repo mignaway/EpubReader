@@ -139,9 +139,8 @@ const getUserSettings = async function () {
  * @param {Object} userSettings - The user settings to be saved.
  */
 const saveUserSettings = async function (userSettings) {
-    let storePath = await getStorePath();
-    const jsonPath = path.join(storePath, 'assets', 'json', 'user_settings.json');
-    await fse.writeJson(jsonPath, userSettings, { spaces: 4 });
+	let storePath = await getStorePath()
+    if(userSettings) await fse.writeJsonSync(path.join(storePath,'/assets/','json','user_settings.json'), userSettings, {spaces: 4})
 };
 
 /**
