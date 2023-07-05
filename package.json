@@ -7,7 +7,7 @@
   "scripts": {
     "start": "electron-forge start",
     "dev": "concurrently \"npm run tailwatch\" \"electron-forge start\" ",
-    "tailbuild": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css",
+    "tailbuild": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css --minify",
     "tailwatch": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css --watch",
     "package": "electron-forge package",
     "make": "electron-forge make",
