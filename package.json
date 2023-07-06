@@ -27,11 +27,9 @@
     },
 	"linux": {
 		"target": [
-			"deb",
-			"snap",
-			"rpm"
+			"deb"
 		],
-		"icon": "src/icon.ico",
+		"icon": "src/icon.png",
 		"category": "Utility"
 	},
 	"asar": true,
@@ -51,6 +49,9 @@
       "!readme.md",
 	  "!git-previews/"
     ]
+  },
+  "engines": {
+	  "node": ">=16.13.2"
   },
   "keywords": [],
   "author": {
