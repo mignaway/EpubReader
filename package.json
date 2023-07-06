@@ -9,11 +9,8 @@
     "dev": "concurrently \"npm run tailwatch\" \"electron-forge start\" ",
     "tailbuild": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css --minify",
     "tailwatch": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css --watch",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "echo \"No linting configured\"",
-    "build": "electron-builder"
+    "dist:windows": "electron-builder --windows",
+    "dist:linux": "electron-builder --linux"
   },
   "repository": "https://github.com/mignaway/EpubReader",
   "publish": {
@@ -28,6 +25,15 @@
       ],
       "icon": "src/icon.ico"
     },
+	"linux": {
+		"target": [
+			"deb",
+			"snap",
+			"rpm"
+		],
+		"icon": "src/icon.ico",
+		"category": "Utility"
+	},
 	"asar": true,
     "nsis": {
       "oneClick": false,
