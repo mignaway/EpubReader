@@ -39,6 +39,7 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 ### v1.0.4 (Last stable release)
 
 - Update feature (posticipated to v1.0.5 due important fix in order distribute a soon as possible a more stable version)
+- Linux distribution (.deb)
 - Added multiple book layouts (paginated, scrolling)
 - Design fixes and improvements
 - Improved Save Page feature
