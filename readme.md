@@ -34,10 +34,16 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 <img src="https://user-images.githubusercontent.com/40722616/173831311-2f67d669-7ea1-41b3-b93e-57321416504b.png" width="100%">
 -->
 
-## Recent Important Update
+## Version Logs
 
-### v1.0.4 (Last stable release)
+<details><summary><h3>v.1.0.5 (Developing)</h3></summary>
+<p>
+- PDF suppport
+- Update feature
+</p></details>
 
+<details><summary><h3>v1.0.4 (Stable release)</h3></summary>
+<p>
 - Update feature (posticipated to v1.0.5 due important fix in order distribute a soon as possible a more stable version)
 - Linux distribution (.deb)
 - Added multiple book layouts (paginated, scrolling)
@@ -47,14 +53,16 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
     - Book covers are now shown and saved correctly
     - Epub drop fixed glitch
     - Fixed dashboard book sorting
+</p></details>
 
-### v1.0.3 (Previous version)
-
+<details><summary><h3>v1.0.3</h3></summary>
+<p>
 - Epub folder moved to the user's roaming folder
 - Now you can directly drop the file in the application
 - Asar
 - General fixes
 - A lot of refactoring
+</p></details>
 
 ## Testing
 To clone locally this project you'll need [Git](https://git-scm.com/) and [Node.js](https://nodejs.org/en/download/) installed on your computer.
