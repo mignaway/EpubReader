@@ -36,14 +36,14 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 ## Version Logs
 
-<details><summary><h3>v.1.0.5 (Developing)</h3></summary>
+<details open><summary><h3>v.1.0.5 (Developing)</h3></summary>
 
 - PDF suppport
 - Update feature
 
 </details>
 
-<details><summary><h3>v1.0.4 (Stable release)</h3></summary>
+<details open><summary><h3>v1.0.4 (Stable release)</h3></summary>
 
 - Update feature (posticipated to v1.0.5 due important fix in order distribute a soon as possible a more stable version)
 - Linux distribution (.deb)
