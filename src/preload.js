@@ -127,7 +127,7 @@ const getUserSettings = async function () {
             book: {
                 background_color_style: 'default',
                 font_size_percent: 100,
-                typeface: ''
+                typeface: 'IBM Plex Serif'
             }
         };
         await fse.outputJson(userSettingsJsonPath, userDefaultSettings, { spaces: 4 });

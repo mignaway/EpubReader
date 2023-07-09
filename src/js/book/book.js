@@ -8,7 +8,7 @@ const MIN_FONT_SIZE = 70;
 let epubCodeSearch = "";
 let book_epub = null;
 let book_rendition = null;
-let chapters_rendered = false;
+let first_time_rendered = true;
 let current_section_href = null;
 let current_style_settings = null;
 let book_saved_pages = null;
@@ -104,8 +104,15 @@ var loadBook = async function(styleSettings = null) {
 	// Update informations and add events when page rendered 
     book_rendition.on("rendered", async function (section) {
         // Load chapter list in navbar
-        if (!chapters_rendered) {
+        if (first_time_rendered) {
             loadChaptersList()
+			WebFont.load({
+				google: {
+					families: ['Inter', 'IBM Plex Serif']
+				},
+				context: window.frames[0].frameElement.contentWindow,
+			})
+			first_time_rendered = false
         }
         // Add iframe click event to close all navbar popups
         var iframe = $('iframe').contents();
@@ -471,55 +478,4 @@ var getCurrentChapterLabelByHref = async function(navigationToc,chapterHref){
     return chapter_title;
 }
 
-var updateDictionaryLanguage = async function(lang){
-    console.log(lang)
-    sessionDictionaryLanguage = lang
-    loadDictionary()
-}
 
-function getHtmlSvgFlag() {
-    const flags_svg = {
-        "en": `<svg width="25" height="20" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_610_2)">
-            <path d="M15 0.000198364H0V10.0003H15V0.000198364Z" fill="#F0F0F0"/>
-            <path d="M8.4375 0H6.5625V4.06248H0V5.93748H6.5625V9.99996H8.4375V5.93748H15V4.06248H8.4375V0Z" fill="#D80027"/>
-            <path d="M11.5366 6.73912L15 8.66322V6.73912H11.5366Z" fill="#0052B4"/>
-            <path d="M9.13037 6.73911L14.9999 9.99996V9.07787L10.7902 6.73911H9.13037Z" fill="#0052B4"/>
-            <path d="M13.4365 9.99998L9.13037 7.60748V9.99998H13.4365Z" fill="#0052B4"/>
-            <path d="M9.13037 6.73911L14.9999 9.99996V9.07787L10.7902 6.73911H9.13037Z" fill="#F0F0F0"/>
-            <path d="M9.13037 6.73911L14.9999 9.99996V9.07787L10.7902 6.73911H9.13037Z" fill="#D80027"/>
-            <path d="M2.64671 6.73904L0 8.20945V6.73904H2.64671Z" fill="#0052B4"/>
-            <path d="M5.86959 7.1537V9.99992H0.746826L5.86959 7.1537Z" fill="#0052B4"/>
-            <path d="M4.20976 6.73911L0 9.07787V9.99996L5.86957 6.73911H4.20976Z" fill="#D80027"/>
-            <path d="M3.46333 3.26085L0 1.33675V3.26085H3.46333Z" fill="#0052B4"/>
-            <path d="M5.86957 3.26086L0 0V0.92209L4.20976 3.26086H5.86957Z" fill="#0052B4"/>
-            <path d="M1.56348 0L5.86959 2.3925V0H1.56348Z" fill="#0052B4"/>
-            <path d="M5.86957 3.26086L0 0V0.92209L4.20976 3.26086H5.86957Z" fill="#F0F0F0"/>
-            <path d="M5.86957 3.26086L0 0V0.92209L4.20976 3.26086H5.86957Z" fill="#D80027"/>
-            <path d="M12.3533 3.26092L15 1.79051V3.26092H12.3533Z" fill="#0052B4"/>
-            <path d="M9.13037 2.84625V3.05176e-05H14.2531L9.13037 2.84625Z" fill="#0052B4"/>
-            <path d="M10.7902 3.26086L14.9999 0.92209V0L9.13037 3.26086H10.7902Z" fill="#D80027"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_610_2">
-            <rect width="15" height="10" rx="1" fill="white"/>
-            </clipPath>
-            </defs>
-            </svg>
-            `,
-        "it": `<svg width="25" height="20" viewBox="0 0 15 10" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <g clip-path="url(#clip0_610_26)">
-            <path d="M15 8.46154C15 8.86956 14.8244 9.26088 14.5118 9.54939C14.1993 9.83791 13.7754 10 13.3333 10H10V0H13.3333C13.7754 0 14.1993 0.162087 14.5118 0.450605C14.8244 0.739122 15 1.13044 15 1.53846V8.46154Z" fill="#CE2B37"/>
-            <path d="M1.66667 0C1.22464 0 0.800716 0.162087 0.488155 0.450605C0.175595 0.739122 0 1.13044 0 1.53846L0 8.46154C0 8.86956 0.175595 9.26088 0.488155 9.54939C0.800716 9.83791 1.22464 10 1.66667 10H5V0H1.66667Z" fill="#009246"/>
-            <path d="M5 0H10V10H5V0Z" fill="#EEEEEE"/>
-            </g>
-            <defs>
-            <clipPath id="clip0_610_26">
-            <rect width="15" height="10" fill="white"/>
-            </clipPath>
-            </defs>
-            </svg>
-            `
-    }
-    return flags_svg[sessionDictionaryLanguage]
-}
