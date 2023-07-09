@@ -43,7 +43,8 @@ $(window).on('load', function(){
             $('#book-saved').css('display','flex')
         }
     })
-    $('#libraryNavBtn').on('click', function(){
+    $('#libraryNavBtn').on('click', async function(){
+		window.appConfig.send('unsetWindowResizable');
         window.appConfig.send('unmaximizeApp');
     })
     $('#settings-increase-font-size').on('click', function(){

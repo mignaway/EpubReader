@@ -7,11 +7,14 @@ if (require('electron-squirrel-startup')) {
 	app.quit();
 }
 
+const DEFAULT_WINDOW_WIDTH = 1280
+const DEFAULT_WINDOW_HEIGHT = 720 
+
 const createWindow = () => {
 	// Create the browser window.
 	const mainWindow = new BrowserWindow({
-		width: 1280,
-		height: 720,
+		width: DEFAULT_WINDOW_WIDTH,
+		height: DEFAULT_WINDOW_HEIGHT,
 		resizable: false,
 		show: false,
 		frame: false,
@@ -67,7 +70,15 @@ const createWindow = () => {
 			mainWindow.unmaximize();
 		}
 	});
-
+	ipcMain.on('setWindowResizable', () => {
+		mainWindow.setResizable(true)
+	});
+	ipcMain.on('unsetWindowResizable', () => {
+		mainWindow.unmaximize();
+		mainWindow.setSize(1280,720,false);
+		mainWindow.center()
+		mainWindow.setResizable(false);
+	});
 	// Show a file dialog to choose an EPUB file
 	ipcMain.on('openBookChooserDialog', () => {
 		dialog

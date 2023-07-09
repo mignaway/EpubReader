@@ -1,9 +1,10 @@
 $(window).on('load', function(){
+	window.appConfig.send('setWindowResizable');
     loadBook();
 })
 
-const MAX_FONT_SIZE = 130;
-const MIN_FONT_SIZE = 70;
+const MAX_FONT_SIZE = 160;
+const MIN_FONT_SIZE = 100;
 
 let epubCodeSearch = "";
 let book_epub = null;

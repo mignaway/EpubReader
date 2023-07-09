@@ -231,6 +231,11 @@ const isAllowedExtension = function (ext) {
     return allowedExtensions.includes(ext);
 };
 
+/**
+ * Convert ebooks file allowed to epub and save in a local user folder.
+ * @param {string} inputFilePath - File source path 
+ * @returns {promise} success 
+ */
 const convertToEpub = async function (inputFilePath) {
 	displayAlert("Converting file... It may take a while");
 	const storePath = await getStorePath();
@@ -271,6 +276,7 @@ contextBridge.exposeInMainWorld('bookConfig', {
 	isAllowedExtension: (ext) => isAllowedExtension(ext),
 	convertToEpub: (inputFilePath) => convertToEpub(inputFilePath)
 });
+
 contextBridge.exposeInMainWorld('appConfig', {
     appVersion: () => ipcRenderer.invoke('appVersion'),
     dirname: async () => await getStorePath(),
