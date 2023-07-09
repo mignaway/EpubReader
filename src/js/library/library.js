@@ -165,16 +165,26 @@ async function filterBooksByTitleAndAuthor(json,searchText){
 }
 
 window.appConfig.on('bookChosenSuccess', async function (_, epubPath) {
-    var response = await window.bookConfig.addEpubBook(epubPath);
-    if (response) {
-        $('#section-book-loading-animation').removeClass('loaded');
-        await loadBooks(response);
-    }
+	addEpubBookHandler(epubPath)
 })
 
 async function addEpubBookHandler(epubPath){
-    var response = await window.bookConfig.addEpubBook(epubPath);
-    if (response != false) await loadBooks(response)
+	try {
+		// check if it's an epub file
+		if(!(/\.epub$/i.test(epubPath))) {
+			$('.circle-loading-logo').css('opacity', '1');
+			// convert to pdf and change variable 
+			epubPath = await window.bookConfig.convertToEpub(epubPath)
+		}
+		var response = await window.bookConfig.addEpubBook(epubPath);
+		if (response != false) {
+			await loadBooks(response)
+		} else $('.circle-loading-logo').css('opacity', '0');
+
+	} catch (e){
+		console.log(e)
+		$('.circle-loading-logo').css('opacity', '0');
+	}
 }
 async function deleteEpubBookHandler(bookFolderName) {
     var json = await window.bookConfig.deleteEpubBook(bookFolderName);

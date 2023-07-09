@@ -4,9 +4,10 @@ const fse = require('fs-extra');
 const Vibrant = require('node-vibrant');
 const Epub = require("epub2").EPub;
 const path = require('path');
+const convert = require('ebook-convert')
 
 // Define allowed extensions for books
-const allowedExtensions = ['epub'];
+const allowedExtensions = ['epub','pdf'];
 
 /**
  * Get the store path.
@@ -230,6 +231,33 @@ const isAllowedExtension = function (ext) {
     return allowedExtensions.includes(ext);
 };
 
+const convertToEpub = async function (inputFilePath) {
+	displayAlert("Converting file... It may take a while");
+	const storePath = await getStorePath();
+	// Unpack input file path
+	const {dir,name,ext} = path.parse(inputFilePath);
+	// Set the output file path in local folder
+	const outputFilePath = path.join(storePath, 'tempConvertedBooks', name  + ".epub");
+
+	return new Promise((resolve, reject) => {
+		let convertOptions = {
+			input: `"${inputFilePath}"`,
+			output: `"${outputFilePath}"`,
+		};
+
+		convert(convertOptions, (err) => {
+			if (err) {
+				displayAlert("Couldn't convert file", 'default');
+				console.log("Conversion error: ", err);
+				reject(err); // Reject the promise with the error
+			} else {
+				console.log("Conversion success, book added in library!");
+				resolve(outputFilePath); // Resolve the promise with the output file path
+			}
+		});
+	});
+};
+
 contextBridge.exposeInMainWorld('bookConfig', {
     addEpubBook: async (epubPath) => await addEpubBook(epubPath),
     deleteEpubBook: async (bookFolderName) => await deleteEpubBook(bookFolderName),
@@ -240,7 +268,8 @@ contextBridge.exposeInMainWorld('bookConfig', {
     changeBookValue: async (json, bookFolderName, key, newValue) => await changeBookValue(json, bookFolderName, key, newValue),
     getVibrantColorFromImage: async (bookFolderName,imagePath) => await getVibrantColorFromImage(bookFolderName,imagePath),
     ensureBookCoverExistsAndReturn: async (bookFolderName, coverPath) => await ensureBookCoverExistsAndReturn(bookFolderName, coverPath),
-	isAllowedExtension: (ext) => isAllowedExtension(ext)
+	isAllowedExtension: (ext) => isAllowedExtension(ext),
+	convertToEpub: (inputFilePath) => convertToEpub(inputFilePath)
 });
 contextBridge.exposeInMainWorld('appConfig', {
     appVersion: () => ipcRenderer.invoke('appVersion'),

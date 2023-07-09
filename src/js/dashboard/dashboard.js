@@ -106,8 +106,22 @@ window.appConfig.on('bookChosenSuccess', async function (event, epubPath) {
 })
 
 async function addEpubBookHandler(epubPath){
-    var response = await window.bookConfig.addEpubBook(epubPath);
-    if (response != false) await loadAll(response)
+	try {
+		// check if it's an epub file
+		if(!(/\.epub$/i.test(epubPath))) {
+			$('#hero-section-loading-animation').removeClass('hidden');
+			// convert to pdf and change variable 
+			epubPath = await window.bookConfig.convertToEpub(epubPath)
+		}
+		var response = await window.bookConfig.addEpubBook(epubPath);
+		if (response != false) {
+			await loadAll(response)
+		} else $('#hero-section-loading-animation').addClass('hidden');
+
+	} catch (e){
+		console.log(e)
+		$('#hero-section-loading-animation').addClass('hidden');
+	}
 }
 async function deleteEpubBookHandler(bookFolderName) {
     var json = await window.bookConfig.deleteEpubBook(bookFolderName);

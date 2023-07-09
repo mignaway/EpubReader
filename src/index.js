@@ -74,7 +74,7 @@ const createWindow = () => {
 			.showOpenDialog({
 				properties: ['openFile'],
 				filters: [
-					{ name: 'Epub Files', extensions: ['epub'] }
+					{ name: 'Epub Files', extensions: ['epub','pdf'] }
 				]
 			})
 			.then(result => {

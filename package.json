@@ -15,43 +15,43 @@
   "repository": "https://github.com/mignaway/EpubReader",
   "publish": {
     "provider": "github",
-	"releaseType": "release"
+    "releaseType": "release"
   },
   "build": {
-	  "appId": "EpubReader",
-	  "win": {
-		  "target": [
-			  "nsis"
-		  ],
-		  "icon": "src/icon.ico"
-	  },
-	  "linux": {
-		  "target": [
-			  "deb"
-		  ],
-		  "icon": "src/icon.png",
-		  "category": "Utility"
-	  },
-	  "asar": true,
-	  "nsis": {
-		  "oneClick": false,
-		  "installerIcon": "src/icon.ico",
-		  "uninstallerIcon": "src/icon.ico",
-		  "uninstallDisplayName": "EpubReaderUninstaller",
-		  "license": "LICENSE.md",
-		  "allowToChangeInstallationDirectory": true
-	  },
+    "appId": "EpubReader",
+    "win": {
+      "target": [
+        "nsis"
+      ],
+      "icon": "src/icon.ico"
+    },
+    "linux": {
+      "target": [
+        "deb"
+      ],
+      "icon": "src/icon.png",
+      "category": "Utility"
+    },
+    "asar": true,
+    "nsis": {
+      "oneClick": false,
+      "installerIcon": "src/icon.ico",
+      "uninstallerIcon": "src/icon.ico",
+      "uninstallDisplayName": "EpubReaderUninstaller",
+      "license": "LICENSE.md",
+      "allowToChangeInstallationDirectory": true
+    },
     "files": [
       "**/*",
       "!dist/",
       "!src/epubs/",
       "!src/assets/json/",
       "!readme.md",
-	  "!git-previews/"
+      "!git-previews/"
     ]
   },
   "engines": {
-	  "node": ">=16.13.2"
+    "node": ">=16.13.2"
   },
   "keywords": [],
   "author": {
@@ -88,6 +88,7 @@
   },
   "dependencies": {
     "dominant-color": "^0.0.1",
+    "ebook-convert": "^2.0.1",
     "electron-squirrel-startup": "^1.0.0",
     "electron-updater": "^5.3.0",
     "epub2": "^2.0.7",
