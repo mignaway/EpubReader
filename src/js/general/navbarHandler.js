@@ -14,6 +14,7 @@ $(window).on('load', async function () {
     $('#edit-books-button').on('click', function () {
         $('.book-box.not-empty').toggleClass('currently-editing')
         $('#edit-books-button').toggleClass('currently-editing')
+        $('.book-box-informations-edit').toggleClass('currently-editing')
     })
     $('#add-books-button').on('click', function (){
         window.appConfig.send('openBookChooserDialog')

@@ -40,6 +40,7 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 - PDF support
 - Resizable Book Window
+- Now you can edit your books
 - Update feature
 
 </details>

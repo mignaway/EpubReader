@@ -72,9 +72,9 @@ async function loadBooksSection(books_json) {
 
                 $('#section-book-preview').append(`
                 <div class="book-box ${editingClass} not-empty" data-folderbookcode="${books_json[i].bookFolderName}" onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${books_json[i].bookFolderName}'">
-                    <div class="book-box-informations absolute p-5 bg-black/90 gap-2.5 transition opacity-0 z-[5] overflow-hidden w-100 h-100 flex-column" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                        <h1 class="main-text text-[17px] w-full line-clamp-5 text-white font-bold">${title}</h1>
-                        <h2 class="main-text text-[15px] text-white">${author}</h2>
+                    <div class="book-box-informations absolute p-5 bg-black/90 gap-2.5 flex flex-col transition opacity-0 z-[5] overflow-hidden w-full h-full" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
+                        <h1 class="main-text text-[17px] w-full line-clamp-4 text-white font-bold">${title}</h1>
+                        <h2 class="main-text text-[13px] text-white">${author}</h2>
                         <h3 class="main-text text-[13px] text-white opacity-50">${language}</h3>
                     </div>
                     <div class="book-box-image overflow-hidden w-full h-full">
@@ -88,7 +88,10 @@ async function loadBooksSection(books_json) {
                         <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="3" stroke-linecap="round" />
                         </svg>
                     </div>
-                </div>
+					<div class="book-edit-icon cursor-pointer" onclick="event.stopPropagation(); editEpubBookHandler($(this).parent().data('folderbookcode'));">
+						<svg class="cursor-pointer" width="10" height="10" xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="512" height="512" x="0" y="0" viewBox="0 0 492.493 492" style="enable-background:new 0 0 512 512" xml:space="preserve" class=""><g><path d="M304.14 82.473 33.165 353.469a10.799 10.799 0 0 0-2.816 4.949L.313 478.973a10.716 10.716 0 0 0 2.816 10.136 10.675 10.675 0 0 0 7.527 3.114 10.6 10.6 0 0 0 2.582-.32l120.555-30.04a10.655 10.655 0 0 0 4.95-2.812l271-270.977zM476.875 45.523 446.711 15.36c-20.16-20.16-55.297-20.14-75.434 0l-36.949 36.95 105.598 105.597 36.949-36.949c10.07-10.066 15.617-23.465 15.617-37.715s-5.547-27.648-15.617-37.719zm0 0" data-original="#000000" class=""></path></g></svg>
+					</div>
+				</div>
                 `)
             } else {
                 $('#section-book-preview').append('<div class="book-box"></div>')
