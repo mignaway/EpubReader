@@ -3,7 +3,7 @@ $(window).on('load', function(){
     loadBook();
 })
 
-const MAX_FONT_SIZE = 160;
+const MAX_FONT_SIZE = 180;
 const MIN_FONT_SIZE = 100;
 
 let epubCodeSearch = "";
