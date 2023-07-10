@@ -98,6 +98,24 @@ const createWindow = () => {
 				console.log(err);
 			});
 	});
+	ipcMain.on('openCoverChooserDialog', () => {
+		dialog
+			.showOpenDialog({
+				properties: ['openFile'],
+				filters: [
+					{ name: 'Cover image', extensions: ['png','jpg'] }
+				]
+			})
+			.then(result => {
+				if (!result.canceled) {
+					// Send the selected file path to the renderer process
+					mainWindow.webContents.send('coverChosenSuccess', result.filePaths[0]);
+				}
+			})
+			.catch(err => {
+				console.log(err);
+			});
+	});
 
 	mainWindow.on('resize', () => {
 		mainWindow.webContents.send('updateMaximizeIcon', mainWindow.isMaximized());

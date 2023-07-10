@@ -101,19 +101,32 @@ const deleteEpubBook = async function (bookFolderName) {
 	return response;
 };
 
-const updateEpubBook = async function (targetFolderName, optional) {
+/**
+ * Update and EPUB book
+ * @param {string} bookFolderName - The folder name of the book to be deleted
+ * @param {dict} optional - Optional parameter to change: title, author, language, year
+ * @returns {Promise<Array>} The updated books in JSON
+*/
+
+const updateEpubBook = async function (bookFolderName, optional) {
 	try {
-		let booksData = await getBooks();
+		const booksData = await getBooks();
+		const storePath = await getStorePath();
+
 		for (let i = 0; i < booksData.length; i++) {
-			if (booksData[i].bookFolderName == targetFolderName) {
+			if (booksData[i].bookFolderName == bookFolderName) {
 				if (optional.title) booksData[i].title = optional.title;
 				if (optional.author) booksData[i].author = optional.author;
 				if (optional.language) booksData[i].lang = optional.language;
 				if (optional.year) booksData[i].bookYear = optional.year;				
+				if (optional.cover && optional.cover != booksData[i].coverPath) {
+					const coverExt = path.parse(optional.cover).ext   
+					await fse.copy(optional.cover,path.join(storePath,'epubs',booksData[i].bookFolderName,'cover'+coverExt))
+					booksData[i].coverPath = 'cover'+coverExt;				
+				}
 				break;
 			}
 		}
-		let storePath = await getStorePath();
 		await fse.writeJson(path.join(storePath, 'assets', 'json', 'books.json'), booksData, { spaces: 4 });
 
 		displayAlert('Update successfully','success')
@@ -257,7 +270,7 @@ const isAllowedExtension = function (ext) {
 /**
  * Convert ebooks file allowed to epub and save in a local user folder.
  * @param {string} inputFilePath - File source path 
- * @returns {promise} success 
+ * @returns {Promise<string>} The output file path
  */
 const convertToEpub = async function (inputFilePath) {
 	displayAlert("Converting file... It may take a while");

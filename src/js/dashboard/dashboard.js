@@ -108,6 +108,11 @@ window.appConfig.on('bookChosenSuccess', async function (event, epubPath) {
 	await addEpubBookHandler(epubPath)
 })
 
+// Event called after updating book cover
+window.appConfig.on('coverChosenSuccess', async function (event, coverPath) {
+	$('#edit-book-information-cover').attr('src',coverPath)
+})
+
 async function addEpubBookHandler(epubPath){
 	try {
 		// check if it's an epub file
@@ -150,10 +155,12 @@ async function applyEditEpubBookHandler(bookFolderName) {
 	let author = $('#edit-book-information-author').val()
 	let language = $('#edit-book-information-language').val()
 	let year = $('#edit-book-information-year').val()
-	console.log(bookFolderName,title,author,language,year)
-	let json = await window.bookConfig.updateEpubBook(bookFolderName,{title: title, author: author,language:language,year: year});
+	let cover = $('#edit-book-information-cover').attr('src')
+	let json = await window.bookConfig.updateEpubBook(bookFolderName,{title: title, author: author,language:language,year: year,cover: cover});
     await loadAll(json);
 }
+
+
 
 // Order a json object by modality
 async function orderBookModality(books_json, option) {
