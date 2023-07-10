@@ -101,6 +101,29 @@ const deleteEpubBook = async function (bookFolderName) {
 	return response;
 };
 
+const updateEpubBook = async function (targetFolderName, optional) {
+	try {
+		let booksData = await getBooks();
+		for (let i = 0; i < booksData.length; i++) {
+			if (booksData[i].bookFolderName == targetFolderName) {
+				if (optional.title) booksData[i].title = optional.title;
+				if (optional.author) booksData[i].author = optional.author;
+				if (optional.language) booksData[i].lang = optional.language;
+				if (optional.year) booksData[i].bookYear = optional.year;				
+				break;
+			}
+		}
+		let storePath = await getStorePath();
+		await fse.writeJson(path.join(storePath, 'assets', 'json', 'books.json'), booksData, { spaces: 4 });
+
+		displayAlert('Update successfully','success')
+
+		return booksData;
+	} catch (e) {
+		console.log("Error while updating book: ", e);
+	}
+};
+
 /**
  * Get the books from the JSON data.
  * @returns {Promise<Array>} The books in JSON.
@@ -266,6 +289,7 @@ const convertToEpub = async function (inputFilePath) {
 contextBridge.exposeInMainWorld('bookConfig', {
     addEpubBook: async (epubPath) => await addEpubBook(epubPath),
     deleteEpubBook: async (bookFolderName) => await deleteEpubBook(bookFolderName),
+    updateEpubBook: async (bookFolderName,optional) => await updateEpubBook(bookFolderName,optional),
     getBooks: async () => getBooks(),
     getUserSettings: async () => await getUserSettings(),
     saveUserSettings: async (json) => await saveUserSettings(json),

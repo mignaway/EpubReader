@@ -61,7 +61,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                 $('#book-section-grid').append(`
 <div class="book-box ${editingClass} not-empty" data-folderbookcode="${book.bookFolderName}" onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.bookFolderName}'">
                     <div class="book-box-informations absolute p-5 bg-black/90 gap-2.5 flex flex-col transition opacity-0 z-[5] overflow-hidden w-full h-full" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-                        <h1 class="main-text text-[15px] w-full line-clamp-4 text-white font-bold">${title}</h1>
+                        <h1 class="main-text text-[15px] w-full line-clamp-5 text-white font-bold">${title}</h1>
                         <h2 class="main-text text-[13px] text-white">${author}</h2>
                         <h3 class="main-text text-[13px] text-white opacity-50">${language}</h3>
                     </div>
@@ -105,7 +105,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
 					book_final_html += `
 				<div class="book-box ${editingClass} not-empty" data-folderbookcode="${book.bookFolderName}" onclick="if(!$(this).hasClass('currently-editing')) window.location.href = 'book.html?code=${book.bookFolderName}'">
 					<div class="book-box-informations absolute p-5 bg-black/90 gap-2.5 flex flex-col transition opacity-0 z-[5] overflow-hidden w-full h-full" ${$('#section-book-show-information').hasClass('active') ? 'style="opacity: 1"' : ''}>
-						<h1 class="main-text text-[15px] w-full line-clamp-4 text-white font-bold">${title}</h1>
+						<h1 class="main-text text-[15px] w-full line-clamp-5 text-white font-bold">${title}</h1>
 						<h2 class="main-text text-[13px] text-white">${author}</h2>
 						<h3 class="main-text text-[13px] text-white opacity-50">${language}</h3>
 					</div>
@@ -195,6 +195,30 @@ async function addEpubBookHandler(epubPath){
 }
 async function deleteEpubBookHandler(bookFolderName) {
     var json = await window.bookConfig.deleteEpubBook(bookFolderName);
+    await loadBooks(json);
+}
+async function editEpubBookHandler(bookFolderName){
+	const bookData = await window.bookConfig.getBooks()
+	const book = await window.bookConfig.searchBook(bookData,bookFolderName)
+	const bookCoverPath = await window.bookConfig.ensureBookCoverExistsAndReturn(bookFolderName,book.coverPath)	
+	if(book){
+		$('#edit-book-information-cover').attr('src',bookCoverPath);
+		$('#edit-book-information-title').val(book.title);
+		$('#edit-book-information-author').val(book.author);
+		$('#edit-book-information-language').val(book.lang);
+		$('#edit-book-information-year').val(book.bookYear);
+		$('#edit-book-information-apply-btn').data('folderbookcode',bookFolderName);
+		$('#edit-book-information').removeClass('hidden');
+	}
+}
+
+async function applyEditEpubBookHandler(bookFolderName) {
+	let title = $('#edit-book-information-title').val() 
+	let author = $('#edit-book-information-author').val()
+	let language = $('#edit-book-information-language').val()
+	let year = $('#edit-book-information-year').val()
+	console.log(bookFolderName,title,author,language,year)
+	let json = await window.bookConfig.updateEpubBook(bookFolderName,{title: title, author: author,language:language,year: year});
     await loadBooks(json);
 }
 

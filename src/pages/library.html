@@ -68,6 +68,35 @@
           </div>
       </div>
     </div>
+	<div id="edit-book-information" class="hidden flex items-center justify-center w-full h-full bg-[rgba(0,0,0,.8)] absolute z-[100]">
+      <div id="edit-book-information-box" class="bg-[#121212] rounded-[15px] p-8">
+          <svg id="menu-close-edit-book-information" class="mr-3 cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="21" height="14" viewBox="0 0 21 14" fill="white">
+            <path
+              d="M19.5 7.9C19.9971 7.9 20.4 7.49706 20.4 7C20.4 6.50294 19.9971 6.1 19.5 6.1L19.5 7.9ZM0.363604 6.3636C0.012132 6.71507 0.012132 7.28492 0.363604 7.63639L6.09117 13.364C6.44264 13.7154 7.01249 13.7154 7.36396 13.364C7.71543 13.0125 7.71543 12.4426 7.36396 12.0912L2.27279 7L7.36396 1.90883C7.71543 1.55736 7.71543 0.98751 7.36396 0.636038C7.01249 0.284566 6.44264 0.284566 6.09117 0.636038L0.363604 6.3636ZM19.5 6.1L1 6.1L1 7.9L19.5 7.9L19.5 6.1Z"
+              fill="white" />
+          </svg>
+          <div class="flex flex-col mt-6 gap-5 w-[600px]">
+			  <div class="flex flex-row gap-6">
+				  <div class="flex-1">
+					  <img id="edit-book-information-cover" src="" alt="book cover"/>
+				  </div>
+				  <div class="flex flex-col gap-3 flex-1">
+					  <span class="main-text text-white font-semibold">Title</span>
+					  <input id="edit-book-information-title" type="text" class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
+					  <span class="main-text text-white font-semibold">Author</span>
+					  <input id="edit-book-information-author" type="text" class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
+					  <span class="main-text text-white font-semibold">Language</span>
+					  <input id="edit-book-information-language" type="text" class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
+					  <span class="main-text text-white font-semibold">Year</span>
+					  <input id="edit-book-information-year" type="text" class="main-text text-white bg-white/10 py-3 px-5 rounded-md" >
+					  <div class="flex-1 flex">
+						  <button id="edit-book-information-apply-btn" class="main-text w-full flex-0 self-end text-white font-bold bg-[#18C34D] py-3 px-5 rounded-md" onclick="event.stopPropagation(); applyEditEpubBookHandler($(this).data('folderbookcode'));"><span class="drop-shadow-md">Apply edit</span></button>
+					  </div>
+				  </div>
+			  </div>
+          </div>
+      </div>
+    </div>
 	<div id="droparea" class="w-full h-full gap-8 flex flex-col items-center justify-center">
 		<svg width="100" height="101" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
 			<path d="M72.9167 21.3335H88.3625L72.9167 5.8877V21.3335ZM33.3333 64.0419C33.3146 62.8835 32.0792 62.9689 31.25 63.0002V65.0835C32.0792 65.1127 33.3146 65.2002 33.3333 64.0419Z" fill="white" fill-opacity="0.75"/>

@@ -48,6 +48,9 @@ $(window).on('load', async function () {
         $('#application-information').addClass('hidden');
     })
 
+    $('#menu-close-edit-book-information').on('click', function () {
+        $('#edit-book-information').addClass('hidden');
+    })
     // preload 
     $('#app-info-version').text("v" + await window.appConfig.appVersion());
 });

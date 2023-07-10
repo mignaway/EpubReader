@@ -7,7 +7,7 @@ html,body {
 
 * {
 	box-sizing: border-box;
-	user-select: none;
+	user-select: none !important;
 }
 
 :focus {
@@ -256,7 +256,7 @@ img {
 	right: 0;
 	left: 0;
 	top: 0;
-	z-index: 100;
+	z-index: 150;
 	transform: translateY(-50px);
 	width: max-content;
 }
