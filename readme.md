@@ -5,14 +5,14 @@
 
 </p>
 
-# Ebook Reader
+# Epub Reader
 
 
-<a href="https://github.com/mignaway/ebook-reader/releases/download/v1.0.4/EpubReader.Setup.1.0.4.exe"><img src="https://img.shields.io/badge/v1.0.4-Installer-yellow"></a>
+<a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.4/EpubReader.Setup.1.0.4.exe"><img src="https://img.shields.io/badge/v1.0.4-Installer-yellow"></a>
 <a href="https://mignaway.github.io/epub-reader-website/"><img src="https://user-images.githubusercontent.com/40722616/192098396-694ce4b1-15fb-495f-ba89-241043d2d8bd.svg"></a>
 
 
-Ebook Reader is a open-source project made with [ElectronJS](https://www.electronjs.org/). Like the name says it's an application for reading ebook files (pdf, epub, etc...), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
+Epub Reader is a open-source project made with [ElectronJS](https://www.electronjs.org/). It's an application for reading ebook files (pdf, epub, etc...), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
 
 > **Warning** : This project is under development, you might experience some bugs!
 
@@ -20,7 +20,7 @@ Ebook Reader is a open-source project made with [ElectronJS](https://www.electro
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176780491-6f7c7711-780f-4d96-bd2d-dc51fb7b5164.jpg" width="100%"> -->
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176781677-4b024470-9a6b-4e93-81c2-ea6a6898b3c1.jpg" width="100%"> -->
 <img src="https://user-images.githubusercontent.com/40722616/191061901-c6437634-5a80-434e-bf90-e4cc14c97682.png" width="100%">
-More updated previews are <a href="https://github.com/mignaway/ebook-reader/blob/master/git-previews/1.0.4.md">available here</a>
+More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/master/git-previews/1.0.4.md">available here</a>
 
 
 
@@ -75,9 +75,9 @@ Then clone the project with these command line:<br><br>
 _(Windows)_
 ```bash
 # Clone this repository
-git clone https://github.com/mignaway/ebook-reader
+git clone https://github.com/mignaway/EpubReader
 # Go into the repository
-cd ebook-reader
+cd EpubReader
 # Install dependencies
 npm install
 # Run the app
