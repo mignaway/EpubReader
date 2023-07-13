@@ -7,7 +7,7 @@ const path = require('path');
 const convert = require('ebook-convert')
 
 // Define allowed extensions for books
-const allowedExtensions = ['epub','pdf'];
+const allowedExtensions = ['epub','pdf','mobi'];
 
 /**
  * Get the store path.
