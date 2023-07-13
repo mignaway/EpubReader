@@ -5,14 +5,14 @@
 
 </p>
 
-# EpubReader 
+# Epub Reader
 
-<!-- <a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.1/Setup.v1.0.1.exe"><img src="https://user-images.githubusercontent.com/40722616/187921781-d02952a2-f3e2-4c2f-9b67-718994b0f49a.svg"></a> -->
+
 <a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.4/EpubReader.Setup.1.0.4.exe"><img src="https://img.shields.io/badge/v1.0.4-Installer-yellow"></a>
 <a href="https://mignaway.github.io/epub-reader-website/"><img src="https://user-images.githubusercontent.com/40722616/192098396-694ce4b1-15fb-495f-ba89-241043d2d8bd.svg"></a>
 
 
-EpubReader is a open-source project made with [ElectronJS](https://www.electronjs.org/). Like the name says it's an application for reading ***.epub*** files, there are already a thousand of epub reader but their UI/UX it's really bad. I started this project for letting people read epub books in a nice way with a well-made application.
+Epub Reader is a open-source project made with [ElectronJS](https://www.electronjs.org/). It's an application for reading ebook files (pdf, epub, etc...), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
 
 > **Warning** : This project is under development, you might experience some bugs!
 
