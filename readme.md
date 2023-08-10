@@ -37,12 +37,11 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 ## Version Logs
 
-<details open><summary><h3>v.1.0.5 (Developing)</h3></summary>
+<details open><summary><h3>v.1.0.5 (Last release)</h3></summary>
 
 - PDF and Mobi conversion support
 - Resizable Book Window
 - Now you can edit your books
-- Update feature
 
 </details>
 
