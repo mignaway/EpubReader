@@ -119,7 +119,7 @@ const updateEpubBook = async function (bookFolderName, optional) {
 				if (optional.author) booksData[i].author = optional.author;
 				if (optional.language) booksData[i].lang = optional.language;
 				if (optional.year) booksData[i].bookYear = optional.year;				
-				if (optional.cover && optional.cover != booksData[i].coverPath) {
+				if (optional.cover && path.basename(optional.cover) != booksData[i].coverPath) {
 					const coverExt = path.parse(optional.cover).ext   
 					await fse.copy(optional.cover,path.join(storePath,'epubs',booksData[i].bookFolderName,'cover'+coverExt))
 					booksData[i].coverPath = 'cover'+coverExt;				
