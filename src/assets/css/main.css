@@ -390,7 +390,7 @@ img {
 	transition: stroke .3s;
 }
 
-.book-box .book-delete-icon:hover svg,  {
+.book-box .book-delete-icon:hover svg {
 	stroke: white !important;
 }
 

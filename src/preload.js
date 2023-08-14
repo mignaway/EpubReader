@@ -35,8 +35,9 @@ const addEpubBook = async function (epubPath) {
             const author = epub.metadata.creator ?? null;
 
             // Generate folder name using title and author
-            const bookFolderAuthorName = author?.replaceAll(" ", "-").replaceAll(".", "").toLowerCase() ?? 'undefined';
-            const bookFolderName = epub.metadata.title.replace(/[^a-z0-9\s]/gi, '').replaceAll(" ", "-").replaceAll(".", "").toLowerCase() + "-" + bookFolderAuthorName;
+			// Replace non alphanumeric character and replace spaces with "-"
+            const bookFolderAuthorName = author?.replace(/[^\w\s]|_/g, '').replace(/\s+/g, '-').toLowerCase() ?? 'undefined';
+            const bookFolderName = epub.metadata.title.replace(/[^\w\s]|_/g, '').replace(/\s+/g, '-').toLowerCase() + "-" + bookFolderAuthorName;
             const bookFolderPath = path.join(storePath, 'epubs', bookFolderName);
 
             const coverPath = epub.metadata.cover ? epub.metadata.cover + ".png" : null;
