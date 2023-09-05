@@ -86,10 +86,13 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
             $('#book-section-grid').addClass('column-style')
             $('#book-section-grid').removeClass('row-style')
             for(const separator_letter of Object.keys(ordered_books)){
+
+				const booksLimitRange = ordered_books[separator_letter].length > 5
+
                 book_final_html = ''
-                book_final_html += '<div class="flex flex-col flex-1 gap-5">'
+				book_final_html += `<div class="flex flex-col ${booksLimitRange ? 'flex-5' : 'flex-1'} gap-5">`
                 book_final_html += `<div class="flex flex-col gap-1"><h1 class="main-text font-semibold">${separator_letter}</h1><div class="horizontal-divider-05 bg-black opacity-10"></div></div>`
-				book_final_html += '<div class="flex flex-row gap-10">'
+				book_final_html += `<div class="${booksLimitRange ? 'grid grid-cols-5' : 'flex flex-row'} gap-10">`
 
 
 				for (const book of ordered_books[separator_letter]){
