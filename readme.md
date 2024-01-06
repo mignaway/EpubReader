@@ -39,7 +39,14 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 ## Version Logs
 
-<details open><summary><h3>v.1.0.5 (Last release)</h3></summary>
+<details open><summary><h3>v.1.0.6 (Current Developing Release)</h3></summary>
+
+- Dark Mode
+- Auto Updater
+
+</details>
+
+<details open><summary><h3>v.1.0.5 (Last Release)</h3></summary>
 
 - PDF and Mobi conversion support
 - Resizable Book Window
@@ -47,7 +54,7 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 </details>
 
-<details open><summary><h3>v1.0.4 (Stable release)</h3></summary>
+<details open><summary><h3>v1.0.4</h3></summary>
 
 - Update feature (posticipated to v1.0.5 due important fix in order distribute a soon as possible a more stable version)
 - Linux distribution (.deb)
@@ -58,16 +65,6 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
     - Book covers are now shown and saved correctly
     - Epub drop fixed glitch
     - Fixed dashboard book sorting
-
-</details>
-
-<details><summary><h3>v1.0.3</h3></summary>
-
-- Epub folder moved to the user's roaming folder
-- Now you can directly drop the file in the application
-- Asar
-- General fixes
-- A lot of refactoring
 
 </details>
 
