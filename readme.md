@@ -18,7 +18,7 @@ Epub Reader is a open-source project made with [ElectronJS](https://www.electron
 This project could be improved by using a framework like React so that is possible to avoid code repetition, but since I don't have a lot of time to devote to the project, I prefer to avoid refactoring everything.
 
 > [!WARNING]
-> I've decided not to maintain this project anymore as I'm working on another one with a partner, which I believe is gonna be 10x better. This project is also quite challenging to maintain, so I hope you understand. I have a lot of faith in this future project and believe it could truly become a reference point for all digital reading enthusiasts, with some amazing features in mind.
+> I've decided not to maintain this project anymore as I'm working on another one with a partner, which I believe is gonna be 10x better. This project is also quite challenging to maintain, so I hope you understand. I have a lot of faith in this future project and believe it could truly become a reference point for all digital reading enthusiasts, with some amazing features in mind. Meanwhile, you can still enjoy this good ebook reader :)
 
 ## Preview
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176780491-6f7c7711-780f-4d96-bd2d-dc51fb7b5164.jpg" width="100%"> -->
