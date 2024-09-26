@@ -17,7 +17,7 @@ Epub Reader is a open-source project made with [ElectronJS](https://www.electron
 
 If you'd like to support the creator, [donate here](https://buymeacoffee.com/mignaway) <3
 
-> [!WARNING]
+> [!info]
 > I've decided not to maintain this project anymore as I'm working on another one with a partner, which I believe is gonna be 10x better. This project is also quite challenging to maintain, so I hope you understand. I have a lot of faith in this future project and believe it could truly become a reference point for all digital reading enthusiasts, with some amazing features in mind. Meanwhile, you can still enjoy this <3
 
 ## Preview
