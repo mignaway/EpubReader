@@ -13,7 +13,7 @@
 [![BuyMeACoffee](https://img.shields.io/badge/Share%20Love%20-ffdd00?&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/mignaway)
 
 
-Epub Reader is a open-source project made with [ElectronJS](https://www.electronjs.org/). It's an application for reading ebook files (epub, mobi, pdf), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
+Epub Reader is a open-source project made with ElectronJS. It's an application for reading ebook files (epub, mobi, pdf), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
 
 If you'd like to support the creator, [donate here](https://buymeacoffee.com/mignaway) <3
 
