@@ -387,50 +387,131 @@ function updateSavePagesButton(savedPages,cfi){
         $('#book-saved-btn').addClass("saving")
     }
 }
-async function loadBookStyleSettings(newStyleColor = null){
-    // Load settings
-    if (current_style_settings == null) current_style_settings = await window.bookConfig.getUserSettings();
-
-    // Check if font size is max/min and change opacity style
-    checkNavbarFontSizeOpacity();
-
-    // (NOT INITIAL LOAD) If style is manually changed then do it
-    // (INITIAL LOAD) Style is not changed then load initial font size
-    if (newStyleColor != null) {
-        current_style_settings.book.background_color_style = newStyleColor
-    } else {
-        await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")
+async function loadBookStyleSettings(newStyleColor = null) {
+    // Load user settings if not already loaded
+    if (!current_style_settings) {
+        current_style_settings = await window.bookConfig.getUserSettings();
     }
-    // LOAD FONT
-    book_rendition.themes.font(current_style_settings.book.typeface)
-    if (current_style_settings.book.typeface.length > 0) $('#typeface-section-text').text(current_style_settings.book.typeface)
 
-    // Group elements to change on initial style load
-    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1, #book-action-menu, .dictionary-audio-button, #currentPagesContainer')
-    var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup')
-    var text_elements = $('#currentPages h1')
+    // Update style settings if a new style is selected
+    if (newStyleColor) {
+        current_style_settings.book.background_color_style = newStyleColor;
+    }
 
-    // Color style setting change
-    switch (current_style_settings.book.background_color_style){
+    // Apply font size and font family
+    await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
+    book_rendition.themes.font(current_style_settings.book.typeface);
+    if (current_style_settings.book.typeface.length > 0) {
+        $('#typeface-section-text').text(current_style_settings.book.typeface);
+    }
+
+    // Apply color styles
+    applyThemeStyles(current_style_settings.book.background_color_style);
+}
+
+// Helper function to apply theme styles
+function applyThemeStyles(theme) {
+    const backgroundElements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #book-action-menu, .dictionary-audio-button, #currentPagesContainer');
+    const iconElements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup');
+    const textElements = $('#currentPages h1');
+
+    // Get the previous and next chapter or page buttons
+    const previousChapterBtn = $('#previous-chapter-btn g path');
+    const nextChapterBtn = $('#next-chapter-btn g path');
+
+    // Get the close and minimize app buttons
+    const closeAppBtn = $('#close-app-icon');
+    const resizeAppBtn = $('#resize-minimize-app-icon path');
+    const maximizeAppBtn = $('#resize-maximize-app-icon rect');
+    const minimizeAppBtn = $('#minimize-app-icon');
+
+    // Reading settings
+    const readingSettingsSpan = $('#reading-settings span');
+    const readingSettingsH1 = $('#reading-settings h1');
+    const verticalDivider = $('.vertical-divider-05');
+    const horizontalDivider = $('.horizontal-divider-05');
+    const typefaceSectionSVG = $('#typeface-section svg path');
+    const selectFontFamily = $('#typeface-option');
+
+    // Book infos
+    const bookInfoH1 = $('#book-info h1')
+    const bookInfoSpan = $('#book-info span')
+
+    // Reset classes
+    backgroundElements.removeClass('page-color-style-brown-bg page-color-style-dark-bg');
+    iconElements.removeClass('page-color-style-brown-color page-color-style-dark-color');
+    textElements.css('color', '');
+
+    previousChapterBtn.css('fill', 'black');
+    nextChapterBtn.css('fill', 'black');
+    
+    closeAppBtn.css('stroke', 'black');
+    resizeAppBtn.css('fill', 'black');
+    maximizeAppBtn.css('stroke', 'black');
+    minimizeAppBtn.css('stroke', 'black');
+
+    readingSettingsSpan.css('color', '');
+    readingSettingsH1.css('color', '');
+    verticalDivider.css('background-color', 'black');
+    horizontalDivider.css('background-color', 'black');
+    typefaceSectionSVG.css('fill', 'black');
+    selectFontFamily.css('background-color', 'white');
+
+    bookInfoH1.css('color', 'black')
+    bookInfoSpan.css('color', 'black')
+    // Apply theme-specific styles
+    switch (theme) {
         case "brown":
-            // if i use multiple themes (themes.register)
-            // when it change text color it will not update cause it won't replace but append the css
-            // -> color: #5B4636;color: black; | So it's necessary to apply css directly on default theme
             book_rendition.themes.default({ body: { 'color': '#5B4636' } });
-            backround_elements.addClass('page-color-style-brown-bg');
-            icon_elements.addClass('page-color-style-brown-color');
-            text_elements.css('color','#5B4636');
-            $('#page-color-style-brown').addClass('selected');
-            $('#page-color-style-default').removeClass('selected');
+            backgroundElements.addClass('page-color-style-brown-bg');
+            iconElements.addClass('page-color-style-brown-color');
+            textElements.css('color', '#5B4636');
+
+            previousChapterBtn.css('fill', 'black');
+            nextChapterBtn.css('fill', 'black');
+
+            closeAppBtn.css('stroke', '#5B4636');
+            resizeAppBtn.css('fill', '#5B4636');
+            maximizeAppBtn.css('stroke', '#5B4636');
+            minimizeAppBtn.css('stroke', '#5B4636');
+
+            readingSettingsSpan.css('color', '#5B4636');
+            readingSettingsH1.css('color', '#5B4636');
+            verticalDivider.css('background-color', '#5B4636');
+            horizontalDivider.css('background-color', '#5B4636');
+            typefaceSectionSVG.css('fill', '#5B4636');
+            selectFontFamily.css('background-color', '#5B4636', 'color', 'white');
+
+            bookInfoH1.css('color', '#5B4636')
+            bookInfoSpan.css('color', '#5B4636')
             break;
-        default:
-            book_rendition.themes.default({ body: { 'color': 'black' } })
-            backround_elements.removeClass('page-color-style-brown-bg');
-            icon_elements.removeClass('page-color-style-brown-color');
-            text_elements.css('color', 'black');
-            $('#page-color-style-default').addClass('selected');
-            $('#page-color-style-brown').removeClass('selected');
+        case "dark":
+            book_rendition.themes.default({ body: { 'color': 'white' } });
+            backgroundElements.addClass('page-color-style-dark-bg');
+            iconElements.addClass('page-color-style-dark-color');
+            textElements.css('color', 'white');
+
+            previousChapterBtn.css('fill', 'white');
+            nextChapterBtn.css('fill', 'white');
+
+            closeAppBtn.css('stroke', 'white');
+            resizeAppBtn.css('fill', 'white');
+            maximizeAppBtn.css('stroke', 'white');
+            minimizeAppBtn.css('stroke', 'white');
+
+            readingSettingsSpan.css('color', 'white');
+            readingSettingsH1.css('color', 'white');
+            verticalDivider.css('background-color', 'white');
+            horizontalDivider.css('background-color', 'white');
+            typefaceSectionSVG.css('fill', 'white');
+            selectFontFamily.css('background-color', 'black', 'color', 'white');
+            
+            bookInfoH1.css('color', 'white')
+            bookInfoSpan.css('color', 'white')
             break;
+        default: // Default to light theme
+            book_rendition.themes.default({ body: { 'color': 'black' } });
+            textElements.css('color', 'black');
     }
 }
 

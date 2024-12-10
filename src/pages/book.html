@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <meta charset="UTF-8" />
     <meta http-equiv="cache-control" content="no-cache" />
@@ -10,49 +11,63 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.5/jszip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/epubjs/dist/epub.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js" integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
-	<script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.1.slim.min.js"
+        integrity="sha256-w8CvhFs7iHNVUtnSP0YKEg00p9Ih13rlL9zGqvLdePA=" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
     <script src="../js/general/navbarHandler.js"></script>
     <script src="../js/book/book.js"></script>
     <script src="../js/book/bookNavbarHandler.js"></script>
     <script src="../js/general/dictionaryApi.js"></script>
 </head>
+
 <body>
     <h1 id="alert-text" class="main-text text-sb text-color-white alert-default"></h1>
     <div class="flex-column h-100">
         <div id="main-navbar">
             <div class="flex-row flex-v-center gap-30 no-drag">
-                <a href="library.html" id="libraryNavBtn" class="main-text text-color-black text-sb cursor-pointer text-decoration-none" onclick="saveBeforeClose();">Library</a>
-                <div class="vertical-divider-05 bg-black"></div>
+                <a href="library.html" id="libraryNavBtn"
+                    class="main-text text-color-black text-sb cursor-pointer text-decoration-none"
+                    onclick="saveBeforeClose();">Library</a>
+                <div class="vertical-divider-05"></div>
                 <div class="flex-row flex-v-center gap-30">
                     <div class="flex-column" style="position: relative;">
-                        <svg id="show-book-chapters" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="show-book-chapters" class="book-navbar-popup-open cursor-pointer" width="20"
+                            height="20" viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_5_29)">
-                                <path d="M19.0024 17.2623H5.62845C5.07724 17.2623 4.63049 16.8155 4.63049 16.2643C4.63049 15.7131 5.07724 15.2664 5.62845 15.2664H19.002C19.5532 15.2664 20 15.7131 20 16.2643C20 16.8155 19.5536 17.2623 19.0024 17.2623Z" />
-                                <path d="M19.0024 10.9981H5.62845C5.07724 10.9981 4.63049 10.5514 4.63049 10.0002C4.63049 9.44895 5.07724 9.0022 5.62845 9.0022H19.002C19.5532 9.0022 20 9.44895 20 10.0002C20.0003 10.5514 19.5536 10.9981 19.0024 10.9981Z" />
-                                <path d="M19.0024 4.73395H5.62845C5.07724 4.73395 4.63049 4.28719 4.63049 3.73599C4.63049 3.18479 5.07724 2.73804 5.62845 2.73804H19.002C19.5532 2.73804 20 3.18479 20 3.73599C20 4.28719 19.5536 4.73395 19.0024 4.73395Z" />
-                                <path d="M1.34025 5.1534C2.08045 5.1534 2.6805 4.55335 2.6805 3.81315C2.6805 3.07295 2.08045 2.4729 1.34025 2.4729C0.600051 2.4729 0 3.07295 0 3.81315C0 4.55335 0.600051 5.1534 1.34025 5.1534Z" />
-                                <path d="M1.34025 11.3404C2.08045 11.3404 2.6805 10.7404 2.6805 10.0002C2.6805 9.25996 2.08045 8.65991 1.34025 8.65991C0.600051 8.65991 0 9.25996 0 10.0002C0 10.7404 0.600051 11.3404 1.34025 11.3404Z" />
-                                <path d="M1.34025 17.5274C2.08045 17.5274 2.6805 16.9273 2.6805 16.1871C2.6805 15.4469 2.08045 14.8469 1.34025 14.8469C0.600051 14.8469 0 15.4469 0 16.1871C0 16.9273 0.600051 17.5274 1.34025 17.5274Z" />
+                                <path
+                                    d="M19.0024 17.2623H5.62845C5.07724 17.2623 4.63049 16.8155 4.63049 16.2643C4.63049 15.7131 5.07724 15.2664 5.62845 15.2664H19.002C19.5532 15.2664 20 15.7131 20 16.2643C20 16.8155 19.5536 17.2623 19.0024 17.2623Z" />
+                                <path
+                                    d="M19.0024 10.9981H5.62845C5.07724 10.9981 4.63049 10.5514 4.63049 10.0002C4.63049 9.44895 5.07724 9.0022 5.62845 9.0022H19.002C19.5532 9.0022 20 9.44895 20 10.0002C20.0003 10.5514 19.5536 10.9981 19.0024 10.9981Z" />
+                                <path
+                                    d="M19.0024 4.73395H5.62845C5.07724 4.73395 4.63049 4.28719 4.63049 3.73599C4.63049 3.18479 5.07724 2.73804 5.62845 2.73804H19.002C19.5532 2.73804 20 3.18479 20 3.73599C20 4.28719 19.5536 4.73395 19.0024 4.73395Z" />
+                                <path
+                                    d="M1.34025 5.1534C2.08045 5.1534 2.6805 4.55335 2.6805 3.81315C2.6805 3.07295 2.08045 2.4729 1.34025 2.4729C0.600051 2.4729 0 3.07295 0 3.81315C0 4.55335 0.600051 5.1534 1.34025 5.1534Z" />
+                                <path
+                                    d="M1.34025 11.3404C2.08045 11.3404 2.6805 10.7404 2.6805 10.0002C2.6805 9.25996 2.08045 8.65991 1.34025 8.65991C0.600051 8.65991 0 9.25996 0 10.0002C0 10.7404 0.600051 11.3404 1.34025 11.3404Z" />
+                                <path
+                                    d="M1.34025 17.5274C2.08045 17.5274 2.6805 16.9273 2.6805 16.1871C2.6805 15.4469 2.08045 14.8469 1.34025 14.8469C0.600051 14.8469 0 15.4469 0 16.1871C0 16.9273 0.600051 17.5274 1.34025 17.5274Z" />
                             </g>
                             <defs>
-                            <clipPath id="clip0_5_29">
-                                 <rect width="20" height="20" fill="white"/>
-                            </clipPath>
+                                <clipPath id="clip0_5_29">
+                                    <rect width="20" height="20" fill="white" />
+                                </clipPath>
                             </defs>
                         </svg>
                         <div id="book-chapters" class="book-navbar-popup">
-                            
+
                         </div>
                     </div>
                     <div class="flex-column" style="position: relative;">
-                        <svg id="show-book-saved" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="show-book-saved" class="book-navbar-popup-open cursor-pointer" width="20" height="20"
+                            viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M15.6489 0H4.35111C3.35544 0 2.50983 0.803036 2.50983 1.84129V18.547C2.51276 19.8648 4.12234 20.4831 5.03742 19.5581L9.34383 15.2529C9.68894 14.8928 10.3111 14.8928 10.6562 15.2529L14.9626 19.5581C15.8781 20.4835 17.4875 19.8642 17.4902 18.547V1.84129C17.4902 0.803036 16.6446 0 15.6489 0V0Z" />
                         </svg>
                         <div id="book-saved" class="book-navbar-popup flex-column">
-                            <div id="book-saved-btn" onclick="handleSavePage()" class="cursor-pointer flex-all-centered">
-                                <svg class="m-r-10" width="15" height="20" viewBox="0 0 15 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <div id="book-saved-btn" onclick="handleSavePage()"
+                                class="cursor-pointer flex-all-centered">
+                                <svg class="m-r-10" width="15" height="20" viewBox="0 0 15 20" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
                                     <path
                                         d="M1.84129 0.75H13.1391C13.7319 0.75 14.2304 1.2285 14.2304 1.84129L14.2304 18.5454C14.2304 18.5456 14.2304 18.5457 14.2304 18.5458C14.2288 19.1579 13.4557 19.5054 12.986 19.0306L12.9831 19.0277L8.6814 14.7272C8.04218 14.0681 6.93821 14.0681 6.29899 14.7272L1.99733 19.0277L1.9944 19.0306C1.5249 19.5052 0.751938 19.1582 0.75 18.546V1.84129C0.75 1.2285 1.24849 0.75 1.84129 0.75Z"
                                         stroke="white" stroke-width="1.5" />
@@ -77,12 +92,11 @@
                         </div>
                     </div>
                     <div class="flex-column" style="position: relative;">
-                        <svg id="show-book-info" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 20 20"
-                            fill="black" xmlns="http://www.w3.org/2000/svg">
+                        <svg id="show-book-info" class="book-navbar-popup-open cursor-pointer" width="20" height="20"
+                            viewBox="0 0 20 20" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <g clip-path="url(#clip0_10_155)">
                                 <path
-                                    d="M9.78321 0C11.0882 0 12.1436 1.05543 12.1436 2.3604C12.1436 3.66537 11.0882 4.7208 9.78321 4.7208C8.47824 4.7208 7.42281 3.66537 7.42281 2.3604C7.42281 1.05543 8.47824 0 9.78321 0ZM11.9309 6.20168H11.8695H8.07325H7.93416C7.1569 6.20168 6.53101 6.83166 6.53101 7.60482C6.53101 8.38208 7.16099 9.00797 7.93416 9.00797H8.07325V17.1896H6.53101V20H13.469V17.1896H11.935V6.20168H11.9309Z"
-                                    />
+                                    d="M9.78321 0C11.0882 0 12.1436 1.05543 12.1436 2.3604C12.1436 3.66537 11.0882 4.7208 9.78321 4.7208C8.47824 4.7208 7.42281 3.66537 7.42281 2.3604C7.42281 1.05543 8.47824 0 9.78321 0ZM11.9309 6.20168H11.8695H8.07325H7.93416C7.1569 6.20168 6.53101 6.83166 6.53101 7.60482C6.53101 8.38208 7.16099 9.00797 7.93416 9.00797H8.07325V17.1896H6.53101V20H13.469V17.1896H11.935V6.20168H11.9309Z" />
                             </g>
                             <defs>
                                 <clipPath id="clip0_10_155">
@@ -92,27 +106,41 @@
                         </svg>
                         <div id="book-info" class="book-navbar-popup">
                             <div class="flex-column" style="gap: 10px;">
-                                <div class="flex-row"><h1 class="main-text m-r-10">Title:</h1><span id="book-info-title" class="main-text text-sb"></span></div>
-                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
-                                <div class="flex-row"><h1 class="main-text m-r-10">Author:</h1><span id="book-info-author" class="main-text text-sb"></span></div>
-                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
-                                <div class="flex-row"><h1 class="main-text m-r-10">Language:</h1><span id="book-info-language" class="main-text text-sb"></span></div>
-                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
-                                <div class="flex-row"><h1 class="main-text m-r-10">Year Edition:</h1><span id="book-info-year" class="main-text text-sb"></span></div>
-                                <div class="horizontal-divider-05 bg-black" style="opacity: .1"></div>
-                                <div class="flex-row"><h1 class="main-text m-r-10">Pages:</h1><span id="book-info-pages" class="main-text text-sb"></span></div>
+                                <div class="flex-row">
+                                    <h1 class="main-text m-r-10">Title:</h1><span id="book-info-title"
+                                        class="main-text text-sb"></span>
+                                </div>
+                                <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
+                                <div class="flex-row">
+                                    <h1 class="main-text m-r-10">Author:</h1><span id="book-info-author"
+                                        class="main-text text-sb"></span>
+                                </div>
+                                <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
+                                <div class="flex-row">
+                                    <h1 class="main-text m-r-10">Language:</h1><span id="book-info-language"
+                                        class="main-text text-sb"></span>
+                                </div>
+                                <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
+                                <div class="flex-row">
+                                    <h1 class="main-text m-r-10">Year Edition:</h1><span id="book-info-year"
+                                        class="main-text text-sb"></span>
+                                </div>
+                                <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
+                                <div class="flex-row">
+                                    <h1 class="main-text m-r-10">Pages:</h1><span id="book-info-pages"
+                                        class="main-text text-sb"></span>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="vertical-divider-05 bg-black"></div>
+                <div class="vertical-divider-05"></div>
                 <div class="flex-column" style="position: relative;">
-                    <svg id="show-dictionary-popup" class="book-navbar-popup-open cursor-pointer" width="20" height="20" viewBox="0 0 400 400"
-                        xmlns="http://www.w3.org/2000/svg">
+                    <svg id="show-dictionary-popup" class="book-navbar-popup-open cursor-pointer" width="20" height="20"
+                        viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">
                         <g clip-path="url(#clip0_348_104)">
                             <path fill-rule="evenodd" clip-rule="evenodd"
-                                d="M395.36 372.693L302.133 279.467C330.144 245.642 344.051 202.327 340.966 158.518C337.881 114.709 318.04 73.7717 285.565 44.2065C253.089 14.6413 210.474 -1.27971 166.569 -0.250524C122.663 0.778666 80.8412 18.679 49.7868 49.7334C18.7324 80.7878 0.832011 122.61 -0.19718 166.516C-1.22637 210.421 14.6947 253.036 44.2599 285.511C73.8251 317.987 114.763 337.827 158.572 340.913C202.381 343.998 245.695 330.091 279.52 302.08L372.747 395.307C374.229 396.795 375.991 397.977 377.932 398.783C379.872 399.589 381.952 400.004 384.053 400.004C386.154 400.004 388.235 399.589 390.175 398.783C392.115 397.977 393.877 396.795 395.36 395.307C398.336 392.296 400.004 388.233 400.004 384C400.004 379.767 398.336 375.704 395.36 372.693V372.693ZM188 218.667H102.667C98.4232 218.667 94.3536 216.981 91.353 213.98C88.3524 210.98 86.6667 206.91 86.6667 202.667C86.6667 198.423 88.3524 194.354 91.353 191.353C94.3536 188.352 98.4232 186.667 102.667 186.667H188C192.243 186.667 196.313 188.352 199.314 191.353C202.314 194.354 204 198.423 204 202.667C204 206.91 202.314 210.98 199.314 213.98C196.313 216.981 192.243 218.667 188 218.667V218.667ZM230.667 154.667H102.667C98.4232 154.667 94.3536 152.981 91.353 149.98C88.3524 146.98 86.6667 142.91 86.6667 138.667C86.6667 134.423 88.3524 130.354 91.353 127.353C94.3536 124.352 98.4232 122.667 102.667 122.667H230.667C234.91 122.667 238.98 124.352 241.98 127.353C244.981 130.354 246.667 134.423 246.667 138.667C246.667 142.91 244.981 146.98 241.98 149.98C238.98 152.981 234.91 154.667 230.667 154.667Z"
-                                />
+                                d="M395.36 372.693L302.133 279.467C330.144 245.642 344.051 202.327 340.966 158.518C337.881 114.709 318.04 73.7717 285.565 44.2065C253.089 14.6413 210.474 -1.27971 166.569 -0.250524C122.663 0.778666 80.8412 18.679 49.7868 49.7334C18.7324 80.7878 0.832011 122.61 -0.19718 166.516C-1.22637 210.421 14.6947 253.036 44.2599 285.511C73.8251 317.987 114.763 337.827 158.572 340.913C202.381 343.998 245.695 330.091 279.52 302.08L372.747 395.307C374.229 396.795 375.991 397.977 377.932 398.783C379.872 399.589 381.952 400.004 384.053 400.004C386.154 400.004 388.235 399.589 390.175 398.783C392.115 397.977 393.877 396.795 395.36 395.307C398.336 392.296 400.004 388.233 400.004 384C400.004 379.767 398.336 375.704 395.36 372.693V372.693ZM188 218.667H102.667C98.4232 218.667 94.3536 216.981 91.353 213.98C88.3524 210.98 86.6667 206.91 86.6667 202.667C86.6667 198.423 88.3524 194.354 91.353 191.353C94.3536 188.352 98.4232 186.667 102.667 186.667H188C192.243 186.667 196.313 188.352 199.314 191.353C202.314 194.354 204 198.423 204 202.667C204 206.91 202.314 210.98 199.314 213.98C196.313 216.981 192.243 218.667 188 218.667V218.667ZM230.667 154.667H102.667C98.4232 154.667 94.3536 152.981 91.353 149.98C88.3524 146.98 86.6667 142.91 86.6667 138.667C86.6667 134.423 88.3524 130.354 91.353 127.353C94.3536 124.352 98.4232 122.667 102.667 122.667H230.667C234.91 122.667 238.98 124.352 241.98 127.353C244.981 130.354 246.667 134.423 246.667 138.667C246.667 142.91 244.981 146.98 241.98 149.98C238.98 152.981 234.91 154.667 230.667 154.667Z" />
                         </g>
                         <defs>
                             <clipPath id="clip0_348_104">
@@ -120,18 +148,19 @@
                             </clipPath>
                         </defs>
                     </svg>
+                    <!-- Need to see a way to change the text color for the dark theme -->
                     <div id="dictionary-popup" class="book-navbar-popup flex-column">
-                        
+
                     </div>
                 </div>
-                
+
 
             </div>
             <div class="flex-row flex-v-center gap-15 no-drag">
                 <div class="flex-row flex-v-center gap-30 no-drag" style="margin-right: 150px">
                     <div class="flex-column" style="position: relative;">
-                        <svg id="show-reading-settings" class="book-navbar-popup-open cursor-pointer" width="25" height="20" viewBox="0 0 31 20" fill="black"
-                            xmlns="http://www.w3.org/2000/svg">
+                        <svg id="show-reading-settings" class="book-navbar-popup-open cursor-pointer" width="25"
+                            height="20" viewBox="0 0 31 20" fill="black" xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M2.15584 20H0.467532L5.35065 6.7013H7.01299L11.8961 20H10.2078L6.23377 8.80519H6.12987L2.15584 20ZM2.77922 14.8052H9.58442V16.2338H2.77922V14.8052ZM16.2338 20H13.039L20.2175 0.0519486H23.6948L30.8734 20H27.6786L22.039 3.67532H21.8831L16.2338 20ZM16.7695 12.1883H27.1331V14.7208H16.7695V12.1883Z" />
                         </svg>
@@ -139,121 +168,160 @@
                             <div class="flex-column">
                                 <div class="flex-row" style="justify-content: space-around; align-items: stretch;">
                                     <span id="settings-decrease-font-size" class="main-text cursor-pointer">A</span>
-                                    <div class="vertical-divider-05 bg-black" style="height: 40px;"></div>
-                                    <span id="settings-increase-font-size" class="main-text text-giant cursor-pointer">A</span>
+                                    <div class="vertical-divider-05" style="height: 40px; background-color: black;"></div>
+                                    <span id="settings-increase-font-size"
+                                        class="main-text text-giant cursor-pointer">A</span>
                                 </div>
-                                <div class="horizontal-divider-05 bg-black"></div>
+                                <div class="horizontal-divider-05" style="background-color: black;"></div>
                                 <div class="flex-row flex-v-center" style="margin-top: 20px;">
                                     <h1 class="main-text m-r-10">Typeface:</h1>
                                     <div id="typeface-settings" class="w-100" onclick="handleTypeFaceSelection()">
                                         <div id="typeface-section" class="flex-row flex-v-center">
                                             <h1 id="typeface-section-text" class="flex-1 main-text text-sb">Default</h1>
-                                            <svg width="12" height="8" viewBox="0 0 8 4" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <svg width="12" height="8" viewBox="0 0 8 4" fill="none"
+                                                xmlns="http://www.w3.org/2000/svg">
                                                 <path
                                                     d="M7.18198 0.318107C7.08821 0.224372 6.96106 0.171714 6.82848 0.171714C6.69589 0.171714 6.56874 0.224372 6.47498 0.318107L3.99998 2.79311L1.52498 0.318107C1.43068 0.227028 1.30438 0.176631 1.17328 0.17777C1.04218 0.178909 0.916772 0.231493 0.824068 0.324197C0.731364 0.416901 0.67878 0.542308 0.677641 0.673406C0.676502 0.804505 0.726899 0.930805 0.817978 1.02511L3.64648 3.85361C3.74024 3.94734 3.86739 4 3.99998 4C4.13256 4 4.25971 3.94734 4.35348 3.85361L7.18198 1.02511C7.27571 0.931343 7.32837 0.804189 7.32837 0.671607C7.32837 0.539025 7.27571 0.411871 7.18198 0.318107V0.318107Z"
                                                     fill="black" fill-opacity="0.5" />
                                             </svg>
                                         </div>
                                         <div id="typeface-option" class="w-100">
-											<h1 class="main-text" onclick="handleChangeFont(this.innerHTML,this.dataset.value)" data-value="IBM Plex Serif">IMB Plex Serif</h1>
-											<div class="horizontal-divider-05 text-color-black"></div>
-                                            <h1 class="main-text" onclick="handleChangeFont(this.innerHTML,this.dataset.value)" data-value="Inter">Inter</h1>
+                                            <h1 class="main-text"
+                                                onclick="handleChangeFont(this.innerHTML,this.dataset.value)"
+                                                data-value="IBM Plex Serif">IMB Plex Serif</h1>
+                                            <div class="horizontal-divider-05 text-color-black"></div>
+                                            <h1 class="main-text"
+                                                onclick="handleChangeFont(this.innerHTML,this.dataset.value)"
+                                                data-value="Inter">Inter</h1>
                                         </div>
-                                    </div> 
+                                    </div>
                                 </div>
                                 <div class="flex-row flex-v-center" style="margin-top: 20px;">
                                     <h1 class="main-text m-r-10">Color Style:</h1>
                                     <div class="flex-row flex-v-center flex-h-center">
-                                        <div id="page-color-style-default" class="cursor-pointer" onclick="loadBookStyleSettings('default');"></div>
-                                        <div id="page-color-style-brown" class="cursor-pointer" onclick="loadBookStyleSettings('brown');"></div>
+                                        <div id="page-color-style-default" class="cursor-pointer"
+                                            onclick="loadBookStyleSettings('default');"></div>
+                                        <div id="page-color-style-brown" class="cursor-pointer"
+                                            onclick="loadBookStyleSettings('brown');"></div>
+                                        <div id="page-color-style-dark" class="cursor-pointer"
+                                            onclick="loadBookStyleSettings('dark');"></div>
                                     </div>
                                 </div>
-								<div class="flex-row flex-v-center" style="margin-top: 20px;">
+                                <div class="flex-row flex-v-center" style="margin-top: 20px;">
                                     <h1 class="main-text" style="margin-right: 20px">Layout:</h1>
                                     <div class="flex-row flex-v-center flex-h-center" style="gap: 15px;">
-											<svg id="loadLayoutDefault" class="loadLayoutIcon active group/layout h-[40px] cursor-pointer" viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="loadLayoutHandler('default')">
-												<rect class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]" x="13.4131" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0"/>
-												<rect class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]" x="0.5" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0" />
-												<path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]" d="M22.7035 10.8933C22.8011 10.7956 22.8011 10.6373 22.7035 10.5397L21.1125 8.94872C21.0149 8.85109 20.8566 8.85109 20.7589 8.94872C20.6613 9.04636 20.6613 9.20465 20.7589 9.30228L22.1731 10.7165L20.7589 12.1307C20.6613 12.2283 20.6613 12.3866 20.7589 12.4843C20.8566 12.5819 21.0149 12.5819 21.1125 12.4843L22.7035 10.8933ZM17.6253 10.9665H22.5267V10.4665H17.6253V10.9665Z" fill="black" fill-opacity="0.5"/>
-												<path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]" d="M4.7443 10.5397C4.64667 10.6373 4.64667 10.7956 4.7443 10.8933L6.3353 12.4843C6.43293 12.5819 6.59122 12.5819 6.68885 12.4843C6.78648 12.3866 6.78648 12.2283 6.68885 12.1307L5.27463 10.7165L6.68885 9.30228C6.78648 9.20465 6.78648 9.04636 6.68885 8.94872C6.59122 8.85109 6.43293 8.85109 6.3353 8.94872L4.7443 10.5397ZM4.92108 10.9665H9.82247V10.4665H4.92108V10.9665Z" fill="black" fill-opacity="0.5"/>
-											</svg>
-											<svg id="loadLayoutScrolled" class="loadLayoutIcon group/layout h-[40px] cursor-pointer" viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg" onclick="loadLayoutHandler('scrolled')">
-												<rect class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]" x="1.41309" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0" stroke="#AAAAAA"/>
-												<path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]" d="M7.73631 13.8159C7.83394 13.9136 7.99223 13.9136 8.08986 13.8159L9.68085 12.225C9.77848 12.1273 9.77848 11.969 9.68085 11.8714C9.58322 11.7738 9.42493 11.7738 9.3273 11.8714L7.91309 13.2856L6.49887 11.8714C6.40124 11.7738 6.24295 11.7738 6.14532 11.8714C6.04769 11.969 6.04769 12.1273 6.14532 12.225L7.73631 13.8159ZM7.66309 6.81958V13.6392H8.16309V6.81958H7.66309Z" fill="black" fill-opacity="0.5"/>
-											</svg>
-									</div>
+                                        <svg id="loadLayoutDefault"
+                                            class="loadLayoutIcon active group/layout h-[40px] cursor-pointer"
+                                            viewBox="0 0 27 21" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                            onclick="loadLayoutHandler('default')">
+                                            <rect
+                                                class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]"
+                                                x="13.4131" y="0.5" width="13" height="20" rx="1.89506"
+                                                fill="#E0E0E0" />
+                                            <rect
+                                                class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]"
+                                                x="0.5" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0" />
+                                            <path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]"
+                                                d="M22.7035 10.8933C22.8011 10.7956 22.8011 10.6373 22.7035 10.5397L21.1125 8.94872C21.0149 8.85109 20.8566 8.85109 20.7589 8.94872C20.6613 9.04636 20.6613 9.20465 20.7589 9.30228L22.1731 10.7165L20.7589 12.1307C20.6613 12.2283 20.6613 12.3866 20.7589 12.4843C20.8566 12.5819 21.0149 12.5819 21.1125 12.4843L22.7035 10.8933ZM17.6253 10.9665H22.5267V10.4665H17.6253V10.9665Z"
+                                                fill="black" fill-opacity="0.5" />
+                                            <path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]"
+                                                d="M4.7443 10.5397C4.64667 10.6373 4.64667 10.7956 4.7443 10.8933L6.3353 12.4843C6.43293 12.5819 6.59122 12.5819 6.68885 12.4843C6.78648 12.3866 6.78648 12.2283 6.68885 12.1307L5.27463 10.7165L6.68885 9.30228C6.78648 9.20465 6.78648 9.04636 6.68885 8.94872C6.59122 8.85109 6.43293 8.85109 6.3353 8.94872L4.7443 10.5397ZM4.92108 10.9665H9.82247V10.4665H4.92108V10.9665Z"
+                                                fill="black" fill-opacity="0.5" />
+                                        </svg>
+                                        <svg id="loadLayoutScrolled"
+                                            class="loadLayoutIcon group/layout h-[40px] cursor-pointer"
+                                            viewBox="0 0 15 21" fill="none" xmlns="http://www.w3.org/2000/svg"
+                                            onclick="loadLayoutHandler('scrolled')">
+                                            <rect
+                                                class="group-[.active]/layout:stroke-[#1E69DB] group-[.active]/layout:fill-[#1E69DB]/20 stroke-[#AAAAAA]"
+                                                x="1.41309" y="0.5" width="13" height="20" rx="1.89506" fill="#E0E0E0"
+                                                stroke="#AAAAAA" />
+                                            <path class="group-[.active]/layout:stroke-[#1E69DB] stroke-[#AAAAAA]"
+                                                d="M7.73631 13.8159C7.83394 13.9136 7.99223 13.9136 8.08986 13.8159L9.68085 12.225C9.77848 12.1273 9.77848 11.969 9.68085 11.8714C9.58322 11.7738 9.42493 11.7738 9.3273 11.8714L7.91309 13.2856L6.49887 11.8714C6.40124 11.7738 6.24295 11.7738 6.14532 11.8714C6.04769 11.969 6.04769 12.1273 6.14532 12.225L7.73631 13.8159ZM7.66309 6.81958V13.6392H8.16309V6.81958H7.66309Z"
+                                                fill="black" fill-opacity="0.5" />
+                                        </svg>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>     
+                    </div>
                 </div>
                 <svg id="minimize-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 15 1" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
                     <line x1="14.5" y1="0.5" x2="0.5" y2="0.499999" stroke-width="1.5" stroke-linecap="round" />
                 </svg>
-                <svg id="resize-minimize-app-icon" class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
+                <svg id="resize-minimize-app-icon" class="cursor-pointer" xmlns="http://www.w3.org/2000/svg" width="20"
+                    height="20" viewBox="0 0 20 20" fill="none" style="display: none;">
                     <path
                         d="M17.8947 0.117188H7.36842C6.17544 0.117188 5.26316 1.09964 5.26316 2.22245V5.16982H1.89474C0.842105 5.16982 0 6.01192 0 7.06456V18.0119C0 19.0646 0.842105 19.9067 1.89474 19.9067H12.8421C13.8947 19.9067 14.7368 19.0646 14.7368 18.0119V14.854H17.8947C19.0877 14.854 20 13.8716 20 12.7488V2.22245C20 1.02947 19.0877 0.117188 17.8947 0.117188ZM13.3333 18.0119C13.3333 18.2926 13.193 18.5032 12.9123 18.5032H1.89474C1.61403 18.5032 1.40351 18.2926 1.40351 18.0119V7.06456C1.40351 6.78385 1.61403 6.57333 1.89474 6.57333H12.8421C13.1228 6.57333 13.3333 6.78385 13.3333 7.06456V18.0119ZM18.5965 12.7488C18.5965 13.1698 18.2456 13.4505 17.8947 13.4505H14.7368V7.06456C14.7368 6.01192 13.8947 5.16982 12.8421 5.16982H6.66667V2.22245C6.66667 1.8014 7.01754 1.5207 7.36842 1.5207H17.8947C18.3158 1.5207 18.5965 1.87157 18.5965 2.22245V12.7488Z"
                         fill="black" />
                 </svg>
-                <svg id="resize-maximize-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 21 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg id="resize-maximize-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 21 20"
+                    fill="none" xmlns="http://www.w3.org/2000/svg">
                     <rect x="2.825" y="2.825" width="14.85" height="14.85" rx="1.375" stroke="black" stroke-width="1.65"
                         stroke-linejoin="round" />
                 </svg>
                 <svg id="close-app-icon" class="cursor-pointer" width="20" height="20" viewBox="0 0 17 17" fill="none"
                     xmlns="http://www.w3.org/2000/svg">
-                    <line x1="15.1422" y1="2.06066" x2="2.06067" y2="15.1421" stroke-width="1.5" stroke-linecap="round" />
-                    <line x1="14.7886" y1="15.1422" x2="1.70711" y2="2.06067" stroke-width="1.5" stroke-linecap="round" />
+                    <line x1="15.1422" y1="2.06066" x2="2.06067" y2="15.1421" stroke-width="1.5"
+                        stroke-linecap="round" />
+                    <line x1="14.7886" y1="15.1422" x2="1.70711" y2="2.06067" stroke-width="1.5"
+                        stroke-linecap="round" />
                 </svg>
             </div>
         </div>
         <div id="book-container">
-			<!-- <div class="flex-row flex-all-centered h-100 w-100 gap-5">-->
-                <svg id="previous-chapter-btn" class="cursor-pointer" width="16" height="30" viewBox="0 0 16 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_5_60)">
-                        <path
-                            d="M0.535264 14.0174L13.3922 0.446178C13.9336 -0.128089 14.8379 -0.149534 15.4107 0.390456C15.9836 0.933318 16.0079 1.83758 15.465 2.41044L3.5409 14.9988L15.4651 27.5886C16.0079 28.1615 15.9836 29.0657 15.4107 29.6086C15.135 29.87 14.7822 30 14.4293 30C14.0507 30 13.6722 29.85 13.3922 29.5529L0.535205 15.9817C0.0124407 15.4317 0.0124407 14.5674 0.535264 14.0174Z"
-                            fill="black" fill-opacity="0.2" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_5_60">
-                            <rect width="16" height="30" fill="white" transform="matrix(-1 0 0 1 16 0)" />
-                        </clipPath>
-                    </defs>
-                </svg>
-                <div id="book-content-columns-wrapper">
-                    <ul id="book-action-menu">
-                        <li id="action-menu-show-dictionary" class="main-text text-sb flex-row flex-v-center" onclick="$(this).parent().hide();">
-                            <svg class="m-r-10" width="20" height="20" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd"
-                                    d="M14.3251 12.8985L19.7048 18.2783C19.8939 18.4676 20.0001 18.7242 20 18.9917C19.9999 19.2592 19.8935 19.5157 19.7043 19.7048C19.5151 19.8939 19.2585 20.0001 18.991 20C18.7235 19.9999 18.467 19.8935 18.2779 19.7043L12.8981 14.3244C11.2899 15.5701 9.26759 16.1563 7.24253 15.9638C5.21748 15.7712 3.34182 14.8145 1.99713 13.2881C0.652446 11.7617 -0.0602623 9.78035 0.00399614 7.74712C0.0682545 5.7139 0.904653 3.78152 2.34304 2.3431C3.78143 0.904675 5.71376 0.0682562 7.74693 0.00399624C9.7801 -0.0602638 11.7614 0.652463 13.2877 1.99718C14.8141 3.3419 15.7708 5.21761 15.9634 7.24271C16.1559 9.26782 15.5697 11.2902 14.3241 12.8985H14.3251ZM8.00037 13.9994C9.5916 13.9994 11.1176 13.3673 12.2428 12.2421C13.368 11.1169 14.0001 9.59084 14.0001 7.99957C14.0001 6.40831 13.368 4.88222 12.2428 3.75702C11.1176 2.63183 9.5916 1.9997 8.00037 1.9997C6.40915 1.9997 4.88309 2.63183 3.75793 3.75702C2.63276 4.88222 2.00065 6.40831 2.00065 7.99957C2.00065 9.59084 2.63276 11.1169 3.75793 12.2421C4.88309 13.3673 6.40915 13.9994 8.00037 13.9994Z"
-                                    fill="black" />
-                            </svg>Search on dictionary
-                        </li>
-                    </ul>
-                    <div id="book-content-columns" class="flex-row flex-h-center">
-                        
-                    </div>
-                </div>
-                <svg id="next-chapter-btn" class="cursor-pointer" width="16" height="30" viewBox="0 0 16 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <g clip-path="url(#clip0_5_55)">
-                        <path
-                            d="M15.4647 14.0174L2.60778 0.446178C2.06639 -0.128089 1.16206 -0.149534 0.589262 0.390456C0.0164 0.933318 -0.00785708 1.83758 0.535005 2.41044L12.4591 14.9988L0.534947 27.5886C-0.00791518 28.1615 0.0164 29.0657 0.589262 29.6086C0.864999 29.87 1.21784 30 1.57069 30C1.94926 30 2.32783 29.85 2.60784 29.5529L15.4648 15.9817C15.9876 15.4317 15.9876 14.5674 15.4647 14.0174Z"
-                            fill="black" fill-opacity="0.2" />
-                    </g>
-                    <defs>
-                        <clipPath id="clip0_5_55">
-                            <rect width="16" height="30" fill="white" />
-                        </clipPath>
-                    </defs>
-                </svg>
-			<!-- </div>-->
-        </div>
-		<div id="currentPagesContainer" class="w-100 flex-row flex-h-center py-8">
-                <div id="currentPages" class="w-100 flex-row flex-h-center">
-                    <h1 class="main-text"><span id="current_page_value" class="text-sb"></span> of <span id="total_page_value"></span></h1>
+            <!-- <div class="flex-row flex-all-centered h-100 w-100 gap-5">-->
+            <svg id="previous-chapter-btn" class="cursor-pointer" width="16" height="30" viewBox="0 0 16 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_5_60)">
+                    <path
+                        d="M0.535264 14.0174L13.3922 0.446178C13.9336 -0.128089 14.8379 -0.149534 15.4107 0.390456C15.9836 0.933318 16.0079 1.83758 15.465 2.41044L3.5409 14.9988L15.4651 27.5886C16.0079 28.1615 15.9836 29.0657 15.4107 29.6086C15.135 29.87 14.7822 30 14.4293 30C14.0507 30 13.6722 29.85 13.3922 29.5529L0.535205 15.9817C0.0124407 15.4317 0.0124407 14.5674 0.535264 14.0174Z"
+                        fill="black" fill-opacity="0.2" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_5_60">
+                        <rect width="16" height="30" fill="white" transform="matrix(-1 0 0 1 16 0)" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <div id="book-content-columns-wrapper">
+                <ul id="book-action-menu">
+                    <li id="action-menu-show-dictionary" class="main-text text-sb flex-row flex-v-center"
+                        onclick="$(this).parent().hide();">
+                        <svg class="m-r-10" width="20" height="20" viewBox="0 0 20 20"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clip-rule="evenodd"
+                                d="M14.3251 12.8985L19.7048 18.2783C19.8939 18.4676 20.0001 18.7242 20 18.9917C19.9999 19.2592 19.8935 19.5157 19.7043 19.7048C19.5151 19.8939 19.2585 20.0001 18.991 20C18.7235 19.9999 18.467 19.8935 18.2779 19.7043L12.8981 14.3244C11.2899 15.5701 9.26759 16.1563 7.24253 15.9638C5.21748 15.7712 3.34182 14.8145 1.99713 13.2881C0.652446 11.7617 -0.0602623 9.78035 0.00399614 7.74712C0.0682545 5.7139 0.904653 3.78152 2.34304 2.3431C3.78143 0.904675 5.71376 0.0682562 7.74693 0.00399624C9.7801 -0.0602638 11.7614 0.652463 13.2877 1.99718C14.8141 3.3419 15.7708 5.21761 15.9634 7.24271C16.1559 9.26782 15.5697 11.2902 14.3241 12.8985H14.3251ZM8.00037 13.9994C9.5916 13.9994 11.1176 13.3673 12.2428 12.2421C13.368 11.1169 14.0001 9.59084 14.0001 7.99957C14.0001 6.40831 13.368 4.88222 12.2428 3.75702C11.1176 2.63183 9.5916 1.9997 8.00037 1.9997C6.40915 1.9997 4.88309 2.63183 3.75793 3.75702C2.63276 4.88222 2.00065 6.40831 2.00065 7.99957C2.00065 9.59084 2.63276 11.1169 3.75793 12.2421C4.88309 13.3673 6.40915 13.9994 8.00037 13.9994Z"
+                                fill="black" />
+                        </svg>Search on dictionary
+                    </li>
+                </ul>
+                <div id="book-content-columns" class="flex-row flex-h-center">
+
                 </div>
             </div>
+            <svg id="next-chapter-btn" class="cursor-pointer" width="16" height="30" viewBox="0 0 16 30" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <g clip-path="url(#clip0_5_55)">
+                    <path
+                        d="M15.4647 14.0174L2.60778 0.446178C2.06639 -0.128089 1.16206 -0.149534 0.589262 0.390456C0.0164 0.933318 -0.00785708 1.83758 0.535005 2.41044L12.4591 14.9988L0.534947 27.5886C-0.00791518 28.1615 0.0164 29.0657 0.589262 29.6086C0.864999 29.87 1.21784 30 1.57069 30C1.94926 30 2.32783 29.85 2.60784 29.5529L15.4648 15.9817C15.9876 15.4317 15.9876 14.5674 15.4647 14.0174Z"
+                        fill="black" fill-opacity="0.2" />
+                </g>
+                <defs>
+                    <clipPath id="clip0_5_55">
+                        <rect width="16" height="30" fill="white" />
+                    </clipPath>
+                </defs>
+            </svg>
+            <!-- </div>-->
+        </div>
+        <div id="currentPagesContainer" class="w-100 flex-row flex-h-center py-8">
+            <div id="currentPages" class="w-100 flex-row flex-h-center">
+                <h1 class="main-text"><span id="current_page_value" class="text-sb"></span> of <span
+                        id="total_page_value"></span></h1>
+            </div>
+        </div>
 </body>
 
 </html>
