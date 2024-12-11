@@ -115,6 +115,7 @@
     max-height: 80vh;
     overflow-y: auto !important;
 }
+
 .dictionary-audio-button {
     width: 30px;
     height: 30px;
@@ -257,6 +258,7 @@
     flex: 1;
     overflow-y: auto;
 }
+
 .saved-information {
     transition: padding .3s;
     flex: 1;
@@ -264,12 +266,11 @@
 .saved-information:hover {
     padding-left: 10px;
 }
-.book-saved-box > svg {
+.book-saved-box svg {
     opacity: .25;
     transition: all .3s;
-    fill: black;
 }
-.book-saved-box > svg:hover {
+.book-saved-box svg:hover {
     opacity: 1;
     fill: var(--primary-red-color);
 }
