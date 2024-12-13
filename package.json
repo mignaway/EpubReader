@@ -1,24 +1,25 @@
 {
-  "name": "epub-reader",
-  "productName": "EpubReader",
-  "version": "1.0.5",
-  "description": "Epub Reader Application built with ElectronJS",
+  "name": "epub-reader-redo",
+  "productName": "EpubReaderRedo",
+  "version": "1.0.6",
+  "description": "Epub Reader Application customized with ElectronJS for modern eBook reading experience",
   "main": "src/index.js",
   "scripts": {
     "start": "electron-forge start",
-    "dev": "concurrently \"npm run tailwatch\" \"electron-forge start\" ",
+    "dev": "concurrently \"npm run tailwatch\" \"electron-forge start\"",
     "tailbuild": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css --minify",
     "tailwatch": "tailwind build -i ./src/assets/css/tailinit.css -o ./src/assets/css/tailwindcss.css --watch",
     "dist:windows": "electron-builder --windows",
-    "dist:linux": "electron-builder --linux"
+    "dist:linux": "electron-builder --linux",
+    "build": "electron-builder"
   },
-  "repository": "https://github.com/mignaway/EpubReader",
+  "repository": "https://github.com/a5ur4/EpubReaderRedo",
   "publish": {
     "provider": "github",
     "releaseType": "release"
   },
   "build": {
-    "appId": "EpubReader",
+    "appId": "com.a5ur4.epubreaderredo",
     "win": {
       "target": [
         "nsis"
@@ -37,7 +38,7 @@
       "oneClick": false,
       "installerIcon": "src/icon.ico",
       "uninstallerIcon": "src/icon.ico",
-      "uninstallDisplayName": "EpubReaderUninstaller",
+      "uninstallDisplayName": "EpubReaderRedo Uninstaller",
       "license": "LICENSE.md",
       "allowToChangeInstallationDirectory": true
     },
@@ -53,10 +54,16 @@
   "engines": {
     "node": ">=16.13.2"
   },
-  "keywords": [],
+  "keywords": [
+    "epub",
+    "ebook",
+    "reader",
+    "epub-reader",
+    "electron"
+  ],
   "author": {
-    "name": "mignaway",
-    "email": "40722616+mignaway@users.noreply.github.com"
+    "name": "a5ur4",
+    "email": "a5ur4@users.noreply.github.com"
   },
   "license": "MIT",
   "config": {
@@ -66,7 +73,7 @@
         {
           "name": "@electron-forge/maker-squirrel",
           "config": {
-            "name": "epub_reader"
+            "name": "epub_reader_redo"
           }
         },
         {
@@ -90,7 +97,6 @@
     "dominant-color": "^0.0.1",
     "ebook-convert": "^2.0.1",
     "electron-squirrel-startup": "^1.0.0",
-    "electron-updater": "^5.3.0",
     "epub2": "^2.0.7",
     "epubjs": "^0.3.93",
     "fs-extra": "^10.1.0",
@@ -106,7 +112,7 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
     "@electron-forge/maker-zip": "^6.0.0-beta.63",
     "electron": "18.0.4",
-    "electron-builder": "^23.3.3",
+    "electron-builder": "^23.6.0",
     "tailwindcss": "^3.3.2"
   }
 }
