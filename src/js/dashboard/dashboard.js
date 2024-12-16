@@ -16,6 +16,7 @@ var loadAll = async function (books_json){
     const orderedBooks = await orderBookModality(books_json, sortingSettings)
     await loadHeroSection(orderedBooks)
     await loadBooksSection(orderedBooks.slice(0, 6))
+    await fetchContributors(); // Fetch contributors from github
 }
 
 async function loadHeroSection(books_json) {
@@ -182,4 +183,21 @@ async function orderBookModality(books_json, option) {
     return orderedBooks;
 }
 
-
+async function fetchContributors() {
+    fetch('https://api.github.com/repos/mignaway/EpubReader/contributors')
+        .then((res) => res.json())
+        .then((data) => {
+            console.log(data);
+            const contributorsList = document.getElementById('contributors-list');
+            contributorsList.innerHTML = '';
+            data.forEach(contributor => {
+                if (contributor.login !== 'mignaway') {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `<img src="${contributor.avatar_url}" alt="${contributor.login}" class="rounded-full w-8 h-8 mr-2">
+                    <a href="${contributor.html_url}" target="_blank">${contributor.login}</a>`;
+                    contributorsList.appendChild(listItem);
+                }
+            });
+        })
+        .catch((error) => console.error('Erro no fetch:', error));
+}

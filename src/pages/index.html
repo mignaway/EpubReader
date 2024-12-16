@@ -37,17 +37,21 @@
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
         <div class="flex items-center flex-wrap">
           <h1 class="main-text font-bold mr-3 text-white ">Author:</h1>
-          <h1 id="app-info-author" class="main-text text-color-white cursor-pointer"
+          <div class="flex flex-row items-center">
+            <img src="https://avatars.githubusercontent.com/u/40722616?v=4" alt="github logo" />
+            <h1
+            id="app-info-author" class="main-text text-color-white cursor-pointer"
             onclick="window.open('https://github.com/mignaway','_blank')"
-            style="text-decoration: underline; display: ;">mignaway</h1>
+            style="text-decoration: underline; display: ;">
+              mignaway
+            </h1>
+          </div>
         </div>
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
-        <div class="flex items-center flex-wrap">
-          <h1 class="main-text font-bold mr-3 text-white ">Mod by:</h1>
-          <h1 id="app-info-author" class="main-text text-color-white cursor-pointer"
-            onclick="window.open('https://github.com/a5ur4','_blank')"
-            style="text-decoration: underline; display: ;">a5ur4</h1>
-        </div>
+        <div id="contributors-section">
+          <h1 class="main-text font-bold mr-3 text-white">Contributors:</h1>
+          <ul id="contributors-list" class="main-text text-color-white"></ul>
+        </div>        
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
         <div>
           <h1 class="main-text font-bold mr-3 text-white inline">Description:</h1>

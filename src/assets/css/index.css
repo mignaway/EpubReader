@@ -27,3 +27,21 @@
   border-bottom: 1px solid rgba(0,0,0,.1);
 }
 
+#application-information img {
+  width: 30px;
+  margin-right: 10px;
+  border-radius: 50%;
+}
+
+#contributors-list {
+  margin-top: 10px;
+  list-style: none;
+  padding: 0;
+}
+
+#contributors-list li {
+  margin-bottom: 5px;
+  display: flex;
+  align-items: center;
+  text-decoration: underline;
+}
