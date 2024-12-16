@@ -248,7 +248,7 @@ async function getHtmlEnglishDictionary(selection_text){
                                         <div class="flex-row flex-v-center" style="gap: 5px; padding: 10px 0;">
                                         ${definition.phonetic ? "<h2 class='main-text'>" + definition.phonetic + "</h2>" : ""}
                                         <h2 class="main-text">${meaning.partOfSpeech}</h2>
-                                  </div>`
+                                </div>`
 
                 // Upper text synonyms
                 if (meaning.synonyms.length > 0) {
@@ -261,7 +261,7 @@ async function getHtmlEnglishDictionary(selection_text){
                     finalHtml += synonymText
                 }
                 // Closing Upper Text
-                finalHtml += '<div class="horizontal-divider-05 bg-black"></div>'
+                finalHtml += '<div class="horizontal-divider-05 m-t-10 m-b-10 bg-black"></div>'
                 // Definitions list
                 finalHtml += '<ol style="padding: 0;list-style-position: inside;">'
                 for (const meaning_definition of meaning.definitions) {
@@ -319,7 +319,7 @@ async function loadSavedPages(saved_pages){
                             d="M18.4719 2.57066C18.1331 2.21673 17.6563 1.99994 17.139 1.99994H5.84116C4.8455 1.99994 3.99988 2.80297 3.99988 3.84123V17.5538L18.4719 2.57066ZM3.99988 19.6361V20.5469C4.00281 21.8647 5.6124 22.4831 6.52747 21.558L10.8339 17.2528C11.179 16.8928 11.8012 16.8928 12.1463 17.2528L16.4527 21.558C17.3681 22.4834 18.9775 21.8641 18.9803 20.5469V4.12663L3.99988 19.6361Z"
                             />
                         <rect x="-0.00186306" y="-0.71746" width="2.44728" height="27.9745" rx="1.22364"
-                            transform="matrix(0.698458 0.715651 -0.694731 0.719269 19.4901 0.79992)" stroke="white" />
+                            transform="matrix(0.698458 0.715651 -0.694731 0.719269 19.4901 0.79992)" stroke="rgba(0, 0, 0, 0.5)" />
                     </svg>
                 </div>
             `)
@@ -387,50 +387,178 @@ function updateSavePagesButton(savedPages,cfi){
         $('#book-saved-btn').addClass("saving")
     }
 }
-async function loadBookStyleSettings(newStyleColor = null){
-    // Load settings
-    if (current_style_settings == null) current_style_settings = await window.bookConfig.getUserSettings();
-
-    // Check if font size is max/min and change opacity style
-    checkNavbarFontSizeOpacity();
-
-    // (NOT INITIAL LOAD) If style is manually changed then do it
-    // (INITIAL LOAD) Style is not changed then load initial font size
-    if (newStyleColor != null) {
-        current_style_settings.book.background_color_style = newStyleColor
-    } else {
-        await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%")
+async function loadBookStyleSettings(newStyleColor = null) {
+    // Load user settings if not already loaded
+    if (!current_style_settings) {
+        current_style_settings = await window.bookConfig.getUserSettings();
     }
-    // LOAD FONT
-    book_rendition.themes.font(current_style_settings.book.typeface)
-    if (current_style_settings.book.typeface.length > 0) $('#typeface-section-text').text(current_style_settings.book.typeface)
 
-    // Group elements to change on initial style load
-    var backround_elements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #typeface-option h1, #book-action-menu, .dictionary-audio-button, #currentPagesContainer')
-    var icon_elements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup')
-    var text_elements = $('#currentPages h1')
+    // Update style settings if a new style is selected
+    if (newStyleColor) {
+        current_style_settings.book.background_color_style = newStyleColor;
+    }
 
-    // Color style setting change
-    switch (current_style_settings.book.background_color_style){
+    // Apply font size and font family
+    await book_rendition.themes.fontSize(current_style_settings.book.font_size_percent + "%");
+    book_rendition.themes.font(current_style_settings.book.typeface);
+    if (current_style_settings.book.typeface.length > 0) {
+        $('#typeface-section-text').text(current_style_settings.book.typeface);
+    }
+
+    // Apply color styles
+    applyThemeStyles(current_style_settings.book.background_color_style);
+}
+
+// Helper function to apply theme styles
+function applyThemeStyles(theme) {
+    const backgroundElements = $('#book-container, #main-navbar, .book-navbar-popup, #typeface-option, #typeface-section, #book-action-menu, .dictionary-audio-button, #currentPagesContainer');
+    const iconElements = $('#show-book-chapters, #show-book-saved, #show-book-info, #show-reading-settings, #libraryNavBtn, #show-dictionary-popup');
+    const textElements = $('#currentPages h1');
+
+    // Get the previous and next chapter or page buttons
+    const previousChapterBtn = $('#previous-chapter-btn g path');
+    const nextChapterBtn = $('#next-chapter-btn g path');
+
+    // Get the close and minimize app buttons
+    const closeAppBtn = $('#close-app-icon');
+    const resizeAppBtn = $('#resize-minimize-app-icon path');
+    const maximizeAppBtn = $('#resize-maximize-app-icon rect');
+    const minimizeAppBtn = $('#minimize-app-icon');
+
+    // Reading settings
+    const readingSettingsSpan = $('#reading-settings span');
+    const readingSettingsH1 = $('#reading-settings h1');
+    const verticalDivider = $('.vertical-divider-05');
+    const horizontalDivider = $('.horizontal-divider-05');
+    const typefaceSectionSVG = $('#typeface-section svg path');
+    const selectFontFamily = $('#typeface-option');
+
+    // Book infos
+    const bookInfoH1 = $('#book-info h1')
+    const bookInfoSpan = $('#book-info span')
+
+    // Book chapters
+    const bookChaptersH1 = $('#book-chapters h1')
+
+    // Book saved pages
+    const bookSavedPagesH1 = $('#book-saved-pages h1')
+    const bookSavedPagesH2 = $('#book-saved-pages h2')
+    const bookSaveButton = $('.book-saved-box svg')
+    const bookUnsaveButton = $('#book-saved-btn.unsaving')
+
+    // Dictionary popup, isn't working yet
+    const dictionaryPopupH1 = $('#dictionary-popup h1')
+    const dictionaryPopupH2 = $('#dictionary-popup h2')
+    const dictionaryPopupOlLi = $('#dictionary-popup ol li')
+
+    // Reset classes
+    backgroundElements.removeClass('page-color-style-brown-bg page-color-style-dark-bg');
+    iconElements.removeClass('page-color-style-brown-color page-color-style-dark-color');
+    textElements.css('color', '');
+
+    previousChapterBtn.css('fill', 'black');
+    nextChapterBtn.css('fill', 'black');
+    
+    closeAppBtn.css('stroke', 'black');
+    resizeAppBtn.css('fill', 'black');
+    maximizeAppBtn.css('stroke', 'black');
+    minimizeAppBtn.css('stroke', 'black');
+
+    readingSettingsSpan.css('color', '');
+    readingSettingsH1.css('color', '');
+    verticalDivider.css('background-color', 'black');
+    horizontalDivider.css('background-color', 'black');
+    typefaceSectionSVG.css('fill', 'black');
+    selectFontFamily.css('background-color', 'white');
+
+    bookInfoH1.css('color', 'black')
+    bookInfoSpan.css('color', 'black')
+
+    bookChaptersH1.css('color', 'black')
+
+    bookSavedPagesH1.css('color', 'black')
+    bookSavedPagesH2.css('color', 'black')
+    bookSaveButton.css('fill', 'black')
+    bookUnsaveButton.css('background-color', '#E3B230')
+
+    /*dictionaryPopupH1.css('color', 'black')
+    dictionaryPopupH2.css('color', 'black')
+    dictionaryPopupOlLi.css('color', 'black')*/
+    // Apply theme-specific styles
+    switch (theme) {
         case "brown":
-            // if i use multiple themes (themes.register)
-            // when it change text color it will not update cause it won't replace but append the css
-            // -> color: #5B4636;color: black; | So it's necessary to apply css directly on default theme
             book_rendition.themes.default({ body: { 'color': '#5B4636' } });
-            backround_elements.addClass('page-color-style-brown-bg');
-            icon_elements.addClass('page-color-style-brown-color');
-            text_elements.css('color','#5B4636');
-            $('#page-color-style-brown').addClass('selected');
-            $('#page-color-style-default').removeClass('selected');
+            backgroundElements.addClass('page-color-style-brown-bg');
+            iconElements.addClass('page-color-style-brown-color');
+            textElements.css('color', '#5B4636');
+
+            previousChapterBtn.css('fill', 'black');
+            nextChapterBtn.css('fill', 'black');
+
+            closeAppBtn.css('stroke', '#5B4636');
+            resizeAppBtn.css('fill', '#5B4636');
+            maximizeAppBtn.css('stroke', '#5B4636');
+            minimizeAppBtn.css('stroke', '#5B4636');
+
+            readingSettingsSpan.css('color', '#5B4636');
+            readingSettingsH1.css('color', '#5B4636');
+            verticalDivider.css('background-color', '#5B4636');
+            horizontalDivider.css('background-color', '#5B4636');
+            typefaceSectionSVG.css('fill', '#5B4636');
+            selectFontFamily.css('background-color', '#5B4636', 'color', 'white');
+
+            bookInfoH1.css('color', '#5B4636')
+            bookInfoSpan.css('color', '#5B4636')
+
+            bookChaptersH1.css('color', '#5B4636')
+
+            bookSavedPagesH1.css('color', '#5B4636')
+            bookSavedPagesH2.css('color', '#5B4636')
+            bookSaveButton.css('fill', '#5B4636')
+            bookUnsaveButton.css('background-color', '#5B4636')
+
+            /*dictionaryPopupH1.css('color', '#5B4636')
+            dictionaryPopupH2.css('color', '#5B4636')
+            dictionaryPopupOlLi.css('color', '#5B4636')*/
             break;
-        default:
-            book_rendition.themes.default({ body: { 'color': 'black' } })
-            backround_elements.removeClass('page-color-style-brown-bg');
-            icon_elements.removeClass('page-color-style-brown-color');
-            text_elements.css('color', 'black');
-            $('#page-color-style-default').addClass('selected');
-            $('#page-color-style-brown').removeClass('selected');
+        case "dark":
+            book_rendition.themes.default({ body: { 'color': 'white' } });
+            backgroundElements.addClass('page-color-style-dark-bg');
+            iconElements.addClass('page-color-style-dark-color');
+            textElements.css('color', 'white');
+
+            previousChapterBtn.css('fill', 'white');
+            nextChapterBtn.css('fill', 'white');
+
+            closeAppBtn.css('stroke', 'white');
+            resizeAppBtn.css('fill', 'white');
+            maximizeAppBtn.css('stroke', 'white');
+            minimizeAppBtn.css('stroke', 'white');
+
+            readingSettingsSpan.css('color', 'white');
+            readingSettingsH1.css('color', 'white');
+            verticalDivider.css('background-color', 'white');
+            horizontalDivider.css('background-color', 'white');
+            typefaceSectionSVG.css('fill', 'white');
+            selectFontFamily.css('background-color', 'black', 'color', 'white');
+            
+            bookInfoH1.css('color', 'white')
+            bookInfoSpan.css('color', 'white')
+
+            bookChaptersH1.css('color', 'white')
+
+            bookSavedPagesH1.css('color', 'white')
+            bookSavedPagesH2.css('color', 'white')
+            bookSaveButton.css('fill', 'white')
+            bookUnsaveButton.css({ 'border': '1px solid white', 'background-color': '#1A1A1A' })
+
+            /*dictionaryPopupH1.css('color', 'white')
+            dictionaryPopupH2.css('color', 'white')
+            dictionaryPopupOlLi.css('color', 'white')*/
             break;
+        default: // Default to light theme
+            book_rendition.themes.default({ body: { 'color': 'black' } });
+            textElements.css('color', 'black');
     }
 }
 

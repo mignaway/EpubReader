@@ -20,6 +20,9 @@ Epub Reader is a open-source project made with ElectronJS. It's an application f
 
 If you'd like to support the creator, [click here](https://buymeacoffee.com/mignaway) <3
 
+## New in Version 1.0.6
+- **Dark Mode**: In addition to light and sepia themes, a dark mode is now available, offering greater comfort in low-light environments.
+
 ## Preview
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176780491-6f7c7711-780f-4d96-bd2d-dc51fb7b5164.jpg" width="100%"> -->
 <!-- <img src="https://user-images.githubusercontent.com/40722616/176781677-4b024470-9a6b-4e93-81c2-ea6a6898b3c1.jpg" width="100%"> -->
@@ -40,10 +43,9 @@ More updated previews are <a href="https://github.com/mignaway/EpubReader/blob/m
 
 ## Version Logs
 
-<details open><summary><h3>v.1.0.6 (Current Developing Release)</h3></summary>
+<details open><summary><h3>v.1.0.6 (Last Release)</h3></summary>
 
 - Dark Mode
-- Auto Updater
 
 </details>
 

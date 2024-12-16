@@ -22,10 +22,6 @@
     stroke: var(--primary-red-color) !important;
 }
 
-#minimize-app-icon:hover {
-    stroke: rgba(0, 0, 0, 0.7) !important;
-}
-
 #book-container {
     padding: 40px 40px 0 40px;
     overflow: hidden;
@@ -119,6 +115,7 @@
     max-height: 80vh;
     overflow-y: auto !important;
 }
+
 .dictionary-audio-button {
     width: 30px;
     height: 30px;
@@ -202,7 +199,8 @@
 }
 
 #page-color-style-default,
-#page-color-style-brown {
+#page-color-style-brown,
+#page-color-style-dark {
     width: 40px;
     height: 40px;
     border-radius: 40px;
@@ -235,12 +233,32 @@
     color: #5B4636 !important;
     fill: #5B4636;
 }
+
+#page-color-style-dark {
+    border: 2px solid rgba(255, 255, 255, .2);
+    background-color: #1A1A1A;
+}
+
+#page-color-style-dark.selected {
+    border: 2px solid white !important;
+}
+
+.page-color-style-dark-bg {
+    background-color: #1A1A1A !important;
+}
+
+.page-color-style-dark-color {
+    color: white !important;
+    fill: white;
+}
+
 #book-saved-pages {
     padding: 2vh;
     margin: 1vh;
     flex: 1;
     overflow-y: auto;
 }
+
 .saved-information {
     transition: padding .3s;
     flex: 1;
@@ -248,12 +266,11 @@
 .saved-information:hover {
     padding-left: 10px;
 }
-.book-saved-box > svg {
+.book-saved-box svg {
     opacity: .25;
     transition: all .3s;
-    fill: black;
 }
-.book-saved-box > svg:hover {
+.book-saved-box svg:hover {
     opacity: 1;
     fill: var(--primary-red-color);
 }
@@ -315,16 +332,12 @@
     background-color: white;
     filter: brightness(.95);
     padding: 1vh;
-    border: .5px solid rgba(0,0,0,.05)
+    border: .5px solid white
 }
 #typeface-option h1 {
     padding: 1vh;
     cursor: pointer;
     border-radius: 5px;
-    background-color: white;
-}
-#typeface-option h1:hover {
-    filter: brightness(.9)
 }
 
 #lang-select {
