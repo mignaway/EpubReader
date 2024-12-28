@@ -8,7 +8,7 @@
 # EpubReader 
 
 <!-- <a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.1/Setup.v1.0.1.exe"><img src="https://user-images.githubusercontent.com/40722616/187921781-d02952a2-f3e2-4c2f-9b67-718994b0f49a.svg"></a> -->
-<a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.5/EpubReader.Setup.1.0.5.exe"><img src="https://img.shields.io/badge/v1.0.5-Download-41D147"></a>
+<a href="https://github.com/mignaway/EpubReader/releases/download/v1.0.6/EpubReader.Setup.1.0.6.exe"><img src="https://img.shields.io/badge/v1.0.6-Download-41D147"></a>
 <a href="https://mignaway.github.io/epub-reader-website/"><img src="https://user-images.githubusercontent.com/40722616/192098396-694ce4b1-15fb-495f-ba89-241043d2d8bd.svg"></a>
 [![BuyMeACoffee](https://img.shields.io/badge/Share%20Love%20-ffdd00?&logo=buy-me-a-coffee&logoColor=black)](https://buymeacoffee.com/mignaway)
 
@@ -16,9 +16,9 @@
 Epub Reader is a open-source project made with ElectronJS. It's an application for reading ebook files (epub, mobi, pdf), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
 
 > [!note]
-> I've decided not to maintain this project anymore as I'm working on another one with a partner, which I believe is gonna be 10x better. This project is also quite challenging to maintain, so I hope you understand. I have a lot of faith in this future project and believe it could truly become a reference point for all digital reading enthusiasts, with some amazing features in mind. Meanwhile, you can still enjoy this <3
+> Exciting news! We’re working on a new version of the ebook reader, probably the best one that has ever existed. Stick around for updates, and in the meantime, enjoy what’s here <3
 
-If you'd like to support the creator, [click here](https://buymeacoffee.com/mignaway) <3
+If you'd like to support the creator, [click here](https://buymeacoffee.com/mignaway) 
 
 ## New in Version 1.0.6
 - **Dark Mode**: In addition to light and sepia themes, a dark mode is now available, offering greater comfort in low-light environments.
