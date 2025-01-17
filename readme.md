@@ -18,7 +18,7 @@ Epub Reader is a open-source project made with ElectronJS. It's an application f
 > [!note]
 > Exciting news! We’re working on a new version of the ebook reader, probably the best one that has ever existed. Stick around for updates, and in the meantime, enjoy what’s here <3
 
-If you'd like to support the creator, [click here](https://buymeacoffee.com/mignaway) 
+If you'd like to support the projects, [click here](https://buymeacoffee.com/mignaway) 
 
 ## New in Version 1.0.6
 - **Dark Mode**: In addition to light and sepia themes, a dark mode is now available, offering greater comfort in low-light environments.
