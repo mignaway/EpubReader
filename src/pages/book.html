@@ -18,6 +18,7 @@
     <script src="../js/book/book.js"></script>
     <script src="../js/book/bookNavbarHandler.js"></script>
     <script src="../js/general/dictionaryApi.js"></script>
+    <script src="../js/general/rendererI18n.js" defer></script>
 </head>
 
 <body>
@@ -27,7 +28,31 @@
             <div class="flex-row flex-v-center gap-30 no-drag">
                 <a href="library.html" id="libraryNavBtn"
                     class="main-text text-color-black text-sb cursor-pointer text-decoration-none"
-                    onclick="saveBeforeClose();">Library</a>
+                    onclick="saveBeforeClose();" data-i18n="mainNavbar.library">Library</a>
+                <div class="vertical-divider-05"></div>
+                <div class="flex flex-col relative">
+					<div id="language-menu-open" class="flex flex-row items-center cursor-pointer">
+						<h1 class="main-text mr-1 font-semibold">EN</h1>
+						<svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+							<line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
+							<line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="black" stroke-linecap="round" />
+						</svg>
+					</div>
+					<div id="language-menu" class="p-6 mt-10 hidden absolute z-[10] flex flex-col gap-7 rounded-md bg-[#121212] shadow-md overflow-hidden w-fit">
+						<div id="menu-open-languages" class="flex flex-col items-center transition opacity-80 hover:opacity-100 cursor-pointer">
+                            <div>
+                                <button class="button-language" onclick="defineCurrentLanguage('en')">
+                                    <h1 class="main-text text-white ml-2">EN</h1>
+                                </button>
+                            </div>
+                            <div>
+                                <button class="button-language" onclick="defineCurrentLanguage('ptBR')">
+                                    <h1 class="main-text text-white ml-2">PT-BR</h1>
+                                </button>
+                            </div>
+						</div>
+					</div>
+				</div>
                 <div class="vertical-divider-05"></div>
                 <div class="flex-row flex-v-center gap-30">
                     <div class="flex-column" style="position: relative;">
@@ -72,7 +97,7 @@
                                         d="M1.84129 0.75H13.1391C13.7319 0.75 14.2304 1.2285 14.2304 1.84129L14.2304 18.5454C14.2304 18.5456 14.2304 18.5457 14.2304 18.5458C14.2288 19.1579 13.4557 19.5054 12.986 19.0306L12.9831 19.0277L8.6814 14.7272C8.04218 14.0681 6.93821 14.0681 6.29899 14.7272L1.99733 19.0277L1.9944 19.0306C1.5249 19.5052 0.751938 19.1582 0.75 18.546V1.84129C0.75 1.2285 1.24849 0.75 1.84129 0.75Z"
                                         stroke="white" stroke-width="1.5" />
                                 </svg>
-                                <h1 class="main-text text-sb">Save this page</h1>
+                                <h1 class="main-text text-sb" data-i18n="mainNavbar.saveThisPage">Save this page</h1>
                             </div>
                             <div id="book-saved-pages" class="flex-column gap-15">
                                 <!-- <div class="book-saved-box cursor-pointer flex-row flex-v-center">
@@ -107,27 +132,27 @@
                         <div id="book-info" class="book-navbar-popup">
                             <div class="flex-column" style="gap: 10px;">
                                 <div class="flex-row">
-                                    <h1 class="main-text m-r-10">Title:</h1><span id="book-info-title"
+                                    <h1 class="main-text m-r-10" data-i18n="bookInformation.title">Title:</h1><span id="book-info-title"
                                         class="main-text text-sb"></span>
                                 </div>
                                 <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
                                 <div class="flex-row">
-                                    <h1 class="main-text m-r-10">Author:</h1><span id="book-info-author"
+                                    <h1 class="main-text m-r-10" data-i18n="bookInformation.author">Author:</h1><span id="book-info-author"
                                         class="main-text text-sb"></span>
                                 </div>
                                 <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
                                 <div class="flex-row">
-                                    <h1 class="main-text m-r-10">Language:</h1><span id="book-info-language"
+                                    <h1 class="main-text m-r-10" data-i18n="bookInformation.language">Language:</h1><span id="book-info-language"
                                         class="main-text text-sb"></span>
                                 </div>
                                 <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
                                 <div class="flex-row">
-                                    <h1 class="main-text m-r-10">Year Edition:</h1><span id="book-info-year"
+                                    <h1 class="main-text m-r-10" data-i18n="bookInformation.year">Year Edition:</h1><span id="book-info-year"
                                         class="main-text text-sb"></span>
                                 </div>
                                 <div class="horizontal-divider-05" style="opacity: .1; background-color: black;"></div>
                                 <div class="flex-row">
-                                    <h1 class="main-text m-r-10">Pages:</h1><span id="book-info-pages"
+                                    <h1 class="main-text m-r-10" data-i18n="bookInformation.pages">Pages:</h1><span id="book-info-pages"
                                         class="main-text text-sb"></span>
                                 </div>
                             </div>
@@ -174,10 +199,10 @@
                                 </div>
                                 <div class="horizontal-divider-05" style="background-color: black;"></div>
                                 <div class="flex-row flex-v-center" style="margin-top: 20px;">
-                                    <h1 class="main-text m-r-10">Typeface:</h1>
+                                    <h1 class="main-text m-r-10" data-i18n="readingSettings.typeface">Typeface:</h1>
                                     <div id="typeface-settings" class="w-100" onclick="handleTypeFaceSelection()">
                                         <div id="typeface-section" class="flex-row flex-v-center">
-                                            <h1 id="typeface-section-text" class="flex-1 main-text text-sb">Default</h1>
+                                            <h1 id="typeface-section-text" class="flex-1 main-text text-sb" data-i18n="readingSettings.default">Default</h1>
                                             <svg width="12" height="8" viewBox="0 0 8 4" fill="none"
                                                 xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -197,7 +222,7 @@
                                     </div>
                                 </div>
                                 <div class="flex-row flex-v-center" style="margin-top: 20px;">
-                                    <h1 class="main-text m-r-10">Color Style:</h1>
+                                    <h1 class="main-text m-r-10" data-i18n="readingSettings.colorStyle">Color Style:</h1>
                                     <div class="flex-row flex-v-center flex-h-center">
                                         <div id="page-color-style-default" class="cursor-pointer"
                                             onclick="loadBookStyleSettings('default');"></div>
@@ -318,7 +343,7 @@
         </div>
         <div id="currentPagesContainer" class="w-100 flex-row flex-h-center py-8">
             <div id="currentPages" class="w-100 flex-row flex-h-center">
-                <h1 class="main-text"><span id="current_page_value" class="text-sb"></span> of <span
+                <h1 class="main-text"><span id="current_page_value" class="text-sb"></span><span  data-i18n="currentPageOf"> of </span><span
                         id="total_page_value"></span></h1>
             </div>
         </div>

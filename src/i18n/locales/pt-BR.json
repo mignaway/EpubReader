@@ -1,0 +1,57 @@
+{
+  "applicationInformation.appVersion": "Versão do aplicativo:",
+  "applicationInformation.author": "Autor:",
+  "applicationInformation.contributors": "Colaboradores:",
+  "applicationInformation.description": "Descrição:",
+  "applicationInformation.descriptionMessage": "Um Leitor de Epub construído com ElectronJS",
+  "applicationInformation.gitRepository": "Repositório Git:",
+
+  "bookInformation.title": "Título:",
+  "bookInformation.author": "Autor:",
+  "bookInformation.language": "Idioma:",
+  "bookInformation.year": "Ano:",
+  "bookInformation.pages": "Páginas:",
+  "bookInformation.applyEdit": "Aplicar edição",
+
+  "dropArea.dropFileHere": "Solte o arquivo aqui",
+
+  "mainNavbar.library": "Biblioteca",
+  "mainNavbar.saveThisPage": "Salvar esta página",
+
+  "settingsMenu.settings": "Configurações",
+  "settingsMenu.appInformation": "Sobre o aplicativo",
+
+  "sidebarSettings.BackToDashboard": "Voltar ao painel",
+  "sidebarSettings.searchBooks": "Pesquisar livros...",
+
+  "readingSettings.typeface": "Tipo de letra/Fonte:",
+  "readingSettings.default": "Padrão",
+  "readingSettings.colorStyle": "Estilo de Cor:",
+  "readingSettings.layout": "Formato/Layout:",
+
+  "currentPageOf": " de ",
+
+  "allBooksRightArrow": "Todos os Livros ->",
+
+  "bookSortings.sorting": "Ordem",
+  "bookSortings.sortBy": "Ordenar por: ",
+  "bookSortings.lastRead": "Última Leitura",
+  "bookSortings.alphabetically": "Alfabeticamente",
+  "bookSortings.lastOpened": "Última Abertura",
+  "bookSortings.applyChanges": "Aplicar alterações",
+
+  "keepReadingButton.keepReading": "Continuar lendo",
+  "keepReadingButton.startReading": "Começar a ler",
+
+  "dictionaryPopup.highlightSomeText": "Destaque algum texto para saber seu significado!",
+  "dictionaryPopup.rembemberToSearchFor": "Lembre-se de pesquisar ",
+  "dictionaryPopup.onlyOneWordAtATime": "apenas uma palavra por vez",
+  "dictionaryPopup.noPageSaved": "nenhuma página salva",
+
+  "noPreviewAvailable": "Nenhuma pré-visualização disponível.",
+  "addBooksByClickingPlusButton": "Adicione livros clicando no botão \"+\".",
+  "new": "NOVO",
+  
+  "library.noBooksFound": "Nenhum livro encontrado.",
+  "library.youMayTryRemoveTheSearch": "Você pode tentar remover a pesquisa."
+}

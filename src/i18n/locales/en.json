@@ -1,0 +1,57 @@
+{
+  "applicationInformation.appVersion": "App version:",
+  "applicationInformation.author": "Author:",
+  "applicationInformation.contributors": "Contributors:",
+  "applicationInformation.description": "Description:",
+  "applicationInformation.descriptionMessage": "Epub Reader Application built with ElectronJS",
+  "applicationInformation.gitRepository": "Git Repository:",
+
+  "bookInformation.title": "Title:",
+  "bookInformation.author": "Author:",
+  "bookInformation.language": "Language:",
+  "bookInformation.year": "Year Edition:",
+  "bookInformation.pages": "Pages:",
+  "bookInformation.applyEdit": "Apply edit",
+
+  "dropArea.dropFileHere": "Drop file here",
+
+  "mainNavbar.library": "Library",
+  "mainNavbar.saveThisPage": "Save this page",
+
+  "settingsMenu.settings": "Settings",
+  "settingsMenu.appInformation": "App information",
+
+  "sidebarSettings.BackToDashboard": "Back to dashboard",
+  "sidebarSettings.searchBooks": "Search books...",
+
+  "readingSettings.typeface": "Typeface:",
+  "readingSettings.default": "Default",
+  "readingSettings.colorStyle": "Color Style:",
+  "readingSettings.layout": "Layout:",
+
+  "currentPageOf": " of ",
+
+  "allBooksRightArrow": "All Books ->",
+
+  "bookSortings.sorting": "Sorting",
+  "bookSortings.sortBy": "Sort by: ",
+  "bookSortings.lastRead": "Last Read",
+  "bookSortings.alphabetically": "Alphabetically",
+  "bookSortings.lastOpened": "Last Opened",
+  "bookSortings.applyChanges": "Apply changes",
+
+  "keepReadingButton.keepReading": "Keep reading",
+  "keepReadingButton.startReading": "Start reading",
+
+  "dictionaryPopup.highlightSomeText": "Highlight some text to know his definition!",
+  "dictionaryPopup.rembemberToSearchFor": "Rembember to search for ",
+  "dictionaryPopup.onlyOneWordAtATime": "only one word at a time",
+  "dictionaryPopup.noPageSaved": "no page saved",
+
+  "noPreviewAvailable": "No preview available.",
+  "addBooksByClickingPlusButton": "Add books by clicking the \"+\" button.",
+  "new": "NEW",
+
+  "library.noBooksFound": "No books found.",
+  "library.youMayTryRemoveTheSearch": "You may try remove the search."
+}

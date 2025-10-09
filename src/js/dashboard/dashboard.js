@@ -35,7 +35,8 @@ async function loadHeroSection(books_json) {
 		// Check cover exists and return path 
         const bookCover = await window.bookConfig.ensureBookCoverExistsAndReturn(bookFolderName, coverPath)
 
-        var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
+        // var keepReadingText = bookOpened ? 'Keep reading' : 'Start reading';
+        var keepReadingText = bookOpened ? window.i18n.t('keepReadingButton.keepReading') : window.i18n.t('keepReadingButton.startReading');
         $('#hero-section-content')
             .html(`
             <div id="hero-section-image-cover" class="flex justify-center items-center overflow-hidden select-none w-[140px] h-[213px]">
@@ -49,7 +50,7 @@ async function loadHeroSection(books_json) {
         `)
         $('#hero-section-image-background').css('background-image', `linear-gradient(180deg, rgba(0, 0, 0, 0.8) 0%, rgba(0, 0, 0, 0.8) 100%), url(${bookCover}`);
     } else {
-        $('#hero-section-content').html('<h2 class="main-text text-white text-center">No preview available.<br>Add books by clicking the "+" button</h2>')
+        $('#hero-section-content').html(`<h2 class="main-text text-white text-center">${window.i18n.t("noPreviewAvailable")}<br>${window.i18n.t("addBooksByClickingPlusButton")}</h2>`)
         $('#hero-section-image-background').css({ 'background-image': 'none', 'background-color': 'rgb(20, 20, 20)' });
     }
     $('#hero-section-loading-animation').addClass('hidden')
@@ -82,7 +83,7 @@ async function loadBooksSection(books_json) {
                         <img class="w-full h-full" src="${bookCover}">
                     </div>
                     <div class="new-book-box drop-shadow-lg" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                        <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">NEW</h1>
+                        <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">${window.i18n.t("new")}</h1>
                     </div>
                     <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                         <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -98,7 +99,7 @@ async function loadBooksSection(books_json) {
                 $('#section-book-preview').append('<div class="book-box"></div>')
             }
         }
-		$('#section-book-preview').append('<div class="book-box"><a id="see-all-books" href="library.html" class="main-text font-bold transition py-5 px-[30px] rounded-[10px] hover:bg-black hover:text-white">All Books -></a></div>')
+		$('#section-book-preview').append(`<div class="book-box"><a id="see-all-books" href="library.html" class="main-text font-bold transition py-5 px-[30px] rounded-[10px] hover:bg-black hover:text-white" data-i18n="allBooksRightArrow">All Books -></a></div>`)
     }
     $('.circle-loading-logo').css('opacity', '0');
 }

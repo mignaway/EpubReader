@@ -198,7 +198,7 @@ var loadDictionary = async function (){
         $('#dictionary-popup').html(finalHtml);
     } else {
         // No selection text
-        $('#dictionary-popup').html('<h1 class="main-text text-sb" style="text-align: center; font-size: 14px;">Highlight some text to know his definition!</h1>')
+        $('#dictionary-popup').html(`<h1 class="main-text text-sb" style="text-align: center; font-size: 14px;">${window.i18n.t("dictionaryPopup.highlightSomeText")}</h1>`)
     }
 }
 
@@ -274,7 +274,7 @@ async function getHtmlEnglishDictionary(selection_text){
         }
     } else {
         // No match text
-        finalHtml += `<div class="dictionary-definition-box flex-column"><h1 class="main-text text-sb" style="font-size: 20px; padding-top: 10px;">${multiple_definitions.title}</h1><div class="horizontal-divider-05 m-t-10 m-b-10 bg-black"></div><h2 class="main-text">${multiple_definitions.message}<br><br>Rembember to search for <u>only one word at a time</u></h2></div>`;
+        finalHtml += `<div class="dictionary-definition-box flex-column"><h1 class="main-text text-sb" style="font-size: 20px; padding-top: 10px;">${multiple_definitions.title}</h1><div class="horizontal-divider-05 m-t-10 m-b-10 bg-black"></div><h2 class="main-text">${multiple_definitions.message}<br><br>${window.i18n.t("dictionaryPopup.rembemberToSearchFor")}<u>${window.i18n.t("dictionaryPopup.rembemberToSearchFor")}</u></h2></div>`;
     }
     return finalHtml
 }
@@ -325,7 +325,7 @@ async function loadSavedPages(saved_pages){
             `)
         })
     } else {
-        $('#book-saved-pages').html('<h1 class="main-text text-small op-5" style="text-align: center;">no page saved</h1>');
+        $('#book-saved-pages').html(`<h1 class="main-text text-small op-5" style="text-align: center;">${window.i18n.t("dictionaryPopup.noPageSaved")}</h1>`);
     }
 }
 async function handleSavePage() {
@@ -451,6 +451,12 @@ function applyThemeStyles(theme) {
     const dictionaryPopupH2 = $('#dictionary-popup h2')
     const dictionaryPopupOlLi = $('#dictionary-popup ol li')
 
+    // Language Menu
+    const languageMenuOpenText = $('#language-menu-open h1');
+    const languageMenuArrow = $('#language-menu-open svg line');
+    const languageMenu = $('#language-menu');
+    const languageMenuButtons = $('#menu-open-languages .button-language h1');
+
     // Reset classes
     backgroundElements.removeClass('page-color-style-brown-bg page-color-style-dark-bg');
     iconElements.removeClass('page-color-style-brown-color page-color-style-dark-color');
@@ -471,15 +477,20 @@ function applyThemeStyles(theme) {
     typefaceSectionSVG.css('fill', 'black');
     selectFontFamily.css('background-color', 'white');
 
-    bookInfoH1.css('color', 'black')
-    bookInfoSpan.css('color', 'black')
+    bookInfoH1.css('color', 'black');
+    bookInfoSpan.css('color', 'black');
 
-    bookChaptersH1.css('color', 'black')
+    bookChaptersH1.css('color', 'black');
 
-    bookSavedPagesH1.css('color', 'black')
-    bookSavedPagesH2.css('color', 'black')
-    bookSaveButton.css('fill', 'black')
-    bookUnsaveButton.css('background-color', '#E3B230')
+    bookSavedPagesH1.css('color', 'black');
+    bookSavedPagesH2.css('color', 'black');
+    bookSaveButton.css('fill', 'black');
+    bookUnsaveButton.css('background-color', '#E3B230');
+
+    languageMenu.removeClass('page-color-style-brown-bg page-color-style-dark-bg');
+    languageMenuOpenText.css('color', '');
+    languageMenuArrow.css('stroke', '');
+    languageMenuButtons.css('color', '');
 
     /*dictionaryPopupH1.css('color', 'black')
     dictionaryPopupH2.css('color', 'black')
@@ -520,6 +531,11 @@ function applyThemeStyles(theme) {
             /*dictionaryPopupH1.css('color', '#5B4636')
             dictionaryPopupH2.css('color', '#5B4636')
             dictionaryPopupOlLi.css('color', '#5B4636')*/
+
+            languageMenu.addClass('page-color-style-brown-bg');
+            languageMenuOpenText.css('color', '#5B4636');
+            languageMenuArrow.css('stroke', '#5B4636');
+            languageMenuButtons.css('color', '#5B4636');
             break;
         case "dark":
             book_rendition.themes.default({ body: { 'color': 'white' } });
@@ -555,10 +571,20 @@ function applyThemeStyles(theme) {
             /*dictionaryPopupH1.css('color', 'white')
             dictionaryPopupH2.css('color', 'white')
             dictionaryPopupOlLi.css('color', 'white')*/
+
+            languageMenu.addClass('page-color-style-dark-bg');
+            languageMenuOpenText.css('color', 'white');
+            languageMenuArrow.css('stroke', 'white');
+            languageMenuButtons.css('color', 'white');
             break;
         default: // Default to light theme
             book_rendition.themes.default({ body: { 'color': 'black' } });
             textElements.css('color', 'black');
+
+            languageMenu.css('background-color', 'white');
+            languageMenuOpenText.css('color', 'black');
+            languageMenuArrow.css('stroke', 'black');
+            languageMenuButtons.css('color', 'black');
     }
 }
 
