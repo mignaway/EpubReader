@@ -1,3 +1,6 @@
+> [!important]
+> Our new ebook reader is close to its release! Go check it out on [wizread.io](https://wizread.io). Also make sure to join our [discord](https://discord.gg/GXmu3McvfW) for updates <3
+
 <p align="center">
 <!-- static image <img src="https://user-images.githubusercontent.com/40722616/173697452-302514f6-0c85-4e8a-beb6-07fa6ea5126e.png"> -->
 <!-- <img src="https://user-images.githubusercontent.com/40722616/173834545-7cfbe16c-19e7-4efd-a4de-bb0b6cce1c3d.gif"> -->
@@ -14,9 +17,6 @@
 
 
 Epub Reader is a open-source project made with ElectronJS. It's an application for reading ebook files (epub, mobi, pdf), there are already a thousand of ebook reader but their UI/UX it's really bad. I started this project for letting people read books in a nice way with a well-made application.
-
-> [!note]
-> Exciting news! We’re working on a new version of the ebook reader, probably the best one that has ever existed. Stick around for updates, and in the meantime, enjoy what’s here <3
 
 If you'd like to support the projects, [click here](https://buymeacoffee.com/mignaway) 
 
