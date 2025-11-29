@@ -16,6 +16,7 @@
   <script src="../js/general/dropFile.js"></script>
   <script src="../js/dashboard/dashboard.js"></script>
   <script src="../js/dashboard/sectionBookHandler.js"></script>
+    <script src="../js/general/rendererI18n.js" defer></script>
 </head>
 
 <body>
@@ -31,12 +32,12 @@
       </svg>
       <div class="flex flex-col mt-6 gap-5 w-[250px]">
         <div class="flex flex-row items-center">
-          <h1 class="main-text font-bold mr-3 text-white ">App version:</h1>
+          <h1 class="main-text font-bold mr-3 text-white " data-i18n="applicationInformation.appVersion">App version:</h1>
           <h1 id="app-info-version" class="main-text text-white "></h1>
         </div>
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
         <div class="flex items-center flex-wrap">
-          <h1 class="main-text font-bold mr-3 text-white ">Author:</h1>
+          <h1 class="main-text font-bold mr-3 text-white " data-i18n="applicationInformation.author">Author:</h1>
           <div class="flex flex-row items-center">
             <img src="https://avatars.githubusercontent.com/u/40722616?v=4" alt="github logo" />
             <h1
@@ -49,18 +50,18 @@
         </div>
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
         <div id="contributors-section">
-          <h1 class="main-text font-bold mr-3 text-white">Contributors:</h1>
+          <h1 class="main-text font-bold mr-3 text-white"  data-i18n="applicationInformation.contributors">Contributors:</h1>
           <ul id="contributors-list" class="main-text text-color-white"></ul>
         </div>        
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
         <div>
-          <h1 class="main-text font-bold mr-3 text-white inline">Description:</h1>
-          <h1 id="app-info-description" class="main-text text-white inline">Epub Reader Application built with
+          <h1 class="main-text font-bold mr-3 text-white inline"  data-i18n="applicationInformation.description">Description:</h1>
+          <h1 id="app-info-description" class="main-text text-white inline"  data-i18n="applicationInformation.descriptionMessage">Epub Reader Application built with
             ElectronJS</h1>
         </div>
         <div class="h-[.5px] w-full bg-white opacity-10"></div>
         <div class="flex-row flex-v-center">
-          <h1 class="main-text font-bold mr-3 text-white ">Git Repository:</h1>
+          <h1 class="main-text font-bold mr-3 text-white " data-i18n="applicationInformation.gitRepository">Git Repository:</h1>
           <svg xmlns="http://www.w3.org/2000/svg" class="cursor-pointer"
             onclick="window.open('https://github.com/a5ur4/EpubReaderRedo','_blank')" version="1.1"
             xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.com/svgjs" width="20" height="20" x="0"
@@ -115,23 +116,23 @@
             <img id="edit-book-information-cover" src="" alt="book cover" />
           </div>
           <div class="flex flex-col gap-3 flex-1">
-            <span class="main-text text-white font-semibold">Title</span>
+            <span class="main-text text-white font-semibold" data-i18n="bookInformation.title">Title</span>
             <input id="edit-book-information-title" type="text"
               class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
-            <span class="main-text text-white font-semibold">Author</span>
+            <span class="main-text text-white font-semibold" data-i18n="bookInformation.author">Author</span>
             <input id="edit-book-information-author" type="text"
               class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
-            <span class="main-text text-white font-semibold">Language</span>
+            <span class="main-text text-white font-semibold" data-i18n="bookInformation.language">Language</span>
             <input id="edit-book-information-language" type="text"
               class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
-            <span class="main-text text-white font-semibold">Year</span>
+            <span class="main-text text-white font-semibold" data-i18n="bookInformation.year">Year</span>
             <input id="edit-book-information-year" type="text"
               class="main-text text-white bg-white/10 py-3 px-5 rounded-md">
             <div class="flex-1 flex">
               <button id="edit-book-information-apply-btn"
                 class="main-text w-full flex-0 self-end text-white font-bold bg-[#18C34D] py-3 px-5 rounded-md"
                 onclick="event.stopPropagation(); applyEditEpubBookHandler($(this).data('folderbookcode'));"><span
-                  class="drop-shadow-md">Apply edit</span></button>
+                  class="drop-shadow-md" data-i18n="bookInformation.applyEdit">Apply edit</span></button>
             </div>
           </div>
         </div>
@@ -152,13 +153,13 @@
       </g>
     </svg>
 
-    <span class="main-text text-white">Drop file here</span>
+    <span class="main-text text-white" data-i18n="dropArea.dropFileHere">Drop file here</span>
   </div>
   <div id="main-navbar" class="absolute p-7 flex justify-between items-center z-[50] w-full select-none">
     <div class="flex flex-row items-center gap-7 no-drag">
       <div class="flex flex-col relative">
         <div id="settings-menu-open" class="flex flex-row items-center cursor-pointer">
-          <h1 class="main-text text-white mr-1">Settings</h1>
+          <h1 class="main-text text-white mr-1" data-i18n="settingsMenu.settings">Settings</h1>
           <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
             <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="white" stroke-linecap="round" />
             <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="white" stroke-linecap="round" />
@@ -181,7 +182,33 @@
                 </g>
               </g>
             </svg>
-            <h1 class="main-text text-white ml-2">App information</h1>
+            <h1 class="main-text text-white ml-2" data-i18n="settingsMenu.appInformation">App information</h1>
+          </div>
+        </div>
+      </div>
+      <div class="vertical-divider-05 bg-white"></div>
+      <div class="flex flex-col relative">
+        <div id="language-menu-open" class="flex flex-row items-center cursor-pointer">
+          <h1 class="main-text text-white mr-1">EN</h1>
+          <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="white" stroke-linecap="round" />
+            <line x1="3.5" y1="3.79289" x2="6.29289" y2="1" stroke="white" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div id="language-menu"
+          class="p-6 mt-10 hidden absolute z-[10] flex flex-col gap-7 rounded-md bg-[#121212] shadow-md overflow-hidden w-fit">
+          <div id="menu-open-languages"
+            class="flex flex-col items-center transition opacity-80 hover:opacity-100 cursor-pointer">
+            <div>
+              <button class="button-language" onclick="defineCurrentLanguage('en')">
+                <h1 class="main-text text-white ml-2">EN</h1>
+              </button>
+            </div>
+            <div>
+              <button class="button-language" onclick="defineCurrentLanguage('ptBR')">
+                <h1 class="main-text text-white ml-2">PT-BR</h1>
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -236,10 +263,10 @@
     <div class="flex flex-row justify-between">
       <div class="flex flex-row items-center">
         <div class="flex flex-row items-center">
-          <h1 class="main-text mr-1">Sort by: </h1>
+          <h1 class="main-text mr-1" data-i18n="bookSortings.sortBy">Sort by: </h1>
           <div class="flex flex-col">
             <div id="section-book-choose-sorting" class="flex flex-row items-center cursor-pointer">
-              <h1 id="section-book-current-sorting" class="main-text font-bold mr-1" data-sort="last_read">Last Read
+              <h1 id="section-book-current-sorting" class="main-text font-bold mr-1" data-sort="last_read" data-i18n="bookSortings.lastRead">Last Read
               </h1>
               <svg width="12" height="7" viewBox="0 0 7 5" fill="none" xmlns="http://www.w3.org/2000/svg">
                 <line x1="0.707107" y1="1" x2="3.5" y2="3.79289" stroke="black" stroke-linecap="round" />
@@ -250,11 +277,11 @@
               class="p-0 mt-8 list-none hidden absolute z-[15] rounded-md bg-white shadow-[0_0_6px_1px_rgba(0,0,0,.1)] overflow-hidden">
               <li
                 class="main-text font-bold py-2.5 px-5 transition hover:bg-[#ebebeb] cursor-pointer last-of-type:border-[1px_solid_rgba(0,0,0,0.1)]"
-                value="last_read">Last Read</li>
+                value="last_read" data-i18n="bookSortings.lastRead">Last Read</li>
               <li
                 class="main-text font-bold py-2.5 px-5 transition hover:bg-[#ebebeb] cursor-pointer last-of-type:border-[1px_solid_rgba(0,0,0,0.1)]"
-                value="alphabetically">Alphabetically</li>
-              <!-- <li class="main-text text-b" value="last_opened">Last Opened</li> -->
+                value="alphabetically" data-i18n="bookSortings.alphabetically">Alphabetically</li>
+              <!-- <li class="main-text text-b" value="last_opened" data-i18n="bookSortings.lastOpened">Last Opened</li> -->
             </ul>
           </div>
         </div>

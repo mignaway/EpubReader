@@ -38,6 +38,24 @@ img {
 	-webkit-app-region: drag;
 }
 
+#select-language {
+    background: transparent;
+}
+
+.button-language {
+	max-width: 200px;
+}
+
+.button-language:hover {
+	color: red;
+}
+
+.button-language h1 {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .overflow-hidden {
 	overflow: hidden;
 }

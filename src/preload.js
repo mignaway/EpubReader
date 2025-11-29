@@ -5,6 +5,7 @@ const Vibrant = require('node-vibrant');
 const Epub = require("epub2").EPub;
 const path = require('path');
 const convert = require('ebook-convert')
+const i18n = require('./i18n/i18n.js')
 
 // Define allowed extensions for books
 const allowedExtensions = ['epub','pdf','mobi'];
@@ -326,4 +327,10 @@ contextBridge.exposeInMainWorld('appConfig', {
     async invoke(eventName, ...params) {
         return await ipcRenderer.invoke(eventName, ...params)
     },
+});
+
+contextBridge.exposeInMainWorld("i18n", {
+  t: (key) => i18n.t(key),
+  changeLanguage: (lang, callback) => i18n.changeLanguage(lang, callback),
+  setLang: (lang) => i18n.load(lang),
 });

@@ -22,6 +22,9 @@ $(window).on('load', async function () {
     $('#settings-menu-open').on('click', function(){
         $('#settings-menu').toggleClass('hidden');
     })
+    $('#language-menu-open').on('click', function(){
+        $('#language-menu').toggleClass('hidden');
+    })
     $("body").on('click', function (e) {
         // iframe click doesn't work, need to be added/fixed
         if (!$(e.target).is('#settings-menu-open') && // Check clicking popup icon

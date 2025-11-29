@@ -37,9 +37,9 @@ var loadBooks = async function (books_json_not_sorted){
     } else {
         $('.circle-loading-logo').css('opacity', '0');
         if (isSearchingSomething) {
-            $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No books found.<br>You may try remove the search</h2>');    
+            $('#book-section-grid').html(`<h2 class="no-book-text main-text text-align-center">${window.i18n.t("library.noBooksFound")}<br>${window.i18n.t("library.youMayTryRemoveTheSearch")}</h2>`);    
         } else {
-            $('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No preview available.<br>Add books by clicking the "+" button</h2>');
+            $('#book-section-grid').html(`<h2 class="no-book-text main-text text-align-center">${window.i18n.t("noPreviewAvailable")}<br>${window.i18n.t("addBooksByClickingPlusButton")}</h2>`);
         }
     }
 }
@@ -69,7 +69,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
                         <img class="w-full h-full" src="${bookCover}">
                     </div>
                     <div class="new-book-box drop-shadow-lg" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-                        <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">NEW</h1>
+                        <h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">${window.i18n.t("new")}</h1>
                     </div>
                     <div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
                         <svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -116,7 +116,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
 						<img class="w-full h-full" src="${bookCover}">
 					</div>
 					<div class="new-book-box drop-shadow-lg" style="background-color: rgb(${dominantRGBValue}); display: ${already_read}">
-						<h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">NEW</h1>
+						<h1 class="main-text text-white drop-shadow-[0_1px_3px_rgba(0,0,0,0.35)] font-bold">${window.i18n.t("new")}</h1>
 					</div>
 					<div class="book-delete-icon cursor-pointer" onclick="event.stopPropagation(); deleteEpubBookHandler($(this).parent().data('folderbookcode'));">
 						<svg class="cursor-pointer" width="10" height="10" viewBox="0 0 15 1" xmlns="http://www.w3.org/2000/svg">
@@ -134,7 +134,7 @@ async function loadBooksAction(ordered_books, dominantRGBValue) {
 			}
 		}
 	} else {
-		$('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">No books found.<br>You may try remove the search</h2>');
+		$('#book-section-grid').html('<h2 class="no-book-text main-text text-align-center">${window.i18n.t("library.noBooksFound")}<br>${window.i18n.t("library.youMayTryRemoveTheSearch")}</h2>');
 	}
 	$('.circle-loading-logo').css('opacity', '0');
 }
