@@ -1,5 +1,5 @@
 > [!important]
-> Our new ebook reader is close to its release! Go check it out on [wizread.io](https://wizread.io). Also make sure to join our [discord](https://discord.gg/GXmu3McvfW) for updates <3
+> Our new ebook reader is ready! Go check it out on [wizread.io](https://wizread.io). Also make sure to join our [discord](https://discord.gg/GXmu3McvfW) for updates <3
 
 <p align="center">
 <!-- static image <img src="https://user-images.githubusercontent.com/40722616/173697452-302514f6-0c85-4e8a-beb6-07fa6ea5126e.png"> -->
